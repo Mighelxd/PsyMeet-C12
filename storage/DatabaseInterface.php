@@ -1,0 +1,45 @@
+<?php
+    include("DatabaseConnector.php");
+    class DatabaseInterface{
+        public static function insertQuery(array $obj, $tablename){
+            $connection = DatabaseConnector::connect();
+            $insert = "INSERT INTO $tablename (";
+            foreach($obj as $value){
+                if(gettype($value) == "string")
+                    $insert .= ."\"" . $value . "\"" . ",";
+                else
+                    $insert.= $value . ",";
+            }
+            $insert = substr($insert,0,-1);
+            $result = $connection->query($insert);
+            DatabaseConnector::close($connection);
+            return $result;
+        }
+        public static function updateQueryById(array $obj, $tablename){
+            $connection = DatabaseConnector::connect();
+            $update = "UPDATE $tablename SET ";
+            $where = "WHERE " . array_key_first($obj) . " = " . $obj[array_key_first($obj)];
+            foreach($obj as $key => $value){
+                if(gettype($value) == "string")
+                    $update .= $key . " = " . "\"" .$value . "\"". " , ";
+                else
+                    $update .= $key . " = " .$value . " , ";
+
+        }
+            $update = substr($update,0,-2);
+            $result = $connection->query($update . $where);
+            var_dump($update . $where);
+            DatabaseConnector::close($connection);
+            return $result;
+
+        }
+        public static function selectQueryById(array $array, $tablename){
+            $connection = DatabaseConnector::connect();
+            $select = "SELECT * FROM $tablename ";
+            $where = "WHERE " . array_key_first($array) . " = " . $array[array_key_first($array)];
+            $result = $connection->query($select . $where);
+            DatabaseConnector::close($connection);
+            return $result;
+        }
+    }
+?>
