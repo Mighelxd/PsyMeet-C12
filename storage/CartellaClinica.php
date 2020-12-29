@@ -1,4 +1,11 @@
 <?php 
+   /*
+     * CartellaClinica
+     * Questa classe contiene le informazioni relative all'oggetto cartella clinica
+     * Autore: D'Avino Michele
+     * Versione: 0.1
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 class CartellaClinica {
     private $id;
     private $farmaci;
