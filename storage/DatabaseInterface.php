@@ -6,7 +6,7 @@
             $insert = "INSERT INTO $tablename (";
             foreach($obj as $value){
                 if(gettype($value) == "string")
-                    $insert .= ."\"" . $value . "\"" . ",";
+                $update .= "\"" .$value . "\"". ",";
                 else
                     $insert.= $value . ",";
             }
