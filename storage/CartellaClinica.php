@@ -78,7 +78,6 @@ class CartellaClinica {
         $this->qualitaRelazioni =  $qur;
         $this->cfPaz = $cfPa;
         $this->cfProf = $cfPro;
-        return $this;
     }
 
     public function getArray(){
