@@ -1,4 +1,11 @@
 <?php
+    /*
+    * DatabaseInterface 
+    * Questa classe fornisce tutti i metodi per effettuare query sul DB
+    * Autore: Michele D'Avino
+    * Versione: 0.1
+    * 2020 Copyright by PsyMeet - University of Salerno 
+*/
     include("DatabaseConnector.php");
     class DatabaseInterface{
         public static function insertQuery(array $obj, $tablename){
