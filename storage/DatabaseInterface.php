@@ -7,6 +7,7 @@
     * 2020 Copyright by PsyMeet - University of Salerno 
 */
     include("DatabaseConnector.php");
+    include '..\plugins\libArray\FunArray.php';
     class DatabaseInterface{
         public static function insertQuery(array $obj, $tablename){
             $connection = DatabaseConnector::connect();
@@ -25,7 +26,7 @@
         public static function updateQueryById(array $obj, $tablename){
             $connection = DatabaseConnector::connect();
             $update = "UPDATE $tablename SET ";
-            $where = "WHERE " . array_key_first($obj) . " = " . $obj[array_key_first($obj)];
+            $where = "WHERE " . FunArray::array_key_first($obj) . " = " . $obj[FunArray::array_key_first($obj)];
             foreach($obj as $key => $value){
                 if(gettype($value) == "string")
                     $update .= $key . " = " . "\"" .$value . "\"". " , ";
@@ -43,7 +44,7 @@
         public static function selectQueryById(array $array, $tablename){
             $connection = DatabaseConnector::connect();
             $select = "SELECT * FROM $tablename ";
-            $where = "WHERE " . array_key_first($array) . " = " . $array[array_key_first($array)];
+            $where = "WHERE " . FunArray::array_key_first($array) . " = " . $array[FunArray::array_key_first($array)];
             $result = $connection->query($select . $where);
             DatabaseConnector::close($connection);
             return $result;
