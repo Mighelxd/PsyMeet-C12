@@ -139,6 +139,7 @@ CREATE TABLE appuntamento(
  id_appuntamento INT not null,
  data DATE not null,
  ora TIME not null,
+ descrizione VARCHAR(500) not null,
  cf_prof CHAR(16) not null,
  cf CHAR(16) not null,
  PRIMARY KEY(id_appuntamento),
