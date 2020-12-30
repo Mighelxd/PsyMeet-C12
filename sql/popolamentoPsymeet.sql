@@ -18,7 +18,7 @@ insert into schedaFollowup(id_scheda,data,ricadute,esiti_positivi,id_terapia) va
 
 insert into schedaModelloEziologico(id_scheda,data,fattori_causativi,fattori_precipitanti,fattori_mantenimento,relazione_finale,id_terapia) value('1','2020-12-10','NA','NA','NA','NA','1');
 
-insert into appuntamento(id_appuntamento,data,ora,cf_prof,cf) value('1','2020-10-01','19:00:00','RSSMRC80R12H703U','NSTFNC94M23H703G');
+insert into appuntamento(id_appuntamento,data,ora,descrizione,cf_prof,cf) value('1','2020-10-01','19:00:00','Seduta primo colloquio','RSSMRC80R12H703U','NSTFNC94M23H703G');
 
 insert into pacchetto(id_pacchetto,n_sedute,prezzo,tipologia) value('1','1','60.00','Seduta singola');
 

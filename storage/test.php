@@ -1,6 +1,8 @@
 <?php
     include("DatabaseInterface.php"); 
     include "CartellaClinica.php";
+    include "Appuntamento.php";
+
     $arr = array("id_cartella_clinica" => 1,);
     $result = DatabaseInterface::selectQueryById($arr,"cartellaclinica");
     $arr = $result -> fetch_array();
@@ -8,4 +10,8 @@
     $cc -> setFarmaci("test");
     $result = DatabaseInterface::updateQueryById($cc->getArray(),CartellaClinica::$table_name);
     var_dump($result);
+    /*$app = array("id_appuntamento" => 1,);
+    $res = DatabaseInterface::selectQueryById($arr,"appuntamento");
+    $app = $res->fetch_array();*/
+
 ?>
