@@ -6,8 +6,7 @@
 
 
 
-
-    $arr = array("id_cartella_clinica" => 1,);
+    /*$arr = array("id_cartella_clinica" => 1,);
     $result = DatabaseInterface::selectQueryById($arr,"cartellaclinica");
     $arr = $result -> fetch_array();
     $cc = new CartellaClinica($arr[0],$arr[1],$arr[2],$arr[3],$arr[4],$arr[5],$arr[6]);
@@ -16,7 +15,7 @@
     echo FunArray::array_key_first($cc->getArray());
     echo $arr[FunArray::array_key_first($cc->getArray())];
     var_dump($result);
-
+  */
 /*  $app = array("id_appuntamento" => 1,);
     $res = DatabaseInterface::selectQueryById($arr,"appuntamento");
     $app = $res->fetch_array();
