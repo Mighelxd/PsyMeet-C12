@@ -58,7 +58,10 @@
         public static function selectQueryById(array $array, $tablename){
             $connection = DatabaseConnector::connect();
             $select = "SELECT * FROM $tablename ";
-            $where = "WHERE " . FunArray::array_key_first($array) . " = " . $array[FunArray::array_key_first($array)];
+            if(gettype($array[FunArray::array_key_first($array)]) == "string")
+                $where = "WHERE " . FunArray::array_key_first($array) . " = " ."\"". $array[FunArray::array_key_first($array)]. "\"";
+            else
+                $where = "WHERE " . FunArray::array_key_first($array) . " = " . $array[FunArray::array_key_first($array)];
             $result = $connection->query($select . $where);
             DatabaseConnector::close($connection);
             return $result;
@@ -71,24 +74,23 @@
             $where = "WHERE ";
             if(count($array) == 1){
                 if(gettype($array[FunArray::array_key_first($array)] == "string"))
-                    $where .= FunArray::array_key_first($array) . " = " . "\" " . $array[FunArray::array_key_first($array)] . "\"";
+                    $where .= FunArray::array_key_first($array) . " = " . "\"" . $array[FunArray::array_key_first($array)] . "\"";
                 else
                     $where .= FunArray::array_key_first($array) . " = " . $array[FunArray::array_key_first($array)];
                 }
             else{
                 foreach($array as $att_name => $att){
                     if(gettype($array[FunArray::array_key_first($array)] == "string"))
-                        $where .= FunArray::array_key_first($array) . " = " . "\" " . $array[FunArray::array_key_first($array)] . "\"";
+                        $where .= FunArray::array_key_first($array) . " = " . "\"" . $array[FunArray::array_key_first($array)] . "\"";
                     else
                         $where .= FunArray::array_key_first($array) . " = " . $array[FunArray::array_key_first($array)];
                     $where .= " OR "; 
                     }
                     $where = substr($where,0,-4);
-                }
+                } 
                 $result = $connection->query($select . $where);
                 DatabaseConnector::close($connection);
                 return $result;
             }
-            
-        }
+    }
 ?>
