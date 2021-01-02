@@ -12,21 +12,35 @@
         public static function insertQuery(array $obj, $tablename){
             $connection = DatabaseConnector::connect();
             $insert = "INSERT INTO $tablename (";
-            foreach($obj as $value){
-                if(gettype($value) == "string")
-                    $insert .= "\"" .$value . "\"". ",";
-                else
-                    $insert.= $value . ",";
+            $values = "VALUES(";
+
+            foreach($obj as $o=>$value){
+                if(gettype($value) == "string"){
+                    $insert .= "$o,";
+                    $values.= "'$value',";
+                }
+                else{
+                    $insert .= "$o,";
+                    $values.= $value . ",";
+                }
             }
+
             $insert = substr($insert,0,-1);
-            $result = $connection->query($insert);
+            $insert .= ") ";
+            $values = substr($values,0,-1);
+            $values .= ");";
+
+            $result = $connection->query($insert.$values);
             DatabaseConnector::close($connection);
             return $result;
         }
         public static function updateQueryById(array $obj, $tablename){
             $connection = DatabaseConnector::connect();
             $update = "UPDATE $tablename SET ";
-            $where = "WHERE " . FunArray::array_key_first($obj) . " = " . $obj[FunArray::array_key_first($obj)];
+            if(gettype($obj[FunArray::array_key_first($obj)] == "string"))
+                $where = "WHERE " .FunArray::array_key_first($obj) . " = " . "\"".  $obj[FunArray::array_key_first($obj)] . "\"";
+            else
+                $where = "WHERE " .FunArray::array_key_first($obj) . " = " .  $obj[FunArray::array_key_first($obj)];
             foreach($obj as $key => $value){
                 if(gettype($value) == "string")
                     $update .= $key . " = " . "\"" .$value . "\"". " , ";
@@ -50,8 +64,20 @@
             return $result;
         }
 
-        public static function selectQueryByCrit(array $array, $tablename, $crit){
+        public static function selectQueryByAtt($att, $val_att, $tablename){
             $connection = DatabaseConnector::connect();
+
+            $select = "SELECT * FROM $tablename ";
+            if(is_int($val_att)){
+                $where = "WHERE $att = $val_att";
+            }
+            else{
+                $where = "WHERE $att = '$val_att'";
+            }
+            $result = $connection->query($select . $where);
+            DatabaseConnector::close($connection);
+            return $result;
         }
+        
     }
 ?>
