@@ -47,7 +47,7 @@ CREATE TABLE paziente(
 
 DROP TABLE IF EXISTS terapia;
 CREATE TABLE terapia(
- id_terapia INT not null,
+ id_terapia INT unsigned auto_increment not null,
  data DATE not null,
  descrizione TEXT not null,
  cf_prof CHAR(16) not null,
@@ -61,14 +61,14 @@ CREATE TABLE terapia(
 
 DROP TABLE IF EXISTS schedaPrimoColloquio;
 CREATE TABLE schedaPrimoColloquio(
- id_scheda INT not null,
+ id_scheda INT unsigned auto_increment not null,
  data DATE not null,
  problema TEXT not null,
  aspettative TEXT not null,
  motivazione TEXT not null,
  obiettivi TEXT not null,
  cambiamento TEXT not null,
- id_terapia INT not null,
+ id_terapia INT unsigned not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
  ON DELETE CASCADE ON UPDATE CASCADE
@@ -76,7 +76,7 @@ CREATE TABLE schedaPrimoColloquio(
 
 DROP TABLE IF EXISTS schedaAssessmentGeneralizzato;
 CREATE TABLE schedaAssessmentGeneralizzato(
- id_scheda INT not null,
+ id_scheda INT unsigned auto_increment not null,
  data DATE not null,
  autoreg_positivi TEXT not null,
  autoreg_negativi TEXT not null,
@@ -86,7 +86,7 @@ CREATE TABLE schedaAssessmentGeneralizzato(
  self_management_negativi TEXT not null,
  sociali_positivi TEXT not null,
  sociali_negativi TEXT not null,
- id_terapia INT not null,
+ id_terapia INT unsigned not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
  ON DELETE CASCADE ON UPDATE CASCADE
@@ -94,7 +94,7 @@ CREATE TABLE schedaAssessmentGeneralizzato(
 
 DROP TABLE IF EXISTS schedaAssessmentFocalizzato;
 CREATE TABLE schedaAssessmentFocalizzato(
- id_scheda INT not null,
+ id_scheda INT unsigned auto_increment not null,
  data DATE not null,
  analisi_fun TEXT not null,
  m_a TEXT not null,
@@ -102,7 +102,7 @@ CREATE TABLE schedaAssessmentFocalizzato(
  m_c TEXT not null,
  appunti TEXT not null,
  n_episodi INT not null,
- id_terapia INT not null,
+ id_terapia INT unsigned not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
  ON DELETE CASCADE ON UPDATE CASCADE
@@ -110,11 +110,11 @@ CREATE TABLE schedaAssessmentFocalizzato(
 
 DROP TABLE IF EXISTS schedaFollowup;
 CREATE TABLE schedaFollowup(
- id_scheda INT not null,
+ id_scheda INT unsigned auto_increment not null,
  data DATE not null,
  ricadute TEXT not null,
  esiti_positivi TEXT not null,
- id_terapia INT not null,
+ id_terapia INT unsigned not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
  ON DELETE CASCADE ON UPDATE CASCADE
@@ -122,13 +122,13 @@ CREATE TABLE schedaFollowup(
 
 DROP TABLE IF EXISTS schedaModelloEziologico;
 CREATE TABLE schedaModelloEziologico(
- id_scheda INT not null,
+ id_scheda INT unsigned auto_increment not null,
  data DATE not null,
  fattori_causativi TEXT not null,
  fattori_precipitanti TEXT not null,
  fattori_mantenimento TEXT not null,
  relazione_finale TEXT not null,
- id_terapia INT not null,
+ id_terapia INT unsigned not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
  ON DELETE CASCADE ON UPDATE CASCADE
@@ -136,7 +136,7 @@ CREATE TABLE schedaModelloEziologico(
 
 DROP TABLE IF EXISTS appuntamento;
 CREATE TABLE appuntamento(
- id_appuntamento INT not null,
+ id_appuntamento INT unsigned auto_increment not null,
  data DATE not null,
  ora TIME not null,
  descrizione VARCHAR(500) not null,
@@ -151,7 +151,7 @@ CREATE TABLE appuntamento(
 
 DROP TABLE IF EXISTS pacchetto;
 CREATE TABLE pacchetto(
- id_pacchetto INT not null,
+ id_pacchetto INT unsigned auto_increment not null,
  n_sedute INT not null,
  prezzo FLOAT not null,
  tipologia VARCHAR(500) not null,
@@ -160,7 +160,7 @@ CREATE TABLE pacchetto(
 
 DROP TABLE IF EXISTS cartellaClinica;
 CREATE TABLE cartellaClinica(
- id_cartella_clinica INT not null,
+ id_cartella_clinica INT unsigned auto_increment not null,
  q_umore INT not null,
  q_relazioni INT not null,
  patologie_pregresse TEXT not null,
@@ -176,11 +176,13 @@ CREATE TABLE cartellaClinica(
 
 DROP TABLE IF EXISTS compito;
 CREATE TABLE compito(
- id_compito INT not null,
+ id_compito INT unsigned auto_increment not null,
  data DATE not null,
  effettuato BOOL not null,
  titolo VARCHAR(1000) not null,
  descrizione TEXT not null,
+ svolgimento VARCHAR (1000),
+ correzione VARCHAR (500),
  cf_prof CHAR(16) not null,
  cf CHAR(16) not null,
  PRIMARY KEY(id_compito),
@@ -192,10 +194,10 @@ CREATE TABLE compito(
 
 DROP TABLE IF EXISTS fattura;
 CREATE TABLE fattura(
- id_fattura INT not null,
+ id_fattura INT unsigned auto_increment not null,
  data DATE not null,
  cf CHAR(16) not null,
- id_pacchetto INT not null,
+ id_pacchetto INT unsigned not null,
  PRIMARY KEY(id_fattura),
  FOREIGN KEY(cf) REFERENCES paziente(cf)
  ON DELETE CASCADE ON UPDATE CASCADE,
@@ -205,9 +207,9 @@ CREATE TABLE fattura(
 
 DROP TABLE IF EXISTS scelta;
 CREATE TABLE scelta(
- id_scelta INT not null,
+ id_scelta INT unsigned auto_increment not null,
  cf_prof CHAR(16) not null,
- id_pacchetto INT not null,
+ id_pacchetto INT unsigned not null,
  PRIMARY KEY(id_scelta),
  FOREIGN KEY(cf_prof) REFERENCES professionista(cf_prof)
  ON DELETE CASCADE ON UPDATE CASCADE,
