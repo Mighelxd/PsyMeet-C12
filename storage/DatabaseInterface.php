@@ -14,7 +14,7 @@
             $insert = "INSERT INTO $tablename (";
             foreach($obj as $value){
                 if(gettype($value) == "string")
-                $update .= "\"" .$value . "\"". ",";
+                    $insert .= "\"" .$value . "\"". ",";
                 else
                     $insert.= $value . ",";
             }
@@ -48,6 +48,10 @@
             $result = $connection->query($select . $where);
             DatabaseConnector::close($connection);
             return $result;
+        }
+
+        public static function selectQueryByCrit(array $array, $tablename, $crit){
+            $connection = DatabaseConnector::connect();
         }
     }
 ?>
