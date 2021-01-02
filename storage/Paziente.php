@@ -4,7 +4,7 @@
  * Gestione Paziente
  * Questa classe contiene le informazioni relative all'oggetto Paziente
  * Autore: Giuseppe Ferrante
- * Versione: 0.1
+ * Versione: 0.2
  * 2020 Copyright by PsyMeet - University of Salerno
 */
 
@@ -21,6 +21,7 @@ class Paziente
     private $istruzione;
     private $lavoro;
     private $difficolCura;
+    public static $table_name="paziente";
 
     public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura)
     {
@@ -147,8 +148,8 @@ class Paziente
         $this->difficolCura = $difficolCura;
     }
 
-    public function intro()
+    public function getArray()
     {
-      echo "Paziente : {$this->nome}, {$this->cognome}, {$this->dataNascita}, {$this->cf}, {$this->email}, {$this->telefono}, {$this->password}, {$this->indirizzo}, {$this->istruzione}, {$this->lavoro}, {$this->difficolCura} ";
+      return array("cf" => $this->cf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "passwor" => $this->password, "indirizzo" => $this->indirizzo, "istruzione" => $this->istruzione,"lavoro" => $this->lavoro, "difficol_cura" => $this->difficolCura);
     }
 }
