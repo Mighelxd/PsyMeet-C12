@@ -9,10 +9,10 @@ USE psyDB;
 
 DROP TABLE IF EXISTS professionista;
 CREATE TABLE professionista(
+ cf_prof CHAR(16) not null,
  nome VARCHAR(20) not null,
  cognome VARCHAR(20) not null,
  data_nascita DATE not null,
- cf_prof CHAR(16) not null,
  email VARCHAR(50) not null,
  telefono VARCHAR(15) not null,
  cellulare VARCHAR(15) not null,
@@ -31,10 +31,10 @@ CREATE TABLE professionista(
 
 DROP TABLE IF EXISTS paziente;
 CREATE TABLE paziente(
+ cf CHAR(16) not null,
  nome VARCHAR(20) not null,
  cognome VARCHAR(20) not null,
  data_nascita DATE not null,
- cf CHAR(16) not null,
  email VARCHAR(50) not null,
  telefono VARCHAR(15) not null,
  passwor VARCHAR(50) not null,
