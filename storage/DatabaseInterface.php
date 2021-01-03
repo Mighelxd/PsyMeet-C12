@@ -92,5 +92,32 @@
                 DatabaseConnector::close($connection);
                 return $result;
             }
+			
+		public static function selectDinamicQuery(array $arrCol,array $arrAtt,$tablename)
+		{
+            $connection = DatabaseConnector::connect();
+            $select = "SELECT ";
+            $where = "WHERE ";
+
+            for($i=0;$i<count($arrCol);$i++){
+                $select.="$arrCol[$i],";
+            }
+
+            $select = substr($select,0,-1);
+            $select .= " FROM $tablename ";
+
+            foreach($arrAtt as $att=>$attValue){
+                if(is_int($attValue)){
+                    $where .= "$att = $attValue and ";
+                }
+                else{
+                     $where .= "$att = '$attValue' and ";
+                }
+            }
+            $where = substr($where,0,-5);
+            $result = $connection->query($select . $where);
+            DatabaseConnector::close($connection);
+            return $result;
+        }
     }
 ?>
