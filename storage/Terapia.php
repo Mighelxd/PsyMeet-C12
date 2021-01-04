@@ -47,10 +47,6 @@ class Terapia
     public function getArray(){
         return array("id_terapia" => $this->id_terapia, "data" => $this->data, "descr" => $this->descrizione, "cf_prof" => $this->cf_prof, "cf" => $this->cf);
     }
-    public function setIdTerapia($id_terapia)
-    {
-        return $this -> id_terapia= $id_terapia;
-    }
     public function setData($data)
     {
         return $this -> data = $data;
