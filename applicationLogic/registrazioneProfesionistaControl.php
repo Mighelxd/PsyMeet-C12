@@ -20,8 +20,8 @@
             $polizza_rc=$_POST["polizzaRc"];
             $n_iscrizione_albo=$_POST["nIscrizioneAlbo"];
             $email=$_POST["email"];
-            $password=$_POST["password"];
-            $conferma_password=$_POST["confermaPassword"];
+            $password=md5($_POST["password"]);
+            $conferma_password=md5($_POST["confermaPassword"]);
             $videoProfessionista=$_POST["videoPresentazione"];
             $professionista = new Professionista($codice_fiscale,$nome,$cognome,$data_nascita,$email,$telefono,$cellulare,$password,$indirizzo_studio,$esperienze,$pubblicazioni,$titolo_studio,$n_iscrizione_albo,$p_iva,NULL,NULL,$polizza_rc,Null,NULL);
             $result = DatabaseInterface::insertQuery($professionista->getArray(),$professionista->tableName);
