@@ -24,7 +24,7 @@ CREATE TABLE professionista(
  n_iscrizione_albo VARCHAR(100) not null,
  partita_iva CHAR(11) not null,
  pec VARCHAR(50) not null,
- specializzazione VARCHAR(500) not null,
+ specializzazione VARCHAR(500) ,
  polizza_RC VARCHAR(500) not null,
  video_presentazione VARCHAR(50),
  foto_profilo_professionista VARCHAR(50),
