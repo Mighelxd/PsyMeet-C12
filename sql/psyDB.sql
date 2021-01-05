@@ -27,6 +27,7 @@ CREATE TABLE professionista(
  specializzazione VARCHAR(500) not null,
  polizza_RC VARCHAR(500) not null,
  video_presentazione VARCHAR(50),
+ foto_profilo_professionista VARCHAR(50),
  PRIMARY KEY(cf_prof)
 );
 
