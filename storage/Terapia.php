@@ -13,17 +13,24 @@ class Terapia
     private $descrizione;
     private $cf_prof;
     private $cf;
-    private static $nome_tabella="terapia";
+    public static $nome_tabella="terapia";
     
-    public function __construct($id_terapia, $data,$descrizione, $cf_prof, $cf)
+    public function __construct($id_ter, $date,$descriz, $cf_professionista, $cf_pa)
     {
-        $this->id_terapia = $id_terapia;
-        $this->data = $data;
-        $this->descrizione= $descrizione;
-        $this->cf_prof = $cf_prof;
-        $this->cf = $cf;
+        $this->id_terapia = $id_ter;
+        $this->data = $date;
+        $this->descrizione= $descriz;
+        $this->cf_prof = $cf_professionista;
+        $this->cf = $cf_pa;
         
     }
+    public function __constructD(){
+        $this->id_terapia = -1;
+        $this->data ="" ;
+        $this->descrizione = "";
+        $this->cf_prof = "";
+        $this->cf = "";
+     }
     public function getIdTerapia()
     {
         return $this -> id_terapia;
