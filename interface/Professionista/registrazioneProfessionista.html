@@ -28,114 +28,114 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Effettua la registrazione come professionista</p>
 
-      <form action="../../index.html" method="post">
+      <form action="../../applicationLogic/registrazioneProfesionistaControl.php" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Nome">
+          <input type="text" class="form-control" name="nome" placeholder="nome">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cognome">
+          <input type="text" class="form-control" placeholder="Cognome" name="cognome">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="data" class="form-control" placeholder="Data di nascita">
+          <input type="data" class="form-control" placeholder="Data di nascita" name="dataN">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Codice Fiscale">
+          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Titolo di studio">
+          <input type="text" class="form-control" placeholder="Titolo di studio" name="titoloStudio">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Pubblicazioni">
+          <input type="text" class="form-control" placeholder="Pubblicazioni" name="pubblicazioni">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Esperienze">
+          <input type="text" class="form-control" placeholder="Esperienze" name="esperienze">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Indirizzo studio">
+          <input type="text" class="form-control" placeholder="Indirizzo studio" name="indirizzoStudio">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Telefono">
+          <input type="text" class="form-control" placeholder="Telefono" name="telefono">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cellulare">
+          <input type="text" class="form-control" placeholder="Cellulare" name="cellulare">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="P.IVA">
+          <input type="text" class="form-control" placeholder="P.IVA" name="pIva">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Polizza RC">
+          <input type="text" class="form-control" placeholder="Polizza RC" name="polizzaRc">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="N° iscrizione albo">
+          <input type="text" class="form-control" placeholder="N° iscrizione albo" name="nIscrizioneAlbo">
           <div class="input-group-append">
             <div class="input-group-text">             
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" placeholder="Email" name="email">
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="password">
           <div class="input-group-append">
             <div class="input-group-text">             
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Conferma password">
+          <input type="password" class="form-control" placeholder="Conferma password" name="confermaPassword">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -146,7 +146,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                    <input type="file" class="custom-file-input" id="exampleInputFile" name="videoPresentazione">
                     <label class="custom-file-label" for="exampleInputFile">Seleziona file</label>
                   </div>
                   <div class="input-group-append">
