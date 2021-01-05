@@ -29,7 +29,7 @@
             $this->telefono=$tel;
             $this->cellulare=$cell;
             $this->password=$pass;
-            $this->$indirizzoStudio=$indiSt;
+            $this->indirizzoStudio=$indiSt;
             $this->esperienze=$esp;
             $this->pubblicazioni=$pub;
             $this->titoloStudio=$titSt;
