@@ -155,7 +155,7 @@ class Paziente
         $this->difficolCura = $difficolCura;
     }
 
-    public function getFotoProfiloPaz($fotoProfiloPaz)
+    public function setFotoProfiloPaz($fotoProfiloPaz)
     {
          $this->$fotoProfiloPaz = $fotoProfiloPaz;
     }
