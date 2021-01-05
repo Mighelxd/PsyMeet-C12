@@ -21,9 +21,10 @@ class Paziente
     private $istruzione;
     private $lavoro;
     private $difficolCura;
+    private $fotoProfiloPaz;
     public static $table_name="paziente";
 
-    public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura)
+    public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura, $fotoProfiloPaz)
     {
         $this->cf = $cf;
         $this->nome = $nome;
@@ -36,9 +37,10 @@ class Paziente
         $this->istruzione = $istruzione;
         $this->lavoro = $lavoro;
         $this->difficolCura = $difficolCura;
+        $this->$fotoProfiloPaz = $fotoProfiloPaz;
     }
 
-    public function getCf($cf)
+    public function getCf()
     {
         return $this->cf;
     }
@@ -53,44 +55,49 @@ class Paziente
         return $this->cognome;
     }
 
-    public function getDataNascita($dataNascita)
+    public function getDataNascita()
     {
         return $this->dataNascita;
     }
 
-    public function getEmail($email)
+    public function getEmail()
     {
         return $this->email;
     }
 
-    public function getTelefono($telefono)
+    public function getTelefono()
     {
         return $this->telefono;
     }
 
-    public function getPassword($password)
+    public function getPassword()
     {
         return $this->password;
     }
 
-    public function getIndirizzo($indirizzo)
+    public function getIndirizzo()
     {
         return $this->indirizzo;
     }
 
-    public function getIstruzione($istruzione)
+    public function getIstruzione()
     {
         return $this->istruzione;
     }
 
-    public function getLavoro($lavoro)
+    public function getLavoro()
     {
         return $this->lavoro;
     }
 
-    public function getDifficolCura($difficolCura)
+    public function getDifficolCura()
     {
         return $this->difficolCura;
+    }
+
+    public function getFotoProfiloPaz()
+    {
+        return $this->$fotoProfiloPaz;
     }
 
     public function setCf($cf)
@@ -146,6 +153,11 @@ class Paziente
     public function setDifficolCura($difficolCura)
     {
         $this->difficolCura = $difficolCura;
+    }
+
+    public function getFotoProfiloPaz($fotoProfiloPaz)
+    {
+         $this->$fotoProfiloPaz = $fotoProfiloPaz;
     }
 
     public function getArray()
