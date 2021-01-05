@@ -1,4 +1,4 @@
-?php
+<?php
 /*
 * SchedaModelloEziologicoControl
 * Questa Control fornisce tutti i metodi relativi alla scheda modello eziologico
@@ -15,11 +15,12 @@
             $id_scheda=$_POST["id_scheda"];
             $data=$_POST["data"];
             $fattori_causativi=$_POST["fattori_causativi"];
-            $fattori_precipitanti=$_POST["fattori_precipitanti"]);
             $fattori_mantenimento=$_POST["fattori_mantenimento"];
+            $fattori_precipitanti=$_POST["fattori_precipitanti"];
             $relazione_finale=$_POST["relazione_finale"];
             $id_terapia=$_POST["id_terapia"];
             $schedamodelloeziologico = new SchedaModelloEziologico($id_scheda,$data,$fattori_causativi,$fattori_precipitanti,$fattori_mantenimento,$relazione_finale,$id_terapia);
             $result = DatabaseInterface::insertQuery($professionista->getArray(),$professionista->tableName);
         }
+
 ?>
