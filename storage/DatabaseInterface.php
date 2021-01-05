@@ -19,10 +19,15 @@
                     $insert .= "$o,";
                     $values.= "'$value',";
                 }
-                else{
-                    $insert .= "$o,";
-                    $values.= $value . ",";
+                else 
+                    if($value == NULL){
+                        $insert .= "$o,";
+                        $values.= "NULL" . ",";
                 }
+                    else{
+                        $insert .= "$o,";
+                        $values.= $value . ",";
+                    }
             }
 
             $insert = substr($insert,0,-1);
@@ -31,6 +36,7 @@
             $values .= ");";
 
             $result = $connection->query($insert.$values);
+            echo $insert.$values."<br>".mysqli_error($connection);
             DatabaseConnector::close($connection);
             return $result;
         }

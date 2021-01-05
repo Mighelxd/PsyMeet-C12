@@ -19,6 +19,7 @@
         private $polizzaRc;
         private $immagineProfessionista;
         private $videoProfessionista;
+        public $tableName="professionista";
 
         public function __construct($cf,$n,$c,$date,$e,$tel,$cell,$pass,$indiSt,$esp,$pub,$titSt,$nIsc,$pIva,$p,$spec,$polRc,$video,$img){
             $this->cfProf=$cf;
@@ -188,7 +189,7 @@
 
 
         public function getArray(){
-            return array("cfProf" => $this->cfProf, "nome" => $this->nome, "cognome" => $this->cognome, "dataNascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "cellulare" => $this->cellulare, "passwor"=> $this->password, "indirizzoStudio"=> $this->indirizzoStudio, "esperienze" => $this->esperienze, "pubblicazioni" => $this->pubblicazioni, "titoloStudio" => $this->titoloStudio, "nIscrizioneAlbo" => $this->nIscrizioneAlbo, "partitaIva" => $this->partitaIva, "pec" => $this->partitaIva, "specializzazione" => $this->specializzazione, "polizzaRc" => $this->$polizzaRc, "videoProfessionista" => $this->videoProfessionista, "foto_profilo_professionista" => $this->image);
+            return array("cf_prof" => $this->cfProf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "cellulare" => $this->cellulare, "passwor"=> $this->password, "indirizzo_studio"=> $this->indirizzoStudio, "esperienze" => $this->esperienze, "pubblicazioni" => $this->pubblicazioni, "titolo_studio" => $this->titoloStudio, "n_iscrizione_albo" => $this->nIscrizioneAlbo, "partita_iva" => $this->partitaIva, "pec" => $this->partitaIva, "specializzazione" => $this->specializzazione, "polizza_rc" => $this->polizzaRc, "video_presentazione" => $this->videoProfessionista, "foto_profilo_professionista" => $this->immagineProfessionista);
         }
     }
 ?>
