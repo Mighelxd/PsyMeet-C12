@@ -2,6 +2,7 @@
 /*
 * SchedaModelloEziologicoControl
 * Questa Control fornisce tutti i metodi relativi alla scheda modello eziologico
+* Autore: Francesco Capone
 * Versione: 0.1
 * 2020 Copyright by PsyMeet - University of Salerno
 */
