@@ -16,9 +16,10 @@ class SchedaPrimoColloquio
     private $obiettivi;
     private $cambiamento;
     private $id_terapia;
+    private $tipo;
     private static $table_name="schedaPrimoColloquio";
     
-    public function __construct($id_scheda, $data, $problema, $aspettative, $motivazione, $obiettivi, $cambiamento, $id_terapia)
+    public function __construct($id_scheda, $data, $problema, $aspettative, $motivazione, $obiettivi, $cambiamento, $id_terapia,$tipo)
     {
         $this->id_scheda = $id_scheda;
         $this->data = $data; 
@@ -28,7 +29,7 @@ class SchedaPrimoColloquio
         $this->obiettivi = $obiettivi; 
         $this->cambiamento = $cambiamento;
         $this->id_terapia = $id_terapia;
-        return this;
+        $this->tipo = $tipo;
     }
     public function getIdScheda()
     {
@@ -62,8 +63,12 @@ class SchedaPrimoColloquio
     {
         return $this -> id_terapia;
     }
+    public function getTipo()
+    {
+        return $this -> tipo;
+    }
     public function getArray(){
-        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "pro" => $this->problema, "aspe" => $this->aspettative, "moti" => $this->motivazione, "obiet" => $this->obiettivi,"camb" => $this->cambiamento, "id_terapia" => $this->id_terapia);
+        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "pro" => $this->problema, "aspe" => $this->aspettative, "moti" => $this->motivazione, "obiet" => $this->obiettivi,"camb" => $this->cambiamento, "id_terapia" => $this->id_terapia,"tipo" =>$this->tipo);
     }
     public function setIdScheda($id_scheda)
     {
@@ -96,6 +101,10 @@ class SchedaPrimoColloquio
     public function setIdTerapia($id_terapia)
     {
         return $this -> id_terapia = $id_terapia;
+    }
+    public function setTipo($tipo)
+    {
+        return $this -> tipo =$tipo;
     }
 }
 

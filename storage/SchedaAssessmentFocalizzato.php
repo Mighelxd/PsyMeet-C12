@@ -17,9 +17,10 @@ class SchedaAssessmentFocalizzato
     private $appunti;
     private $n_episodi;
     private $id_terapia;
+    private $tipo;
     private static $table_name="SchedaAssessmentFocalizzato";
     
-    public function __construct($id_scheda, $data, $analisi_fun, $m_a, $m_b,$m_c, $appunti, $n_episodi, $id_terapia)
+    public function __construct($id_scheda, $data, $analisi_fun, $m_a, $m_b,$m_c, $appunti, $n_episodi, $id_terapia, $tipo)
     {
         $this->id_scheda = $id_scheda;
         $this->data = $data;
@@ -66,8 +67,12 @@ class SchedaAssessmentFocalizzato
     {
         return $this -> id_terapia;
     }
+    public function getTipo()
+    {
+        return $this -> tipo;
+    }
     public function getArray(){
-        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "an_fun" => $this->analisi_fun, "m_a" => $this->m_a, "m_b" => $this->m_b, "m_c" => $this->m_c, "appunti" => $this->appunti, "n_ep" => $this->n_episodi, "id_terapia" => $this->id_terapia);
+        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "an_fun" => $this->analisi_fun, "m_a" => $this->m_a, "m_b" => $this->m_b, "m_c" => $this->m_c, "appunti" => $this->appunti, "n_ep" => $this->n_episodi, "id_terapia" => $this->id_terapia, "tipo" =>$this->tipo);
     }
     public function setIdScheda($id_scheda)
     {
@@ -104,6 +109,10 @@ class SchedaAssessmentFocalizzato
     public function setIdTerapia($id_terapia)
     {
         return $this -> id_terapia = $id_terapia;
+    }
+    public function setTipo($tipo)
+    {
+        return $this -> tipo =$tipo;
     }
 }
 

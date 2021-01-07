@@ -13,15 +13,16 @@ class SchedaFollowUp
     private $ricadute;
     private $esiti_positivi;
     private $id_terapia;
+    private $tipo;
     
-    public function __construct($id_scheda, $data,$ricadute, $esiti_positivi, $id_terapia)
+    public function __construct($id_scheda, $data,$ricadute, $esiti_positivi, $id_terapia,$tipo)
     {
         $this->id_scheda = $id_scheda;
         $this->data = $data;
         $this->ricadute= $ricadute;
         $this->esiti_positivi = $esiti_positivi;
         $this->id_terapia = $id_terapia;
-        return this;
+        $this->tipo = $tipo;
     }
     public function getIdScheda()
     {
@@ -43,8 +44,12 @@ class SchedaFollowUp
     {
         return $this -> id_terapia;
     }
+    public function getTipo()
+    {
+        return $this -> tipo;
+    }
     public function getArray(){
-        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "ric" => $this->ricadute, "esi_pos" => $this->esiti_positivi, "id_terapia" => $this->id_terapia);
+        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "ric" => $this->ricadute, "esi_pos" => $this->esiti_positivi, "id_terapia" => $this->id_terapia,"tipo" => $this->tipo);
     }
     public function setIdScheda($id_scheda)
     {
@@ -65,6 +70,10 @@ class SchedaFollowUp
     public function setIdTerapia($id_terapia)
     {
         return $this -> id_terapia = $id_terapia;
+    }
+    public function setTipo($tipo)
+    {
+        return $this -> tipo =$tipo;
     }
 }
 

@@ -8,15 +8,15 @@ insert into paziente(nome,cognome,data_nascita,cf,email,telefono,passwor,indiriz
 
 insert into terapia(data,descrizione,cf_prof,cf) value('2020-10-02','cognitivo comportamentale','RSSMRC80R12H703U','NSTFNC94M23H703G');
 
-insert into schedaPrimoColloquio(data,problema,aspettative,motivazione,obiettivi,cambiamento,id_terapia) value('2020-10-02','Disturbo comportamentale','Il paziente vuole superare la paura del buio','NA.','Aiutare il paziente a superare il suo disturbo','NA.','1');
+insert into schedaPrimoColloquio(data,problema,aspettative,motivazione,obiettivi,cambiamento,id_terapia,tipo) value('2020-10-02','Disturbo comportamentale','Il paziente vuole superare la paura del buio','NA.','Aiutare il paziente a superare il suo disturbo','NA.','1','Scheda Primo Colloquio');
 
-insert into schedaAssessmentGeneralizzato(data,autoreg_positivi,autoreg_negativi,cognitive_positivi,cognitive_negativi,self_management_positivi,self_management_negativi,sociali_positivi,sociali_negativi,id_terapia) value('2020-10-02','NA','NA','NA','NA','NA','NA','NA','NA','1');
+insert into schedaAssessmentGeneralizzato(data,autoreg_positivi,autoreg_negativi,cognitive_positivi,cognitive_negativi,self_management_positivi,self_management_negativi,sociali_positivi,sociali_negativi,id_terapia,tipo) value('2020-10-02','NA','NA','NA','NA','NA','NA','NA','NA','1','Scheda Assessment Focalizzato');
 
-insert into schedaAssessmentFocalizzato(data,analisi_fun,m_a,m_b,m_c,appunti,n_episodi,id_terapia) value('2020-10-02','NA','NA','NA','NA','NA','1','1');
+insert into schedaAssessmentFocalizzato(data,analisi_fun,m_a,m_b,m_c,appunti,n_episodi,id_terapia,tipo) value('2020-10-02','NA','NA','NA','NA','NA','1','1','Scheda Assessment Focalizzato');
 
-insert into schedaFollowup(data,ricadute,esiti_positivi,id_terapia) value('2020-12-10','NA','NA','1');
+insert into schedaFollowup(data,ricadute,esiti_positivi,id_terapia,tipo) value('2020-12-10','NA','NA','1','Scheda Follow Up');
 
-insert into schedaModelloEziologico(data,fattori_causativi,fattori_precipitanti,fattori_mantenimento,relazione_finale,id_terapia) value('2020-12-10','NA','NA','NA','NA','1');
+insert into schedaModelloEziologico(data,fattori_causativi,fattori_precipitanti,fattori_mantenimento,relazione_finale,id_terapia,tipo) value('2020-12-10','NA','NA','NA','NA','1','Scheda Modello Eziologico');
 
 insert into appuntamento(data,ora,descrizione,cf_prof,cf) value('2020-10-01','19:00:00','Seduta primo colloquio','RSSMRC80R12H703U','NSTFNC94M23H703G');
 

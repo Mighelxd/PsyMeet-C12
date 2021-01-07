@@ -6,7 +6,7 @@
  * Versione: 0.1
  * 2020 Copyright by PsyMeet - University of Salerno
  */
-class SchedaAssessmentFocalizzato
+class SchedaAssessmentGeneralizzato
 {
     private $id_scheda;
     private $data;
@@ -19,9 +19,10 @@ class SchedaAssessmentFocalizzato
     private $sociali_negativi;
     private $self_management_positivi;
     private $id_terapia;
-    private static $table_name="SchedaAssessmentGeneralizzato";
+    private $tipo;
+    public static $table_name="SchedaAssessmentGeneralizzato";
     
-    public function __construct($id_scheda, $data, $autoreg_positivi, $autoreg_negativi, $cognitive_positivi, $cognitive_negativi, $self_management_negativi, $sociali_positivi, $sociali_negativi,$self_management_positivi, $id_terapia)
+    public function __construct($id_scheda, $data, $autoreg_positivi, $autoreg_negativi, $cognitive_positivi, $cognitive_negativi, $self_management_negativi, $sociali_positivi, $sociali_negativi,$self_management_positivi, $id_terapia, $tipo)
     {
         $this->id_scheda = $id_scheda;
         $this->data = $data;
@@ -34,6 +35,7 @@ class SchedaAssessmentFocalizzato
         $this->sociali_negativi =$sociali_negativi;
         $this->self_management_positivi =$self_management_positivi;
         $this->id_terapia = $id_terapia;
+        $this->tipo = $tipo;
     }
     public function getIdScheda()
     {
@@ -79,8 +81,12 @@ class SchedaAssessmentFocalizzato
     {
         return $this -> id_terapia;
     }
+    public function getTipo()
+    {
+        return $this -> tipo;
+    }
     public function getArray(){
-        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "au_pos" => $this->autoreg_positivi, "au_neg" => $this->autoreg_negativi, "co_pos" => $this->cognitive_positivi, "co_neg" => $this->cognitive_negativi, "se_pos" => $this->self_management_positivi, "so_pos" => $this->sociali_positivi, "so_neg" => $this->sociali_negativi, "se_neg" => $this->self_management_negativi, "id_terapia" => $this->id_terapia);
+        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "au_pos" => $this->autoreg_positivi, "au_neg" => $this->autoreg_negativi, "co_pos" => $this->cognitive_positivi, "co_neg" => $this->cognitive_negativi, "se_pos" => $this->self_management_positivi, "so_pos" => $this->sociali_positivi, "so_neg" => $this->sociali_negativi, "se_neg" => $this->self_management_negativi, "id_terapia" => $this->id_terapia, "tipo" =>$this->tipo);
     }
     public function setIdScheda($id_scheda)
     {
@@ -112,11 +118,11 @@ class SchedaAssessmentFocalizzato
     }
     public function setSocialiPositivi($sociali_positivi)
     {
-        return $this -> sociali_positivi = $nsociali_positivi;
+        return $this -> sociali_positivi = $sociali_positivi;
     }
     public function setSocialiNegativi($sociali_negativi)
     {
-        return $this -> sociali_negativi = $nsociali_negativi;
+        return $this -> sociali_negativi = $sociali_negativi;
     }
     public function setSelfManagementPositivi($self_management_positivi)
     {
@@ -125,6 +131,10 @@ class SchedaAssessmentFocalizzato
     public function setIdTerapia($id_terapia)
     {
         return $this -> id_terapia = $id_terapia;
+    }
+    public function setTipo($tipo)
+    {
+        return $this -> tipo =$tipo;
     }
 }
 

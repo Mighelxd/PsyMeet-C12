@@ -72,6 +72,7 @@ CREATE TABLE schedaPrimoColloquio(
  obiettivi TEXT not null,
  cambiamento TEXT not null,
  id_terapia INT unsigned not null,
+ tipo TEXT not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
  ON DELETE CASCADE ON UPDATE CASCADE
@@ -90,6 +91,7 @@ CREATE TABLE schedaAssessmentGeneralizzato(
  sociali_positivi TEXT not null,
  sociali_negativi TEXT not null,
  id_terapia INT unsigned not null,
+ tipo TEXT not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
  ON DELETE CASCADE ON UPDATE CASCADE
@@ -106,6 +108,7 @@ CREATE TABLE schedaAssessmentFocalizzato(
  appunti TEXT not null,
  n_episodi INT not null,
  id_terapia INT unsigned not null,
+ tipo TEXT not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
  ON DELETE CASCADE ON UPDATE CASCADE
@@ -118,6 +121,7 @@ CREATE TABLE schedaFollowup(
  ricadute TEXT not null,
  esiti_positivi TEXT not null,
  id_terapia INT unsigned not null,
+ tipo TEXT not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
  ON DELETE CASCADE ON UPDATE CASCADE
@@ -132,6 +136,7 @@ CREATE TABLE schedaModelloEziologico(
  fattori_mantenimento TEXT not null,
  relazione_finale TEXT not null,
  id_terapia INT unsigned not null,
+ tipo TEXT not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
  ON DELETE CASCADE ON UPDATE CASCADE
