@@ -31,6 +31,7 @@ class SchedaAssessmentFocalizzato
         $this->appunti =$appunti;
         $this->n_episodi =$n_episodi;
         $this->id_terapia = $id_terapia;
+        $this->tipo = $tipo;
     }
     public function getIdScheda()
     {
