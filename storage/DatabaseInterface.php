@@ -1,10 +1,10 @@
 <?php
     /*
-    * DatabaseInterface 
+    * DatabaseInterface
     * Questa classe fornisce tutti i metodi per effettuare query sul DB
     * Autore: Michele D'Avino
     * Versione: 0.1
-    * 2020 Copyright by PsyMeet - University of Salerno 
+    * 2020 Copyright by PsyMeet - University of Salerno
 */
     include("DatabaseConnector.php");
     include '..\plugins\libArray\FunArray.php';
@@ -19,7 +19,7 @@
                     $insert .= "$o,";
                     $values.= "'$value',";
                 }
-                else 
+                else
                     if($value == NULL){
                         $insert .= "$o,";
                         $values.= "NULL" . ",";
@@ -73,7 +73,7 @@
 
         public static function selectQueryByAtt(array $array, $tablename){
             $connection = DatabaseConnector::connect();
-            
+
             $select = "SELECT * FROM $tablename ";
             $where = "WHERE ";
             if(count($array) == 1){
@@ -88,15 +88,15 @@
                         $where .= FunArray::array_key_first($array) . " = " . "\"" . $array[FunArray::array_key_first($array)] . "\"";
                     else
                         $where .= FunArray::array_key_first($array) . " = " . $array[FunArray::array_key_first($array)];
-                    $where .= " OR "; 
+                    $where .= " AND ";
                     }
-                    $where = substr($where,0,-4);
-                } 
+                    $where = substr($where,0,-5);
+                }
                 $result = $connection->query($select . $where);
                 DatabaseConnector::close($connection);
                 return $result;
             }
-			
+
 		public static function selectDinamicQuery(array $arrCol,array $arrAtt,$tablename)
 		{
             $connection = DatabaseConnector::connect();
@@ -120,6 +120,24 @@
             }
             $where = substr($where,0,-5);
             $result = $connection->query($select . $where);
+            DatabaseConnector::close($connection);
+            return $result;
+        }
+        public static function deleteQuery(array $arrAtt, $tablename){
+            $connection = DatabaseConnector::connect();
+            $delete = "DELETE FROM $tablename ";
+            $where = "WHERE ";
+
+            foreach($arrAtt as $att=>$attValue){
+                if(is_int($attValue)){
+                    $where .= "$att = $attValue and ";
+                }
+                else{
+                    $where .= "$att = '$attValue' and ";
+                }
+            }
+            $where = substr($where,0,-5);
+            $result = $connection->query($delete . $where);
             DatabaseConnector::close($connection);
             return $result;
         }

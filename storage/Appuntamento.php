@@ -7,24 +7,15 @@
     * 2020 Copyright by PsyMeet - University of Salerno 
 */
 class Appuntamento{
-private $id_app;
+private $id_appuntamento;
 private $data;
 private $ora;
-private $desc
+private $desc;
 private $cfProf;
 private $cfPaz;
 
-  function __construct(){
-    $this->id_app = 0;
-    $this->data = '';
-    $this->ora = '';
-    $this->desc = '';
-    $this->cfProf = '';
-    $this->cfPaz = '';
-  }
-
   function __construct($id,$date,$hour,$des,$cfPr,$cfPa){
-    $this->id_app = $id;
+    $this->id_appuntamento = $id;
     $this->data = $date;
     $this->ora = $hour;
     $this->desc = $des;
@@ -32,7 +23,7 @@ private $cfPaz;
     $this->cfPaz = $cfPa;
   }
   function getId(){
-    return $this->id_app;
+    return $this->id_appuntamento;
   }
   function getData(){
     return $this->data;
@@ -51,7 +42,7 @@ private $cfPaz;
   }
 
   function setId($newId){
-    $this->id_app = $newId;
+    $this->id_appuntamento = $newId;
   }
   function setData($newDate){
     $this->data = $newDate;
@@ -70,7 +61,7 @@ private $cfPaz;
   }
 
   public function getArray(){
-       return array("id_appuntamento" => $this->id_app, "data" => $this->data, "ora" => $this->ora, "descrizione" => $this->desc, "cf_prof" => $this->cfProf, "cf" => $this->cfPaz);
+       return array("id_appuntamento" => $this->id_appuntamento,"data" => $this->data, "ora" => $this->ora, "descrizione" => $this->desc, "cf_prof" => $this->cfProf, "cf" => $this->cfPaz);
    }
 }
 

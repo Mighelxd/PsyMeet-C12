@@ -24,15 +24,37 @@ function getXmlHttpRequest() {
 	return xhr;
 }
 
-function calendario(appuntamenti){
-  /* initialize the calendar
+/*function createEvents(app) {
+	var str = "";
+	for (a of app) {
+		console.log(a.data);
+		var date = new Date(a.data);
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+
+		str += "{\
+					title:" + a.descrizione+",\
+					start:new Date("+ a.data + "),\
+					backgroundColor:'#f56954',\
+					borderColor:'#f56954',\
+					allDay:true\
+				},";
+	}
+	var finalStr = str.substr(0, str.length - 1);
+	//finalStr+="]"
+	console.log(finalStr+"\nin createevents");
+	return finalStr.trim();
+}*/
+
+$(function(){
+  /* initialize the calendar------
    -----------------------------------------------------------------*/
   //Date for the calendar events (dummy data)
-  console.log(appuntamenti);
-  var date = new Date(appuntamenti.data)
+  /*var date = new Date(appuntamenti.data)
   var d    = date.getDate(),
       m    = date.getMonth(),
-      y    = date.getFullYear()
+      y    = date.getFullYear()*/
 
   var Calendar = FullCalendar.Calendar;
   var calendarEl = document.getElementById('calendar');
@@ -44,35 +66,10 @@ function calendario(appuntamenti){
       center: 'title',
       right : 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    'themeSystem': 'bootstrap',
-    //Random default events
-    events    : [
-      {
-        title          : 'appuntamento '+appuntamenti.ora,
-        start          : new Date(y, m, d),
-        backgroundColor: '#f56954', //red
-        borderColor    : '#f56954', //red
-        allDay         : true
-      }
-    ],
-    editable  : true,
-    droppable : true, // this allows things to be dropped onto the calendar !!!
+    'themeSystem': 'bootstrap'
+	  //Random default events
   });
 
   calendar.render();
   // $('#calendar').fullCalendar()
-}
-
-$(function () {
-  var xhttp = getXmlHttpRequest();
-	xhttp.onreadystatechange = function(){
-		if(this.readyState == 4 && this.status == 200){
-			calendario(this.responseText);
-		}
-	};
-  var url = window.location.pathname;
-  console.log(url);
-  var str = 'RSSMRC80R12H703U';
-  xhttp.open("get","/psymeet/applicationLogic/AppuntamentoControl.php?action=recoveryAll&key="+str,true);
-	xhttp.send();
 })
