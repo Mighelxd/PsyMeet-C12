@@ -21,6 +21,12 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -42,7 +48,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Effettua la registrazione come professionista</p>
 
-      <form action="../../applicationLogic/registrazioneProfesionistaControl.php" method="post">
+      <form method="post" id="registerProf">
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="nome" placeholder="nome" required>
           <div class="input-group-append">
@@ -65,7 +71,7 @@
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf" required>
+          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf" id="cf" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -135,7 +141,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email" required>
+          <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>
@@ -177,6 +183,11 @@
           </div>
           <!-- /.col -->
         </div>
+        <div class="row" style="padding-top:1 px;">
+          <div class="col-12">
+            <div class="alert alert-danger" style="display:none;"></div>
+          </div>
+        </div>
       </form>
 
 
@@ -187,11 +198,34 @@
 </div>
 <!-- /.register-box -->
 
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script>
+  $("#registerProf").submit(function(e){
+      e.preventDefault()
+      $.ajax({
+          url: '../../applicationLogic/registrazioneProfesionistaControl.php',
+          data: $("#registerProf").serialize(),
+          type: "post",
+          success:function(data){
+            data=JSON.parse(data);
+            console.log(data);
+            if(data.esito==true){
+              window.location.replace("areaPersonale.html");
+            
+            }else{
+                  $('.alert-danger').show();
+                  $('.alert-danger')[0].innerHTML=data.errore;
+                  if(data.errore.includes("Codice"))
+                    $("#cf").select();
+                  if(data.errore.includes("email"))
+                    $("#email").select();
+            }
+          },
+          error: function(err){
+            console.log(err);
+          }
+      });
+  })
+</script>
+
 </body>
 </html>

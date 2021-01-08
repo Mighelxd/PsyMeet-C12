@@ -30,26 +30,28 @@
             $email=$_POST["email"];
             $password=md5($_POST["password"]);
             $conferma_password=md5($_POST["confermaPassword"]);
-            $videoProfessionista=$_POST["videoPresentazione"];
+            if(isset($_POST["videoPresentazione"]))
+                $videoProfessionista=$_POST["videoPresentazione"];
+            else
+                $videoProfessionista=NULL;
             $professionista = new Professionista($codice_fiscale,$nome,$cognome,$data_nascita,$email,$telefono,$cellulare,$password,$indirizzo_studio,$esperienze,$pubblicazioni,$titolo_studio,$n_iscrizione_albo,$p_iva,NULL,NULL,$polizza_rc,Null,NULL);
+            
             $select = DatabaseInterface::selectQueryById($professionista->getArray(),$professionista->tableName);
             if(mysqli_num_rows($select)!=0){
-                session_start();
-                $_SESSION["errore"]="Codice fiscale già presente.";
-                header("Location: ../interface/professionista/registrazioneProfessionista.php");
+                $errore = array("esito" => false,"errore" => "Codice fiscale gia' presente.");
+                echo json_encode($errore);
             }
             $select = DatabaseInterface::selectQueryByAtt(array("email" => $professionista->getEmail()),$professionista->tableName);
             if(mysqli_num_rows($select)!=0){
-                session_start();
-                $_SESSION["errore"]="Email già presente.";
-                header("Location: ../interface/professionista/registrazioneProfessionista.php");
+                $errore=array("esito" => "false","errore" => "Email gia' presente.");
+                return json_encode($errore);
             }
             $result = DatabaseInterface::insertQuery($professionista->getArray(),$professionista->tableName);
             if($result==true){
                 session_start();
                 $_SESSION["codiceFiscale"]=$codice_fiscale;
                 $_SESSION["tipo"]="professionista";
-                header("Location: ../interface/Professionista/areaPersonale.php");
+                return json_encode(array("esito"=>true));
             }
         }
 ?>
