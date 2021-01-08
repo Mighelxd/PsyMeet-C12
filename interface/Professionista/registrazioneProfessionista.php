@@ -210,7 +210,6 @@
             console.log(data);
             if(data.esito==true){
               window.location.replace("areaPersonale.html");
-            
             }else{
                   $('.alert-danger').show();
                   $('.alert-danger')[0].innerHTML=data.errore;

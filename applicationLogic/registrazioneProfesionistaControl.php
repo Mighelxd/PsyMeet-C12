@@ -44,14 +44,15 @@
             $select = DatabaseInterface::selectQueryByAtt(array("email" => $professionista->getEmail()),$professionista->tableName);
             if(mysqli_num_rows($select)!=0){
                 $errore=array("esito" => "false","errore" => "Email gia' presente.");
-                return json_encode($errore);
+                echo json_encode($errore);
             }
             $result = DatabaseInterface::insertQuery($professionista->getArray(),$professionista->tableName);
             if($result==true){
                 session_start();
                 $_SESSION["codiceFiscale"]=$codice_fiscale;
                 $_SESSION["tipo"]="professionista";
-                return json_encode(array("esito"=>true));
+                $esito=array("esito" => true, "errore" => "nessuno");
+                echo json_encode($esito);
             }
         }
 ?>
