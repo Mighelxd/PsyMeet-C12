@@ -7,7 +7,7 @@
     * 2020 Copyright by PsyMeet - University of Salerno
 */
     include("DatabaseConnector.php");
-    include '..\plugins\libArray\FunArray.php';
+//    include '..\plugins\libArray\FunArray.php';
     class DatabaseInterface{
         public static function insertQuery(array $obj, $tablename){
             $connection = DatabaseConnector::connect();
@@ -140,6 +140,18 @@
             $result = $connection->query($delete . $where);
             DatabaseConnector::close($connection);
             return $result;
+        }
+
+        public static function selectAllQuery($tablename)
+        {
+          $connection = DatabaseConnector::connect();
+          $select = "SELECT * ";
+
+          $select .= " FROM $tablename ";
+
+          $result = $connection->query($select);
+          DatabaseConnector::close($connection);
+          return $result;
         }
     }
 ?>
