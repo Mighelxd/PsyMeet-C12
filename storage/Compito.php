@@ -22,15 +22,15 @@ class Compito
 	private $cfProf;
 
 
-	public function __construct($id, $data, $titolo, $descrizione, $svolgimento, $correzione, $effettuato, $cfPaz, $cfProf)
+	public function __construct($id, $data, $effettuato, $titolo, $descrizione, $svolgimento, $correzione, $cfProf, $cfPaz)
 	{
 		$this->id= $id;
 		$this->data = $data;
+		$this->effettuato= $effettuato;
 		$this->titolo = $titolo;
 		$this->descrizione = $descrizione;
 		$this->svolgimento = $svolgimento;
 		$this->correzione = $correzione;
-		$this->effettuato= $effettuato;
 		$this->cfPaz= $cfPaz;
 		$this->cfProf= $cfProf;
 	}
@@ -88,26 +88,26 @@ class Compito
 	{
 		$this->descrizione = $descrizione;
 	}
-	
-	
+
+
 	public function getSvoglimento()
 	{
 		return $this->svolgimento;
 	}
-	
-	
+
+
 	public function setSvoglimento($svolgimento)
 	{
 		$this->svolgimento = $svolgimento;
 	}
-	
-	
+
+
 	public function getCorrezione()
 	{
 		return $this->correzione;
 	}
-	
-	
+
+
 	public function setCorrezione($correzione)
 	{
 		$this->correzione = $correzione;
@@ -128,6 +128,6 @@ class Compito
 
 	public function getArray()
 	{
-		return ['id_compito'->$id, 'data'->$data, 'effettuato'->$effettuato, 'titolo'->$titolo, 'descrizione'->$descrizione, 'svolgimento'->$svolgimento, 'correzione'->$correzione, 'cf_prof'->$cfProf, 'cf'->$cfPaz];
+		return array("id_compito"=>$this->id, "data"=>$this->data, "effettuato"=>$this->effettuato, "titolo"=>$this->titolo, "descrizione"=>$this->descrizione, "svolgimento"=>$this->svolgimento, "correzione"=>$this->correzione, "cf_prof"=>$this->cfProf, "cf"=>$this->cfPaz);
 	}
 }
