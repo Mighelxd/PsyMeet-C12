@@ -10,7 +10,7 @@ insert into terapia(data,descrizione,cf_prof,cf) value('2020-10-02','cognitivo c
 
 insert into schedaPrimoColloquio(data,problema,aspettative,motivazione,obiettivi,cambiamento,id_terapia,tipo) value('2020-10-02','Disturbo comportamentale','Il paziente vuole superare la paura del buio','NA.','Aiutare il paziente a superare il suo disturbo','NA.','1','Scheda Primo Colloquio');
 
-insert into schedaAssessmentGeneralizzato(data,autoreg_positivi,autoreg_negativi,cognitive_positivi,cognitive_negativi,self_management_positivi,self_management_negativi,sociali_positivi,sociali_negativi,id_terapia,tipo) value('2020-10-02','NA','NA','NA','NA','NA','NA','NA','NA','1','Scheda Assessment Focalizzato');
+insert into schedaAssessmentGeneralizzato(data,autoreg_positivi,autoreg_negativi,cognitive_positivi,cognitive_negativi,self_management_positivi,self_management_negativi,sociali_positivi,sociali_negativi,id_terapia,tipo) value('2020-10-02','NA','NA','NA','NA','NA','NA','NA','NA','1','Scheda Assessment Generalizzato');
 
 insert into schedaAssessmentFocalizzato(data,analisi_fun,m_a,m_b,m_c,appunti,n_episodi,id_terapia,tipo) value('2020-10-02','NA','NA','NA','NA','NA','1','1','Scheda Assessment Focalizzato');
 
