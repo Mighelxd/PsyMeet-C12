@@ -1,3 +1,15 @@
+<?php
+
+include "../../storage/DatabaseInterface.php";
+include "../../storage/Terapia.php";
+include "../../storage/SchedaPrimoColloquio.php";
+include "../../storage/SchedaModelloEziologico.php";
+include "../../storage/SchedaFollowUp.php";
+include "../../storage/SchedaAssessmentGeneralizzato.php";
+include "../../storage/SchedaAssessmentFocalizzato.php";
+include "../../applicationLogic/terapiaControl.php";
+$terapie = terapiaControl::recuperaSchede();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -276,7 +288,7 @@
         <div class="card-body p-0">
           <table class="table table-striped projects">
               <thead>
-                  <tr>
+                  <tr> 
                       <th style="width: 1%">
                           #
                       </th>
@@ -285,192 +297,51 @@
                       </th>
 
                       <th>
-                          Progresso
-                      </th>
-                      <th style="width: 8%" class="text-center">
-                          Status
-                      </th>
-                      <th style="width: 20%">
+                          Data Inizio
                       </th>
                   </tr>
               </thead>
               <tbody>
-                  <tr>
+                <?php
+                  for($i=0;$i<count($terapie);$i++) {
+                ?>
+                  <tr> <!--INIZIO -->
                       <td>
-                          #
+                          <?php 
+                            echo $terapie[$i]->getIdScheda();
+                          ?>
                       </td>
                       <td>
                           <a>
-                              Scheda Assessment Generalizzato
+                          <?php 
+                            echo $terapie[$i]->getTipo();
+                          ?>
                           </a>
                           <br/>
-                          <small>
-                              Iniziata in data 01.01.2019
-                          </small>
+                          
                       </td>
 
-                      <td class="project_progress">
-                          <div class="progress progress-sm">
-                              <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%">
-                              </div>
-                          </div>
-                          <small>
-                              57% Complete
-                          </small>
-                      </td>
-                      <td class="project-state">
-                          <span class="badge badge-success">Success</span>
+                      <td>  
+                          <?php 
+                            echo $terapie[$i]->getData();
+                          ?>
                       </td>
                       <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="#">
+                          <?php 
+                            $tipo = str_replace(' ','',$terapie[$i]->getTipo());
+                            $tipo = $tipo.".html"; 
+                           // echo($tipo);
+                          ?>
+                          <a class="btn btn-primary btn-sm" href='<?php echo($tipo) ?>'>
                               <i class="fas fa-folder">
                               </i>
                               View
                           </a>
-                          <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Edit
-                          </a>
-                          <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Delete
-                          </a>
                       </td>
                   </tr>
-                  <tr>
-                      <td>
-                          #
-                      </td>
-                      <td>
-                          <a>
-                              Scheda Assessment Focalizzato
-                          </a>
-                          <br/>
-                          <small>
-                              Iniziata in data 01.01.2019
-                          </small>
-                      </td>
-
-                      <td class="project_progress">
-                          <div class="progress progress-sm">
-                              <div class="progress-bar bg-green" role="progressbar" aria-volumenow="47" aria-volumemin="0" aria-volumemax="100" style="width: 47%">
-                              </div>
-                          </div>
-                          <small>
-                              47% Complete
-                          </small>
-                      </td>
-                      <td class="project-state">
-                          <span class="badge badge-success">Success</span>
-                      </td>
-                      <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="#">
-                              <i class="fas fa-folder">
-                              </i>
-                              View
-                          </a>
-                          <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Edit
-                          </a>
-                          <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Delete
-                          </a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          #
-                      </td>
-                      <td>
-                          <a>
-                              Scheda follow-up
-                          </a>
-                          <br/>
-                          <small>
-                              Iniziata in data 01.01.2019
-                          </small>
-                      </td>
-
-                      <td class="project_progress">
-                          <div class="progress progress-sm">
-                              <div class="progress-bar bg-green" role="progressbar" aria-volumenow="77" aria-volumemin="0" aria-volumemax="100" style="width: 77%">
-                              </div>
-                          </div>
-                          <small>
-                              77% Complete
-                          </small>
-                      </td>
-                      <td class="project-state">
-                          <span class="badge badge-success">Success</span>
-                      </td>
-                      <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="#">
-                              <i class="fas fa-folder">
-                              </i>
-                              View
-                          </a>
-                          <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Edit
-                          </a>
-                          <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Delete
-                          </a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          #
-                      </td>
-                      <td>
-                          <a>
-                              Modello Eziologico
-                          </a>
-                          <br/>
-                          <small>
-                              Iniziato in data 01.01.2019
-                          </small>
-                      </td>
-
-                      <td class="project_progress">
-                          <div class="progress progress-sm">
-                              <div class="progress-bar bg-green" role="progressbar" aria-volumenow="60" aria-volumemin="0" aria-volumemax="100" style="width: 60%">
-                              </div>
-                          </div>
-                          <small>
-                              60% Complete
-                          </small>
-                      </td>
-                      <td class="project-state">
-                          <span class="badge badge-success">Success</span>
-                      </td>
-                      <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="#">
-                              <i class="fas fa-folder">
-                              </i>
-                              View
-                          </a>
-                          <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Edit
-                          </a>
-                          <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Delete
-                          </a>
-                      </td>
-                  </tr>
+                  <?php 
+                    }
+                  ?>
 
               </tbody>
           </table>

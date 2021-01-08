@@ -6,15 +6,8 @@
 * Versione: 0.1
 * 2020 Copyright by PsyMeet - University of Salerno
 */
-include "../storage/DatabaseInterface.php";
-include "../storage/Terapia.php";
-include "../storage/SchedaPrimoColloquio.php";
-include "../storage/SchedaModelloEziologico.php";
-include "../storage/SchedaFollowUp.php";
-include "../storage/SchedaAssessmentGeneralizzato.php";
-include "../storage/SchedaAssessmentFocalizzato.php";
-
 class terapiaControl{
+
 
     static function recuperaSchede(){
         $att = array("id_terapia"=>"1");
