@@ -1,3 +1,17 @@
+<?php
+  session_start();
+  if(isset($_SESSION["errore"])){
+    $errore=$_SESSION["errore"];
+  echo "
+  <script>
+      alert('$errore')
+  </script>";
+  unset($_SESSION["errore"]);
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,112 +44,112 @@
 
       <form action="../../applicationLogic/registrazioneProfesionistaControl.php" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="nome" placeholder="nome">
+          <input type="text" class="form-control" name="nome" placeholder="nome" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cognome" name="cognome">
+          <input type="text" class="form-control" placeholder="Cognome" name="cognome" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="data" class="form-control" placeholder="Data di nascita" name="dataN">
+          <input type="data" class="form-control" placeholder="Data di nascita" name="dataN" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf">
+          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Titolo di studio" name="titoloStudio">
+          <input type="text" class="form-control" placeholder="Titolo di studio" name="titoloStudio" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Pubblicazioni" name="pubblicazioni">
+          <input type="text" class="form-control" placeholder="Pubblicazioni" name="pubblicazioni" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Esperienze" name="esperienze">
+          <input type="text" class="form-control" placeholder="Esperienze" name="esperienze" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Indirizzo studio" name="indirizzoStudio">
+          <input type="text" class="form-control" placeholder="Indirizzo studio" name="indirizzoStudio" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Telefono" name="telefono">
+          <input type="text" class="form-control" placeholder="Telefono" name="telefono" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cellulare" name="cellulare">
+          <input type="text" class="form-control" placeholder="Cellulare" name="cellulare" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="P.IVA" name="pIva">
+          <input type="text" class="form-control" placeholder="P.IVA" name="pIva" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Polizza RC" name="polizzaRc">
+          <input type="text" class="form-control" placeholder="Polizza RC" name="polizzaRc" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="N° iscrizione albo" name="nIscrizioneAlbo">
+          <input type="text" class="form-control" placeholder="N° iscrizione albo" name="nIscrizioneAlbo" required>
           <div class="input-group-append">
             <div class="input-group-text">             
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email">
+          <input type="email" class="form-control" placeholder="Email" name="email" required>
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password">
+          <input type="password" class="form-control" placeholder="Password" name="password" required>
           <div class="input-group-append">
             <div class="input-group-text">             
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Conferma password" name="confermaPassword">
+          <input type="password" class="form-control" placeholder="Conferma password" name="confermaPassword" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
