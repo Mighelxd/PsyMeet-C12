@@ -1,3 +1,19 @@
+
+<?php
+/*
+    * areaPersonaleProfessionista.php
+    * Pagina area personale professionista
+    * Autore: Martino D'Auria
+    * Versione: 0.1
+    * 2020 Copyright by PsyMeet - University of Salerno
+*/
+include "../../storage/DatabaseInterface.php";
+include "../../storage/Professionista.php";
+include "../../applicationLogic/ProfessionistaControl.php";
+$Professionista = professionistaControl::recuperaProfessionisti();
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -179,53 +195,58 @@
 
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
+            <?php for($i=0;$i<count($Professionista);$i++) { 
+              ?>
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
                        src="../../dist/img/user4-128x128.jpg"
                        alt="User profile picture">
                 </div>
-
-                <h3 class="profile-username text-center">Nome Professionista</h3>
-
-                <p class="text-muted text-center">Data di nascita: </p>
+                 <td>
+                    <?php echo $Professionista[$i]->getNome() , $Professionista[$i]->getCognome();
+                      ?>
+                 </td>
+                <p class="text-muted text-center">// </p>
 
                 <ul class="list-group list-group-unbordered mb-3">
 				  <li class="list-group-item">
-                    <b>Codice Fiscale:</b> <a class="float-right">0000000</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Pazienti in cura</b> <a class="float-right">2</a>
+                    <b>Data di Nascita:</b> <td> <?php echo $Professionista[$i]->getDataNascita();?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>N iscrizione albo</b> <a class="float-right">757</a>
+                    <b>N iscrizione albo</b>       <td> <?php echo $Professionista[$i]->getNIscrizioneAlbo();?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>Email</b> <a class="float-right">aaa@aa.aa</a>
+                    <b>Email</b> <td> <?php echo $Professionista[$i]->getEmail();?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>Telefono</b> <a class="float-right">000987877</a>
+                    <b>Telefono</b> <td> <?php echo $Professionista[$i]->getTelefono();?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>Cellulare</b> <a class="float-right">24354653463</a>
+                    <b>Cellulare</b> <td> <?php echo $Professionista[$i]->getCellulare();?></td>
                   </li>
 				  	  <li class="list-group-item">
-                    <b>P.IVA</b> <a class="float-right">...........</a>
+                    <b>P.IVA</b> <td> <?php echo $Professionista[$i]->getPartitaIva();?></td>
                   </li>
 				  	  <li class="list-group-item">
-                    <b>Polizza RC</b> <a class="float-right">..........</a>
+                    <b>Polizza RC</b> <td> <?php echo $Professionista[$i]->getPolizzaRc();?></td>
                   </li>
 				  	  <li class="list-group-item">
-                    <b>PEC</b> <a class="float-right">........</a>
+                    <b>PEC</b> <td> <?php echo $Professionista[$i]->getPec();?></td>
                   </li>
                 </ul>
               </div>
               <!-- /.card-body -->
             </div>
+            <?php 
+            }
+          ?>
             <!-- /.card -->
 
             <!-- About Me Box -->
             <div class="card card-primary">
+            <?php for($i=0;$i<count($Professionista);$i++) { 
+              ?>
               <div class="card-header">
                 <h3 class="card-title">Scheda tecnica</h3>
               </div>
@@ -233,53 +254,48 @@
               <div class="card-body">
 
 			  <strong><i class="fas fa-graduation-cap"></i> Titolo di studio</strong>
-
-                <p class="text-muted">
-                  Qui va il titolo di studio
-                </p>
-
+          <td>  
+            <?php echo $Professionista[$i]->getTitoloStudio();?>
+          </td>
                 <hr>
-
-                <strong><i class="fas fa-book mr-1"></i> Pubblicazioni</strong>
-
-                <p class="text-muted">
-                  Qui vanno le pubblicazioni e le partecipazioni ad eventuali progetti
-                </p>
-
+        <strong><i class="fas fa-book mr-1"></i> Pubblicazioni</strong>
+          <td>  
+            <?php echo $Professionista[$i]->getPubblicazioni();?>
+          </td>
                 <hr>
-
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Indirizzo studio fisico</strong>
-
-                <p class="text-muted">via, cap, provincia, città, regione, Italia</p>
-
+          <strong><i class="fas fa-map-marker-alt mr-1"></i> Indirizzo studio fisico</strong>
+          <td>  
+            <?php echo $Professionista[$i]->getIndirizzoStudio();?>
+          </td>
                 <hr>
-
-                <strong><i class="fas fa-handshake"></i> Esperienze</strong>
-
-                <p class="text-muted"> Qui vanno le esperienze </p>
-
-                <hr>
-
+          <strong><i class="fas fa-handshake"></i> Esperienze</strong>
+          <td>  
+            <?php echo $Professionista[$i]->getEsperienze();?>
+          </td>
+              <hr>
               </div>
+              <?php 
+                }
+              ?>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
           <!-- /.col -->
-          <div class="col-md-9">
+          <div class="col-md-9"> <!--Inizio -->
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
 
-                  <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab" >Settings</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab" >Modifica</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
 
                   <div class="tab-pane fade show active" id="settings">
-                    <form class="form-horizontal">
-
+                    <form class="form-horizontal" action="../../applicationLogic/modificaProfessionistaControl.php" method="post"> 
+              
 					     <div class="form-group row">
                         <label for="cellulare" class="col-sm-2 col-form-label">Cellulare</label>
                         <div class="col-sm-10">
@@ -310,8 +326,7 @@
                           <input type="password" class="form-control" id="pax" placeholder="Password">
                         </div>
                       </div>
-
-					 <div class="form-group row">
+                <div class="form-group row">
                         <label for="titoloStudio" class="col-sm-2 col-form-label">Titolo di studio</label>
                         <div class="col-sm-10">
                           <textarea class="form-control" id="titoloStudio" placeholder="Titolo di studio"></textarea>
@@ -359,10 +374,10 @@
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
+                          <button type="submit" name="action" value="aggiornaDati"class="btn btn-danger">Conferma</button> 
                         </div>
                       </div>
-                    </form>
+                    </form> //
                   </div>
                   <!-- /.tab-pane -->
                 </div>
@@ -370,7 +385,7 @@
               </div><!-- /.card-body -->
             </div>
             <!-- /.nav-tabs-custom -->
-          </div>
+          </div> 
           <!-- /.col -->
         </div>
         <!-- /.row -->

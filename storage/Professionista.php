@@ -151,8 +151,8 @@
             return $this->email;
         }
 
-        public function getPubblicazione(){
-            return $this->pubblicazione;
+        public function getPubblicazioni(){
+            return $this->pubblicazioni;
         }
 
         public function getTitoloStudio(){

@@ -1,4 +1,11 @@
 <?php
+/*
+    * gestioneTerapia.php
+    * Pagina per la gestione della terapia
+    * Autore: Martino D'Auria
+    * Versione: 0.1
+    * 2020 Copyright by PsyMeet - University of Salerno
+*/
 
 include "../../storage/DatabaseInterface.php";
 include "../../storage/Terapia.php";
