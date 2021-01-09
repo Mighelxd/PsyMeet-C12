@@ -8,111 +8,62 @@
  */
 class SchedaAssessmentFocalizzato
 {
-    private $id_scheda;
+    private $idScheda;
     private $data;
-    private $analisi_fun;
-    private $m_a;
-    private $m_b;
-    private $m_c;
-    private $appunti;
-    private $n_episodi;
-    private $id_terapia;
+    private $nEpisodi;
+    private $idTerapia;
     private $tipo;
-    private static $table_name="schedaassessmentfocalizzato";
+    private static $tableName="schedaassessmentfocalizzato";
 
-    public function __construct($id_scheda, $data, $analisi_fun, $m_a, $m_b,$m_c, $appunti, $n_episodi, $id_terapia, $tipo)
+    public function __construct($idScheda, $data, $nEpisodi, $idTerapia, $tipo)
     {
-        $this->id_scheda = $id_scheda;
+        $this->idScheda = $idScheda;
         $this->data = $data;
-        $this->analisi_fun= $analisi_fun;
-        $this->m_a = $m_a;
-        $this->m_b = $m_b;
-        $this->m_c =$m_c;
-        $this->appunti =$appunti;
-        $this->n_episodi =$n_episodi;
-        $this->id_terapia = $id_terapia;
+        $this->nEpisodi =$nEpisodi;
+        $this->idTerapia = $idTerapia;
         $this->tipo = $tipo;
     }
     public function getIdScheda()
     {
-        return $this -> id_scheda;
+        return $this->idScheda;
     }
     public function getData()
     {
-        return $this -> data;
-    }
-    public function getAnalisiFun()
-    {
-        return $this -> analisi_fun;
-    }
-    public function getMA()
-    {
-        return $this -> m_a;
-    }
-    public function getMB()
-    {
-        return $this -> m_b;
-    } public function getMC()
-    {
-        return $this -> m_c;
-    }
-    public function getAppunti()
-    {
-        return $this -> appunti;
+        return $this->data;
     }
     public function getNEpisodi()
     {
-        return $this -> n_episodi;
+        return $this->nEpisodi;
     }
     public function getIdTerapia()
     {
-        return $this -> id_terapia;
+        return $this->idTerapia;
     }
     public function getTipo()
     {
-        return $this -> tipo;
+        return $this->tipo;
     }
     public function getArray(){
-        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "an_fun" => $this->analisi_fun, "m_a" => $this->m_a, "m_b" => $this->m_b, "m_c" => $this->m_c, "appunti" => $this->appunti, "n_ep" => $this->n_episodi, "id_terapia" => $this->id_terapia, "tipo" =>$this->tipo);
+        return array("id_scheda" => $this->idScheda, "data" => $this->data, "n_episodi" => $this->nEpisodi, "id_terapia" => $this->idTerapia, "tipo" =>$this->tipo);
     }
-    public function setIdScheda($id_scheda)
+    public function setIdScheda($idScheda)
     {
-        return $this -> id_scheda= $id_scheda;
+        $this->idScheda= $idScheda;
     }
     public function setData($data)
     {
-        return $this -> data = $data;
+        $this->data = $data;
     }
-    public function setAnalisiFun($analisi_fun)
+    public function setNEpisodi($nEpisodi)
     {
-        return $this -> analisi_fun = $analisi_fun;
+        $this->nEpisodi = $nEpisodi;
     }
-    public function setMA($m_a)
+    public function setIdTerapia($idTerapia)
     {
-        return $this -> m_a = $m_a;
-    }
-    public function setMB($m_b)
-    {
-        return $this -> m_b = $m_b;
-    }
-    public function setMC($m_c)
-    {
-        return $this -> m_c = $m_c;
-    }
-    public function setAppunti($appunti)
-    {
-        return $this -> appunti = $appunti;
-    }
-    public function setNEpisodi($n_episodi)
-    {
-        return $this -> n_episodi = $n_episodi;
-    }
-    public function setIdTerapia($id_terapia)
-    {
-        return $this -> id_terapia = $id_terapia;
+        $this->idTerapia = $idTerapia;
     }
     public function setTipo($tipo)
     {
-        return $this -> tipo =$tipo;
+        $this->tipo =$tipo;
     }
 }
