@@ -26,8 +26,8 @@ CREATE TABLE professionista(
  pec VARCHAR(50) not null,
  specializzazione VARCHAR(500) ,
  polizza_RC VARCHAR(500) not null,
- video_presentazione VARCHAR(50),
- foto_profilo_professionista VARCHAR(50),
+ video_presentazione LONGBLOB,
+ foto_profilo_professionista MEDIUMBLOB,
  PRIMARY KEY(cf_prof)
 );
 
@@ -44,7 +44,7 @@ CREATE TABLE paziente(
  istruzione VARCHAR(500) not null,
  lavoro VARCHAR(100) not null,
  difficol_cura INT not null,
- foto_profilo_paz VARCHAR(50),
+ foto_profilo_paz MEDIUMBLOB,
  PRIMARY KEY(cf)
 );
 

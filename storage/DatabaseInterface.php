@@ -34,7 +34,6 @@
             $insert .= ") ";
             $values = substr($values,0,-1);
             $values .= ");";
-            echo $insert.$values;
             $result = $connection->query($insert.$values);
             DatabaseConnector::close($connection);
             return $result;
@@ -55,8 +54,6 @@
         }
             $update = substr($update,0,-2);
             $result = $connection->query($update . $where);
-          //  var_dump($update . $where);
-            echo $update . $where;
             DatabaseConnector::close($connection);
             return $result;
 

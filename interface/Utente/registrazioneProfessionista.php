@@ -27,6 +27,8 @@
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<!-- bs-custom-file-input -->
+<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -163,15 +165,25 @@
         </div>
 				Video di presentazione
 		<div class="input-group mb-3">
-              <div class="col-sm-10">
-                <div class="input-group mb-3">
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="exampleInputFile" name="videoPresentazione">
-                    <label class="custom-file-label" for="exampleInputFile">Seleziona file</label>
-                  </div>
-                  <div class="input-group-append">
-                    <span class="input-group-text" id="">Upload</span>
-                  </div>
+              <div class="input-group mb-3">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="exampleInputFile" name="videoPresentazione">
+                  <label class="custom-file-label" for="exampleInputFile">Seleziona file</label>
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">Upload</span>
+                </div>
+              </div>
+        </div>
+        Immagine Professionista
+		<div class="input-group mb-3">
+              <div class="input-group mb-3">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="exampleInputFile" name="immagine">
+                  <label class="custom-file-label" for="exampleInputFile">Seleziona file</label>
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">Upload</span>
                 </div>
               </div>
         </div>
@@ -199,17 +211,21 @@
 <!-- /.register-box -->
 
 <script>
+  $(document).ready(function () {
+  bsCustomFileInput.init();
+});
   $("#registerProf").submit(function(e){
       e.preventDefault()
       $.ajax({
           url: '../../applicationLogic/registrazioneProfesionistaControl.php',
+          contentType:
           data: $("#registerProf").serialize(),
           type: "post",
           success:function(data){
             data=JSON.parse(data);
             console.log(data);
             if(data.esito==true){
-              window.location.replace("areaPersonale.html");
+              window.location.replace("../Professionista/areaPersonale.html");
             }else{
                   $('.alert-danger').show();
                   $('.alert-danger')[0].innerHTML=data.errore;

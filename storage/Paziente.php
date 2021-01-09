@@ -37,7 +37,7 @@ class Paziente
         $this->istruzione = $istruzione;
         $this->lavoro = $lavoro;
         $this->difficolCura = $difficolCura;
-        $this->$fotoProfiloPaz = $fotoProfiloPaz;
+        $this->fotoProfiloPaz = $fotoProfiloPaz;
     }
 
     public function getCf()

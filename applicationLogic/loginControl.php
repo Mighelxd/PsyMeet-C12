@@ -24,7 +24,7 @@
                 session_start();
                 $_SESSION["tipo"]="professionista";
                 $_SESSION["cf"]=$cf;
-                $esito=array("esito" => true, "errore" => "professionista");
+                $esito=array("esito" => true, "tipo" => "professionista");
                 echo json_encode($esito);
             }
             else{
