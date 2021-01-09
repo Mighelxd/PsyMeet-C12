@@ -7,6 +7,14 @@ include ('../../storage/DatabaseInterface.php');
 include '../../plugins/libArray/FunArray.php';
 include '../../applicationLogic/CompitoControl.php';
 
+session_start();
+$tipoUtente = $_SESSION["tipo"];
+if($tipoUtente != "professionista"){
+  header("Location: ../Utente/login.php");
+}
+
+
+
 $compito= CompitoControl::selectAllCompitiProf();
 
 
