@@ -9,6 +9,10 @@ include '../plugins/libArray/FunArray.php';
 define("TABLE_NAME", "compito");
 
 
+
+
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
   $action=$_POST['action'];
@@ -56,9 +60,9 @@ $data = $_POST['data'];
 $titolo = $_POST['titolo'];
 $descrizione = $_POST['descrizione'];
 $cfPaz = "NSTFNC94M23H703G";
-$cfProf = "RSSMRC80R12H703U";
 
-$compitoComp=array("data"=>$data,"titolo"=>$titolo, "descrizione"=>$descrizione, "cf_prof"=>$cfProf, "cf"=>$cfPaz);
+
+$compitoComp=array("data"=>$data,"titolo"=>$titolo, "descrizione"=>$descrizione, "cf"=>$cfPaz);
 
 
 $compt = DatabaseInterface::insertQuery($compitoComp,TABLE_NAME);

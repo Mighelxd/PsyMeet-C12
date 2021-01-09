@@ -284,7 +284,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
 
 
     <section class="content">
-      <form method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
+      <form method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php" onsubmit=" return validate();">
         <input type="text" name="action" value="addComp" hidden="true">
         <div class="col-md-12">
           <div class="card card-primary">
@@ -300,15 +300,16 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
             <div class="card-body">
               <div class="form-group">
                 <label for="data">Data</label>
-                <input type="date" name="data" class="form-control" rows="1" >
+                <input type="date" id="inputData" name="data" class="form-control" rows="1" >
+                <span id="dataSpan"> </span>
               </div>
               <div class="form-group">
                 <label for="titolo">Titolo</label>
-                <textarea name="titolo" class="form-control" rows="1" ></textarea>
+                <textarea name="titolo" class="form-control" rows="1" required></textarea>
               </div>
               <div class="form-group">
                 <label for="descrizione">Descrizione</label>
-                <textarea name="descrizione" class="form-control" rows="3" ></textarea>
+                <textarea name="descrizione" class="form-control" rows="3" required ></textarea>
               </div>
               <div class="form-group">
                 <label for="svolgimento">Svolgimento Compito</label>
@@ -322,7 +323,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
                 <label for="effettuato">Effettuato</label>
                 <input type="checkbox" name="effettuato" class="form-control" rows="3" disabled>
               </div>
-              <button name='action' type="submit" value="addComp" class="btn btn-success float-right">Aggiungi Compito</button>
+              <button name='action' type="submit" value="addComp" class="btn btn-success float-right" >Aggiungi Compito</button>
 
             </div>
           </form>
@@ -427,6 +428,34 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<!-- validazione della data -->
+<script>
+function validate(){
+  var data=document.getElementById("inputData");
+  if(data_validation(data)) {
+    return;
+  }
+  return false;
+}
+
+function data_validation(data){
+	var currentDate = new Date();
+	currentDate = currentDate.toISOString();
+	currentDate = currentDate.substr(0,10);
+
+	if(data.value < currentDate || data.value > currentDate){
+		$("#dataSpan").text("Data inserita non valida!");
+		$("#dataSpan").css("color", "red");
+		$("#inputData").css("background-color", "red");
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+</script>
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
