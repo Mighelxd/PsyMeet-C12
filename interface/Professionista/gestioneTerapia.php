@@ -320,7 +320,6 @@ $terapie = terapiaControl::recuperaSchede();
                           <br/>
                           
                       </td>
-
                       <td>  
                           <?php 
                             echo $terapie[$i]->getData();
