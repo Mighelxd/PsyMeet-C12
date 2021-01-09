@@ -90,13 +90,13 @@ class Compito
 	}
 
 
-	public function getSvoglimento()
+	public function getSvolgimento()
 	{
 		return $this->svolgimento;
 	}
 
 
-	public function setSvoglimento($svolgimento)
+	public function setSvolgimento($svolgimento)
 	{
 		$this->svolgimento = $svolgimento;
 	}

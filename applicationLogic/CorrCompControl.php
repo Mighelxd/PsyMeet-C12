@@ -93,7 +93,7 @@ else{
       echo $svolgimento;
 
     //  $compitoComp->setSvolgimento($svolgimento);
-      $compitoComp ->  setSvoglimento($svolgimento);
+      $compitoComp ->  setSvolgimento($svolgimento);
       var_dump($compitoComp);
       echo "<br>";
 
