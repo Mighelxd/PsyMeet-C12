@@ -9,9 +9,7 @@
     }
     else{
         $cf=$_POST["cf"];
-        //$password=md5($_POST["password"]);
-        $password=$_POST["password"];
-        unset($query);
+        $password=md5($_POST["password"]);
         $query=DatabaseInterface::selectQueryByAtt(array("cf"=>$cf, "passwor"=>$password), Paziente::$tableName);
         if(mysqli_num_rows($query)==1){
             session_start();
@@ -21,7 +19,6 @@
             echo json_encode($esito);
         }
         else{
-            unset($query);
             $query=DatabaseInterface::selectQueryByAtt(array("cf_prof" => $cf, "passwor" => $password), Professionista::$tableName);
             if(mysqli_num_rows($query)==1){
                 session_start();
@@ -31,14 +28,12 @@
                 echo json_encode($esito);
             }
             else{
-                unset($query);
                 $query=DatabaseInterface::selectQueryByAtt(array("cf"=>$cf),Paziente::$tableName);
                 if(mysqli_num_rows($query)==1){
                     $esito=array("esito" => false, "errore" => "Password errata");
                     echo json_encode($esito);
                 }
-                else{
-                    unset($query);
+                else{  
                     $query=DatabaseInterface::selectQueryByAtt(array(("cf_prof")=>$cf),Professionista::$tableName);
                     if(mysqli_num_rows($query)==1){
                         $esito=array("esito" => false, "errore" => "Password errata");
