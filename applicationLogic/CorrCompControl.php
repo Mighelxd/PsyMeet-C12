@@ -8,6 +8,8 @@ include '../plugins/libArray/FunArray.php';
 
 define("TABLE_NAME", "compito");
 
+session_start();
+$cfProf=$_SESSION['cf'];
 
 
 
@@ -17,12 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
   $action=$_POST['action'];
 
+}
 
 // questa action permette di correggere un compito
   if($action=="correzione"){
 
 $idComp = $_POST['id'];
-echo $idComp;
+//echo $idComp;
 $arrKey = array("id_compito"=>$idComp);
 $comp = DatabaseInterface::selectQueryByAtt($arrKey,TABLE_NAME);
 $temp=$comp->fetch_array();
@@ -31,15 +34,15 @@ $compitoComp= new Compito($temp[0],$temp[1],$temp[2],$temp[3],$temp[4],$temp[5],
 
 $correzione = $_POST["correzione"];
 
-echo $correzione;
+//echo $correzione;
 
 $compitoComp->setCorrezione($correzione);
 
-var_dump($compitoComp);
-echo "<br>";
+//var_dump($compitoComp);
+//echo "<br>";
 
 $isUpdate = DatabaseInterface::updateQueryById($compitoComp->getArray(),TABLE_NAME);
-var_dump($isUpdate);
+//var_dump($isUpdate);
 
 if($isUpdate){
     header('Location: ../interface/Professionista/gestioneCompiti.php');
@@ -60,9 +63,11 @@ $data = $_POST['data'];
 $titolo = $_POST['titolo'];
 $descrizione = $_POST['descrizione'];
 $cfPaz = "NSTFNC94M23H703G";
+$svolgimento="";
+$correzione="";
 
 
-$compitoComp=array("data"=>$data,"titolo"=>$titolo, "descrizione"=>$descrizione, "cf"=>$cfPaz);
+$compitoComp=array("data"=>$data,"effettuato"=>"1", "titolo"=>$titolo, "descrizione"=>$descrizione,"svolgimento"=>$svolgimento, "correzione"=>$correzione,"cf_prof"=>$cfProf, "cf"=>$cfPaz);
 
 
 $compt = DatabaseInterface::insertQuery($compitoComp,TABLE_NAME);
@@ -115,6 +120,6 @@ else{
 
     }
 
-}
+
 
  ?>

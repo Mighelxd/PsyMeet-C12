@@ -34,6 +34,7 @@
             $insert .= ") ";
             $values = substr($values,0,-1);
             $values .= ");";
+            echo $insert.$values;
             $result = $connection->query($insert.$values);
             DatabaseConnector::close($connection);
             return $result;
@@ -42,19 +43,20 @@
             $connection = DatabaseConnector::connect();
             $update = "UPDATE $tablename SET ";
             if(gettype($obj[FunArray::array_key_first($obj)] == "string"))
-                $where = "WHERE " .FunArray::array_key_first($obj) . " = " . "\"".  $obj[FunArray::array_key_first($obj)] . "\"";
+                $where = "WHERE " .FunArray::array_key_first($obj) . " = " . "'".  $obj[FunArray::array_key_first($obj)] . "'";
             else
                 $where = "WHERE " .FunArray::array_key_first($obj) . " = " .  $obj[FunArray::array_key_first($obj)];
             foreach($obj as $key => $value){
                 if(gettype($value) == "string")
-                    $update .= $key . " = " . "\"" .$value . "\"". " , ";
+                    $update .= $key . " = " . "'" .$value . "'". " , ";
                 else
                     $update .= $key . " = " .$value . " , ";
 
         }
             $update = substr($update,0,-2);
             $result = $connection->query($update . $where);
-            var_dump($update . $where);
+          //  var_dump($update . $where);
+            echo $update . $where;
             DatabaseConnector::close($connection);
             return $result;
 
