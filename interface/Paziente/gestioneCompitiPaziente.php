@@ -7,16 +7,12 @@ include ('../../storage/DatabaseInterface.php');
 include '../../plugins/libArray/FunArray.php';
 include '../../applicationLogic/CompitoControl.php';
 
+//$compito= CompitoControl::selectAllCompitiProf();
+//$cfPaziente = "NSTFNC94M23H703G";
 session_start();
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "professionista"){
-  header("Location: ../Utente/login.php");
-}
-
-
-
-$compito= CompitoControl::selectAllCompitiProf();
-
+$cfPaziente = $_SESSION["cf"];
+echo $cfPaziente;
+$compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
 
 
 /*$action = 'recoveryAll';
@@ -260,7 +256,7 @@ $compito= CompitoControl::selectAllCompitiProf();
           </li>
 
         </ul>
-      </nav> -->
+      </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -290,61 +286,14 @@ $compito= CompitoControl::selectAllCompitiProf();
 
 
     <section class="content">
-      <form method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
-        <input type="text" name="action" value="addComp" hidden="true">
-        <div class="col-md-12">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Aggiungi un nuovo compito</h3>
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
-              </div>
-            </div>
 
-            <div class="card-body">
-              <div class="form-group">
-                <label for="data">Data</label>
-                <textarea name="data" class="form-control" rows="1" ></textarea>
-              </div>
-              <div class="form-group">
-                <label for="titolo">Titolo</label>
-                <textarea name="titolo" class="form-control" rows="1" ></textarea>
-              </div>
-              <div class="form-group">
-                <label for="descrizione">Descrizione</label>
-                <textarea name="descrizione" class="form-control" rows="3" ></textarea>
-              </div>
-              <div class="form-group">
-                <label for="svolgimento">Svolgimento Compito</label>
-                <textarea name="svolgimento" class="form-control" rows="3" readonly></textarea>
-              </div>
-              <div class="form-group">
-                <label for="correzione">Correzione Compito</label>
-                <textarea name="correzione" class="form-control" rows="3" readonly></textarea>
-              </div>
-              <div class="form-group">
-                <label for="effettuato">Effettuato</label>
-                <input type="checkbox" name="effettuato" class="form-control" rows="3" disabled>
-              </div>
-              <button name='action' type="submit" value="addComp" class="btn btn-success float-right">Aggiungi Compito</button>
-
-            </div>
-          </form>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
-          <!-- /.card -->
-        </div>
 
       <?php
        for($i=0; $i<count($compito); $i++) {
         ?>
 
-      <form  method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
-        <input type="text" name="action" value="correzione" hidden="true">
+      <form  name="correzione" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
       <div class="row">
           <div class="col-md-12">
             <div class="card card-primary">
@@ -358,6 +307,7 @@ $compito= CompitoControl::selectAllCompitiProf();
               </div>
               <div class="card-body">
                 <div class="form-group">
+                  <input type="text" name="action" value="doComp" hidden ="true">
                   <label for="data">Data</label>
                   <textarea name="data" class="form-control" rows="1" readonly><?php echo $compito[$i]->getData(); ?> </textarea>
                 </div>
@@ -371,11 +321,11 @@ $compito= CompitoControl::selectAllCompitiProf();
                 </div>
                 <div class="form-group">
                   <label for="svolgimento">Svolgimento Compito</label>
-                  <textarea name="svolgimento" class="form-control" rows="3" readonly>  <?php echo $compito[$i]->getSvolgimento(); ?> </textarea>
+                  <textarea name="svolgimento" class="form-control" rows="3" >  <?php echo $compito[$i]->getSvolgimento(); ?> </textarea>
                 </div>
                 <div class="form-group">
                   <label for="correzione">Correzione Compito</label>
-                  <textarea name="correzione" class="form-control" rows="3"> <?php echo $compito[$i]->getCorrezione(); ?> </textarea>
+                  <textarea name="correzione" class="form-control" rows="3" readonly> <?php echo $compito[$i]->getCorrezione(); ?> </textarea>
                 </div>
 
                 <?php
@@ -385,7 +335,7 @@ $compito= CompitoControl::selectAllCompitiProf();
 
                 <div class="form-group">
                   <label for="effettuato">Effettuato</label>
-                  <input type="checkbox" name="effettuato" class="form-control" rows="1" checked>
+                  <input type="checkbox" name="effettuato" class="form-control" rows="1" disabled>
                 </div>
 
               <?php
@@ -394,13 +344,13 @@ $compito= CompitoControl::selectAllCompitiProf();
 
                   <div class="form-group">
                     <label for="effettuato">Effettuato</label>
-                    <input type="checkbox" name="effettuato" class="form-control" rows="1">
+                    <input type="checkbox" name="effettuato" class="form-control" rows="1" disabled>
                   </div>
 
             <?php }  ?>
 
 
-                  <input type="submit" value="Correggi Compito" class="btn btn-success float-right" >
+                  <input type="submit" value="Svolgi Compito" class="btn btn-success float-right" >
               </div>
               <!-- /.card-body -->
 

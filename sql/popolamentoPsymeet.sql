@@ -12,7 +12,9 @@ insert into schedaPrimoColloquio(data,problema,aspettative,motivazione,obiettivi
 
 insert into schedaAssessmentGeneralizzato(data,autoreg_positivi,autoreg_negativi,cognitive_positivi,cognitive_negativi,self_management_positivi,self_management_negativi,sociali_positivi,sociali_negativi,id_terapia,tipo) value('2020-10-02','NA','NA','NA','NA','NA','NA','NA','NA','1','Scheda Assessment Generalizzato');
 
-insert into schedaAssessmentFocalizzato(data,analisi_fun,m_a,m_b,m_c,appunti,n_episodi,id_terapia,tipo) value('2020-10-02','NA','NA','NA','NA','NA','1','1','Scheda Assessment Focalizzato');
+insert into schedaAssessmentFocalizzato(data,n_episodi,id_terapia,tipo) value('2020-10-02','1','1','Scheda Assessment Focalizzato');
+
+insert into episodio(numero,analisi_fun,m_a,m_b,m_c,appunti,id_scheda) value('1','NA','NA','NA','NA','NA','1');
 
 insert into schedaFollowup(data,ricadute,esiti_positivi,id_terapia,tipo) value('2020-12-10','NA','NA','1','Scheda Follow Up');
 

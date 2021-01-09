@@ -162,6 +162,11 @@ class Paziente
 
     public function getArray()
     {
+      return array("cf" => $this->cf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "passwor" => $this->password, "indirizzo" => $this->indirizzo, "istruzione" => $this->istruzione,"lavoro" => $this->lavoro, "difficol_cura" => $this->difficolCura, "foto_profilo_paz" => $this->fotoProfiloPaz);
+    }
+
+    public function getArrayNoFoto()
+    {
       return array("cf" => $this->cf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "passwor" => $this->password, "indirizzo" => $this->indirizzo, "istruzione" => $this->istruzione,"lavoro" => $this->lavoro, "difficol_cura" => $this->difficolCura);
     }
 }

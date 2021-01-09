@@ -101,16 +101,26 @@ DROP TABLE IF EXISTS schedaAssessmentFocalizzato;
 CREATE TABLE schedaAssessmentFocalizzato(
  id_scheda INT unsigned auto_increment not null,
  data DATE not null,
- analisi_fun TEXT not null,
- m_a TEXT not null,
- m_b TEXT not null,
- m_c TEXT not null,
- appunti TEXT not null,
  n_episodi INT not null,
  id_terapia INT unsigned not null,
  tipo TEXT not null,
  PRIMARY KEY(id_scheda),
  FOREIGN KEY(id_terapia) REFERENCES terapia(id_terapia)
+ ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS episodio;
+CREATE TABLE episodio(
+ id_episodio INT unsigned auto_increment not null,
+ numero INT unsigned not null,
+ analisi_fun TEXT not null,
+ m_a TEXT not null,
+ m_b TEXT not null,
+ m_c TEXT not null,
+ appunti TEXT not null,
+ id_scheda INT unsigned not null,
+ PRIMARY KEY(id_episodio),
+ FOREIGN KEY(id_scheda) REFERENCES schedaAssessmentFocalizzato(id_scheda)
  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
