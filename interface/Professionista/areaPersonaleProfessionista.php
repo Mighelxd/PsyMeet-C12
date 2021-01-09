@@ -299,51 +299,51 @@ $Professionista = professionistaControl::recuperaProfessionisti();
 					     <div class="form-group row">
                         <label for="cellulare" class="col-sm-2 col-form-label">Cellulare</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="cellulare" placeholder="Cellulare">
+                          <input type="text" class="form-control" id="cellulare" placeholder="Cellulare" name="cellulare">
                         </div>
                       </div>
 					   <div class="form-group row">
                         <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="telefono" placeholder="Telefono">
+                          <input type="text" class="form-control" id="telefono" placeholder="Telefono" name="telefono">
                         </div>
                       </div>
 					      <div class="form-group row">
                         <label for="indirizzoFisico" class="col-sm-2 col-form-label">Indirizzo studio</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="indirizzoFisico" placeholder="Indirizzo fisico">
+                          <input type="text" class="form-control" id="indirizzoFisico" placeholder="Indirizzo fisico" name="IndirizzoStudio">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                          <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email">
                         </div>
                       </div>
 					      <div class="form-group row">
                         <label for="pax" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" id="pax" placeholder="Password">
+                          <input type="password" class="form-control" id="pax" placeholder="Password" name="Password">
                         </div>
                       </div>
                 <div class="form-group row">
                         <label for="titoloStudio" class="col-sm-2 col-form-label">Titolo di studio</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control" id="titoloStudio" placeholder="Titolo di studio"></textarea>
+                          <textarea class="form-control" id="titoloStudio" placeholder="Titolo di studio" name="TitoloDiStudio"></textarea>
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label for="pubblicazioni" class="col-sm-2 col-form-label">Pubblicazioni</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control" id="pubblicazioni" placeholder="Pubblicazioni"></textarea>
+                          <textarea class="form-control" id="pubblicazioni" placeholder="Pubblicazioni" name="Pubblicazioni"></textarea>
                         </div>
                       </div>
 
 					  <div class="form-group row">
                         <label for="esperienze" class="col-sm-2 col-form-label">Esperienze</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control" id="esperienze" placeholder="Esperienze"></textarea>
+                          <textarea class="form-control" id="esperienze" placeholder="Esperienze" name="Esperienze"></textarea>
                         </div>
                       </div>
 
@@ -377,7 +377,7 @@ $Professionista = professionistaControl::recuperaProfessionisti();
                           <button type="submit" name="action" value="aggiornaDati"class="btn btn-danger">Conferma</button> 
                         </div>
                       </div>
-                    </form> //
+                    </form>
                   </div>
                   <!-- /.tab-pane -->
                 </div>
