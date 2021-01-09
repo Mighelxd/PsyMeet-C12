@@ -17,6 +17,12 @@
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -28,9 +34,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Effettua il login per cominciare</p>
 
-      <form action="../../index3.html" method="post">
+      <form action="" method="post" id="loginForm">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Codice Fiscale">
+          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user-alt"></span>
@@ -38,7 +44,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -52,6 +58,10 @@
           </div>
           <!-- /.col -->
         </div>
+        <div class="row" style="margin-top:1 %;">
+          <div class="col-12">
+            <div class="alert alert-danger" style="display:none;"></div>
+          </div>
       </form>
 
 
@@ -64,13 +74,37 @@
   </div>
 </div>
 <!-- /.login-box -->
+<script>
+  $("#loginForm").submit(function(e){
+      e.preventDefault()
+      $.ajax({
+          url: '../../applicationLogic/loginControl.php',
+          data: $("#loginForm").serialize(),
+          type: "post",
+          success:function(data){
+            data=JSON.parse(data);
+            console.log(data);
+            if(data.esito==true){
+              if(data.tipo=="professionista")
+                window.location.replace("../Professionista/indexProfessionsita.html");
+              else
+                  window.location.replace("../Paziente/homePagePaziente.php");
+            }else{
+                  $('.alert-danger').show();
+                  $('.alert-danger')[0].innerHTML=data.errore;
+                  if(data.errore.includes("Codice"))
+                    $("#cf").select();
+                  if(data.errore.includes("Password"))
+                    $("#email").select();
+            }
+          },
+          error: function(err){
+            console.log(err);
+          }
+      });
+  })
+</script>
 
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
 
 </body>
 </html>
