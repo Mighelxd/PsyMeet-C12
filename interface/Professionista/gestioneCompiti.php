@@ -282,7 +282,8 @@ $compito= CompitoControl::selectAllCompitiProf();
 
 
     <section class="content">
-
+      <form method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
+        <input type="text" name="action" value="addComp" hidden="true">
         <div class="col-md-12">
           <div class="card card-primary">
             <div class="card-header">
@@ -293,7 +294,7 @@ $compito= CompitoControl::selectAllCompitiProf();
                   <i class="fas fa-minus"></i></button>
               </div>
             </div>
-            <form name="addComp" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
+
             <div class="card-body">
               <div class="form-group">
                 <label for="data">Data</label>
@@ -317,7 +318,7 @@ $compito= CompitoControl::selectAllCompitiProf();
               </div>
               <div class="form-group">
                 <label for="effettuato">Effettuato</label>
-                <input type="checkbox" name="effettuato" class="form-control" rows="3">
+                <input type="checkbox" name="effettuato" class="form-control" rows="3" disabled>
               </div>
               <button name='action' type="submit" value="addComp" class="btn btn-success float-right">Aggiungi Compito</button>
 
@@ -334,7 +335,8 @@ $compito= CompitoControl::selectAllCompitiProf();
        for($i=0; $i<count($compito); $i++) {
         ?>
 
-      <form  name="correzione" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
+      <form  method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
+        <input type="text" name="action" value="correzione" hidden="true">
       <div class="row">
           <div class="col-md-12">
             <div class="card card-primary">
