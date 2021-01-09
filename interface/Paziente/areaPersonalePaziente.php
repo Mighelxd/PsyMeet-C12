@@ -9,16 +9,45 @@
 include "../../storage/Paziente.php";
 include ("../../storage/DatabaseInterface.php");
 include ("../../plugins/libArray/FunArray.php");
+include "../../applicationLogic/PazienteControl.php";
 
 $utenteNome = "Francesco";
 $utenteCognome = "Nesta";
 $utenteCf = "NSTFNC94M23H703G";
 
-$arr = array("cf" => "NSTFNC94M23H703G",);
+
+/*
+$arrrr = array('nome' =>"nome1" , );
+$pazientes = PazienteControl::searchPaz($arrrr);
+var_dump($pazientes);*/
+/*
+$pazientiPaz = PazienteControl::getListPaz();
+echo $pazientiPaz[2]->getCf();
+$i =0;
+while ($i < count($pazientiPaz)) {
+  echo $pazientiPaz[$i]->getCf() ."<br>";
+  echo $pazientiPaz[$i]->getNome()."<br>";
+  echo $pazientiPaz[$i]->getCognome()."<br>";
+  echo $pazientiPaz[$i]->getDataNascita()."<br>";
+  echo $pazientiPaz[$i]->getEmail()."<br>";
+  echo $pazientiPaz[$i]->getTelefono()."<br>";
+  echo $pazientiPaz[$i]->getPassword()."<br>";
+  echo $pazientiPaz[$i]->getIndirizzo()."<br>";
+  echo $pazientiPaz[$i]->getIstruzione()."<br>";
+  echo $pazientiPaz[$i]->getLavoro()."<br>";
+  echo $pazientiPaz[$i]->getDifficolCura()."<br>";
+  echo $pazientiPaz[$i]->getFotoProfiloPaz()."<br>";
+  $i++;
+}
+
+*/
+
+$paz = PazienteControl::getPaz($utenteCf);
+/*$arr = array("cf" => "NSTFNC94M23H703G",);
 $result = DatabaseInterface::selectQueryById($arr,"paziente");
 $arr = $result -> fetch_array();
 $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $arr[11]);
-
+*/
  ?>
  <!DOCTYPE html>
  <html>
@@ -187,7 +216,7 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
                      <b>Indirizzo</b> <a class="float-right"><?php  echo $paz->getIndirizzo(); ?></a>
                    </li>
                    <li class="list-group-item">
-                          <b>Titolo di studio</b> <a class="float-right"><?php echo $paz->getIstruzione(); ?></a>
+                          <b>Istruzione</b> <a class="float-right"><?php echo $paz->getIstruzione(); ?></a>
                         </li>
 
                         <li class="list-group-item">
@@ -221,8 +250,8 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
                  <div class="tab-content">
 
                    <div class="tab-pane fade show active" id="settings">
-                     <form class="form-horizontal" action="../../applicationLogic/PazienteControl.php" method="post">
-                       <input type="text" name="actionModifica" value="ModificaPaziente" hidden ="true">
+                     <form class="form-horizontal" action="../../applicationLogic/AreaPersonalePazienteControl.php" method="post">
+                       <input type="text" name="action" value="ModificaPaziente" hidden ="true">
  					   <div class="form-group row">
                          <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
                          <div class="col-sm-10">
@@ -249,14 +278,37 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
                        </div>
 
  					 <div class="form-group row">
-                         <label for="titoloStudio" class="col-sm-2 col-form-label">Titolo di studio</label>
+                         <label for="titoloStudio" class="col-sm-2 col-form-label">Istruzione</label>
                          <div class="col-sm-10">
-                           <input type="text" class="form-control" name="titoloStudio" id="titoloStudio" placeholder="Titolo di studio"></textarea>
+                           <input type="text" class="form-control" name="istruzione" id="istruzione" placeholder="Istruzione"></textarea>
                          </div>
                        </div>
 
 
-   					<div class="form-group row">
+
+
+
+                       <div class="form-group row">
+                         <div class="offset-sm-2 col-sm-10">
+                           <input type="submit"  class="btn btn-danger"></button>
+                         </div>
+                       </div>
+                     </form>
+
+
+                   </div>
+                   <!-- /.tab-pane -->
+
+                 </div>
+                 <!-- /.tab-content -->
+
+               </div><!-- /.card-body -->
+             </div>
+              <!-- /.nav-tabs-custom -->
+
+              <div class = "card-body">
+
+             <div class="form-group row">
                <label for="videoPresentazione" class="col-sm-2 col-form-label">Foto Profilo</label>
                <div class="col-sm-10">
                  <div class="input-group">
@@ -271,29 +323,8 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
                </div>
              </div>
 
+           </div>
 
-                       <div class="form-group row">
-                         <div class="offset-sm-2 col-sm-10">
-                           <div class="checkbox">
-                             <label>
-                               <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                             </label>
-                           </div>
-                         </div>
-                       </div>
-                       <div class="form-group row">
-                         <div class="offset-sm-2 col-sm-10">
-                           <button type="submit" class="btn btn-danger">Submit</button>
-                         </div>
-                       </div>
-                     </form>
-                   </div>
-                   <!-- /.tab-pane -->
-                 </div>
-                 <!-- /.tab-content -->
-               </div><!-- /.card-body -->
-             </div>
-             <!-- /.nav-tabs-custom -->
            </div>
            <!-- /.col -->
          </div>

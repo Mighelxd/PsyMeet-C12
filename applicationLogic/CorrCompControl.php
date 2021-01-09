@@ -92,8 +92,8 @@ else{
 
       echo $svolgimento;
 
-      $compitoComp->setSvolgimento($svolgimento);
-
+    //  $compitoComp->setSvolgimento($svolgimento);
+      $compitoComp ->  setSvoglimento($svolgimento);
       var_dump($compitoComp);
       echo "<br>";
 
@@ -101,7 +101,7 @@ else{
       var_dump($isUpdate);
 
       if($isUpdate){
-          header('Location: ../interface/Paziente/gestioneCompiti.php');
+          header('Location: ../interface/Paziente/gestioneCompitiPaziente.php');
       }
       else{
           echo "non corretto correttamente";

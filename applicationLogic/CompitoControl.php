@@ -33,6 +33,19 @@ static function selectAllCompitiProf () {
 //  }
 }
 
+// metodo aggiunto per selezionare tutti i compiti relativi al paziente
+static function selectAllCompitiPaz ($cfPaz) {
+    $arrKey = array("cf"=>$cfPaz);
+    $allCompPaz = DatabaseInterface::selectQueryByAtt($arrKey,TABLE_NAME);
+    while($row=$allCompPaz->fetch_array()){
+      $comp= new Compito($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
+      $arr[]=$comp;
+    }
+
+    return $arr;
+}
+
+
 
  function correggiCompito(){
   //($action == 'correComp')
@@ -43,6 +56,8 @@ echo "sono qui";
       $oldDescrizione = $_POST['descrizione'];
       $oldCorrezione = $_POST['correzione'];
       $oldEffettuato = $_POST['effettuato'];
+
+
       $arrOldComp = array("id"=>$oldId,"data"=>$oldData,"titolo"=>$oldTitolo,"descrizione"=>$oldDescrizione,"correzione"=>$oldCorrezione,"effettuato"=>$oldEffettuato);
 
       $correzione = $_POST["correzione"];
@@ -54,7 +69,7 @@ echo "sono qui";
 
     }
       $oldComp->setCorrezione($correzione);
-
+      
       $isUpdate = DatabaseInterface::updateQueryById($oldComp->getArray(),TABLE_NAME);
 
       if($isUpdate){
