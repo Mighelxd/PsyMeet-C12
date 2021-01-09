@@ -9,22 +9,16 @@ include '../../applicationLogic/CompitoControl.php';
 
 session_start();
 $tipoUtente = $_SESSION["tipo"];
+$cf= $_SESSION["cf"];
 if($tipoUtente != "professionista"){
   header("Location: ../Utente/login.php");
 }
 
 
 
-$compito= CompitoControl::selectAllCompitiProf();
+$compito= CompitoControl::selectAllCompitiProf($cf);
 
 
-
-/*$action = 'recoveryAll';
-/*Questa action recupera tutti i compiti di un professionista */
-/*if($action == 'recoveryAll'){
-  $arrKey = array("cf_prof"=>'RSSMRC80R12H703U');
-  $allCompProf = DatabaseInterface::selectQueryByAtt($arrKey,'compito');
-} */
 ?>
 
 <!DOCTYPE html>
@@ -306,7 +300,7 @@ $compito= CompitoControl::selectAllCompitiProf();
             <div class="card-body">
               <div class="form-group">
                 <label for="data">Data</label>
-                <textarea name="data" class="form-control" rows="1" ></textarea>
+                <input type="date" name="data" class="form-control" rows="1" >
               </div>
               <div class="form-group">
                 <label for="titolo">Titolo</label>
@@ -359,7 +353,7 @@ $compito= CompitoControl::selectAllCompitiProf();
               <div class="card-body">
                 <div class="form-group">
                   <label for="data">Data</label>
-                  <textarea name="data" class="form-control" rows="1" readonly><?php echo $compito[$i]->getData(); ?> </textarea>
+                  <input type="date" name="data"  value="<?php echo $compito[$i]->getData(); ?>" class="form-control" rows="1" readonly>
                 </div>
                 <div class="form-group">
                   <label for="titolo">Titolo</label>

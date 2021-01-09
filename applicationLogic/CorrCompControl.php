@@ -104,7 +104,7 @@ else{
           header('Location: ../interface/Paziente/gestioneCompitiPaziente.php');
       }
       else{
-          echo "non corretto correttamente";
+          echo "non svolto correttamente";
         }
 
 
