@@ -84,10 +84,10 @@
                 }
             else{
                 foreach($array as $att_name => $att){
-                    if(gettype($array[FunArray::array_key_first($array)] == "string"))
-                        $where .= FunArray::array_key_first($array) . " = " . "\"" . $array[FunArray::array_key_first($array)] . "\"";
+                    if(gettype($att == "string"))
+                        $where .= $att_name . " = " . "\"" . $att . "\"";
                     else
-                        $where .= FunArray::array_key_first($array) . " = " . $array[FunArray::array_key_first($array)];
+                        $where .= $att_name . " = " . $att;
                     $where .= " AND ";
                     }
                     $where = substr($where,0,-5);

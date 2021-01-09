@@ -47,12 +47,12 @@ $professionisti = professionistaControl::recuperaProfessionisti();
 <body class="hold-transition sidebar-mini layout-fixed" onload="rimuovi()">
   <!-- bar nav -->
   <nav>
-    <a href="#" class="brand-link">
-      <img src="../../dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">PsyMeet</span>
-    </a>
+    <img src="../../dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3"style="opacity: .8">
+    <span >PsyMeet</span>
+    <a href="../Professionista/registrazioneProfessionista.php" class="btnReg">Registrati</a>
+    <a href='#' class="btnAccess">Accedi</a>
   </nav>
+  <h1 id="welcomeTitle">Benvenuti in PsyMeet</h1>
   <!--slideshow-->
   <div class="container mt-3">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -65,13 +65,13 @@ $professionisti = professionistaControl::recuperaProfessionisti();
       <!-- The slideshow -->
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="../../dist/img/photo3.jpg" alt="photo3" width="1100" height="500">
+          <img src="../../dist/img/jitsimeet.jpg" alt="photo3" width="1100" height="500">
         </div>
         <div class="carousel-item">
-          <img src="../../dist/img/photo1.png" alt="Photo" width="1100" height="500">
+          <img src="../../dist/img/seduta1.jpg" alt="Photo" width="1100" height="500">
         </div>
         <div class="carousel-item">
-          <img src="../../dist/img/photo2.png" alt="Photo" width="1100" height="500">
+          <img src="../../dist/img/seduta2.jpg" alt="Photo" width="1100" height="500">
         </div>
       </div>
 
@@ -86,7 +86,7 @@ $professionisti = professionistaControl::recuperaProfessionisti();
   </div>
   <br>
   <!-- Titolo intro -->
-  <p id="intro">Incontra i nostri professionisti</p>
+  <h4 id="intro">Incontra i nostri professionisti</h4>
   <!-- Main content -->
   <section class="content">
       <div class="container-fluid">
@@ -191,5 +191,14 @@ $professionisti = professionistaControl::recuperaProfessionisti();
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!-- script button nav-->
+<script>
+/*  $('.btn btn-primary').click(function(){
+
+});*/
+  $('.btn btn-success').click(function(){
+    window.location.replace('../Professionista/registrazioneProfessionista.php');
+  });
+</script>
 </body>
 </html>

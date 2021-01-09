@@ -22,7 +22,7 @@ class Paziente
     private $lavoro;
     private $difficolCura;
     private $fotoProfiloPaz;
-    public static $table_name="paziente";
+    public static $tableName="paziente";
 
     public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura, $fotoProfiloPaz)
     {

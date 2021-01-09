@@ -183,7 +183,7 @@
           </div>
           <!-- /.col -->
         </div>
-        <div class="row" style="padding-top:1 px;">
+        <div class="row" style="margin-top:1 %;">
           <div class="col-12">
             <div class="alert alert-danger" style="display:none;"></div>
           </div>

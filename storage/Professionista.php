@@ -19,7 +19,7 @@
         private $polizzaRc;
         private $immagineProfessionista;
         private $videoProfessionista;
-        public $tableName="professionista";
+        public static $tableName="professionista";
 
         public function __construct($cf,$n,$c,$date,$e,$tel,$cell,$pass,$indiSt,$esp,$pub,$titSt,$nIsc,$pIva,$p,$spec,$polRc,$video,$img){
             $this->cfProf=$cf;
