@@ -1,3 +1,7 @@
+body{
+  background-color: aliceblue;
+}
+
 nav{
   background-color: #17A2B8;
 }
@@ -5,4 +9,48 @@ nav{
 #intro{
   text-align: center;
   font-family: sans-serif;
+}
+
+#welcomeTitle{
+  text-align: center;
+  color: #007bff;
+  font-style: oblique;
+  font-family: 'Font Awesome 5 Free';
+}
+
+nav a.btnAccess:link, a.btnAccess:visited{
+  float: right;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+nav a.btnAccess:hover, a.btnAccess:active {
+  box-shadow: 5px 5px 5px #888888;
+}
+
+nav a.btnReg:link, a.btnReg:visited{
+  float: right;
+  background-color: #28a745;
+  color: white;
+  padding: 8px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+nav a.btnReg:hover, a.btnReg:active {
+  box-shadow: 5px 10px 8px #888888;
+}
+
+nav span{
+  color: white;
+}
+
+nav img{
+  width:60px;
+  height: 40px;
 }
