@@ -6,7 +6,7 @@
  * Versione: 0.1
  * 2020 Copyright by PsyMeet - University of Salerno
  */
-class Terapia
+class Pacchetto
 {
     private $id_pacchetto;
     private $n_sedute;
@@ -23,13 +23,7 @@ class Terapia
         
         
     }
-    public function __constructD(){
-        $this->id_pacchetto = -1;
-        $this->n_sedute = -1;
-        $this->prezzo = "";
-        $this->tipologia = "";
-        
-     }
+  
     public function getIdPacchetto()
     {
         return $this -> id_pacchetto;
