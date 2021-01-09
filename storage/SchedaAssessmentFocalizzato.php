@@ -18,8 +18,8 @@ class SchedaAssessmentFocalizzato
     private $n_episodi;
     private $id_terapia;
     private $tipo;
-    private static $table_name="SchedaAssessmentFocalizzato";
-    
+    private static $table_name="schedaassessmentfocalizzato";
+
     public function __construct($id_scheda, $data, $analisi_fun, $m_a, $m_b,$m_c, $appunti, $n_episodi, $id_terapia, $tipo)
     {
         $this->id_scheda = $id_scheda;
@@ -116,4 +116,3 @@ class SchedaAssessmentFocalizzato
         return $this -> tipo =$tipo;
     }
 }
-
