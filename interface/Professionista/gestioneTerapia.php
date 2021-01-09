@@ -15,7 +15,20 @@ include "../../storage/SchedaFollowUp.php";
 include "../../storage/SchedaAssessmentGeneralizzato.php";
 include "../../storage/SchedaAssessmentFocalizzato.php";
 include "../../applicationLogic/terapiaControl.php";
-$terapie = terapiaControl::recuperaSchede();
+
+session_start();
+$tipoUtente = $_SESSION["tipo"];
+if($tipoUtente != "professionista"){
+  header("Location: ../Utente/login.php");
+}
+
+$cfProfessionista = $_SESSION["cf"];
+
+$cfPazienteTer = $_POST["codFiscalePaz"];
+
+$listTerapie = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
+
+$terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
 ?>
 <!DOCTYPE html>
 <html>
@@ -295,7 +308,7 @@ $terapie = terapiaControl::recuperaSchede();
         <div class="card-body p-0">
           <table class="table table-striped projects">
               <thead>
-                  <tr> 
+                  <tr>
                       <th style="width: 1%">
                           #
                       </th>
@@ -314,28 +327,28 @@ $terapie = terapiaControl::recuperaSchede();
                 ?>
                   <tr> <!--INIZIO -->
                       <td>
-                          <?php 
+                          <?php
                             echo $terapie[$i]->getIdScheda();
                           ?>
                       </td>
                       <td>
                           <a>
-                          <?php 
+                          <?php
                             echo $terapie[$i]->getTipo();
                           ?>
                           </a>
                           <br/>
-                          
+
                       </td>
-                      <td>  
-                          <?php 
+                      <td>
+                          <?php
                             echo $terapie[$i]->getData();
                           ?>
                       </td>
                       <td class="project-actions text-right">
-                          <?php 
+                          <?php
                             $tipo = str_replace(' ','',$terapie[$i]->getTipo());
-                            $tipo = $tipo.".html"; 
+                            $tipo = $tipo.".html";
                            // echo($tipo);
                           ?>
                           <a class="btn btn-primary btn-sm" href='<?php echo($tipo) ?>'>
@@ -345,7 +358,7 @@ $terapie = terapiaControl::recuperaSchede();
                           </a>
                       </td>
                   </tr>
-                  <?php 
+                  <?php
                     }
                   ?>
 

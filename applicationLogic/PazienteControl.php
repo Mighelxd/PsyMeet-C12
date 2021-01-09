@@ -47,6 +47,23 @@ class PazienteControl {
       return $arrayPazienti;
   }
 
+
+  static function getPazientiByProf($cfProf){
+
+    $arrKey = array('cf_prof' =>  $cfProf, );
+    $listTerapie = DatabaseInterface::selectQueryByAtt($arrKey,"terapia");
+  
+    while ($row = $listTerapie->fetch_array()) {
+      $terapia = new Terapia($row[0], $row[1], $row[2], $row[3], $row[4]);
+      $arrPaz = array("cf" => $terapia -> getCf());
+      $listPazienti = DatabaseInterface::selectQueryById($arrPaz,"paziente");
+      $arrPaziente = $listPazienti->fetch_array();
+      $paziente = new Paziente($arrPaziente[0],$arrPaziente[1],$arrPaziente[2],$arrPaziente[3],$arrPaziente[4],$arrPaziente[5],$arrPaziente[6],$arrPaziente[7],$arrPaziente[8],$arrPaziente[9],$arrPaziente[10],$arrPaziente[11]);
+      $arrayPazienti[] = $paziente;
+    }
+    return $arrayPazienti;
+  }
+
 }
 
 

@@ -10,8 +10,16 @@ include ("../../storage/DatabaseInterface.php");
 include ("../../plugins/libArray/FunArray.php");
 include "../../applicationLogic/PazienteControl.php";
 include "../../storage/Paziente.php";
+include "../../storage/Terapia.php";
 
-$listPaz = PazienteControl::getListPaz();
+session_start();
+$tipoUtente = $_SESSION["tipo"];
+if($tipoUtente != "professionista"){
+  header("Location: ../Utente/login.php");
+}
+
+$cfProfessionista = $_SESSION["cf"];
+$listPaz = PazienteControl::getPazientiByProf($cfProfessionista);
 
 
  ?>
@@ -204,12 +212,17 @@ $listPaz = PazienteControl::getListPaz();
                               </i>
                               Cartella clinica
                           </a>
-                          <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php">
+                      <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
+                      <form class="" action="gestioneTerapia.php" method="post">
+
+                          <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
                               <i class="nav-icon fas fa-table">
                                 Terapia
                               </i>
-                          </a>
 
+                          </button>
+                            <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf(); ?>" hidden ="true">
+                          </form>
                       </td>
                   </tr>
                 <?php } ?>

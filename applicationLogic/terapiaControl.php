@@ -9,8 +9,8 @@
 class terapiaControl{
 
 
-    static function recuperaSchede(){
-        $att = array("id_terapia"=>"1");
+    static function recuperaSchede($idTerapia){
+        $att = array("id_terapia"=>$idTerapia);
         $col = array("*");
         $schPrimoColl = DatabaseInterface:: selectDinamicQuery($col, $att, "schedaprimocolloquio");
         $schAssFoc = DatabaseInterface:: selectDinamicQuery($col, $att, "schedaassessmentfocalizzato");
@@ -24,7 +24,7 @@ class terapiaControl{
             $allSchede[] = $scheda;
         }
         while($row = $schAssFoc->fetch_array()){
-            $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9]);
+            $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
             $allSchede[] = $scheda;
         }
         while($row = $schAssGen->fetch_array()){
@@ -42,6 +42,20 @@ class terapiaControl{
 
         return $allSchede;
     }
+
+    public static function getTerapie($cfPaz, $cfProf){
+      $arrKey= array('cf' => $cfPaz, 'cf_prof' => $cfProf);
+
+      $listTerapie = DatabaseInterface::selectQueryByAtt($arrKey, "terapia");
+
+      while ($row = $listTerapie->fetch_array()) {
+        $terapia = new Terapia($row[0],$row[1],$row[2],$row[3],$row[4]);
+        $arrayTerapie[] = $terapia;
+      }
+      return $arrayTerapie;
+    }
+
+
 }
 
 

@@ -11,38 +11,22 @@ include ("../../storage/DatabaseInterface.php");
 include ("../../plugins/libArray/FunArray.php");
 include "../../applicationLogic/PazienteControl.php";
 
-$utenteNome = "Francesco";
-$utenteCognome = "Nesta";
-$utenteCf = "NSTFNC94M23H703G";
 
 
-/*
-$arrrr = array('nome' =>"nome1" , );
-$pazientes = PazienteControl::searchPaz($arrrr);
-var_dump($pazientes);*/
-/*
-$pazientiPaz = PazienteControl::getListPaz();
-echo $pazientiPaz[2]->getCf();
-$i =0;
-while ($i < count($pazientiPaz)) {
-  echo $pazientiPaz[$i]->getCf() ."<br>";
-  echo $pazientiPaz[$i]->getNome()."<br>";
-  echo $pazientiPaz[$i]->getCognome()."<br>";
-  echo $pazientiPaz[$i]->getDataNascita()."<br>";
-  echo $pazientiPaz[$i]->getEmail()."<br>";
-  echo $pazientiPaz[$i]->getTelefono()."<br>";
-  echo $pazientiPaz[$i]->getPassword()."<br>";
-  echo $pazientiPaz[$i]->getIndirizzo()."<br>";
-  echo $pazientiPaz[$i]->getIstruzione()."<br>";
-  echo $pazientiPaz[$i]->getLavoro()."<br>";
-  echo $pazientiPaz[$i]->getDifficolCura()."<br>";
-  echo $pazientiPaz[$i]->getFotoProfiloPaz()."<br>";
-  $i++;
+session_start();
+$tipoUtente = $_SESSION["tipo"];
+if($tipoUtente != "paziente"){
+  header("Location: ../Utente/login.php");
 }
+$cfPaziente = $_SESSION["cf"];
 
-*/
 
-$paz = PazienteControl::getPaz($utenteCf);
+
+
+
+
+
+$paz = PazienteControl::getPaz($cfPaziente);
 /*$arr = array("cf" => "NSTFNC94M23H703G",);
 $result = DatabaseInterface::selectQueryById($arr,"paziente");
 $arr = $result -> fetch_array();

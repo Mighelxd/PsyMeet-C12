@@ -10,8 +10,14 @@ include '../../applicationLogic/CompitoControl.php';
 //$compito= CompitoControl::selectAllCompitiProf();
 //$cfPaziente = "NSTFNC94M23H703G";
 session_start();
+$tipoUtente = $_SESSION["tipo"];
+if($tipoUtente != "paziente"){
+  header("Location: ../Utente/login.php");
+}
+
+
 $cfPaziente = $_SESSION["cf"];
-echo $cfPaziente;
+
 $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
 
 
