@@ -1,5 +1,5 @@
 <?php
-class episodio{
+class Episodio{
   private $idEpisodio;
   private $numero;
   private $analisiFun;
@@ -8,7 +8,7 @@ class episodio{
   private $mC;
   private $appunti;
   private $idScheda;
-  private static $tableName="episodio";
+  public static $tableName="episodio";
 
   public function __construct($idEpisodio, $numero, $analisiFun, $mA, $mB,$mC, $appunti, $idScheda){
     $this->idEpisodio = $idEpisodio;

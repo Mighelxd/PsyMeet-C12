@@ -13,7 +13,7 @@ class SchedaAssessmentFocalizzato
     private $nEpisodi;
     private $idTerapia;
     private $tipo;
-    private static $tableName="schedaassessmentfocalizzato";
+    public static $tableName="schedaassessmentfocalizzato";
 
     public function __construct($idScheda, $data, $nEpisodi, $idTerapia, $tipo)
     {

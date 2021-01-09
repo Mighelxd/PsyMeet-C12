@@ -1,7 +1,9 @@
 <?php
 session_start();
+include '../../plugins/libArray/FunArray.php';
 include '../../storage/DatabaseInterface.php';
 include '../../storage/SchedaAssessmentFocalizzato.php';
+include '../../storage/Episodio.php';
 include '../../applicationLogic/SeduteControl.php';
 
 $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
@@ -216,6 +218,7 @@ $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
     <section class="content">
       <div class="row">
         <div class="col-md-12">
+          <?php for($i=0;$i<count($scheda[0]);$i++){ ?>
           <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">Ass.Focalizzato</h3>
@@ -230,23 +233,24 @@ $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
               <div class="form-group">
                 <label>Date:</label>
                   <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                      <?php $date=date_create($scheda[0][$i]->getData()); $dS = date_format($date,"d/m/Y"); ?>
+                      <input type="text" value='<?php echo $dS; ?>' class="form-control datetimepicker-input" data-target="#reservationdate">
                       <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                       </div>
                   </div>
               </div>
 
-
+            <?php for($j=0;$j<count($scheda[1]);$j++){ ?>
             <div class="card-body">
               <div class="form-group">
-                <label for="inputDescription">Episodio 1</label>
+                <label for="inputDescription">Episodio <?php echo $scheda[1][$j]->getNum(); ?></label>
                   <button type="button" class="btn btn-block btn-primary" style="width: 50px">+</button>
 
               </div>
               <div class="form-group">
-                <label for="inputDescription">Analisi Funzionale EP.1</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <label for="inputDescription">Analisi Funzionale EP.<?php echo $scheda[1][$j]->getNum(); ?></label>
+                <textarea id="inputDescription" class="form-control" rows="4"><?php echo $scheda[1][$j]->getAnalisiFun(); ?></textarea>
               </div>
               <div class="form-group">
                 <div class="card-body">
@@ -260,9 +264,9 @@ $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Esempio di testo per il colonna A</td>
-                        <td>Esempio di testo per il colonna B</td>
-                        <td>Esempio di testo per il colonna C</td>
+                        <td><?php echo $scheda[1][$j]->getMA(); ?></td>
+                        <td><?php echo $scheda[1][$j]->getMB(); ?></td>
+                        <td><?php echo $scheda[1][$j]->getMC(); ?></td>
                       </tr>
                     </tbody>
                   </table>
@@ -272,15 +276,17 @@ $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
 
               <div class="form-group">
                 <label for="inputClientCompany">Appunti Terapeuta</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" class="form-control" rows="4"><?php echo $scheda[1][$j]->getAppunti(); ?></textarea>
               </div>
 
             </div>
             <!-- /.card-body -->
           </div>
+          <?php } ?>
           <!-- /.card -->
         </div>
       </div>
+    <?php } ?>
 
       </div>
       <div class="row">

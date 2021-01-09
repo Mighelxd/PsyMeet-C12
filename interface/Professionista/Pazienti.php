@@ -14,7 +14,7 @@ include "../../storage/Terapia.php";
 
 session_start();
 $tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "professionista"){
+if($tipoUtente != "professionista" || $tipoUtente == null){
   header("Location: ../Utente/login.php");
 }
 
@@ -57,6 +57,7 @@ $listPaz = PazienteControl::getPazientiByProf($cfProfessionista);
           <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
           </li>
+          <a href="logout.php">Logout</a>
         </ul>
 
 
@@ -214,14 +215,14 @@ $listPaz = PazienteControl::getPazientiByProf($cfProfessionista);
                           </a>
                       <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
                       <form class="" action="gestioneTerapia.php" method="post">
-
+                        <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf(); ?>" hidden ="true">
                           <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
                               <i class="nav-icon fas fa-table">
                                 Terapia
                               </i>
 
                           </button>
-                            <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf(); ?>" hidden ="true">
+
                           </form>
                       </td>
                   </tr>
