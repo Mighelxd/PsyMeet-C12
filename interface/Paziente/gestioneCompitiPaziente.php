@@ -8,8 +8,10 @@ include '../../plugins/libArray/FunArray.php';
 include '../../applicationLogic/CompitoControl.php';
 
 //$compito= CompitoControl::selectAllCompitiProf();
-$cfPaziente = "NSTFNC94M23H703G";
-
+//$cfPaziente = "NSTFNC94M23H703G";
+session_start();
+$cfPaziente = $_SESSION["cf"];
+echo $cfPaziente;
 $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
 
 
@@ -319,7 +321,7 @@ $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
                 </div>
                 <div class="form-group">
                   <label for="svolgimento">Svolgimento Compito</label>
-                  <textarea name="svolgimento" class="form-control" rows="3" >  <?php echo $compito[$i]->getSvoglimento(); ?> </textarea>
+                  <textarea name="svolgimento" class="form-control" rows="3" >  <?php echo $compito[$i]->getSvolgimento(); ?> </textarea>
                 </div>
                 <div class="form-group">
                   <label for="correzione">Correzione Compito</label>
