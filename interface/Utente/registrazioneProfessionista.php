@@ -204,7 +204,7 @@
 });
   $("#registerProf").submit(function(e){
       e.preventDefault()
-      var registrazione= new FormData($("#registerProf"));
+      var registrazione= new FormData($("#registerProf")[0]);
       $.ajax({
           url: '../../applicationLogic/registrazioneProfesionistaControl.php',
           contentType:false,
@@ -213,6 +213,7 @@
           data: registrazione,
           type: "post",
           success:function(data){
+            console.log(data);
             data=JSON.parse(data);
             console.log(data);
             if(data.esito==true){
@@ -225,6 +226,7 @@
                   if(data.errore.includes("email"))
                     $("#email").select();
             }
+
           },
           error: function(err){
             console.log(err);
