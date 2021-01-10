@@ -195,7 +195,7 @@
           </div>
           <!-- /.col -->
         </div>
-        <div class="row" style="margin-top:1 %;">
+        <div class="row" style="margin-top:1%;">
           <div class="col-12">
             <div class="alert alert-danger" style="display:none;"></div>
           </div>
@@ -218,7 +218,7 @@
       e.preventDefault()
       $.ajax({
           url: '../../applicationLogic/registrazioneProfesionistaControl.php',
-          contentType:
+          contentType: '',
           data: $("#registerProf").serialize(),
           type: "post",
           success:function(data){
