@@ -50,7 +50,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Effettua la registrazione come professionista</p>
 
-      <form method="post" id="registerProf">
+      <form enctype="multipart/form-data" method="post" id="registerProf">
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="nome" placeholder="nome" required>
           <div class="input-group-append">
@@ -163,18 +163,6 @@
             </div>
           </div>
         </div>
-				Video di presentazione
-		<div class="input-group mb-3">
-              <div class="input-group mb-3">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="exampleInputFile" name="videoPresentazione">
-                  <label class="custom-file-label" for="exampleInputFile">Seleziona file</label>
-                </div>
-                <div class="input-group-append">
-                  <span class="input-group-text" id="">Upload</span>
-                </div>
-              </div>
-        </div>
         Immagine Professionista
 		<div class="input-group mb-3">
               <div class="input-group mb-3">
@@ -216,10 +204,13 @@
 });
   $("#registerProf").submit(function(e){
       e.preventDefault()
+      var registrazione= new FormData($("#registerProf"));
       $.ajax({
           url: '../../applicationLogic/registrazioneProfesionistaControl.php',
-          contentType:
-          data: $("#registerProf").serialize(),
+          contentType:false,
+          processData:false,
+          cache:false,
+          data: registrazione,
           type: "post",
           success:function(data){
             data=JSON.parse(data);

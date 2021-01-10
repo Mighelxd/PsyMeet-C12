@@ -14,7 +14,7 @@
         if(mysqli_num_rows($query)==1){
             session_start();
             $_SESSION["tipo"]="paziente";
-            $_SESSION["cf"]=$cf;
+            $_SESSION["codiceFiscale"]=$cf;
             $esito=array("esito" => true, "tipo" => "paziente");
             echo json_encode($esito);
         }
@@ -23,7 +23,7 @@
             if(mysqli_num_rows($query)==1){
                 session_start();
                 $_SESSION["tipo"]="professionista";
-                $_SESSION["cf"]=$cf;
+                $_SESSION["codiceFiscale"]=$cf;
                 $esito=array("esito" => true, "tipo" => "professionista");
                 echo json_encode($esito);
             }

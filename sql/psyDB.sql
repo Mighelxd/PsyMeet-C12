@@ -26,7 +26,6 @@ CREATE TABLE professionista(
  pec VARCHAR(50) not null,
  specializzazione VARCHAR(500) ,
  polizza_RC VARCHAR(500) not null,
- video_presentazione LONGBLOB,
  foto_profilo_professionista MEDIUMBLOB,
  PRIMARY KEY(cf_prof)
 );

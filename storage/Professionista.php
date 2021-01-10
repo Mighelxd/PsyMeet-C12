@@ -39,7 +39,6 @@
             $this->pec=$p;
             $this->specializzazione=$spec;
             $this->polizzaRc=$polRc;
-            $this->videoProfessionista=$video;
             $this->immagineProfessionista=$img;
         }
 
@@ -105,10 +104,6 @@
 
         public function setPolizzaRc($polRc){
             $this->polizzaRc=$polRc;
-        }
-
-        public function setVideoProfessionista($video){
-            $this->videoProfessionista=$video;
         }
 
         public function setImmagineProfessionista($img){
@@ -179,17 +174,13 @@
             return $this->polizzaRc;
         }
 
-        public function getVideoPresentazione(){
-            return $this->videoPresentazione;
-        }
-
         public function getImmagineProfessionista(){
             return $this->immagineProfessionista;
         }
 
 
         public function getArray(){
-            return array("cf_prof" => $this->cfProf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "cellulare" => $this->cellulare, "passwor"=> $this->password, "indirizzo_studio"=> $this->indirizzoStudio, "esperienze" => $this->esperienze, "pubblicazioni" => $this->pubblicazioni, "titolo_studio" => $this->titoloStudio, "n_iscrizione_albo" => $this->nIscrizioneAlbo, "partita_iva" => $this->partitaIva, "pec" => $this->partitaIva, "specializzazione" => $this->specializzazione, "polizza_rc" => $this->polizzaRc, "video_presentazione" => $this->videoProfessionista, "foto_profilo_professionista" => $this->immagineProfessionista);
+            return array("cf_prof" => $this->cfProf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "cellulare" => $this->cellulare, "passwor"=> $this->password, "indirizzo_studio"=> $this->indirizzoStudio, "esperienze" => $this->esperienze, "pubblicazioni" => $this->pubblicazioni, "titolo_studio" => $this->titoloStudio, "n_iscrizione_albo" => $this->nIscrizioneAlbo, "partita_iva" => $this->partitaIva, "pec" => $this->partitaIva, "specializzazione" => $this->specializzazione, "polizza_rc" => $this->polizzaRc, "foto_profilo_professionista" => $this->immagineProfessionista);
         }
         public function getArrayNoVideo(){
             return array("cf_prof" => $this->cfProf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "cellulare" => $this->cellulare, "passwor"=> $this->password, "indirizzo_studio"=> $this->indirizzoStudio, "esperienze" => $this->esperienze, "pubblicazioni" => $this->pubblicazioni, "titolo_studio" => $this->titoloStudio, "n_iscrizione_albo" => $this->nIscrizioneAlbo, "partita_iva" => $this->partitaIva, "pec" => $this->partitaIva, "specializzazione" => $this->specializzazione, "polizza_rc" => $this->polizzaRc);

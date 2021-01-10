@@ -30,15 +30,11 @@
             $email=$_POST["email"];
             $password=md5($_POST["password"]);
             $conferma_password=md5($_POST["confermaPassword"]);
-            if(isset($_POST["videoPresentazione"]))
-                $videoProfessionista=addslashes(file_get_contents($_FILES["videoPresentazione"]["tmp_name"]));
-            else
-                $videoProfessionista=NULL;
-            if(isset($_POST["immagine"]))
-                $immagine=$_POST["immagine"];
+            if(isset($_FILES["immagine"]))
+                $immagine=addslashes(file_get_contents($_FILES["immagine"]["tmp_name"]));
             else
                 $immagine=NULL;
-            $professionista = new Professionista($codice_fiscale,$nome,$cognome,$data_nascita,$email,$telefono,$cellulare,$password,$indirizzo_studio,$esperienze,$pubblicazioni,$titolo_studio,$n_iscrizione_albo,$p_iva,NULL,NULL,$polizza_rc,$videoProfessionista,$immagine);
+            $professionista = new Professionista($codice_fiscale,$nome,$cognome,$data_nascita,$email,$telefono,$cellulare,$password,$indirizzo_studio,$esperienze,$pubblicazioni,$titolo_studio,$n_iscrizione_albo,$p_iva,NULL,NULL,$polizza_rc,$immagine);
             
             $select = DatabaseInterface::selectQueryById($professionista->getArray(),$professionista->tableName);
             if(mysqli_num_rows($select)!=0){
