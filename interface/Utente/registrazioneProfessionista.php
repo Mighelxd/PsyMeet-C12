@@ -207,29 +207,24 @@
       var registrazione= new FormData($("#registerProf")[0]);
       $.ajax({
           url: '../../applicationLogic/registrazioneProfesionistaControl.php',
-<<<<<<< HEAD
           contentType:false,
           processData:false,
           cache:false,
           data: registrazione,
-=======
-          contentType: '',
-          data: $("#registerProf").serialize(),
->>>>>>> c21e58a44efb8ab2bba42d7682a57b8a141cfdbe
           type: "post",
           success:function(data){
             console.log(data);
-            data=JSON.parse(data);
-            console.log(data);
-            if(data.esito==true){
-              window.location.replace("../Professionista/areaPersonale.html");
-            }else{
-                  $('.alert-danger').show();
-                  $('.alert-danger')[0].innerHTML=data.errore;
-                  if(data.errore.includes("Codice"))
-                    $("#cf").select();
-                  if(data.errore.includes("email"))
-                    $("#email").select();
+             data=JSON.parse(data);
+             console.log(data);
+             if(data.esito==true){
+               window.location.replace("../Professionista/areaPersonaleProfessionista.html");
+             }else{
+                $('.alert-danger').show();
+                $('.alert-danger')[0].innerHTML=data.errore;
+                if(data.errore.includes("Codice"))
+                  $("#cf").select();
+                if(data.errore.includes("email"))
+                  $("#email").select();
             }
 
           },

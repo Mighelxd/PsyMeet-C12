@@ -36,17 +36,17 @@
                 $immagine=NULL;
             $professionista = new Professionista($codice_fiscale,$nome,$cognome,$data_nascita,$email,$telefono,$cellulare,$password,$indirizzo_studio,$esperienze,$pubblicazioni,$titolo_studio,$n_iscrizione_albo,$p_iva,NULL,NULL,$polizza_rc,$immagine);
             
-            $select = DatabaseInterface::selectQueryById($professionista->getArray(),$professionista->tableName);
+            $select = DatabaseInterface::selectQueryById($professionista->getArray(),Professionista::$tableName);
             if(mysqli_num_rows($select)!=0){
                 $errore = array("esito" => false,"errore" => "Codice fiscale gia' presente.");
                 echo json_encode($errore);
             }
-            $select = DatabaseInterface::selectQueryByAtt(array("email" => $professionista->getEmail()),$professionista->tableName);
+            $select = DatabaseInterface::selectQueryByAtt(array("email" => $professionista->getEmail()),Professionista::$tableName);
             if(mysqli_num_rows($select)!=0){
                 $errore=array("esito" => "false","errore" => "Email gia' presente.");
                 echo json_encode($errore);
             }
-            $result = DatabaseInterface::insertQuery($professionista->getArray(),$professionista->tableName);
+            $result = DatabaseInterface::insertQuery($professionista->getArray(),Professionista::$tableName);
             if($result==true){
                 session_start();
                 $_SESSION["codiceFiscale"]=$codice_fiscale;

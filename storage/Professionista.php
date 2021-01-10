@@ -21,7 +21,7 @@
         private $videoProfessionista;
         public static $tableName="professionista";
 
-        public function __construct($cf,$n,$c,$date,$e,$tel,$cell,$pass,$indiSt,$esp,$pub,$titSt,$nIsc,$pIva,$p,$spec,$polRc,$video,$img){
+        public function __construct($cf,$n,$c,$date,$e,$tel,$cell,$pass,$indiSt,$esp,$pub,$titSt,$nIsc,$pIva,$p,$spec,$polRc,$img){
             $this->cfProf=$cf;
             $this->nome=$n;
             $this->cognome=$c;
