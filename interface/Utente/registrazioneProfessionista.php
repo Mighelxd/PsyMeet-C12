@@ -183,7 +183,7 @@
           </div>
           <!-- /.col -->
         </div>
-        <div class="row" style="margin-top:1 %;">
+        <div class="row" style="margin-top:1%;">
           <div class="col-12">
             <div class="alert alert-danger" style="display:none;"></div>
           </div>
@@ -207,10 +207,15 @@
       var registrazione= new FormData($("#registerProf")[0]);
       $.ajax({
           url: '../../applicationLogic/registrazioneProfesionistaControl.php',
+<<<<<<< HEAD
           contentType:false,
           processData:false,
           cache:false,
           data: registrazione,
+=======
+          contentType: '',
+          data: $("#registerProf").serialize(),
+>>>>>>> c21e58a44efb8ab2bba42d7682a57b8a141cfdbe
           type: "post",
           success:function(data){
             console.log(data);

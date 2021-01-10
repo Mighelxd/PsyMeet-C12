@@ -24,11 +24,13 @@ if($tipoUtente != "professionista"){
 
 $cfProfessionista = $_SESSION["cf"];
 
-$cfPazienteTer = $_POST["codFiscalePaz"];
+$cfPazienteTer = isset($_POST["codFiscalePaz"]) ? $_POST['codFiscalePaz'] : "";
 
 $listTerapie = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
-
-$terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
+if(count($listTerapie) > 0 )
+  $terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
+else 
+  $terapie = [];
 ?>
 <!DOCTYPE html>
 <html>

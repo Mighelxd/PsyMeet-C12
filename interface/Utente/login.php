@@ -58,7 +58,7 @@
           </div>
           <!-- /.col -->
         </div>
-        <div class="row" style="margin-top:1 %;">
+        <div class="row" style="margin-top:1%;">
           <div class="col-12">
             <div class="alert alert-danger" style="display:none;"></div>
           </div>
@@ -86,7 +86,7 @@
             console.log(data);
             if(data.esito==true){
               if(data.tipo=="professionista")
-                window.location.replace("../Professionista/indexProfessionsita.html");
+                window.location.replace("../Professionista/indexProfessionista.html");
               else
                   window.location.replace("../Paziente/homePagePaziente.php");
             }else{
