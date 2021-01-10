@@ -54,6 +54,8 @@
         }
             $update = substr($update,0,-2);
             $result = $connection->query($update . $where);
+          //  var_dump($update . $where);
+            echo $update . $where;
             DatabaseConnector::close($connection);
             return $result;
 
