@@ -67,35 +67,35 @@ class SchedaModelloEziologico
     }
     public function setIdScheda($id_scheda)
     {
-        return $this -> id_scheda= $id_scheda;
+         $this -> id_scheda= $id_scheda;
     }
     public function setData($data)
     {
-        return $this -> data = $data;
+         $this -> data = $data;
     }
     public function setFattoriCausativi($fattori_causativi)
     {
-        return $this -> fattori_causativi = $fattori_causativi;
+         $this -> fattori_causativi = $fattori_causativi;
     }
     public function setFattoriPrecipitanti($fattori_precipitanti)
     {
-        return $this -> fattori_precipitanti = $fattori_precipitanti;
+         $this -> fattori_precipitanti = $fattori_precipitanti;
     }
     public function setFattoriMantenimento($fattori_mantenimento)
     {
-        return $this -> fattori_mantenimento = $fattori_mantenimento;
+         $this -> fattori_mantenimento = $fattori_mantenimento;
     }
     public function setRelazioneFinale($relazione_finale)
     {
-        return $this -> relazione_finale = $relazione_finale;
+         $this -> relazione_finale = $relazione_finale;
     }
     public function setIdTerapia($id_terapia)
     {
-        return $this -> id_terapia = $id_terapia;
+         $this -> id_terapia = $id_terapia;
     }
     public function setTipo($tipo)
     {
-        return $this -> tipo =$tipo;
+         $this -> tipo =$tipo;
     }
 }
 

@@ -43,6 +43,6 @@ class Scelta
     }
     public function setCfProf($cf_prof)
     {
-        return $this -> cf_prof = $cf_prof;
+         $this -> cf_prof = $cf_prof;
     }
 }
