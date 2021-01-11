@@ -40,11 +40,13 @@
             if(mysqli_num_rows($select)!=0){
                 $errore = array("esito" => false,"errore" => "Codice fiscale gia' presente.");
                 echo json_encode($errore);
+                exit();
             }
             $select = DatabaseInterface::selectQueryByAtt(array("email" => $professionista->getEmail()),Professionista::$tableName);
             if(mysqli_num_rows($select)!=0){
                 $errore=array("esito" => "false","errore" => "Email gia' presente.");
-                echo json_encode($errore);
+                 echo json_encode($errore);
+                 exit();
             }
             $result = DatabaseInterface::insertQuery($professionista->getArray(),Professionista::$tableName);
             if($result==true){
@@ -53,6 +55,7 @@
                 $_SESSION["tipo"]="professionista";
                 $esito=array("esito" => true, "errore" => "nessuno");
                 echo json_encode($esito);
+                exit();
             }
         }
 ?>

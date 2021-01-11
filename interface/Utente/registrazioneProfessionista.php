@@ -52,112 +52,112 @@
 
       <form enctype="multipart/form-data" method="post" id="registerProf">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="nome" placeholder="nome" required>
+          <input type="text" class="form-control" name="nome" id="nome" placeholder="nome" pattern="[A-Za-z']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cognome" name="cognome" required>
+          <input type="text" class="form-control" placeholder="Cognome" id="cognome" name="cognome" pattern="[A-Za-z']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="date" class="form-control" placeholder="Data di nascita" name="dataN" required>
+          <input type="date" class="form-control" placeholder="Data di nascita" id="dataN" name="dataN" max="2003-12-12" min="1930-12-12" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf" id="cf" required>
+          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf" id="cf" pattern="[A-Za-z0-9]{16}" title="16 Caratteri alfanumerici" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Titolo di studio" name="titoloStudio" required>
+          <input type="text" class="form-control" placeholder="Titolo di studio" id="titoloStudio" name="titoloStudio" pattern="[A-Za-z']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Pubblicazioni" name="pubblicazioni" required>
+          <input type="text" class="form-control" placeholder="Pubblicazioni" id="pubblicazioni" name="pubblicazioni" pattern="[A-Za-z0-9']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Esperienze" name="esperienze" required>
+          <input type="text" class="form-control" placeholder="Esperienze" id="esperienze" name="esperienze" pattern="[A-Za-z0-9']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Indirizzo studio" name="indirizzoStudio" required>
+          <input type="text" class="form-control" placeholder="Indirizzo studio" id="indirizzoStudio" name="indirizzoStudio" pattern="[A-Za-z0-9']{2,250}" title="Da 2 a 250 caratteri Alfanumerici(Apostrofi Consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Telefono" name="telefono" required>
+          <input type="text" class="form-control" placeholder="Telefono" id="telefono" name="telefono" pattern="[0-9]{10}" title="10 Numeri" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cellulare" name="cellulare" required>
+          <input type="text" class="form-control" placeholder="Cellulare" id="cellulare" name="cellulare" pattern="[0-9]{10}" title="10 Numeri" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="P.IVA" name="pIva" required>
+          <input type="text" class="form-control" placeholder="P.IVA" id="pIva" name="pIva" pattern="[A-Za-z0-9]{11}" title="11 Caratteri alfanumerici" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Polizza RC" name="polizzaRc" required>
+          <input type="text" class="form-control" placeholder="Polizza RC" id="polizzaRc" name="polizzaRc" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="N° iscrizione albo" name="nIscrizioneAlbo" required>
+          <input type="text" class="form-control" placeholder="N° iscrizione albo" id="nIscrizioneAlbo" name="nIscrizioneAlbo" pattern="[A-Za-z0-9]{2,20}" title="da 2 a 20 Caratteri Alfanumerici" required>
           <div class="input-group-append">
             <div class="input-group-text">             
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
+          <input type="email" class="form-control" placeholder="Email" name="email" id="email" id="email" required>
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password" required>
+          <input type="password" class="form-control" placeholder="Password" id="password" name="password" pattern=".{8,25}" title="da 8 a 25 caratteri (Quaslaisi carattere consentito)" required>
           <div class="input-group-append">
             <div class="input-group-text">             
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Conferma password" name="confermaPassword" required>
+          <input type="password" class="form-control" placeholder="Conferma password" id="confermaPassword" pattern=".{8,25}" title="da 8 a 25 caratteri (Quaslaisi carattere consentito)" name="confermaPassword" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -167,7 +167,7 @@
 		<div class="input-group mb-3">
               <div class="input-group mb-3">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="exampleInputFile" name="immagine">
+                  <input type="file" class="custom-file-input" id="exampleInputFile" name="immagine" accept=".jpg,.jpeg,.png,.bmp"  title="Immagine di formato jpg png o bmp" required>
                   <label class="custom-file-label" for="exampleInputFile">Seleziona file</label>
                 </div>
                 <div class="input-group-append">
@@ -199,40 +199,52 @@
 <!-- /.register-box -->
 
 <script>
-  $(document).ready(function () {
-  bsCustomFileInput.init();
-});
-  $("#registerProf").submit(function(e){
+$(document).ready(function () {
+    bsCustomFileInput.init();
+  });
+    $("#registerProf").submit(function(e){
       e.preventDefault()
-      var registrazione= new FormData($("#registerProf")[0]);
-      $.ajax({
-          url: '../../applicationLogic/registrazioneProfesionistaControl.php',
-          contentType:false,
-          processData:false,
-          cache:false,
-          data: registrazione,
-          type: "post",
-          success:function(data){
-            console.log(data);
-             data=JSON.parse(data);
-             console.log(data);
-             if(data.esito==true){
-               window.location.replace("../Professionista/indexProfessionista.html");
-             }else{
-                $('.alert-danger').show();
-                $('.alert-danger')[0].innerHTML=data.errore;
-                if(data.errore.includes("Codice"))
-                  $("#cf").select();
-                if(data.errore.includes("email"))
-                  $("#email").select();
+      if(document.getElementById("password").value != document.getElementById("confermaPassword").value){
+        $('.alert-danger').show();
+        $('.alert-danger')[0].innerHTML="Password e conferma password devono essere uguali.";
+        return false
+      }
+          var fileName = document.getElementById("exampleInputFile").value;
+          var idxDot = fileName.lastIndexOf(".") + 1;
+          var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+      if(extFile != "jpg" && extFile != "jpeg" && extFile != "png" && extFile != "bmp"){
+        $('.alert-danger').show();
+        $('.alert-danger')[0].innerHTML="L'Immagine deve essere di tipo jpg jpeg png o bmp.";
+        return false
+      }
+        var registrazione= new FormData($("#registerProf")[0]);
+        $.ajax({
+            url: '../../applicationLogic/registrazioneProfesionistaControl.php',
+            contentType:false,
+            processData:false,
+            cache:false,
+            data: registrazione,
+            type: "post",
+            success:function(data){
+              console.log(data);
+              data=JSON.parse(data);
+              console.log(data);
+                if(data.esito==true){
+                  //window.location.replace("../Professionista/indexProfessionista.html");
+                }else{
+                   $('.alert-danger').show();
+                   $('.alert-danger')[0].innerHTML=data.errore;
+                  if(data.errore.includes("Codice"))
+                     $("#cf").select();
+                  if(data.errore.includes("email"))
+                     $("#email").select();
+               }
+            },
+            error: function(err){
+              console.log(err);
             }
-
-          },
-          error: function(err){
-            console.log(err);
-          }
-      });
-  })
+          })
+    })
 </script>
 
 </body>

@@ -36,30 +36,30 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Effettua la registrazione come paziente</p>
 
-      <form enctype="multipart/form-data" method="post" id="registrazionePaz">
+      <form enctype="multipart/form-data" method="post" id="registrazionePaz" >
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Nome" name="nome">
+          <input type="text" class="form-control" placeholder="Nome" name="nome" pattern="[A-Za-z']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		    <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cognome" name="cognome">
+          <input type="text" class="form-control" placeholder="Cognome" name="cognome" pattern="[A-Za-z']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		        <div class="input-group mb-3">
-          <input type="date" class="form-control" placeholder="Data di nascita" name="dataN">
+          <input type="date" class="form-control" placeholder="Data di nascita" name="dataN" max="2003-12-12" min="1930-12-12" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf">
+          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf" pattern="[A-Za-z0-9]{16}" title="16 Caratteri alfanumerici" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -67,35 +67,35 @@
         </div>
 		
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email">
+          <input type="email" class="form-control" placeholder="Email" name="email" required>
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Telefono" name="telefono">
+          <input type="text" class="form-control" placeholder="Telefono" name="telefono" pattern="[0-9]{10}" title="10 Numeri" required>
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Indirizzo" name="indirizzo">
+          <input type="text" class="form-control" placeholder="Indirizzo" name="indirizzo" pattern="[A-Za-z0-9']{2,250}" title="Da 2 a 250 lettere(Apostrofi Consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Istruzione" name="istruzione">
+          <input type="text" class="form-control" placeholder="Istruzione" name="istruzione" pattern="[A-Za-z']{2,100}" title="Da 2 a 100 lettere(Apostrofi Consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Lavoro" name="lavoro">
+          <input type="text" class="form-control" placeholder="Lavoro" name="lavoro" pattern="[A-Za-z']{2,100}" title="Da 2 a 100 lettere(Apostrofi Consentiti)"required>
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>
@@ -115,14 +115,14 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password">
+          <input type="password" class="form-control" id="password" pattern=".{8,25}" title="da 8 a 25 caratteri (Quaslaisi carattere consentito)" placeholder="Password" name="password" required>
           <div class="input-group-append">
             <div class="input-group-text">             
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Conferma password" name="confermaPassword">
+          <input type="password" class="form-control" id="confermaPassword" pattern=".{8,25}" title="da 8 a 25 caratteri (Quaslaisi carattere consentito)" placeholder="Conferma password" name="confermaPassword" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -132,7 +132,7 @@
 		<div class="input-group mb-3">
               <div class="input-group mb-3">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="exampleInputFile" name="immagine">
+                  <input type="file" class="custom-file-input" id="exampleInputFile" name="immagine" accept=".jpg,.jpeg,.png,.bmp" required>
                   <label class="custom-file-label" for="exampleInputFile"></label>
                 </div>
                 <div class="input-group-append">
@@ -169,6 +169,19 @@
 });
   $("#registrazionePaz").submit(function(e){
       e.preventDefault()
+      if(document.getElementById("password").value != document.getElementById("confermaPassword").value){
+        $('.alert-danger').show();
+        $('.alert-danger')[0].innerHTML="Password e conferma password devono essere uguali.";
+        return false
+      }
+          var fileName = document.getElementById("exampleInputFile").value;
+          var idxDot = fileName.lastIndexOf(".") + 1;
+          var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+      if(extFile != "jpg" && extFile != "jpeg" && extFile != "png" && extFile != "bmp"){
+        $('.alert-danger').show();
+        $('.alert-danger')[0].innerHTML="L'Immagine deve essere di tipo jpg jpeg png o bmp.";
+        return false
+      }
       var registrazione= new FormData($("#registrazionePaz")[0]);
       $.ajax({
           url: '../../applicationLogic/registrazionePazienteControl.php',
