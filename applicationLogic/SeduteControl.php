@@ -1,9 +1,9 @@
 <?php
 class SeduteControl{
-  static function recuperaScheda($tipo){
-    if($tipo == 'SchedaAssessmentFocalizzato'){
+  static function recuperaScheda($allSchede){
+
       $cfProf = 'RSSMRC80R12H703U';
-      $arrAtt = array("id_terapia"=>'1');
+      $arrAtt = array("id_terapia"=>$allSchede);
       $scheda = array();
       $episodi = array();
       $schedaConEpisodi = array();
@@ -24,7 +24,7 @@ class SeduteControl{
         $schedaConEpisodi[] = $scheda;
       }
       return $schedaConEpisodi;
-    }
+
   }
 }
 

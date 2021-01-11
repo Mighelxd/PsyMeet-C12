@@ -216,6 +216,8 @@ $_SESSION["cfPazTer"] = "";
                       <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
                       <form class="" action="gestioneTerapia.php" method="post">
                         <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
+                        <input type="text" name="nomePaz" value="<?php echo $listPaz[$i]->getNome();  ?>" hidden ="true">
+                        <input type="text" name="cogPaz" value="<?php echo $listPaz[$i]->getCognome();  ?>" hidden ="true">
                           <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
                               <i class="nav-icon fas fa-table">
                                 Terapia

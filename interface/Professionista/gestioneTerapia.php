@@ -22,7 +22,15 @@ if($tipoUtente != "professionista"){
   header("Location: ../Utente/login.php");
 }
 
-$cfProfessionista = $_SESSION["cf"];
+if(isset($_POST['nomePaz'])){
+  $pazienteN = $_POST['nomePaz'];
+}
+
+if(isset($_POST['cogPaz'])){
+  $pazienteC = $_POST['cogPaz'];
+}
+
+$cfProfessionista = $_SESSION["codiceFiscale"];
 //$cfPazienteTer = $_POST["codFiscalePaz"];
 $cfPazienteTer = isset($_POST["codFiscalePaz"]) ? $_POST['codFiscalePaz'] : "";
 if($cfPazienteTer != ""){
@@ -33,10 +41,14 @@ else if ($cfPazienteTer == "") {
 }
 
 $listTerapie = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
-if(count($listTerapie) > 0 )
-  $terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
+/*if(count($listTerapie) > 0 ){
+  for($i=0;$i<count($listTerapie);$i++){
+    $terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
+    $_SESSION['totSchede'] = $terapie;
+  }
+}
 else
-  $terapie = [];
+  $terapie = [];*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -161,7 +173,7 @@ else
             <a href="Pazienti.html" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Pazienti
+                Paziente
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -169,15 +181,21 @@ else
               <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link">
                   <i class="fas fa-user nav-icon"></i>
-                  <p>Nome Paziente
+                  <p><?php echo $pazienteN.' '.$pazienteC; ?>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview" style="padding-left: 2%;">
+                <?php
+                  for($i=0;$i<count($listTerapie);$i++){
+                    $terapie = terapiaControl::recuperaSchede($listTerapie[$i]->getIdTerapia());
+                    //$_SESSION['totSchede'] = $terapie;
+
+                ?>
+                <ul class="nav nav-treeview" style="padding-left: 2%;"><!--inizio blocco terapie-->
                   <li class="nav-item has-treeview">
                     <a href="gestioneTerapia.html" class="nav-link active">
                       <i class="fas fa-clipboard nav-icon"></i>
-                      <p>Terapia
+                      <p>Terapia <?php echo $listTerapie[$i]->getIdTerapia(); ?>
                       </p>
                     </a>
                   </li>
@@ -216,7 +234,7 @@ else
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="schedaAssessmentFocalizzato.html" class="nav-link">
+                          <a href="schedaAssessmentFocalizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment focalizzato
                             </p>
@@ -245,7 +263,8 @@ else
                         </p>
                       </a>
                     </li>
-                </ul>
+                </ul><!--fine blocco terapie-->
+                <?php } ?>
               </li>
             </ul>
           </li>
