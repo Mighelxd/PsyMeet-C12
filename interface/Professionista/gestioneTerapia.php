@@ -6,7 +6,7 @@
     * Versione: 0.1
     * 2020 Copyright by PsyMeet - University of Salerno
 */
-
+include ("../../plugins/libArray/FunArray.php");
 include "../../storage/DatabaseInterface.php";
 include "../../storage/Terapia.php";
 include "../../storage/SchedaPrimoColloquio.php";
@@ -15,6 +15,8 @@ include "../../storage/SchedaFollowUp.php";
 include "../../storage/SchedaAssessmentGeneralizzato.php";
 include "../../storage/SchedaAssessmentFocalizzato.php";
 include "../../applicationLogic/terapiaControl.php";
+include "../../applicationLogic/PazienteControl.php";
+include "../../storage/Paziente.php";
 
 session_start();
 $tipoUtente = $_SESSION["tipo"];
@@ -22,13 +24,6 @@ if($tipoUtente != "professionista"){
   header("Location: ../Utente/login.php");
 }
 
-if(isset($_POST['nomePaz'])){
-  $pazienteN = $_POST['nomePaz'];
-}
-
-if(isset($_POST['cogPaz'])){
-  $pazienteC = $_POST['cogPaz'];
-}
 
 $cfProfessionista = $_SESSION["codiceFiscale"];
 //$cfPazienteTer = $_POST["codFiscalePaz"];
@@ -39,6 +34,8 @@ if($cfPazienteTer != ""){
 else if ($cfPazienteTer == "") {
   $cfPazienteTer = $_SESSION["cfPazTer"];
 }
+
+$pazienteTer = PazienteControl::getPaz($cfPazienteTer);
 
 $listTerapie = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
 /*if(count($listTerapie) > 0 ){
@@ -181,7 +178,7 @@ else
               <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link">
                   <i class="fas fa-user nav-icon"></i>
-                  <p><?php echo $pazienteN.' '.$pazienteC; ?>
+                  <p><?php echo $pazienteTer->getNome() ." ". $pazienteTer->getCognome(); ?>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -401,13 +398,7 @@ else
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.5
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
-  </footer>
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
