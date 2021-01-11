@@ -207,12 +207,13 @@ $_SESSION["cfPazTer"] = "";
                         </a>
                       </td>
 
-                      <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="cartellaClinica.html">
-                              <i class="fas fa-folder">
+                      <form class="" action="../../applicationLogic/CartellaClinicaControl.php" method="post">
+                        <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
+                        <input type="text" name="azione" value="visualizza" hidden ="true">
+                          <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
+                              <i class="nav-icon fas fa-table">
+                                Cartella Clinica
                               </i>
-                              Cartella clinica
-                          </a>
                       <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
                       <form class="" action="gestioneTerapia.php" method="post">
                         <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
