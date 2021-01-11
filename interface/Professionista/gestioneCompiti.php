@@ -338,7 +338,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
        for($i=0; $i<count($compito); $i++) {
         ?>
 
-      <form  nome"correz" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php" onsubmit="return controlla();">
+      <form  nome"correz" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php" onSubmit="return controlla();">
         <input type="text" name="action" value="correzione" hidden="true">
       <div class="row">
           <div class="col-md-12">
@@ -464,6 +464,8 @@ function data_validation(data){
 function controlla(){
 
   var svolgi= document.getElementsByClassName("svolgimento");
+  console.log(svolgi[0].value); 
+
   if(checkbox_controllo(svolgi[1].value)) {
     return;
   }
