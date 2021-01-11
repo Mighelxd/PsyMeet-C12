@@ -52,7 +52,7 @@
           </div>
         </div>
 		        <div class="input-group mb-3">
-          <input type="data" class="form-control" placeholder="Data di nascita" name="dataN">
+          <input type="date" class="form-control" placeholder="Data di nascita" name="dataN">
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
