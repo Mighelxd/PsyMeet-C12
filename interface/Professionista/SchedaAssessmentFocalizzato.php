@@ -260,7 +260,7 @@ $idSchedaCorr = $_SESSION['idSCorr'];
               <?php if($scheda[$i][0]->getData() == $dataCorr){ ?>
               <form method="post" class="anEpisodio" action="../../applicationLogic/SeduteControlForm.php">
               <?php } ?>
-              <p>Episodio<input type="number" name ="numero" value='<?php echo $scheda[$i][1][$j]->getNum(); ?>' min="1" max="10" style="width:40px" readonly/></p>
+              <p>Episodio<input type="text" name ="numero" value='<?php echo $scheda[$i][1][$j]->getNum(); ?>' style="width:40px;text-align:center;border:none;" readonly/></p>
               <div class="form-group">
                 <label for="inputDescription">Analisi Funzionale</label>
                 <textarea id="inputDescription" name="analisi" class="form-control" rows="4" readonly><?php echo $scheda[$i][1][$j]->getAnalisiFun(); ?></textarea>

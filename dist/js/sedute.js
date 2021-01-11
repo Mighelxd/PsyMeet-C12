@@ -39,9 +39,9 @@ function createEp(scheda){
   }
 
   var inputNumEp = document.createElement('input');
-  inputNumEp.type = 'number';
-  inputNumEp.min = '1';
-  inputNumEp.max = '10';
+  inputNumEp.type = 'text';
+//  inputNumEp.min = '1';
+//  inputNumEp.max = '10';
   inputNumEp.name = "numero";
   inputNumEp.value = parseInt(scheda.n_episodi) + 1;
   var p = document.createElement('p');
@@ -172,9 +172,9 @@ function createAnEp(scheda){
   }
 
   var inputNumEp = document.createElement('input');
-  inputNumEp.type = 'number';
-  inputNumEp.min = '1';
-  inputNumEp.max = '10';
+  inputNumEp.type = 'text';
+  //inputNumEp.min = '1';
+  //inputNumEp.max = '10';
   inputNumEp.name = "numero";
   inputNumEp.value = parseInt(scheda.n_episodi) + 1;
   var p = document.createElement('p');
