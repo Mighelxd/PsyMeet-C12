@@ -13,7 +13,7 @@ class Terapia
     private $descrizione;
     private $cf_prof;
     private $cf;
-    public static $nome_tabella="terapia";
+    public static $tableName="terapia";
     
     public function __construct($id_ter, $date,$descriz, $cf_professionista, $cf_pa)
     {

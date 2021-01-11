@@ -11,7 +11,7 @@ class Terapia
     private $id_scelta;
     private $cf_prof;
     private $id_pacchetto;
-    public static $nome_tabella="scelta";
+    public static $tableName="scelta";
     
     public function __construct($id_choice, $cf_profess, $id_pack)
     {

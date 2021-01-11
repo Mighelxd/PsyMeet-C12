@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 class Compito
 {
-	public static $nome_tabella='compito';
 	private $id;
 	private $data;
 	private $titolo;
@@ -20,6 +19,7 @@ class Compito
 	private $effettuato;
 	private $cfPaz;
 	private $cfProf;
+	private static $tableName="compito";
 
 
 	public function __construct($id, $data, $effettuato, $titolo, $descrizione, $svolgimento, $correzione, $cfProf, $cfPaz)

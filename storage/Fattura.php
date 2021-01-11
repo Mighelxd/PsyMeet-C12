@@ -9,7 +9,7 @@
 
 class Fattura
 {
-  public static $nome_tabella = 'fattura';
+  public static $tableName = 'fattura';
   private $idFattura;
 	private $data;
   private $cfPaz;

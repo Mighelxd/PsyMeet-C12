@@ -20,7 +20,7 @@ class SchedaAssessmentGeneralizzato
     private $self_management_positivi;
     private $id_terapia;
     private $tipo;
-    public static $table_name="SchedaAssessmentGeneralizzato";
+    public static $tableName="SchedaAssessmentGeneralizzato";
     
     public function __construct($id_scheda, $data, $autoreg_positivi, $autoreg_negativi, $cognitive_positivi, $cognitive_negativi, $self_management_positivi, $self_management_negativi, $sociali_positivi, $sociali_negativi, $id_terapia, $tipo)
     {

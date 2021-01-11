@@ -16,7 +16,7 @@ class SchedaModelloEziologico
     private $relazione_finale;
     private $id_terapia;
     private $tipo;
-    private static $table_name="schedaModelloEziologico";
+    private static $tableName="schedaModelloEziologico";
     
     public function __construct($id_scheda, $data, $fattori_causativi, $fattori_precipitanti, $fattori_mantenimento,$relazione_finale, $id_terapia, $tipo)
     {

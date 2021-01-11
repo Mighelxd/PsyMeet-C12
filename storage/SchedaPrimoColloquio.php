@@ -17,7 +17,7 @@ class SchedaPrimoColloquio
     private $cambiamento;
     private $id_terapia;
     private $tipo;
-    private static $table_name="schedaPrimoColloquio";
+    private static $tableName="schedaPrimoColloquio";
     
     public function __construct($id_scheda, $data, $problema, $aspettative, $motivazione, $obiettivi, $cambiamento, $id_terapia,$tipo)
     {

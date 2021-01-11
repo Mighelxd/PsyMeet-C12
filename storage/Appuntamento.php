@@ -1,7 +1,7 @@
 <?php
 /*
     * Appuntamento 
-    * Questa classe fornisce tutti i metodi per l'entità Appuntamento
+    * Questa classe fornisce tutti i metodi per l'entitï¿½ Appuntamento
     * Autore: Marco Campione
     * Versione: 0.1
     * 2020 Copyright by PsyMeet - University of Salerno 
@@ -13,6 +13,7 @@ private $ora;
 private $desc;
 private $cfProf;
 private $cfPaz;
+private static $tableName="appuntamento";
 
   function __construct($id,$date,$hour,$des,$cfPr,$cfPa){
     $this->id_appuntamento = $id;

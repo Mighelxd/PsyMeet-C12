@@ -14,6 +14,7 @@ class SchedaFollowUp
     private $esiti_positivi;
     private $id_terapia;
     private $tipo;
+    private static $tableName="schedaFollowUp";
     
     public function __construct($id_scheda, $data,$ricadute, $esiti_positivi, $id_terapia,$tipo)
     {

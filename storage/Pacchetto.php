@@ -5,7 +5,7 @@ class Pacchetto
     private $n_sedute;
     private $prezzo;
     private $tipologia;
-    public static $nome_tabella="pacchetto";
+    public static $tableName="pacchetto";
 
     public function __construct($id_pack, $n_sed,$price, $type)
     {
