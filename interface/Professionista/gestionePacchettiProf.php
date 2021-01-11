@@ -1,16 +1,19 @@
 <?php
  include ('../../storage/Pacchetto.php');
+ include ('../../storage/scelta.php');
  include ('../../storage/DatabaseInterface.php');
  include '../../plugins/libArray/FunArray.php';
  include '../../applicationLogic/PacchettoControl.php';
 
  session_start();
  $tipoUtente= $_SESSION["tipo"];
+ $cf=$_SESSION["codiceFiscale"];
  if($tipoUtente !="professionista"){
    header("Location:../Utente/login.php");
  }
 
- $pacchetto = PacchettoControl::selectAllPacchetto();
+ //$allpacchetto = PacchettoControl::selectAllPacchetto();
+ $pacchettoByProf= PacchettoControl::selectAllPacchettoProf($cf);
 
 
 ?>
@@ -274,9 +277,9 @@ to get the desired effect
             <div class="card" >
               <div class="card-header border-0">
                 <h3 class="card-title">Pacchetti</h3>
-                <div class="" style="float: right" >
+              <!--  <div class="" style="float: right" >
                   <button type="button" class="btn btn-primary" name="button">Aggiungi</button>
-                </div>
+                </div> -->
               </div>
               <div class="card-body table-responsive p-0">
                 <table class="table table-striped table-valign-middle">
@@ -291,7 +294,7 @@ to get the desired effect
                   <tbody>
                   <tr>
                     <td>
-                      <img src="../../dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+                     <img src="../../dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                       Pacchetto seduta singola
                     </td>
                     <td>$60 USD</td>
@@ -311,99 +314,12 @@ to get the desired effect
                     </td>
 
                   </tr>
-                  <tr>
-                    <td>
-                      <img src="../../dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                      Pacchetto 6 sedute
-                    </td>
-                    <td>$320 USD</td>
 
-                    <td>
-                      <a href="#" class="text-muted">
-                        <i class="fas fa-search"></i>
-                      </a>
-                    </td>
-                    <td>
-
-                      <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Rimuovi
-                          </a>
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="../../dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                      Pacchetto 10 sedute
-                    </td>
-                    <td>$500 USD</td>
-                    <td>
-                      <a href="#" class="text-muted">
-                        <i class="fas fa-search"></i>
-                      </a>
-                    </td>
-                    <td>
-
-                      <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Rimuovi
-                          </a>
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="../../dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                      Pacchetto 20 sedute
-
-                    </td>
-                    <td>$800 USD</td>
-
-                    <td>
-                      <a href="#" class="text-muted">
-                        <i class="fas fa-search"></i>
-                      </a>
-                    </td>
-                    <td>
-
-                      <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Rimuovi
-                          </a>
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="../../dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                      Relazione finale
-
-                    </td>
-                    <td>$50 USD</td>
-
-                    <td>
-                      <a href="#" class="text-muted">
-                        <i class="fas fa-search"></i>
-                      </a>
-                    </td>
-                    <td>
-
-                      <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Rimuovi
-                          </a>
-                    </td>
-
-                  </tr>
                   </tbody>
                 </table>
               </div>
             </div>
+
             <!-- /.card -->
 
 
@@ -445,7 +361,7 @@ to get the desired effect
                   <!-- /.card-body -->
 
                   <div class="card-footer" style="background-color: white">
-                    <button type="submit" class="btn btn-primary" style="float: right">Aggiungi</button>
+                    <button name='action' type="submit" value="addPacchetto" class="btn btn-primary" style="float: right">Aggiungi</button>
                   </div>
                 </form>
               </div>
