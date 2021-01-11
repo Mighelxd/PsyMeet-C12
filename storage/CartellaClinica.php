@@ -14,7 +14,7 @@ class CartellaClinica {
     private $qualitaRelazioni;
     private $cfPaz;
     private $cfProf;
-    public static $table_name="cartellaclinica";
+    public static $tableName="cartellaclinica";
 
     public function setFarmaci($fa){
         $this->farmaci = $fa;
