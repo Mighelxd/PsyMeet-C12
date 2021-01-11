@@ -9,7 +9,7 @@ include '../../applicationLogic/CompitoControl.php';
 
 session_start();
 $tipoUtente = $_SESSION["tipo"];
-$cf= $_SESSION["cf"];
+$cf= $_SESSION["codiceFiscale"];
 if($tipoUtente != "professionista"){
   header("Location: ../Utente/login.php");
 }
@@ -224,7 +224,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
                       </ul>
                     </li>
                     <li class="nav-item">
-                      <a href="gestioneCompiti.html" class="nav-link active">
+                      <a href="gestioneCompiti.php" class="nav-link active">
                         <i class="fas fa-sticky-note nav-icon"></i>
                         <p>Compiti
                         </p>
@@ -380,7 +380,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
 
                 <div class="form-group">
                   <label for="effettuato">Effettuato</label>
-                  <input type="checkbox" name="effettuato" class="form-control" rows="1" checked>
+                  <input  type="checkbox" value="1" name="effettuato" class="form-control" rows="1"  checked>
                 </div>
 
               <?php
@@ -389,7 +389,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
 
                   <div class="form-group">
                     <label for="effettuato">Effettuato</label>
-                    <input type="checkbox" name="effettuato" class="form-control" rows="1">
+                    <input type="checkbox"  value="0" name="effettuato" class="form-control" rows="1" >
                   </div>
 
             <?php }  ?>
@@ -454,6 +454,11 @@ function data_validation(data){
 		return true;
 	}
 }
+
+
+
+
+
 
 </script>
 

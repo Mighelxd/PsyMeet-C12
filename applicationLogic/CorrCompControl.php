@@ -1,5 +1,13 @@
 <?php
 
+/*
+    * CompitoControl
+    * Questo control fornisce le operazioni che si possono fare per il compito'
+    * Autore: Mary Cerullo
+    * Versione: 0.1
+    * 2020 Copyright by PsyMeet - University of Salerno
+*/
+
 include ('../storage/Compito.php');
 include ('../storage/DatabaseInterface.php');
 include '../plugins/libArray/FunArray.php';
@@ -9,7 +17,7 @@ include '../plugins/libArray/FunArray.php';
 define("TABLE_NAME", "compito");
 
 session_start();
-$cfProf=$_SESSION['cf'];
+$cfProf=$_SESSION['codiceFiscale'];
 
 
 
@@ -25,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   if($action=="correzione"){
 
 $idComp = $_POST['id'];
-//echo $idComp;
 $arrKey = array("id_compito"=>$idComp);
 $comp = DatabaseInterface::selectQueryByAtt($arrKey,TABLE_NAME);
 $temp=$comp->fetch_array();
@@ -33,18 +40,10 @@ $compitoComp= new Compito($temp[0],$temp[1],$temp[2],$temp[3],$temp[4],$temp[5],
 
 
 $correzione = $_POST["correzione"];
-
-//echo $correzione;
-
 $compitoComp->setCorrezione($correzione);
-
-//var_dump($compitoComp);
-//echo "<br>";
-
 $isUpdate = DatabaseInterface::updateQueryById($compitoComp->getArray(),TABLE_NAME);
-//var_dump($isUpdate);
 
-if($isUpdate){
+ if($isUpdate){
     header('Location: ../interface/Professionista/gestioneCompiti.php');
 }
 else{
