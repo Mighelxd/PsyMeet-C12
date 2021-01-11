@@ -22,6 +22,14 @@ if($tipoUtente != "professionista"){
   header("Location: ../Utente/login.php");
 }
 
+if(isset($_POST['nomePaz'])){
+  $pazienteN = $_POST['nomePaz'];
+}
+
+if(isset($_POST['cogPaz'])){
+  $pazienteC = $_POST['cogPaz'];
+}
+
 $cfProfessionista = $_SESSION["codiceFiscale"];
 //$cfPazienteTer = $_POST["codFiscalePaz"];
 $cfPazienteTer = isset($_POST["codFiscalePaz"]) ? $_POST['codFiscalePaz'] : "";
@@ -161,7 +169,7 @@ else
             <a href="Pazienti.html" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Pazienti
+                Paziente
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -169,7 +177,7 @@ else
               <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link">
                   <i class="fas fa-user nav-icon"></i>
-                  <p>Nome Paziente
+                  <p><?php echo $pazienteN.' '.$pazienteC; ?>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -216,7 +224,7 @@ else
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="schedaAssessmentFocalizzato.html" class="nav-link">
+                          <a href="schedaAssessmentFocalizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment focalizzato
                             </p>

@@ -8,7 +8,10 @@ include '../../applicationLogic/SeduteControl.php';
 
 $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
 
-$idSchedaCorr = $_SESSION['idSCorr'];
+if(isset($_SESSION['idSCorr'])){
+  $idSchedaCorr = $_SESSION['idSCorr'];
+}
+
 
  ?>
 
