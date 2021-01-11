@@ -17,14 +17,17 @@ class PacchettoControl{
     return $arr;
   }
 
-  //metodo che recupera tutti i pacchetti per un dato Professionista bisogna
-  // avere un reference verso la relazione Pacchetto del DB magari tramite il Cf del
-  //professionista cosi da poter associare ad ogni professionista i pacchetti che sono
-  //registrati nel DB
-  // oppure aggiungere una vista
+  //metodo che recupera tutti i pacchetti per un dato Professionista
+
 
   static function selectAllPacchettoProf($cfProfessionista){
-    $arrpac= array("")
-  }
+    $arrscelte= array('cf_prof' =>$cfProfessionista);
+    $allScelte= DatabaseInterface::selectQueryByAtt($arrscelte,scelta::$tableName);
+    while ($row =$allScelte->fetch_array()) {
+        $pacscelta= new Scelta($row[0],$row[1],$row[2]);
+        $arrs[]=$pacscelta;
+    }
+  return $arrs;
+ }
 }
  ?>
