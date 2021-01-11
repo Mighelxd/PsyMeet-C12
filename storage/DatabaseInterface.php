@@ -17,7 +17,7 @@
             foreach($obj as $o=>$value){
                 if(gettype($value) == "string"){
                     $insert .= "$o,";
-                    $values.= "'$value',";
+                    $values.= "\"$value\",";
                 }
                 else
                     if($value == NULL){
@@ -35,6 +35,7 @@
             $values = substr($values,0,-1);
             $values .= ");";
             $result = $connection->query($insert.$values);
+            echo $connection->error;
             DatabaseConnector::close($connection);
             return $result;
         }
@@ -47,7 +48,7 @@
                 $where = "WHERE " .FunArray::array_key_first($obj) . " = " .  $obj[FunArray::array_key_first($obj)];
             foreach($obj as $key => $value){
                 if(gettype($value) == "string")
-                    $update .= $key . " = " . "'" .$value . "'". " , ";
+                    $update .= $key . " = " . "\"" .$value . "\"". " , ";
                 else
                     $update .= $key . " = " .$value . " , ";
 

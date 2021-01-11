@@ -219,7 +219,7 @@ $(document).ready(function () {
       }
         var registrazione= new FormData($("#registerProf")[0]);
         $.ajax({
-            url: '../../applicationLogic/registrazioneProfesionistaControl.php',
+            url: '../../applicationLogic/registrazioneProfessionistaControl.php',
             contentType:false,
             processData:false,
             cache:false,

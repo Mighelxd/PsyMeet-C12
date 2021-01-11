@@ -31,14 +31,14 @@
             else
                 $immagine=NULL;
             $paziente = new Paziente($codiceFiscale,$nome,$cognome,$dataNascita,$email,$telefono,$password,$indirizzo,$istruzione,$lavoro,$diffCura,$immagine);
-            
             $select = DatabaseInterface::selectQueryById($paziente->getArray(),Paziente::$tableName);
+            echo var_dump($select);
             if(mysqli_num_rows($select)!=0){
                 $errore = array("esito" => false,"errore" => "Codice fiscale gia' presente.");
                 echo json_encode($errore);
-                exit();
             }
             $select = DatabaseInterface::selectQueryByAtt(array("email" => $paziente->getEmail()),Paziente::$tableName);
+            echo var_dump($select);
             if(mysqli_num_rows($select)!=0){
                 $errore=array("esito" => "false","errore" => "Email gia' presente.");
                 echo json_encode($errore);
@@ -51,7 +51,6 @@
                 $_SESSION["tipo"]="paziente";
                 $esito=array("esito" => true, "errore" => "nessuno");
                 echo json_encode($esito);
-                exit();
             }
         }
 ?>

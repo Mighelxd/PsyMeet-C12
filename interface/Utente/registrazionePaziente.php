@@ -193,18 +193,18 @@
           success:function(data){
              data=JSON.parse(data);
              console.log(data);
-             if(data.esito==true){
-               window.location.replace("../Paziente/homePagePaziente.php");
-             }else{
-                   $('.alert-danger').show();
-                   $('.alert-danger')[0].innerHTML=data.errore;
-                   if(data.errore.includes("Codice"))
-                     $("#cf").select();
-                   if(data.errore.includes("email"))
-                     $("#email").select();
-             }
-            console.log(data);
-          },
+              if(data.esito==true){
+                window.location.replace("../Paziente/homePagePaziente.php");
+              }else{
+                    $('.alert-danger').show();
+                    $('.alert-danger')[0].innerHTML=data.errore;
+                    if(data.errore.includes("Codice"))
+                      $("#cf").select();
+                    if(data.errore.includes("email"))
+                      $("#email").select();
+              }
+             console.log(data);
+          } ,
           error: function(err){
             console.log(err);
           }
