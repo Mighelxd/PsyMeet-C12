@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include '..\plugins\libArray\FunArray.php';
 include '../storage/DatabaseInterface.php';
 include '../storage/SchedaAssessmentFocalizzato.php';
 include '../storage/Episodio.php';
@@ -41,13 +41,42 @@ if($action == "saveScheda"){
 }
 if($action == "recoveryScheda"){
   $idScheda = $_POST['idScheda'];
-  $key = array("key"=>$idScheda);
+  $key = array("id_scheda"=>$idScheda);
 
   $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
   while($row = $recScheda->fetch_array()){
     $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
   }
-  echo jeson_encode($scheda->getArray());
+  echo json_encode($scheda->getArray());
+}
+if($action == "addEpisodio"){
+  $numEp = $_POST['numero'];
+  $analisi = $_POST['analisi'];
+  $mA = $_POST['a'];
+  $mB = $_POST['b'];
+  $mC = $_POST['c'];
+  $appunti = $_POST['appunti'];
+  if($_POST['hIdS'] != null){
+    $idScheda = $_POST['hIdS'];
+  }
+  else{
+    $idScheda = $_SESSION['idSCorr'];
+  }
+
+  $attEp = array("numero"=>$numEp,"analisi_fun"=>$analisi,"m_a"=>$mA,"m_b"=>$mB,"m_c"=>$mC,"appunti"=>$appunti,"id_scheda"=>$idScheda);
+  $insOk = DatabaseInterface::insertQuery($attEp,'episodio');
+  if($insOk){
+    $key = array("id_scheda"=>$idScheda);
+    $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
+    while($row = $recScheda->fetch_array()){
+      $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
+    }
+    $newNumEp = $scheda->getNEpisodi() + 1;
+    $scheda->setNEpisodi($newNumEp);
+    $updateScheda = DatabaseInterface::updateQueryById($scheda->getArray(),'schedaassessmentfocalizzato');
+    $_SESSION['idSCorr'] = $idScheda;
+    header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+  }
 }
 
  ?>

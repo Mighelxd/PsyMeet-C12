@@ -8,7 +8,7 @@ include '../../applicationLogic/SeduteControl.php';
 
 $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
 
-$idSchedaCorr = $_SESSION['idSchedaCorr'];
+$idSchedaCorr = $_SESSION['idSCorr'];
 
  ?>
 
@@ -224,21 +224,21 @@ $idSchedaCorr = $_SESSION['idSchedaCorr'];
       <div class="row">
         <div class="col-md-12">
           <?php for($i=0;$i<count($scheda);$i++){ ?>
-          <div class="card card-primary">
+          <div class="card card-primary collapsed-card"><!--//////////////////////-->
             <div class="card-header">
-              <h3 class="card-title">Ass.Focalizzato</h3>
+              <?php $date=date_create($scheda[$i][0]->getData()); $dS = date_format($date,"d/m/Y"); ?>
+              <h3 class="card-title">Assessment Focalizzato <?php echo $dS; ?> </h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
+                  <i class="fas fa-plus"></i></button><!-- /////////////////////////////-->
               </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="display:none;"><!--//////////////////////-->
 
               <div class="form-group">
                 <label>Date:</label>
                   <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                      <?php $date=date_create($scheda[$i][0]->getData()); $dS = date_format($date,"d/m/Y"); ?>
                       <input type="text" name="dateScheda" value='<?php echo $dS; ?>' class="form-control datetimepicker-input" data-target="#reservationdate" readonly/>
                       <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -247,11 +247,19 @@ $idSchedaCorr = $_SESSION['idSchedaCorr'];
               </div>
 
 
-              <?php if($scheda[$i][0]->getData() == date("Y,m,d")){ ?>
-                <button type="button" class="btn btn-block btn-primary" onclick="addEp();" style="width: 100px">+ episodio</button>
-              <?php } ?>
+              <?php
+              $dataCorr = date("Y,m,d");
+              $dataCorr = str_replace(',','-',$dataCorr);
+              if($scheda[$i][0]->getData() == $dataCorr){
+                echo("<button type='button' id='btnAddAnEp' class='btn btn-block btn-primary' onclick='anEp(".$idSchedaCorr.")' style='width:100px'>+ episodio</button>");
+              }
+                ?>
+                <!--<button type="button" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px">+ episodio</button>-->
               <?php for($j=0;$j<count($scheda[$i][1]);$j++){ ?>
-            <div class="card-body">
+            <div class="card-body"><!--inizio episodio-->
+              <?php if($scheda[$i][0]->getData() == $dataCorr){ ?>
+              <form method="post" class="anEpisodio" action="../../applicationLogic/SeduteControlForm.php">
+              <?php } ?>
               <p>Episodio<input type="number" name ="numero" value='<?php echo $scheda[$i][1][$j]->getNum(); ?>' min="1" max="10" style="width:40px" readonly/></p>
               <div class="form-group">
                 <label for="inputDescription">Analisi Funzionale</label>
@@ -286,12 +294,15 @@ $idSchedaCorr = $_SESSION['idSchedaCorr'];
 
             </div>
             <!-- /.card-body -->
-            <?php if($scheda[$i][0]->getData() == date("Y,m,d")){ ?>
+            <?php if($scheda[$i][0]->getData() == $dataCorr){ ?>
             <div class="col-12">
               <a href="#" class="btn btn-secondary">Cancella episodio</a>
               <input type="submit" value="Modifica episodio" class="btn btn-success" style=" float: right">
             </div>
           <?php } ?>
+          <?php if($scheda[$i][0]->getData() == $dataCorr){ ?>
+        </form>
+      <?php } ?>
           </div>
           <?php } ?>
           <!-- /.card fine episodi-->
@@ -299,6 +310,7 @@ $idSchedaCorr = $_SESSION['idSchedaCorr'];
       </div>
     <?php } ?>
 
+    <!-- Scheda nascosta che si vuole creare -->
     <div class="card card-primary" id="newScheda" hidden>
       <div class="card-header">
         <h3 class="card-title">Ass.Focalizzato</h3>
@@ -310,7 +322,6 @@ $idSchedaCorr = $_SESSION['idSchedaCorr'];
       </div>
       <div class="card-body">
         <div class="form-group">
-      <!--  <form method="post" action="../../applicationLogic/SeduteControlForm.php">-->
           <label>Date:</label>
           <div class="input-group date" id="reservationdate" data-target-input="nearest">
               <input type="text" id="da" name="dateScheda" class="form-control datetimepicker-input" data-target="#reservationdate"/>
@@ -322,17 +333,13 @@ $idSchedaCorr = $_SESSION['idSchedaCorr'];
           <button type="button" class="btn btn-success" id="btnAddScheda" onclick="saveScheda(document.getElementById('da').value,document.getElementById('idTerapia').value)" style=" float: right">Aggiungi Scheda</button>
       <!--  </form>-->
         </div>
-        <input id="hideIdScheda" hidden/>
+        <input type="text" id="hideIdScheda" hidden/>
         <button type="button" id="btnAddEp" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px"/hidden>+ episodio</button>
-        <div class="card-body" id="episodio"><!--inizio episodi-->
-          <form method="post" id="episodio" action="../../applicationLogic/SeduteControlForm.php"></form>
-        <!-- /.card fine episodi
-        </div>
-        <div class="col-12">
-          <input type="submit" name="action" value="addScheda" class="btn btn-success" style=" float: right">
-        </div>-->
+        <div class="card-body"><!--inizio episodi-->
+          <form method="post" id="episodio" action="../../applicationLogic/SeduteControlForm.php">
+          </form>
+        <!-- /.card fine episodi-->
       </div><!-- Fine scheda aggiungi-->
-    <!--</form>-->
     </div>
     </section>
     <div class="col-12">
@@ -340,7 +347,7 @@ $idSchedaCorr = $_SESSION['idSchedaCorr'];
     </div>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+  <!-- /.content-wrapper Della nuova scheda che si vuole creare-->
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
