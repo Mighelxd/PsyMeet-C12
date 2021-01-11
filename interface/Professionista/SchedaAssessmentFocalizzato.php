@@ -5,18 +5,23 @@ include '../../storage/DatabaseInterface.php';
 include '../../storage/SchedaAssessmentFocalizzato.php';
 include '../../storage/Episodio.php';
 include '../../applicationLogic/SeduteControl.php';
+include "../../storage/SchedaPrimoColloquio.php";
+include "../../storage/SchedaModelloEziologico.php";
+include "../../storage/SchedaFollowUp.php";
+include "../../storage/SchedaAssessmentGeneralizzato.php";
+include "../../applicationLogic/terapiaControl.php";
 
 //$scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
 
-if(isset($_SESSION['totSchede'])){
-    $allSchede = $_SESSION['totSchede'];
-    for($i=0;$i<count($allSchede);$i++){
-      if($allSchede[$i]->getTipo() == 'Scheda Assessment Focalizzato'){
-        $schAssFoc[] = $allSchede[$i];
+if(isset($_SESSION['idTerCorr'])){
+    $idTerCorr = $_SESSION['idTerCorr'];
+    $allSc = terapiaControl::recuperaSchede($idTerCorr);
+    for($i=0;$i<count($allSc);$i++){
+      if($allSc[$i]->getTipo() == 'Scheda Assessment Focalizzato'){
+        $schAssFoc[] = $allSc[$i];
       }
     }
 }
-
 $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
 
 /*if(isset($_SESSION['idSCorr'])){
@@ -265,19 +270,19 @@ $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
               $dataCorr = date("Y,m,d");
               $dataCorr = str_replace(',','-',$dataCorr);
               if($schAssFoc[$i]->getData() == $dataCorr){
-                echo("<button type='button' id='btnAddAnEp' class='btn btn-block btn-primary' onclick='anEp(".echo $schAssFoc[$i]->getIdScheda();.")' style='width:100px'>+ episodio</button>");
+                echo("<button type='button' id='btnAddAnEp' class='btn btn-block btn-primary' onclick='anEp(".$schAssFoc[$i]->getIdScheda().")' style='width:100px'>+ episodio</button>");
               }
                 ?>
                 <!--<button type="button" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px">+ episodio</button>-->
-              <?php for($j=0;$j<count($scheda[$i][1]);$j++){ ?>
+              <?php for($j=0;$j<count($schedeConEp[$i][1]);$j++){ ?>
             <div class="card-body"><!--inizio episodio-->
-              <?php if($scheda[$i][0]->getData() == $dataCorr){ ?>
+              <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
               <form method="post" class="anEpisodio" action="../../applicationLogic/SeduteControlForm.php">
               <?php } ?>
-              <p>Episodio<input type="text" name ="numero" value='<?php echo $scheda[$i][1][$j]->getNum(); ?>' style="width:40px;text-align:center;border:none;" readonly/></p>
+              <p>Episodio<input type="text" name ="numero" value='<?php echo $schedeConEp[$i][1][$j]->getNum(); ?>' style="width:40px;text-align:center;border:none;" readonly/></p>
               <div class="form-group">
                 <label for="inputDescription">Analisi Funzionale</label>
-                <textarea id="inputDescription" name="analisi" class="form-control" rows="4" readonly><?php echo $scheda[$i][1][$j]->getAnalisiFun(); ?></textarea>
+                <textarea id="inputDescription" name="analisi" class="form-control" rows="4" readonly><?php echo $schedeConEp[$i][1][$j]->getAnalisiFun(); ?></textarea>
               </div>
               <div class="form-group">
                 <div class="card-body">
@@ -291,9 +296,9 @@ $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
                     </thead>
                     <tbody>
                       <tr>
-                        <td><textarea name="a" class="textABC" readonly><?php echo $scheda[$i][1][$j]->getMA(); ?></textarea></td>
-                        <td><textarea name="b" class="textABC" readonly><?php echo $scheda[$i][1][$j]->getMB(); ?></textarea></td>
-                        <td><textarea name="c" class="textABC" readonly><?php echo $scheda[$i][1][$j]->getMC(); ?></textarea></td>
+                        <td><textarea name="a" class="textABC" readonly><?php echo $schedeConEp[$i][1][$j]->getMA(); ?></textarea></td>
+                        <td><textarea name="b" class="textABC" readonly><?php echo $schedeConEp[$i][1][$j]->getMB(); ?></textarea></td>
+                        <td><textarea name="c" class="textABC" readonly><?php echo $schedeConEp[$i][1][$j]->getMC(); ?></textarea></td>
                       </tr>
                     </tbody>
                   </table>
@@ -303,18 +308,18 @@ $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
 
               <div class="form-group">
                 <label for="appunti">Appunti Terapeuta</label>
-                <textarea id="appunti" name="appunti" class="form-control" rows="4" readonly><?php echo $scheda[$i][1][$j]->getAppunti(); ?></textarea>
+                <textarea id="appunti" name="appunti" class="form-control" rows="4" readonly><?php echo $schedeConEp[$i][1][$j]->getAppunti(); ?></textarea>
               </div>
 
             </div>
             <!-- /.card-body -->
-            <?php if($scheda[$i][0]->getData() == $dataCorr){ ?>
+            <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
             <div class="col-12">
               <a href="#" class="btn btn-secondary">Cancella episodio</a>
               <input type="submit" value="Modifica episodio" class="btn btn-success" style=" float: right">
             </div>
           <?php } ?>
-          <?php if($scheda[$i][0]->getData() == $dataCorr){ ?>
+          <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
         </form>
       <?php } ?>
           </div>
