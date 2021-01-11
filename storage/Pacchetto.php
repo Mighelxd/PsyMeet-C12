@@ -38,15 +38,15 @@ class Pacchetto
     }
     public function setNSedute($n_sedute)
     {
-        return $this -> n_sedute = $n_sedute;
+         $this -> n_sedute = $n_sedute;
     }
     public function setPrezzo($prezzo)
     {
-        return $this -> prezzo = $prezzo;
+         $this -> prezzo = $prezzo;
     }
     public function setTipologia($tipologia)
     {
-        return $this -> tipologia = $tipologia;
+         $this -> tipologia = $tipologia;
     }
 }
 ?>

@@ -56,18 +56,18 @@ class Terapia
     }
     public function setData($data)
     {
-        return $this -> data = $data;
+         $this -> data = $data;
     }
     public function setDescrizione($descrizione)
     {
-        return $this -> descrizione = $descrizione;
+         $this -> descrizione = $descrizione;
     }
     public function setCf_Prof($cf_prof)
     {
-        return $this -> cf_prof = $cf_prof;
+         $this -> cf_prof = $cf_prof;
     }
     public function setCf($cf)
     {
-        return $this -> cf = $cf;
+        $this -> cf = $cf;
     }
 }

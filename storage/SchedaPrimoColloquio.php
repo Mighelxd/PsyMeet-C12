@@ -72,39 +72,39 @@ class SchedaPrimoColloquio
     }
     public function setIdScheda($id_scheda)
     {
-        return $this -> id_scheda= $id_scheda;
+         $this -> id_scheda= $id_scheda;
     }
     public function setData($data)
     {
-        return $this -> data = $data;
+         $this -> data = $data;
     }
     public function setProblema($problema)
     {
-        return $this -> problema= $problema;
+         $this -> problema= $problema;
     }
     public function setAspettative($aspettative)
     {
-        return $this -> aspettative = $aspettative;
+         $this -> aspettative = $aspettative;
     }
     public function setMotivazione($motivazione)
     {
-        return $this -> motivazione= $motivazione;
+         $this -> motivazione= $motivazione;
     }
     public function setObiettivi($obiettivi)
     {
-        return $this -> obiettivi = $obiettivi;
+         $this -> obiettivi = $obiettivi;
     }
     public function setCambiamento($cambiamento)
     {
-        return $this -> cambiamento= $cambiamento;
+         $this -> cambiamento= $cambiamento;
     }
     public function setIdTerapia($id_terapia)
     {
-        return $this -> id_terapia = $id_terapia;
+         $this -> id_terapia = $id_terapia;
     }
     public function setTipo($tipo)
     {
-        return $this -> tipo =$tipo;
+         $this -> tipo =$tipo;
     }
 }
 

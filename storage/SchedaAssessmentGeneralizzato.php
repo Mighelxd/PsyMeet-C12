@@ -90,51 +90,51 @@ class SchedaAssessmentGeneralizzato
     }
     public function setIdScheda($id_scheda)
     {
-        return $this -> id_scheda= $id_scheda;
+         $this -> id_scheda= $id_scheda;
     }
     public function setData($data)
     {
-        return $this -> data = $data;
+         $this -> data = $data;
     }
     public function setAutoregPositivi($autoreg_positivi)
     {
-        return $this -> autoreg_positivi = $autoreg_positivi;
+         $this -> autoreg_positivi = $autoreg_positivi;
     }
     public function setAutoregNegativi($autoreg_negativi)
     {
-        return $this -> autoreg_negativi = $autoreg_negativi;
+         $this -> autoreg_negativi = $autoreg_negativi;
     }
     public function setCognitivePositivi($cognitive_positivi)
     {
-        return $this -> cognitive_positivi = $cognitive_positivi;
+         $this -> cognitive_positivi = $cognitive_positivi;
     }
     public function setCognitiveNegativi($cognitive_negativi)
     {
-        return $this -> cognitive_negativi = $cognitive_negativi;
+         $this -> cognitive_negativi = $cognitive_negativi;
     }
     public function setSelfManagementNegativi($self_management_negativi)
     {
-        return $this -> self_management_negativi = $self_management_negativi;
+        $this -> self_management_negativi = $self_management_negativi;
     }
     public function setSocialiPositivi($sociali_positivi)
     {
-        return $this -> sociali_positivi = $sociali_positivi;
+         $this -> sociali_positivi = $sociali_positivi;
     }
     public function setSocialiNegativi($sociali_negativi)
     {
-        return $this -> sociali_negativi = $sociali_negativi;
+         $this -> sociali_negativi = $sociali_negativi;
     }
     public function setSelfManagementPositivi($self_management_positivi)
     {
-        return $this -> self_management_positivi = $self_management_positivi;
+         $this -> self_management_positivi = $self_management_positivi;
     }
     public function setIdTerapia($id_terapia)
     {
-        return $this -> id_terapia = $id_terapia;
+         $this -> id_terapia = $id_terapia;
     }
     public function setTipo($tipo)
     {
-        return $this -> tipo =$tipo;
+         $this -> tipo =$tipo;
     }
 }
 

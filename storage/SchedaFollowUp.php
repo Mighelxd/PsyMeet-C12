@@ -54,27 +54,27 @@ class SchedaFollowUp
     }
     public function setIdScheda($id_scheda)
     {
-        return $this -> id_scheda= $id_scheda;
+         $this -> id_scheda= $id_scheda;
     }
     public function setData($data)
     {
-        return $this -> data = $data;
+         $this -> data = $data;
     }
     public function setRicadute($ricadute)
     {
-        return $this -> ricadute = $ricadute;
+         $this -> ricadute = $ricadute;
     }
     public function setEsitiPositivi($esiti_positivi)
     {
-        return $this -> esiti_positivi = $esiti_positivi;
+         $this -> esiti_positivi = $esiti_positivi;
     }
     public function setIdTerapia($id_terapia)
     {
-        return $this -> id_terapia = $id_terapia;
+         $this -> id_terapia = $id_terapia;
     }
     public function setTipo($tipo)
     {
-        return $this -> tipo =$tipo;
+         $this -> tipo =$tipo;
     }
 }
 
