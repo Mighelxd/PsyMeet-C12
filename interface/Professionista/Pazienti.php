@@ -18,7 +18,7 @@ if($tipoUtente != "professionista" || $tipoUtente == null){
   header("Location: ../Utente/login.php");
 }
 
-$cfProfessionista = $_SESSION["cf"];
+$cfProfessionista = $_SESSION["codiceFiscale"];
 $listPaz = PazienteControl::getPazientiByProf($cfProfessionista);
 $_SESSION["cfPazTer"] = "";
 
