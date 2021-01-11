@@ -338,7 +338,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
        for($i=0; $i<count($compito); $i++) {
         ?>
 
-      <form  method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
+      <form  nome"correz" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php" onsubmit="return controlla();">
         <input type="text" name="action" value="correzione" hidden="true">
       <div class="row">
           <div class="col-md-12">
@@ -366,14 +366,16 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
                 </div>
                 <div class="form-group">
                   <label for="svolgimento">Svolgimento Compito</label>
-                  <textarea name="svolgimento" class="form-control" rows="3" readonly>  <?php echo $compito[$i]->getSvolgimento(); ?> </textarea>
+                  <textarea class="svolgimento" name="svolgimento" class="form-control" rows="3" readonly>  <?php echo $compito[$i]->getSvolgimento(); ?> </textarea>
+                    <span id="svolgSpan"> </span>
                 </div>
                 <div class="form-group">
                   <label for="correzione">Correzione Compito</label>
                   <textarea name="correzione" class="form-control" rows="3"> <?php echo $compito[$i]->getCorrezione(); ?> </textarea>
                 </div>
 
-                <?php
+
+              <?php
                 $effett=$compito[$i]->getEffettuato();
                 if($effett=="1"){
                   ?>
@@ -389,7 +391,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
 
                   <div class="form-group">
                     <label for="effettuato">Effettuato</label>
-                    <input type="checkbox"  value="0" name="effettuato" class="form-control" rows="1" >
+                    <input type="checkbox"  value="0" name="effettuato" class="form-control" rows="1"  >
                   </div>
 
             <?php }  ?>
@@ -433,10 +435,14 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
 <script>
 function validate(){
   var data=document.getElementById("inputData");
+
   if(data_validation(data)) {
     return;
   }
+
   return false;
+
+
 }
 
 function data_validation(data){
@@ -455,7 +461,28 @@ function data_validation(data){
 	}
 }
 
+function controlla(){
 
+  var svolgi= document.getElementsByClassName("svolgimento");
+  if(checkbox_controllo(svolgi[1].value)) {
+    return;
+  }
+
+  return false;
+
+}
+
+
+function checkbox_controllo(svolg){
+  if (svolg=="") {
+
+      $("#svolgSpan").text("Il campo svolgimento è vuoto!");
+      $("#svolgSpan").css("color", "red");
+
+
+  }
+
+}
 
 
 

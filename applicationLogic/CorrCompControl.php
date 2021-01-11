@@ -38,9 +38,12 @@ $comp = DatabaseInterface::selectQueryByAtt($arrKey,TABLE_NAME);
 $temp=$comp->fetch_array();
 $compitoComp= new Compito($temp[0],$temp[1],$temp[2],$temp[3],$temp[4],$temp[5],$temp[6],$temp[7],$temp[8]);
 
-
+if(!isset($_POST["effettuato"])) {
+  $effettuato=0;
+} else $effettuato=1;
 $correzione = $_POST["correzione"];
 $compitoComp->setCorrezione($correzione);
+$compitoComp->setEffettuato($effettuato);
 $isUpdate = DatabaseInterface::updateQueryById($compitoComp->getArray(),TABLE_NAME);
 
  if($isUpdate){
@@ -66,7 +69,7 @@ $svolgimento="";
 $correzione="";
 
 
-$compitoComp=array("data"=>$data,"effettuato"=>"1", "titolo"=>$titolo, "descrizione"=>$descrizione,"svolgimento"=>$svolgimento, "correzione"=>$correzione,"cf_prof"=>$cfProf, "cf"=>$cfPaz);
+$compitoComp=array("data"=>$data,"effettuato"=>"0", "titolo"=>$titolo, "descrizione"=>$descrizione,"svolgimento"=>$svolgimento, "correzione"=>$correzione,"cf_prof"=>$cfProf, "cf"=>$cfPaz);
 
 
 $compt = DatabaseInterface::insertQuery($compitoComp,TABLE_NAME);
@@ -100,7 +103,7 @@ else{
 
       echo $svolgimento;
 
-    //  $compitoComp->setSvolgimento($svolgimento);
+
       $compitoComp ->  setSvolgimento($svolgimento);
       var_dump($compitoComp);
       echo "<br>";
