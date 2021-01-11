@@ -41,10 +41,14 @@ else if ($cfPazienteTer == "") {
 }
 
 $listTerapie = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
-if(count($listTerapie) > 0 )
-  $terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
+/*if(count($listTerapie) > 0 ){
+  for($i=0;$i<count($listTerapie);$i++){
+    $terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
+    $_SESSION['totSchede'] = $terapie;
+  }
+}
 else
-  $terapie = [];
+  $terapie = [];*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -181,11 +185,17 @@ else
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview" style="padding-left: 2%;">
+                <?php
+                  for($i=0;$i<count($listTerapie);$i++){
+                    $terapie = terapiaControl::recuperaSchede($listTerapie[$i]->getIdTerapia());
+                    //$_SESSION['totSchede'] = $terapie;
+
+                ?>
+                <ul class="nav nav-treeview" style="padding-left: 2%;"><!--inizio blocco terapie-->
                   <li class="nav-item has-treeview">
                     <a href="gestioneTerapia.html" class="nav-link active">
                       <i class="fas fa-clipboard nav-icon"></i>
-                      <p>Terapia
+                      <p>Terapia <?php echo $listTerapie[$i]->getIdTerapia(); ?>
                       </p>
                     </a>
                   </li>
@@ -253,7 +263,8 @@ else
                         </p>
                       </a>
                     </li>
-                </ul>
+                </ul><!--fine blocco terapie-->
+                <?php } ?>
               </li>
             </ul>
           </li>

@@ -6,11 +6,22 @@ include '../../storage/SchedaAssessmentFocalizzato.php';
 include '../../storage/Episodio.php';
 include '../../applicationLogic/SeduteControl.php';
 
-$scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
+//$scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
 
-if(isset($_SESSION['idSCorr'])){
-  $idSchedaCorr = $_SESSION['idSCorr'];
+if(isset($_SESSION['totSchede'])){
+    $allSchede = $_SESSION['totSchede'];
+    for($i=0;$i<count($allSchede);$i++){
+      if($allSchede[$i]->getTipo() == 'Scheda Assessment Focalizzato'){
+        $schAssFoc[] = $allSchede[$i];
+      }
+    }
 }
+
+$schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
+
+/*if(isset($_SESSION['idSCorr'])){
+  $idSchedaCorr = $_SESSION['idSCorr'];
+}*/
 
 
  ?>
@@ -226,10 +237,10 @@ if(isset($_SESSION['idSCorr'])){
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <?php for($i=0;$i<count($scheda);$i++){ ?>
+          <?php for($i=0;$i<count($schAssFoc);$i++){ ?>
           <div class="card card-primary collapsed-card"><!--//////////////////////-->
             <div class="card-header">
-              <?php $date=date_create($scheda[$i][0]->getData()); $dS = date_format($date,"d/m/Y"); ?>
+              <?php $date=date_create($schAssFoc[$i]->getData()); $dS = date_format($date,"d/m/Y"); ?>
               <h3 class="card-title">Assessment Focalizzato <?php echo $dS; ?> </h3>
 
               <div class="card-tools">
@@ -253,8 +264,8 @@ if(isset($_SESSION['idSCorr'])){
               <?php
               $dataCorr = date("Y,m,d");
               $dataCorr = str_replace(',','-',$dataCorr);
-              if($scheda[$i][0]->getData() == $dataCorr){
-                echo("<button type='button' id='btnAddAnEp' class='btn btn-block btn-primary' onclick='anEp(".$idSchedaCorr.")' style='width:100px'>+ episodio</button>");
+              if($schAssFoc[$i]->getData() == $dataCorr){
+                echo("<button type='button' id='btnAddAnEp' class='btn btn-block btn-primary' onclick='anEp(".echo $schAssFoc[$i]->getIdScheda();.")' style='width:100px'>+ episodio</button>");
               }
                 ?>
                 <!--<button type="button" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px">+ episodio</button>-->
