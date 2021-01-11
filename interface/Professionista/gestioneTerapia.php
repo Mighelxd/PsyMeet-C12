@@ -22,7 +22,7 @@ if($tipoUtente != "professionista"){
   header("Location: ../Utente/login.php");
 }
 
-$cfProfessionista = $_SESSION["cf"];
+$cfProfessionista = $_SESSION["codiceFiscale"];
 //$cfPazienteTer = $_POST["codFiscalePaz"];
 $cfPazienteTer = isset($_POST["codFiscalePaz"]) ? $_POST['codFiscalePaz'] : "";
 if($cfPazienteTer != ""){
