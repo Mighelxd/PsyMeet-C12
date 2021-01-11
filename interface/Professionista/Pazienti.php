@@ -18,9 +18,9 @@ if($tipoUtente != "professionista" || $tipoUtente == null){
   header("Location: ../Utente/login.php");
 }
 
-$cfProfessionista = $_SESSION["cf"];
+$cfProfessionista = $_SESSION["codiceFiscale"];
 $listPaz = PazienteControl::getPazientiByProf($cfProfessionista);
-
+$_SESSION["cfPazTer"] = "";
 
  ?>
 <!DOCTYPE html>
@@ -215,7 +215,7 @@ $listPaz = PazienteControl::getPazientiByProf($cfProfessionista);
                           </a>
                       <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
                       <form class="" action="gestioneTerapia.php" method="post">
-                        <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf(); ?>" hidden ="true">
+                        <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
                           <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
                               <i class="nav-icon fas fa-table">
                                 Terapia
@@ -232,7 +232,7 @@ $listPaz = PazienteControl::getPazientiByProf($cfProfessionista);
         </div>
       </div>
     </div>
-
+<?php echo $_SESSION["cfPazTer"]; ?>
 
 
         <!-- /.card-body -->

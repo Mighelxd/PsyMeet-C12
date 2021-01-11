@@ -7,6 +7,9 @@ include '../../storage/Episodio.php';
 include '../../applicationLogic/SeduteControl.php';
 
 $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
+
+$idSchedaCorr = $_SESSION['idSCorr'];
+
  ?>
 
 <!DOCTYPE html>
@@ -28,6 +31,8 @@ $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <!-- Stile textarea sedute -->
+  <link rel="stylesheet" href="../../dist/css/sedute.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -218,39 +223,47 @@ $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <?php for($i=0;$i<count($scheda[0]);$i++){ ?>
-          <div class="card card-primary">
+          <?php for($i=0;$i<count($scheda);$i++){ ?>
+          <div class="card card-primary collapsed-card"><!--//////////////////////-->
             <div class="card-header">
-              <h3 class="card-title">Ass.Focalizzato</h3>
+              <?php $date=date_create($scheda[$i][0]->getData()); $dS = date_format($date,"d/m/Y"); ?>
+              <h3 class="card-title">Assessment Focalizzato <?php echo $dS; ?> </h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
+                  <i class="fas fa-plus"></i></button><!-- /////////////////////////////-->
               </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="display:none;"><!--//////////////////////-->
 
               <div class="form-group">
                 <label>Date:</label>
                   <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                      <?php $date=date_create($scheda[0][$i]->getData()); $dS = date_format($date,"d/m/Y"); ?>
-                      <input type="text" value='<?php echo $dS; ?>' class="form-control datetimepicker-input" data-target="#reservationdate">
+                      <input type="text" name="dateScheda" value='<?php echo $dS; ?>' class="form-control datetimepicker-input" data-target="#reservationdate" readonly/>
                       <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                       </div>
                   </div>
               </div>
 
-            <?php for($j=0;$j<count($scheda[1]);$j++){ ?>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="inputDescription">Episodio <?php echo $scheda[1][$j]->getNum(); ?></label>
-                  <button type="button" class="btn btn-block btn-primary" style="width: 50px">+</button>
 
-              </div>
+              <?php
+              $dataCorr = date("Y,m,d");
+              $dataCorr = str_replace(',','-',$dataCorr);
+              if($scheda[$i][0]->getData() == $dataCorr){
+                echo("<button type='button' id='btnAddAnEp' class='btn btn-block btn-primary' onclick='anEp(".$idSchedaCorr.")' style='width:100px'>+ episodio</button>");
+              }
+                ?>
+                <!--<button type="button" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px">+ episodio</button>-->
+              <?php for($j=0;$j<count($scheda[$i][1]);$j++){ ?>
+            <div class="card-body"><!--inizio episodio-->
+              <?php if($scheda[$i][0]->getData() == $dataCorr){ ?>
+              <form method="post" class="anEpisodio" action="../../applicationLogic/SeduteControlForm.php">
+              <?php } ?>
+              <p>Episodio<input type="text" name ="numero" value='<?php echo $scheda[$i][1][$j]->getNum(); ?>' style="width:40px;text-align:center;border:none;" readonly/></p>
               <div class="form-group">
-                <label for="inputDescription">Analisi Funzionale EP.<?php echo $scheda[1][$j]->getNum(); ?></label>
-                <textarea id="inputDescription" class="form-control" rows="4"><?php echo $scheda[1][$j]->getAnalisiFun(); ?></textarea>
+                <label for="inputDescription">Analisi Funzionale</label>
+                <textarea id="inputDescription" name="analisi" class="form-control" rows="4" readonly><?php echo $scheda[$i][1][$j]->getAnalisiFun(); ?></textarea>
               </div>
               <div class="form-group">
                 <div class="card-body">
@@ -264,9 +277,9 @@ $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
                     </thead>
                     <tbody>
                       <tr>
-                        <td><?php echo $scheda[1][$j]->getMA(); ?></td>
-                        <td><?php echo $scheda[1][$j]->getMB(); ?></td>
-                        <td><?php echo $scheda[1][$j]->getMC(); ?></td>
+                        <td><textarea name="a" class="textABC" readonly><?php echo $scheda[$i][1][$j]->getMA(); ?></textarea></td>
+                        <td><textarea name="b" class="textABC" readonly><?php echo $scheda[$i][1][$j]->getMB(); ?></textarea></td>
+                        <td><textarea name="c" class="textABC" readonly><?php echo $scheda[$i][1][$j]->getMC(); ?></textarea></td>
                       </tr>
                     </tbody>
                   </table>
@@ -275,43 +288,66 @@ $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
 
 
               <div class="form-group">
-                <label for="inputClientCompany">Appunti Terapeuta</label>
-                <textarea id="inputDescription" class="form-control" rows="4"><?php echo $scheda[1][$j]->getAppunti(); ?></textarea>
+                <label for="appunti">Appunti Terapeuta</label>
+                <textarea id="appunti" name="appunti" class="form-control" rows="4" readonly><?php echo $scheda[$i][1][$j]->getAppunti(); ?></textarea>
               </div>
 
             </div>
             <!-- /.card-body -->
+            <?php if($scheda[$i][0]->getData() == $dataCorr){ ?>
+            <div class="col-12">
+              <a href="#" class="btn btn-secondary">Cancella episodio</a>
+              <input type="submit" value="Modifica episodio" class="btn btn-success" style=" float: right">
+            </div>
+          <?php } ?>
+          <?php if($scheda[$i][0]->getData() == $dataCorr){ ?>
+        </form>
+      <?php } ?>
           </div>
           <?php } ?>
-          <!-- /.card -->
+          <!-- /.card fine episodi-->
         </div>
       </div>
     <?php } ?>
 
+    <!-- Scheda nascosta che si vuole creare -->
+    <div class="card card-primary" id="newScheda" hidden>
+      <div class="card-header">
+        <h3 class="card-title">Ass.Focalizzato</h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
       </div>
-      <div class="row">
-
-
-
-
-      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Date:</label>
+          <div class="input-group date" id="reservationdate" data-target-input="nearest">
+              <input type="text" id="da" name="dateScheda" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+              <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+              </div>
+          </div>
+          <input type="text" id="idTerapia" name="idTerapia" value="1" hidden/>
+          <button type="button" class="btn btn-success" id="btnAddScheda" onclick="saveScheda(document.getElementById('da').value,document.getElementById('idTerapia').value)" style=" float: right">Aggiungi Scheda</button>
+      <!--  </form>-->
+        </div>
+        <input type="text" id="hideIdScheda" hidden/>
+        <button type="button" id="btnAddEp" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px"/hidden>+ episodio</button>
+        <div class="card-body"><!--inizio episodi-->
+          <form method="post" id="episodio" action="../../applicationLogic/SeduteControlForm.php">
+          </form>
+        <!-- /.card fine episodi-->
+      </div><!-- Fine scheda aggiungi-->
+    </div>
     </section>
     <div class="col-12">
-      <a href="#" class="btn btn-secondary">Cancella</a>
-        <input type="submit" value="Sottometi Scheda" class="btn btn-success" style=" float: right">
+      <button class="btn btn-success" id="btnNew" onclick="viewScheda();" style=" float: right">Nuova Scheda</button>
     </div>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.5
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
-  </footer>
-
+  <!-- /.content-wrapper Della nuova scheda che si vuole creare-->
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -340,6 +376,7 @@ $scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
    })
 </script>
 <!-- date-range-picker -->
-
+<!--script bottoni -->
+<script src="../../dist/js/sedute.js"></script>
 </body>
 </html>
