@@ -11,7 +11,10 @@
   
   //  $cfPaz=$_POST["codFiscalePaz"];
   //  $_SESSION["codFiscalePaz"]=$cfPaz;
-   
+  session_start();
+   $cartellaClinica=$_SESSION["cartellaClinica"];
+   $_SESSION["cartellaClinica"]=null;
+   echo var_dump($cartellaClinica);
 ?>
 <!DOCTYPE html>
 <html>
