@@ -11,7 +11,10 @@ include "../../storage/SchedaFollowUp.php";
 include "../../storage/SchedaAssessmentGeneralizzato.php";
 include "../../applicationLogic/terapiaControl.php";
 
-//$scheda = SeduteControl::recuperaScheda('SchedaAssessmentFocalizzato');
+$tipoUtente = $_SESSION["tipo"];
+if($tipoUtente != "professionista" || $tipoUtente == null){
+  header("Location: ../Utente/login.php");
+}
 
 if(isset($_SESSION['idTerCorr'])){
     $idTerCorr = $_SESSION['idTerCorr'];
@@ -22,12 +25,18 @@ if(isset($_SESSION['idTerCorr'])){
       }
     }
 }
+else{
+  header("Location: Pazienti.php");
+}
+
 $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
 
 /*if(isset($_SESSION['idSCorr'])){
   $idSchedaCorr = $_SESSION['idSCorr'];
 }*/
-
+$dataCorr = date("Y,m,d");
+$dataCorr = str_replace(',','-',$dataCorr);
+$exists = false;
 
  ?>
 
@@ -245,7 +254,9 @@ $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
           <?php for($i=0;$i<count($schAssFoc);$i++){ ?>
           <div class="card card-primary collapsed-card"><!--//////////////////////-->
             <div class="card-header">
-              <?php $date=date_create($schAssFoc[$i]->getData()); $dS = date_format($date,"d/m/Y"); ?>
+              <?php
+              if($schAssFoc[$i]->getData() == $dataCorr){$exists = true;}
+              $date=date_create($schAssFoc[$i]->getData()); $dS = date_format($date,"d/m/Y"); ?>
               <h3 class="card-title">Assessment Focalizzato <?php echo $dS; ?> </h3>
 
               <div class="card-tools">
@@ -253,7 +264,7 @@ $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
                   <i class="fas fa-plus"></i></button><!-- /////////////////////////////-->
               </div>
             </div>
-            <div class="card-body" style="display:none;"><!--//////////////////////-->
+            <div class="card-body" style="display:none;"><!--////////////////////// aaaaaaaa-->
 
               <div class="form-group">
                 <label>Date:</label>
@@ -267,15 +278,13 @@ $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
 
 
               <?php
-              $dataCorr = date("Y,m,d");
-              $dataCorr = str_replace(',','-',$dataCorr);
               if($schAssFoc[$i]->getData() == $dataCorr){
                 echo("<button type='button' id='btnAddAnEp' class='btn btn-block btn-primary' onclick='anEp(".$schAssFoc[$i]->getIdScheda().")' style='width:100px'>+ episodio</button>");
               }
                 ?>
                 <!--<button type="button" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px">+ episodio</button>-->
               <?php for($j=0;$j<count($schedeConEp[$i][1]);$j++){ ?>
-            <div class="card-body"><!--inizio episodio-->
+            <div class="card-bodyEp"><!--inizio episodio-->
               <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
               <form method="post" class="anEpisodio" action="../../applicationLogic/SeduteControlForm.php">
               <?php } ?>
@@ -285,7 +294,7 @@ $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
                 <textarea id="inputDescription" name="analisi" class="form-control" rows="4" readonly><?php echo $schedeConEp[$i][1][$j]->getAnalisiFun(); ?></textarea>
               </div>
               <div class="form-group">
-                <div class="card-body">
+                <div class="card-bodyTb">
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -332,7 +341,7 @@ $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
     <!-- Scheda nascosta che si vuole creare -->
     <div class="card card-primary" id="newScheda" hidden>
       <div class="card-header">
-        <h3 class="card-title">Ass.Focalizzato</h3>
+        <h3 class="card-title">Assessment Focalizzato</h3>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
             <i class="fas fa-minus"></i>
@@ -343,18 +352,19 @@ $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
         <div class="form-group">
           <label>Date:</label>
           <div class="input-group date" id="reservationdate" data-target-input="nearest">
-              <input type="text" id="da" name="dateScheda" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+              <input type="text" id="da" name="dateScheda" value="<?php echo date("d/m/Y"); ?>" class="form-control datetimepicker-input" data-target="#reservationdate" readonly/>
               <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
               </div>
           </div>
-          <input type="text" id="idTerapia" name="idTerapia" value="1" hidden/>
-          <button type="button" class="btn btn-success" id="btnAddScheda" onclick="saveScheda(document.getElementById('da').value,document.getElementById('idTerapia').value)" style=" float: right">Aggiungi Scheda</button>
-      <!--  </form>-->
+        <!--  <input type="text" id="idTerapia" name="idTerapia" value="1" hidden/> -->
+          <?php
+          echo("<button type='button' class='btn btn-success' id='btnAddScheda' onclick=\"saveScheda(document.getElementById('da').value,".$idTerCorr.")\" style='float: right'>Aggiungi Scheda</button>");
+           ?>
         </div>
-        <input type="text" id="hideIdScheda" hidden/>
-        <button type="button" id="btnAddEp" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px"/hidden>+ episodio</button>
-        <div class="card-body"><!--inizio episodi-->
+      <input type="text" id="hideIdScheda" hidden/>
+      <button type="button" id="btnAddEp" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px"/hidden>+ episodio</button>
+        <div class="card-bodyEp"><!--inizio episodi-->
           <form method="post" id="episodio" action="../../applicationLogic/SeduteControlForm.php">
           </form>
         <!-- /.card fine episodi-->
@@ -362,7 +372,10 @@ $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
     </div>
     </section>
     <div class="col-12">
+      <?php
+      if(!$exists){?>
       <button class="btn btn-success" id="btnNew" onclick="viewScheda();" style=" float: right">Nuova Scheda</button>
+    <?php } ?>
     </div>
     <!-- /.content -->
   </div>

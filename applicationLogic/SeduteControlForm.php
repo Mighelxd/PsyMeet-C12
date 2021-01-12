@@ -56,7 +56,7 @@ if($action == "addEpisodio"){
   $mB = $_POST['b'];
   $mC = $_POST['c'];
   $appunti = $_POST['appunti'];
-  if($_POST['hIdS'] != null){
+  if(isset($_POST['hIdS'])){
     $idScheda = $_POST['hIdS'];
   }
   else{

@@ -102,7 +102,7 @@ function createEp(scheda){
   table.appendChild(tbody);
 
   var divTable = document.createElement('div');
-  divTable.className = "card-body";
+  divTable.className = "card-bodyTb";
   divTable.appendChild(table);
 
   var divABC = document.createElement('div');
@@ -164,12 +164,28 @@ function newEp(idScheda){
 function createAnEp(scheda){
 	var roots = document.getElementsByClassName('anEpisodio');
   if (roots != null) {
+		console.log("non è null. roots= "+roots[0]+" poi "+roots[1]);
+		console.log(typeof roots[0]);
 		for(var i=0;i<roots.length;i++){
 			while (roots[i].hasChildNodes()) {
 	      roots[i].removeChild(roots[i].childNodes[0]);
 	    }
 		}
   }
+	else{
+		var preRoot = document.getElementsByClassName['card-body'];
+		console.log(preRoot);
+		var rootEp = preRoot[preRoot.length -2];
+
+		roots = document.createElement('form');
+		roots.className = "anEpisodio";
+		roots.method = "POST";
+		roots.action = "../../applicationLogic/SeduteControlForm.php";
+		var cardEp = document.createElement('div');
+		cardEp.className = "card-bodyEp";
+		cardEp.appendChild(roots);
+		rootEp.appendChild(cardEp);
+	}
 
   var inputNumEp = document.createElement('input');
   inputNumEp.type = 'text';
@@ -235,7 +251,7 @@ function createAnEp(scheda){
   table.appendChild(tbody);
 
   var divTable = document.createElement('div');
-  divTable.className = "card-body";
+  divTable.className = "card-bodyTb";
   divTable.appendChild(table);
 
   var divABC = document.createElement('div');
