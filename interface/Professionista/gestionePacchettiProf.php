@@ -1,8 +1,8 @@
 <?php
  include ('../../storage/Pacchetto.php');
  include ('../../storage/scelta.php');
- include ('../../storage/DatabaseInterface.php');
  include '../../plugins/libArray/FunArray.php';
+ include ('../../storage/DatabaseInterface.php');
  include '../../applicationLogic/PacchettoControl.php';
 
  session_start();
@@ -14,8 +14,7 @@
 
  //$allpacchetto = PacchettoControl::selectAllPacchetto();
  $pacchettoByProf= PacchettoControl::selectAllPacchettoProf($cf);
-
-
+ $pacchetto= PacchettoControl::selectAllPacchetto();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -287,23 +286,25 @@ to get the desired effect
                   <tr>
                     <th>Pacchetto</th>
                     <th>Prezzo</th>
-                    <th>Dettagli</th>
                     <th></th>
                   </tr>
                   </thead>
+                  <?php for($i=0;count($pacchettoByProf)-1;$i++){
+                     //var_dump($pacchettoByProf[$i]);
+                    $p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto());
+
+
+                    ?>
                   <tbody>
                   <tr>
                     <td>
-                     <img src="../../dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                      Pacchetto seduta singola
+                      <?php echo $p->getTipologia(); ?>
                     </td>
-                    <td>$60 USD</td>
-
                     <td>
-                      <a href="#" class="text-muted">
-                        <i class="fas fa-search"></i>
-                      </a>
+                   <?php echo $p->getPrezzo(); ?>
                     </td>
+
+
                     <td>
 
                       <a class="btn btn-danger btn-sm" href="#">
@@ -316,6 +317,8 @@ to get the desired effect
                   </tr>
 
                   </tbody>
+              <?php  }
+                ?>
                 </table>
               </div>
             </div>
@@ -339,25 +342,21 @@ to get the desired effect
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form" method="POST" action="../../applicationLogic/PacchettoControlForm.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label for="pacchettoNew">Pacchetto</label>
 
-                      <select class="form-control" name="">
+                      <select class="form-control" name="pac">
                       <?php  for($i=0;$i<count($pacchetto);$i++){ ?>
 
 
-                        <option value="pacchettoBase"><?php echo $pacchetto[$i]->getTipologia();?></option>
+                        <option><?php echo $pacchetto[$i]->getTipologia();?></option>
 <?php } ?>
                       </select>
                     </div>
 
-                    <div class="form-group">
-                      <label for="descizione">Descizione</label>
-                      <textarea name="descrizione" class="form-control" placeholder="Descrizione" rows="4" cols="40"></textarea>
-                    </div>
-                  </div>
+
                   <!-- /.card-body -->
 
                   <div class="card-footer" style="background-color: white">
