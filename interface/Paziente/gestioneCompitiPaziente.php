@@ -7,8 +7,7 @@ include ('../../storage/DatabaseInterface.php');
 include '../../plugins/libArray/FunArray.php';
 include '../../applicationLogic/CompitoControl.php';
 
-//$compito= CompitoControl::selectAllCompitiProf();
-//$cfPaziente = "NSTFNC94M23H703G";
+
 session_start();
 $tipoUtente = $_SESSION["tipo"];
 if($tipoUtente != "paziente"){
@@ -16,17 +15,12 @@ if($tipoUtente != "paziente"){
 }
 
 
-$cfPaziente = $_SESSION["cf"];
+$cfPaziente = $_SESSION["codiceFiscale"];
 
 $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
 
 
-/*$action = 'recoveryAll';
-/*Questa action recupera tutti i compiti di un professionista */
-/*if($action == 'recoveryAll'){
-  $arrKey = array("cf_prof"=>'RSSMRC80R12H703U');
-  $allCompProf = DatabaseInterface::selectQueryByAtt($arrKey,'compito');
-} */
+
 ?>
 
 <!DOCTYPE html>
@@ -299,7 +293,8 @@ $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
        for($i=0; $i<count($compito); $i++) {
         ?>
 
-      <form  name="correzione" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
+      <form  name="formSvolg" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
+          <input type="text" name="action" value="doComp" hidden="true">
       <div class="row">
           <div class="col-md-12">
             <div class="card card-primary">
@@ -313,9 +308,8 @@ $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <input type="text" name="action" value="doComp" hidden ="true">
-                  <label for="data">Data</label>
-                  <textarea name="data" class="form-control" rows="1" readonly><?php echo $compito[$i]->getData(); ?> </textarea>
+                  <label for="data">Data assegnazione </label>
+                  <input type="date" value="<?php echo $compito[$i]->getData(); ?>" class="form-control" rows="1" readonly>
                 </div>
                 <div class="form-group">
                   <label for="titolo">Titolo</label>
@@ -327,7 +321,7 @@ $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
                 </div>
                 <div class="form-group">
                   <label for="svolgimento">Svolgimento Compito</label>
-                  <textarea name="svolgimento" class="form-control" rows="3" >  <?php echo $compito[$i]->getSvolgimento(); ?> </textarea>
+                  <textarea name="svolgimento" class="form-control" rows="3" required>  <?php echo $compito[$i]->getSvolgimento(); ?> </textarea>
                 </div>
                 <div class="form-group">
                   <label for="correzione">Correzione Compito</label>
@@ -389,6 +383,9 @@ $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+
+
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
