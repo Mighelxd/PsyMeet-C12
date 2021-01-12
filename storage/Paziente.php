@@ -97,7 +97,7 @@ class Paziente
 
     public function getFotoProfiloPaz()
     {
-        return $this->$fotoProfiloPaz;
+        return $this->fotoProfiloPaz;
     }
 
     public function setCf($cf)

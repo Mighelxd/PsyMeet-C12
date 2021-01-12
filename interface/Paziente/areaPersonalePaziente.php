@@ -18,7 +18,7 @@ $tipoUtente = $_SESSION["tipo"];
 if($tipoUtente != "paziente"){
   header("Location: ../Utente/login.php");
 }
-$cfPaziente = $_SESSION["cf"];
+$cfPaziente = $_SESSION["codiceFiscale"];
 
 
 
@@ -27,6 +27,15 @@ $cfPaziente = $_SESSION["cf"];
 
 
 $paz = PazienteControl::getPaz($cfPaziente);
+
+
+
+
+$img=base64_encode($paz->getFotoProfiloPaz());
+
+
+
+
 /*$arr = array("cf" => "NSTFNC94M23H703G",);
 $result = DatabaseInterface::selectQueryById($arr,"paziente");
 $arr = $result -> fetch_array();
@@ -90,7 +99,8 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
        <!-- Sidebar user panel (optional) -->
        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
          <div class="image">
-           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+           <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+
          </div>
          <div class="info">
            <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
@@ -138,7 +148,7 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
            </li>
 
          </ul>
-       </nav> -->
+       </nav>
        <!-- /.sidebar-menu -->
      </div>
      <!-- /.sidebar -->
@@ -176,9 +186,10 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
              <div class="card card-primary card-outline">
                <div class="card-body box-profile">
                  <div class="text-center">
-                   <img class="profile-user-img img-fluid img-circle"
-                        src="../../dist/img/user2-160x160.jpg"
-                        alt="User profile picture">
+
+
+                        <?php echo '<img class="profile-user-img img-fluid img-circle" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+
                  </div>
 
                  <h3 class="profile-username text-center"><?php echo $paz->getNome() ." " .$paz->getCognome(); ?></h3>
@@ -279,6 +290,26 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
                        </div>
                      </form>
 
+                    <form enctype="multipart/form-data" action="../../applicationLogic/AreaPersonalePazienteControl.php" method="post" id="modificaFoto" >
+                     <div class="form-group row">
+                       <label for="videoPresentazione" class="col-sm-2 col-form-label">Foto Profilo</label>
+                       <div class="col-sm-10">
+                         <div class="input-group">
+                           <div class="custom-file">
+                             <input type="file" class="custom-file-input" name="fotoProfiloPaz" id="fotoProfiloPaz" name="immagine" accept=".jpg,.jpeg,.png,.bmp" required>
+                             <label class="custom-file-label" for="exampleInputFile">Seleziona file</label>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                     <div class="form-group row">
+                       <div class="offset-sm-2 col-sm-10">
+                     <input type="text" name="action" value="modificaFoto" hidden = "true">
+                     <input type="submit" class="btn btn-danger" name="modificaFoto" value="modifica foto">
+                   </div>
+                 </div>
+                   </form>
+
 
                    </div>
                    <!-- /.tab-pane -->
@@ -290,24 +321,7 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
              </div>
               <!-- /.nav-tabs-custom -->
 
-              <div class = "card-body">
 
-             <div class="form-group row">
-               <label for="videoPresentazione" class="col-sm-2 col-form-label">Foto Profilo</label>
-               <div class="col-sm-10">
-                 <div class="input-group">
-                   <div class="custom-file">
-                     <input type="file" class="custom-file-input" name="fotoProfiloPaz" id="fotoProfiloPaz">
-                     <label class="custom-file-label" for="exampleInputFile">Seleziona file</label>
-                   </div>
-                   <div class="input-group-append">
-                     <span class="input-group-text" id="">Upload</span>
-                   </div>
-                 </div>
-               </div>
-             </div>
-
-           </div>
 
            </div>
            <!-- /.col -->

@@ -3,7 +3,10 @@ include "../storage/Paziente.php";
 include ("../storage/DatabaseInterface.php");
 include "PazienteControl.php";
 include ("../plugins/libArray/FunArray.php");
-$utenteCf = "NSTFNC94M23H703G";
+
+
+session_start();
+$cfPaziente = $_SESSION["codiceFiscale"];
 
 if($_POST["action"] == "ModificaPaziente"){
     $telefonoPaz = $_POST["telefono"];
@@ -11,9 +14,9 @@ if($_POST["action"] == "ModificaPaziente"){
     $emailPaz = $_POST["email"];
     $passwordPaz = md5($_POST["password"]);
     $istruzionePaz = $_POST["istruzione"];
-    $fotoProfilo = $_POST["fotoProfiloPaz"];
 
-    $arr = array("cf" => $utenteCf,);
+
+    $arr = array("cf" => $cfPaziente,);
     $result = DatabaseInterface::selectQueryById($arr,"paziente");
     $arr = $result -> fetch_array();
     $paziente = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $arr[11]);
@@ -37,22 +40,45 @@ if($_POST["action"] == "ModificaPaziente"){
     if ($istruzionePaz != "") {
       $paziente->setIstruzione($istruzionePaz);
     }
-    if($fotoProfilo == ""){
-      $fotoProfilo = NULL;
-      $paziente->setFotoProfiloPaz($fotoProfilo);
-    }
+
 
     $result = DatabaseInterface::updateQueryById($paziente->getArrayNoFoto(), "paziente");
 
+    if($result){
+      header("Location: ../interface/Paziente/areaPersonalePaziente.php");
+    }
+    else{
+      echo "non va";
+    }
+
   }
 
-if($result){
-  header("Location: ../interface/Paziente/areaPersonalePaziente.php");
-}
-else{
-  echo "non va";
-}
+else if($_POST["action"] == "modificaFoto"){
+  if(isset($_FILES["fotoProfiloPaz"]))
+      $immagine=addslashes(file_get_contents($_FILES["fotoProfiloPaz"]["tmp_name"]));
+  else
+      $immagine=NULL;
 
+  if($immagine != NULL){
+    $arr = array("cf" => $cfPaziente,);
+    $result = DatabaseInterface::selectQueryById($arr,"paziente");
+    $arr = $result -> fetch_array();
+    $paziente = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $immagine);
+
+
+    $result = DatabaseInterface::updateQueryById($paziente->getArray(), "paziente");
+    var_dump($result);
+    if($result){
+      header("Location: ../interface/Paziente/areaPersonalePaziente.php");
+    }
+    else{
+      echo "non va";
+    }
+  }
+  else {
+      echo "non va per foto = null";
+  }
+}
 
 
  ?>
