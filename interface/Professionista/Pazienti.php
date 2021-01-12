@@ -186,7 +186,8 @@ $_SESSION["cfPazTer"] = "";
               </thead>
               <tbody>
 
-                <?php for($i=0 ; $i < count($listPaz) ; $i++){ ?>
+                <?php for($i=0 ; $i < count($listPaz) ; $i++){
+                  $img=base64_encode($listPaz[$i]->getFotoProfiloPaz()); ?>
                   <tr>
 
                       <td>
@@ -197,8 +198,15 @@ $_SESSION["cfPazTer"] = "";
 
                       </td>
                       <td>
+                            <?php if($img != NULL){
+                               echo '<img class="table-avatar" src="data:image/jpeg;base64,'.$img.'"/>';
+                            }
 
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                            else {
+                              echo '<img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">';
+                            }
+                            ?>
+
 
                       </td>
                       <td style=" padding-left: 35px;">
@@ -206,7 +214,7 @@ $_SESSION["cfPazTer"] = "";
                           <i class="fas fa-search"></i>
                         </a>
                       </td>
-
+                      <td class="project-actions text-right">
                       <form class="" action="../../applicationLogic/CartellaClinicaControl.php" method="post">
                         <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
                         <input type="text" name="azione" value="visualizza" hidden ="true">
