@@ -270,7 +270,7 @@
                     </div>
                     <div class="form-group">
                        <label for="data">Data</label>
-		    		   <input type="date" id="data" name="data" value="<?php echo date("Y-m-d")?>" readonly>
+		    		   <input type="date" id="data" name="data" <?php if(!isset($cartellaClinica)){ ?><?php echo "value=\"".date(Y-m-d)."\"";}?> <?php if(isset($cartellaClinica)){ ?><?php echo "value=\"".$cartellaClinica->getData()."\"";}?>  readonly>
                     </div>
                     <div class="form-group">
                        <label for="professione">Professione</label>
@@ -328,8 +328,8 @@
 <!-- FINE DIV CHE SI TROVA TRA NAV E I BOX -->
 
 <?php
-$_SESSION["datiPaziente"]=NULL;
-$_SESSION["cartellaClinica"]=NULL
+  $_SESSION["datiPaziente"]=NULL;
+  $_SESSION["cartellaClinica"]=NULL
 ?>
 
  <!-- INIZIO PIE DI PAGINA -->
@@ -373,9 +373,9 @@ $_SESSION["cartellaClinica"]=NULL
               var response=JSON.parse(data);
               if(response.esito==true){
                  $(".alert-success").show();
-                //  setTimeout(function(){
-                //    window.location.replace("Pazienti.php");
-                //  },5000)
+                  setTimeout(function(){
+                    window.location.replace("Pazienti.php");
+                  },5000)
               }
               else{
                 $(".alert").removeClass("alert-success");

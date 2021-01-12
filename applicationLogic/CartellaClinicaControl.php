@@ -23,7 +23,7 @@ if($_POST["azione"]=="visualizza"){
         exit();
     }
     $result=mysqli_fetch_array($result);
-    $cartellaClinica=new CartellaClinica($result["id_cartella_clinica"],$result["q_umore"],$result["q_relazioni"],$result["patologie_pregresse"],$result["farmaci"],$cfProf,$cfPaz);
+    $cartellaClinica=new CartellaClinica($result["id_cartella_clinica"],$result["data_creazione"],$result["q_umore"],$result["q_relazioni"],$result["patologie_pregresse"],$result["farmaci"],$cfProf,$cfPaz);
     $_SESSION["cartellaClinica"]=$cartellaClinica;
     header("Location: ../interface/Professionista/CartellaClinica.php");
     exit();
@@ -34,11 +34,11 @@ else
         $result=DatabaseInterface::selectQueryByAtt(array("cf_prof" => $cfProf, "cf" => $cfPaz),CartellaClinica::$tableName);
         $result=mysqli_fetch_array($result);
         $idCartella=$result["id_cartella_clinica"];
-        $cartellaClinica=new CartellaClinica($result["id_cartella_clinica"],$POST["q_umore"],$result["q_relazioni"],$result["patologie_pregresse"],$result["farmaci"],$cfProf,$cfPaz);
+        $date=date("Y-m-d");
+        $cartellaClinica=new CartellaClinica($result["id_cartella_clinica"],$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
         $result=DatabaseInterface::updateQueryById($cartellaClinica->getArray(), CartellaClinica::$tableName);
-        
         if($result){
-            echo json_encode(array("esito"=>true, "errore"=>"ciao"));
+            echo json_encode(array("esito"=>true, "errore"=>$date));
             exit();
         }
         else{
