@@ -1,15 +1,20 @@
 <?php
 
+
+
+
 define("TABLE_NAME","pacchetto");
+
+
+
 
 
 class PacchettoControl{
 
   static function selectAllPacchetto(){
     //Questa action cerca di recuperare tutti i pacchetti che vi sono nel DB
-    $id = 1;
-    $arrKey = array("id_pacchetto"=>$id);
-    $allPac = DatabaseInterface::selectQueryByAtt($arrKey,TABLE_NAME);
+
+    $allPac = DatabaseInterface::selectAllQuery(Pacchetto::$tableName);
     while ($row=$allPac->fetch_array()) {
       $pac=new Pacchetto($row[0],$row[1],$row[2],$row[3]);
       $arr[]=$pac;
@@ -28,6 +33,14 @@ class PacchettoControl{
         $arrs[]=$pacscelta;
     }
   return $arrs;
+ }
+ static function recuperaPacchetto($id){
+   $arrecupero=array('id_pacchetto' =>$id);
+   $paccrecupero=DatabaseInterface::selectQueryByAtt($arrecupero,Pacchetto::$tableName);
+   while ($row=$paccrecupero->fetch_array()) {
+     $pacrec= new Pacchetto($row[0],$row[1],$row[2],$row[3]);
+   }
+   return $pacrec;
  }
 }
  ?>

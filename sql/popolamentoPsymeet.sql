@@ -22,7 +22,15 @@ insert into schedaModelloEziologico(data,fattori_causativi,fattori_precipitanti,
 
 insert into appuntamento(data,ora,descrizione,cf_prof,cf) value('2020-10-01','19:00:00','Seduta primo colloquio','RSSMRC80R12H703U','NSTFNC94M23H703G');
 
-insert into pacchetto(n_sedute,prezzo,tipologia) value('1','60.00','Seduta singola');
+insert into pacchetto(n_sedute,prezzo,tipologia) value('1','60.00','1 seduta');
+
+insert into pacchetto(n_sedute,prezzo,tipologia) value('6','320.00','6 sedute');
+
+insert into pacchetto(n_sedute,prezzo,tipologia) value('10','500.00','10 sedute');
+
+insert into pacchetto(n_sedute,prezzo,tipologia) value('20','800.00','20 sedute');
+
+insert into pacchetto(n_sedute,prezzo,tipologia) value('0','50.00','Relazione finale');
 
 insert into cartellaClinica(q_umore,q_relazioni,patologie_pregresse,farmaci,cf_prof,cf) value('3','3','NA','NA','RSSMRC80R12H703U','NSTFNC94M23H703G');
 
