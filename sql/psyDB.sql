@@ -178,6 +178,7 @@ CREATE TABLE pacchetto(
 DROP TABLE IF EXISTS cartellaClinica;
 CREATE TABLE cartellaClinica(
  id_cartella_clinica INT unsigned auto_increment not null,
+ data_creazione date,
  q_umore INT not null,
  q_relazioni INT not null,
  patologie_pregresse TEXT not null,

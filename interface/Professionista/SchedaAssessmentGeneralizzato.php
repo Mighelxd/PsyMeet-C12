@@ -1,4 +1,37 @@
-../../<!DOCTYPE html>
+<?php
+session_start();
+include '../../plugins/libArray/FunArray.php';
+include '../../storage/DatabaseInterface.php';
+include '../../storage/SchedaAssessmentFocalizzato.php';
+include '../../storage/Episodio.php';
+include '../../applicationLogic/SeduteControl.php';
+include "../../storage/SchedaPrimoColloquio.php";
+include "../../storage/SchedaModelloEziologico.php";
+include "../../storage/SchedaFollowUp.php";
+include "../../storage/SchedaAssessmentGeneralizzato.php";
+include "../../applicationLogic/terapiaControl.php";
+
+
+$tipoUtente = $_SESSION["tipo"];
+if($tipoUtente != "professionista" || $tipoUtente == null){
+  header("Location: ../Utente/login.php");
+}
+$exist = false;
+if(isset($_SESSION['idTerCorr'])){
+    $idTerCorr = $_SESSION['idTerCorr'];
+    $allSc = terapiaControl::recuperaSchede($idTerCorr);
+    for($i=0;$i<count($allSc);$i++){
+      if($allSc[$i]->getTipo() == 'Scheda Assessment Generalizzato'){
+        $schAssGen = $allSc[$i];
+        $exist = true;
+      }
+    }
+}
+else{
+  header("Location: Pazienti.php");
+}
+?>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -345,6 +378,121 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- Main content -->
+    <?php
+      if(!$exist){
+        echo("<div class=\"row\">");
+          echo("<div class=\"col-12\">");
+              echo("<input type=\"submit\" value=\"Crea Scheda\" class=\"btn btn-success float-right\">");
+          echo("</div>");
+        echo("</div>");
+      }?>
+      <?php
+        if($exist){?>
+          <section class="content">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Autoregolazione</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="inputDescription">Aspetti Positivi</label>
+                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getAutoregPositivi(); ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputDescription">Aspetti Negativi</label>
+                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getAutoregNegativi(); ?></textarea>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+              <div class="col-md-6">
+                <div class="card card-secondary">
+                  <div class="card-header">
+                    <h3 class="card-title">Cognitive</h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="inputDescription">Aspetti Positivi</label>
+                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getCognitivePositivi(); ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputDescription">Aspetti Negativi</label>
+                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getCognitiveNegativi(); ?></textarea>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+              <div class="col-md-6">
+                <div class="card card-secondary">
+                  <div class="card-header">
+                    <h3 class="card-title">Self Managment</h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="inputDescription">Aspetti Positivi</label>
+                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getSelfManagementPositivi(); ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputDescription">Aspetti Negativi</label>
+                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getSelfManagementNegativi(); ?></textarea>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+              <div class="col-md-6">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Sociali</h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="inputDescription">Aspetti Positivi</label>
+                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getSocialiPositivi(); ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputDescription">Aspetti Negativi</label>
+                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getSocialiNegativi(); ?></textarea>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <a href="#" class="btn btn-secondary">Cancella</a>
+                <input type="submit" value="Salva Scheda" class="btn btn-success float-right">
+              </div>
+            </div>
+          </section>
+    <?php  }?>
+    <form method='POST' action='../../applicationLogic/SeduteControlForm.php' id='formGen'>
     <section class="content">
       <div class="row">
         <div class="col-md-6">
@@ -360,11 +508,11 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -383,11 +531,11 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -406,11 +554,11 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -429,11 +577,11 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -448,6 +596,7 @@
         </div>
       </div>
     </section>
+  </form>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -476,5 +625,6 @@
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+<script src="../../dist/js/generalizzato.js"></script>
 </body>
 </html>

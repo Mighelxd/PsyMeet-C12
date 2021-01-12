@@ -14,6 +14,7 @@ class CartellaClinica {
     private $qualitaRelazioni;
     private $cfPaz;
     private $cfProf;
+    private $dataCreazione;
     public static $tableName="cartellaclinica";
 
     public function setFarmaci($fa){
@@ -39,6 +40,14 @@ class CartellaClinica {
     public function setCfPaz($cfPa){
         $this->cfPaz = $cfPa;
     }
+    public function setData($d){
+        $this->dataCreazione = $d;
+    }
+
+    public function getData(){
+        return $this->dataCreazione;
+    }
+
 
     public function getId(){
         return $this->id;
@@ -77,8 +86,9 @@ class CartellaClinica {
         $this->cfProf = "";
      }
 
-    public function __construct($i, $qum, $qur, $pat, $fa, $cfPro, $cfPa){
+    public function __construct($i, $d, $qum, $qur, $pat, $fa, $cfPro, $cfPa){
         $this->id = $i;
+        $this->dataCreazione=$d;
         $this->farmaci = $fa;
         $this->qualitaUmore = $qum;
         $this->patologiePregresse = $pat;
@@ -88,7 +98,7 @@ class CartellaClinica {
     }
 
     public function getArray(){
-         return array("id_cartella_clinica" => $this->id, "farmaci" => $this->farmaci, "q_umore" => $this->qualitaUmore, "q_relazioni" => $this->qualitaRelazioni, "patologie_pregresse" => $this->patologiePregresse, "cf_prof" => $this->cfProf, "cf" => $this->cfPaz);
+         return array("id_cartella_clinica" => $this->id,"data_creazione"=>$this->dataCreazione, "farmaci" => $this->farmaci, "q_umore" => $this->qualitaUmore, "q_relazioni" => $this->qualitaRelazioni, "patologie_pregresse" => $this->patologiePregresse, "cf_prof" => $this->cfProf, "cf" => $this->cfPaz);
      }
 }
 ?>
