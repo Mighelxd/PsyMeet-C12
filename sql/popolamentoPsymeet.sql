@@ -2,9 +2,9 @@
 use psyDB;
 SHOW GLOBAL VARIABLES LIKE 'local_infile';
 
-insert into professionista(nome,cognome,data_nascita,cf_prof,email,telefono,cellulare,passwor,indirizzo_studio,esperienze,pubblicazioni,titolo_studio,n_iscrizione_albo,partita_iva,pec,specializzazione,polizza_RC) value('Marco','Rossi','1980-10-12','RSSMRC80R12H703U','marcorossi@gmail.it','089456982','3202678943','0B39872D6291C4DB3ACFC886A4EBF2F6','via studio, 12','Trattamenti a scopo preventivo e curativo della salute mentale e del benessere psicologico di singoli soggetti, coppie, famiglie e organizzazioni sociali. Attività di consulenza psicologica (counseling), per la definizione di problemi e la risoluzione di difficoltà relative a processi evolutivi o involutivi, a fasi di transizione e stati di crisi, rinforzando la capacità di scelta, di problem solving e di cambiamento.','NA.','Laurea Scienze e Tecniche Psicologiche - Università Degli Studi di Napoli','A120','RSSMRC80R12','marcorossi@pec.it','psicologia cognitiva','Assicurazione psicologo');
+insert into professionista(cf_prof,nome,cognome,data_nascita,email,telefono,cellulare,passwor,indirizzo_studio,esperienze,pubblicazioni,titolo_studio,n_iscrizione_albo,partita_iva,pec,specializzazione,polizza_RC) value('RSSMRC80R12H703U','Marco','Rossi','1980-10-12','marcorossi@gmail.it','089456982','3202678943','0B39872D6291C4DB3ACFC886A4EBF2F6','via studio, 12','Trattamenti a scopo preventivo e curativo della salute mentale e del benessere psicologico di singoli soggetti, coppie, famiglie e organizzazioni sociali. Attività di consulenza psicologica (counseling), per la definizione di problemi e la risoluzione di difficoltà relative a processi evolutivi o involutivi, a fasi di transizione e stati di crisi, rinforzando la capacità di scelta, di problem solving e di cambiamento.','NA.','Laurea Scienze e Tecniche Psicologiche - Università Degli Studi di Napoli','A120','RSSMRC80R12','marcorossi@pec.it','psicologia cognitiva','Assicurazione psicologo');
 
-insert into paziente(nome,cognome,data_nascita,cf,email,telefono,passwor,indirizzo,istruzione,lavoro,difficol_cura) value('Francesco','Nesta','1994-08-23','NSTFNC94M23H703G','franconesta@gmail.it','089255788','66744B081EBFE95452B96BE2CA6554ED','via casa, 10','Diploma','Impiegato','3');
+insert into paziente(cf,nome,cognome,data_nascita,email,telefono,passwor,indirizzo,istruzione,lavoro,difficol_cura) value('NSTFNC94M23H703G','Francesco','Nesta','1994-08-23','franconesta@gmail.it','089255788','66744B081EBFE95452B96BE2CA6554ED','via casa, 10','Diploma','Impiegato','3');
 
 insert into terapia(data,descrizione,cf_prof,cf) value('2020-10-02','cognitivo comportamentale','RSSMRC80R12H703U','NSTFNC94M23H703G');
 
@@ -24,7 +24,7 @@ insert into appuntamento(data,ora,descrizione,cf_prof,cf) value('2020-10-01','19
 
 insert into pacchetto(n_sedute,prezzo,tipologia) value('1','60.00','Seduta singola');
 
-insert into cartellaClinica(q_umore,q_relazioni,patologie_pregresse,farmaci,cf_prof,cf) value('3','3','NA','NA','RSSMRC80R12H703U','NSTFNC94M23H703G');
+insert into cartellaClinica(data_creazione,q_umore,q_relazioni,patologie_pregresse,farmaci,cf_prof,cf) value('2020-10-21','3','3','NA','NA','RSSMRC80R12H703U','NSTFNC94M23H703G');
 
 insert into compito(data,effettuato,titolo,descrizione,svolgimento,correzione,cf_prof,cf) value('2020-10-21','1','Buio','NA', 'svolgimento1', 'correzione1', 'RSSMRC80R12H703U','NSTFNC94M23H703G');
 

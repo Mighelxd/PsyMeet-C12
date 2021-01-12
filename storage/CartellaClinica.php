@@ -14,6 +14,7 @@ class CartellaClinica {
     private $qualitaRelazioni;
     private $cfPaz;
     private $cfProf;
+    private $dataCreazione;
     public static $tableName="cartellaclinica";
 
     public function setFarmaci($fa){
@@ -39,6 +40,14 @@ class CartellaClinica {
     public function setCfPaz($cfPa){
         $this->cfPaz = $cfPa;
     }
+    public function setData($d){
+        $this->date = $d;
+    }
+
+    public function getData($d){
+        return $this->dataCreazione;
+    }
+
 
     public function getId(){
         return $this->id;
@@ -77,7 +86,7 @@ class CartellaClinica {
         $this->cfProf = "";
      }
 
-    public function __construct($i, $qum, $qur, $pat, $fa, $cfPro, $cfPa){
+    public function __construct($i, $dataCreazione, $qum, $qur, $pat, $fa, $cfPro, $cfPa){
         $this->id = $i;
         $this->farmaci = $fa;
         $this->qualitaUmore = $qum;
