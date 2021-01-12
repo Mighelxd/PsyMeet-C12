@@ -27,6 +27,7 @@ if($action == "saveScheda"){
   while($row = $recIdScheda->fetch_array()){
     $idSchedaCorr = $row[0];
   }
+  $_SESSION['idSCorr'] = $idSchedaCorr;
   $ris = array("ok"=>$ok,"idScheda"=>$idSchedaCorr);
   echo json_encode($ris);
 //  echo jeson_encode($res);
@@ -64,6 +65,7 @@ if($action == "addEpisodio"){
   }
 
   $attEp = array("numero"=>$numEp,"analisi_fun"=>$analisi,"m_a"=>$mA,"m_b"=>$mB,"m_c"=>$mC,"appunti"=>$appunti,"id_scheda"=>$idScheda);
+  //var_dump($attEp);
   $insOk = DatabaseInterface::insertQuery($attEp,'episodio');
   if($insOk){
     $key = array("id_scheda"=>$idScheda);

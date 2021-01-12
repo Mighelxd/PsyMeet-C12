@@ -251,8 +251,12 @@ $exists = false;
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <?php for($i=0;$i<count($schAssFoc);$i++){ ?>
+          <?php for($i=0;$i<count($schAssFoc);$i++){
+            if($schAssFoc[$i]->getData() == $dataCorr){
+                echo("<div class=\"card card-primary\">");////////////////////////////////
+            }else{?>
           <div class="card card-primary collapsed-card"><!--//////////////////////-->
+          <?php } ?>
             <div class="card-header">
               <?php
               if($schAssFoc[$i]->getData() == $dataCorr){$exists = true;}
@@ -261,10 +265,18 @@ $exists = false;
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <?php if($schAssFoc[$i]->getData() == $dataCorr){
+                    echo("<i class=\"fas fa-minus\"></i></button>");/////////////////
+                  }else{ ?>
                   <i class="fas fa-plus"></i></button><!-- /////////////////////////////-->
+                <?php } ?>
               </div>
             </div>
+            <?php if($schAssFoc[$i]->getData() == $dataCorr){
+              echo("<div class=\"card-body\" style=\"display:block;\">");//////////
+            }else{?>
             <div class="card-body" style="display:none;"><!--////////////////////// aaaaaaaa-->
+            <?php } ?>
 
               <div class="form-group">
                 <label>Date:</label>

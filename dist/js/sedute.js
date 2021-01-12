@@ -162,18 +162,9 @@ function newEp(idScheda){
 }
 
 function createAnEp(scheda){
-	var roots = document.getElementsByClassName('anEpisodio');
-  if (roots != null) {
-		console.log("non è null. roots= "+roots[0]+" poi "+roots[1]);
-		console.log(typeof roots[0]);
-		for(var i=0;i<roots.length;i++){
-			while (roots[i].hasChildNodes()) {
-	      roots[i].removeChild(roots[i].childNodes[0]);
-	    }
-		}
-  }
-	else{
-		var preRoot = document.getElementsByClassName['card-body'];
+	var roots = null;
+	if(scheda.n_episodi == '0'){
+		var preRoot = document.getElementsByClassName('card-body');
 		console.log(preRoot);
 		var rootEp = preRoot[preRoot.length -2];
 
@@ -185,6 +176,22 @@ function createAnEp(scheda){
 		cardEp.className = "card-bodyEp";
 		cardEp.appendChild(roots);
 		rootEp.appendChild(cardEp);
+	}
+	else{
+			roots = document.getElementsByClassName('anEpisodio');
+	}
+	//var tipo = typeof roots[0];
+	console.log("roots: "+roots);
+  if (roots != null) {
+		//console.log("non è null. roots= "+roots[0]+" poi "+roots[1]);
+		for(var i=0;i<roots.length;i++){
+			while (roots[i].hasChildNodes()) {
+	      roots[i].removeChild(roots[i].childNodes[0]);
+	    }
+		}
+  }
+	else{
+
 	}
 
   var inputNumEp = document.createElement('input');
@@ -284,13 +291,26 @@ function createAnEp(scheda){
 	hidIn.name = "hIdS";
 	hidIn.value = document.getElementById('hideIdScheda').value;
 	hidIn.hidden = true;*/
-
-  roots[0].appendChild(p);
-  roots[0].appendChild(divAnalisi);
-  roots[0].appendChild(divABC);
-  roots[0].appendChild(divAppunti);
-	//root.appendChild(hidIn);
-  roots[0].appendChild(addEpBtn);
+	if(scheda.n_episodi == '0'){
+		var hidIn = document.createElement('input');
+		hidIn.type = "text";
+		hidIn.name = "hIdS";
+		hidIn.value = scheda.id_scheda;
+		hidIn.hidden = true;
+	  roots.appendChild(p);
+	  roots.appendChild(divAnalisi);
+	  roots.appendChild(divABC);
+	  roots.appendChild(divAppunti);
+		roots.appendChild(hidIn);
+	  roots.appendChild(addEpBtn);
+	}else{
+		roots[0].appendChild(p);
+	  roots[0].appendChild(divAnalisi);
+	  roots[0].appendChild(divABC);
+	  roots[0].appendChild(divAppunti);
+		//root.appendChild(hidIn);
+	  roots[0].appendChild(addEpBtn);
+	}
 
   $('#btnAddAnEp').hide();
 }
