@@ -24,6 +24,7 @@ if(isset($_SESSION['idTerCorr'])){
       $schModEz[] = $allSc[$i];
     }
   }
+}
 ?>
 ../../<!DOCTYPE html>
 <html>

@@ -24,6 +24,7 @@ if(isset($_SESSION['idTerCorr'])){
       $schPrimoColl[] = $allSc[$i];
     }
   }
+}
 ?>
 <!DOCTYPE html>
 <html>

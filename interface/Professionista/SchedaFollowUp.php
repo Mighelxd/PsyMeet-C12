@@ -24,7 +24,8 @@ if(isset($_SESSION['idTerCorr'])){
       $schFollow[] = $allSc[$i];
     }
   }
-?>
+}
+  ?>
 <!DOCTYPE html>
 <html>
 <head>
