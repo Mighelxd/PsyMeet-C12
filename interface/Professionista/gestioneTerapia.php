@@ -37,7 +37,7 @@ else if ($cfPazienteTer == "") {
 
 $pazienteTer = PazienteControl::getPaz($cfPazienteTer);
 
-$listTerapie = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
+$terapia = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
 /*if(count($listTerapie) > 0 ){
   for($i=0;$i<count($listTerapie);$i++){
     $terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
@@ -183,16 +183,15 @@ else
                   </p>
                 </a>
                 <?php
-                  for($i=0;$i<count($listTerapie);$i++){
-                    $terapie = terapiaControl::recuperaSchede($listTerapie[$i]->getIdTerapia());
-                    //$_SESSION['totSchede'] = $terapie;
+                    $terapie = terapiaControl::recuperaSchede($terapia[0]->getIdTerapia());
+                    $_SESSION['idTerCorr'] = $terapia[0]->getIdTerapia();
 
                 ?>
                 <ul class="nav nav-treeview" style="padding-left: 2%;"><!--inizio blocco terapie-->
                   <li class="nav-item has-treeview">
                     <a href="gestioneTerapia.html" class="nav-link active">
                       <i class="fas fa-clipboard nav-icon"></i>
-                      <p>Terapia <?php echo $listTerapie[$i]->getIdTerapia(); ?>
+                      <p>Terapia <?php echo $terapia[0]->getIdTerapia(); ?>
                       </p>
                     </a>
                   </li>
@@ -261,7 +260,6 @@ else
                       </a>
                     </li>
                 </ul><!--fine blocco terapie-->
-                <?php } ?>
               </li>
             </ul>
           </li>
@@ -291,9 +289,6 @@ else
     <!-- /.sidebar -->
   </aside>
 <!-- FINE MENU' A SINISTRA -->
-
-
-
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

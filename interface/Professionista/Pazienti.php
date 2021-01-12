@@ -214,6 +214,7 @@ $_SESSION["cfPazTer"] = "";
                               <i class="nav-icon fas fa-table">
                                 Cartella Clinica
                               </i>
+                      </form>
                       <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
                       <form class="" action="gestioneTerapia.php" method="post">
                         <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
