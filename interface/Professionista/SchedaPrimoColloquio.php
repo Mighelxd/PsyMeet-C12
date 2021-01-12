@@ -1,3 +1,31 @@
+<?php
+session_start();
+include '../../plugins/libArray/FunArray.php';
+include '../../storage/DatabaseInterface.php';
+include '../../storage/SchedaAssessmentFocalizzato.php';
+include '../../storage/Episodio.php';
+include '../../applicationLogic/SeduteControl.php';
+include "../../storage/SchedaPrimoColloquio.php";
+include "../../storage/SchedaModelloEziologico.php";
+include "../../storage/SchedaFollowUp.php";
+include "../../storage/SchedaAssessmentGeneralizzato.php";
+include "../../applicationLogic/terapiaControl.php";
+
+$tipoUtente = $_SESSION["tipo"];
+if($tipoUtente != "professionista" || $tipoUtente == null){
+  header("Location: ../Utente/login.php");
+}
+
+if(isset($_SESSION['idTerCorr'])){
+  $idTerCorr = $_SESSION['idTerCorr'];
+  $allSc = terapiaControl::recuperaSchede($idTerCorr);
+  for($i=0;$i<count($allSc);$i++){
+    if($allSc[$i]->getTipo() == 'Scheda Primo Colloquio'){
+      $schPrimoColl[] = $allSc[$i];
+    }
+  }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
