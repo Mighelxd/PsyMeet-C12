@@ -289,8 +289,8 @@ to get the desired effect
                     <th></th>
                   </tr>
                   </thead>
-                  <?php for($i=0;count($pacchettoByProf)-1;$i++){
-                     //var_dump($pacchettoByProf[$i]);
+                  <?php for($i=0;$i-count($pacchettoByProf);$i++){
+
                     $p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto());
 
 
@@ -350,10 +350,12 @@ to get the desired effect
                       <select class="form-control" name="pac">
                       <?php  for($i=0;$i<count($pacchetto);$i++){ ?>
 
-
                         <option><?php echo $pacchetto[$i]->getTipologia();?></option>
 <?php } ?>
                       </select>
+                      <span style="color:red;"><?php if(isset($_SESSION['Errore'])) {
+                           echo $_SESSION['Errore'];
+                      }           ?></span>
                     </div>
 
 

@@ -40,6 +40,7 @@ insert into fattura(data,cf,id_pacchetto) value('2020-10-01','NSTFNC94M23H703G',
 
 insert into scelta(cf_prof,id_pacchetto) value('RSSMRC80R12H703U','1');
 
+
 /*load data local infile'/home/marco/Scrivania/datiPsymeet/datiProf.sql'
 into table professionista(nome,cognome,data_nascita,cf_prof,email,telefono,cellulare,passwor,indirizzo_studio,esperienze,pubblicazioni,titolo_studio,n_iscrizione_albo,partita_iva,pec,specializzazione,polizza_RC);
 

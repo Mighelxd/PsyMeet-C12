@@ -12,19 +12,14 @@ class Scelta
     private $cf_prof;
     private $id_pacchetto;
     public static $tableName="scelta";
-    
+
     public function __construct($id_choice, $cf_profess, $id_pack)
     {
         $this->id_pacchetto = $id_pack;
         $this->id_scelta = $id_choice;
         $this->cf_prof= $cf_profess;
     }
-    public function __constructD(){
-        $this->id_pacchetto = -1;
-        $this->id_scelta = -1;
-        $this->cf_prof = "";
-        
-     }
+  
     public function getIdPacchetto()
     {
         return $this -> id_pacchetto;
@@ -37,7 +32,7 @@ class Scelta
     {
         return $this -> cf_prof;
     }
-    
+
     public function getArray(){
         return array("id_scelta" => $this->id_scelta, "cf_prof" => $this->cf_prof, "id_pacchetto" => $this->id_pacchetto);
     }

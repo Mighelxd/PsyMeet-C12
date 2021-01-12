@@ -21,14 +21,22 @@ if($action=='addPacchetto'){
   $att=array('tipologia'=>$pacchetto);
   $coll=array('*');
   $recuperapacc =DatabaseInterface::selectDinamicQuery($coll,$att,Pacchetto::$tableName);
-  var_dump($recuperapacc);
   while ($row = $recuperapacc->fetch_array()) {
      $id=$row[0];
   }
-  $arryid=array('cf_prof'=>$_SESSION['codiceFiscale'],'id_pacchetto'=>$id);
-  $ok=DatabaseInterface::insertQuery($arryid,Scelta::$tableName);
-  if($ok){
+
+  $arrycheck=array('id_pacchetto'=>$id);
+  $check = DatabaseInterface::selectDinamicQuery($coll,$arrycheck,scelta::$tableName);
+  if($check->num_rows>0){
+    $_SESSION['Errore']= 'Pacchetto gia esistente, seleziona un pacchetto che non appartiene al Professionista corrente';
     header('Location: ../interface/Professionista/gestionePacchettiProf.php');
+  }else {
+    $_SESSION['Errore']='';
+    $arryid=array('cf_prof'=>$_SESSION['codiceFiscale'],'id_pacchetto'=>$id);
+    $ok=DatabaseInterface::insertQuery($arryid,Scelta::$tableName);
+    if($ok){
+      header('Location: ../interface/Professionista/gestionePacchettiProf.php');
   }
+ }
 }
  ?>

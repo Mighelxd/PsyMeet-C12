@@ -31,7 +31,9 @@ class PacchettoControl{
     while ($row =$allScelte->fetch_array()) {
         $pacscelta= new Scelta($row[0],$row[1],$row[2]);
         $arrs[]=$pacscelta;
+
     }
+    //var_dump($arrs);
   return $arrs;
  }
  static function recuperaPacchetto($id){
@@ -40,6 +42,7 @@ class PacchettoControl{
    while ($row=$paccrecupero->fetch_array()) {
      $pacrec= new Pacchetto($row[0],$row[1],$row[2],$row[3]);
    }
+
    return $pacrec;
  }
 }
