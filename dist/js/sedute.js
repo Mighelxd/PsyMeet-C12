@@ -40,8 +40,6 @@ function createEp(scheda){
 
   var inputNumEp = document.createElement('input');
   inputNumEp.type = 'text';
-//  inputNumEp.min = '1';
-//  inputNumEp.max = '10';
   inputNumEp.name = "numero";
   inputNumEp.value = parseInt(scheda.n_episodi) + 1;
   var p = document.createElement('p');
@@ -165,7 +163,6 @@ function createAnEp(scheda){
 	var roots = null;
 	if(scheda.n_episodi == '0'){
 		var preRoot = document.getElementsByClassName('card-body');
-		console.log(preRoot);
 		var rootEp = preRoot[preRoot.length -2];
 
 		roots = document.createElement('form');
@@ -180,10 +177,8 @@ function createAnEp(scheda){
 	else{
 			roots = document.getElementsByClassName('anEpisodio');
 	}
-	//var tipo = typeof roots[0];
-	console.log("roots: "+roots);
+
   if (roots != null) {
-		//console.log("non è null. roots= "+roots[0]+" poi "+roots[1]);
 		for(var i=0;i<roots.length;i++){
 			while (roots[i].hasChildNodes()) {
 	      roots[i].removeChild(roots[i].childNodes[0]);
@@ -196,8 +191,6 @@ function createAnEp(scheda){
 
   var inputNumEp = document.createElement('input');
   inputNumEp.type = 'text';
-  //inputNumEp.min = '1';
-  //inputNumEp.max = '10';
   inputNumEp.name = "numero";
   inputNumEp.value = parseInt(scheda.n_episodi) + 1;
   var p = document.createElement('p');
@@ -286,11 +279,6 @@ function createAnEp(scheda){
   addEpBtn.className = "btn btn-success";
   addEpBtn.innerHTML = "Aggiungi Episodio";
 
-/*	var hidIn = document.createElement('input');
-	hidIn.type = "text";
-	hidIn.name = "hIdS";
-	hidIn.value = document.getElementById('hideIdScheda').value;
-	hidIn.hidden = true;*/
 	if(scheda.n_episodi == '0'){
 		var hidIn = document.createElement('input');
 		hidIn.type = "text";
@@ -308,7 +296,6 @@ function createAnEp(scheda){
 	  roots[0].appendChild(divAnalisi);
 	  roots[0].appendChild(divABC);
 	  roots[0].appendChild(divAppunti);
-		//root.appendChild(hidIn);
 	  roots[0].appendChild(addEpBtn);
 	}
 

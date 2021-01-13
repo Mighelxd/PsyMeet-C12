@@ -30,17 +30,8 @@ if($action == "saveScheda"){
   $_SESSION['idSCorr'] = $idSchedaCorr;
   $ris = array("ok"=>$ok,"idScheda"=>$idSchedaCorr);
   echo json_encode($ris);
-//  echo jeson_encode($res);
-
-  //$exists =
-  /*$numEp = $_POST['numero'];
-  $analisi = $_POST['analisi'];
-  $mA = $_POST['a'];
-  $mB = $_POST['b'];
-  $mC = $_POST['c'];
-  $appunti = $_POST['appunti'];*/
 }
-if($action == "recoveryScheda"){
+else if($action == "recoveryScheda"){
   $idScheda = $_POST['idScheda'];
   $key = array("id_scheda"=>$idScheda);
 
@@ -50,7 +41,7 @@ if($action == "recoveryScheda"){
   }
   echo json_encode($scheda->getArray());
 }
-if($action == "addEpisodio"){
+else if($action == "addEpisodio"){
   $numEp = $_POST['numero'];
   $analisi = $_POST['analisi'];
   $mA = $_POST['a'];
@@ -65,7 +56,6 @@ if($action == "addEpisodio"){
   }
 
   $attEp = array("numero"=>$numEp,"analisi_fun"=>$analisi,"m_a"=>$mA,"m_b"=>$mB,"m_c"=>$mC,"appunti"=>$appunti,"id_scheda"=>$idScheda);
-  //var_dump($attEp);
   $insOk = DatabaseInterface::insertQuery($attEp,'episodio');
   if($insOk){
     $key = array("id_scheda"=>$idScheda);
@@ -79,6 +69,58 @@ if($action == "addEpisodio"){
     $_SESSION['idSCorr'] = $idScheda;
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
+}
+else if($action == 'delEpisodio'){
+  $numEp = $_POST['numero'];
+  $analisi = $_POST['analisi'];
+  $mA = $_POST['a'];
+  $mB = $_POST['b'];
+  $mC = $_POST['c'];
+  $appunti = $_POST['appunti'];
+  if(isset($_SESSION['idSCorr'])){
+    $idSchedaCorr = $_SESSION['idSCorr'];
+  }
+
+  $attEp = array("numero"=>$numEp,"analisi_fun"=>$analisi,"m_a"=>$mA,"m_b"=>$mB,"m_c"=>$mC,"appunti"=>$appunti,"id_scheda"=>$idSchedaCorr);
+  $ok = DatabaseInterface::deleteQuery($attEp,'episodio');
+  if($ok){
+    $key = array("id_scheda"=>$idSchedaCorr);
+    $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
+    while($row = $recScheda->fetch_array()){
+      $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
+    }
+    $oldNumEpForSch = $scheda->getNEpisodi();
+    $newNumEp = $oldNumEpForSch - 1;
+    $scheda->setNEpisodi($newNumEp);
+    $updateScheda = DatabaseInterface::updateQueryById($scheda->getArray(),'schedaassessmentfocalizzato');
+
+    $att=array("id_scheda"=>$idSchedaCorr);
+    $allEpForSch = DatabaseInterface::selectQueryByAtt($att,'episodio');
+    while($row = $allEpForSch->fetch_array()){
+      $listEp[] = new Episodio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
+    }
+    $posDaScalare = $oldNumEpForSch - (int)$numEp;
+    $startIndex = $newNumEp - $posDaScalare;
+    for($i=$startIndex;$i<count($listEp);$i++){
+      $oldNumEp = $listEp[$i]->getNum();
+      $listEp[$i]->setNum($oldNumEp - 1);
+      $up=DatabaseInterface::updateQueryById($listEp[$i]->getArray(),'episodio');
+    }
+    header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+  }
+}
+else if($action == 'modEpisodio'){
+  $numEp = $_POST['numero'];
+  $analisi = $_POST['analisi'];
+  $mA = $_POST['a'];
+  $mB = $_POST['b'];
+  $mC = $_POST['c'];
+  $appunti = $_POST['appunti'];
+  if(isset($_SESSION['idSCorr'])){
+    $idSchedaCorr = $_SESSION['idSCorr'];
+  }
+
+
 }
 
  ?>

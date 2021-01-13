@@ -16,12 +16,18 @@ if($tipoUtente != "professionista" || $tipoUtente == null){
   header("Location: ../Utente/login.php");
 }
 
+$dataCorr = date("Y,m,d");
+$dataCorr = str_replace(',','-',$dataCorr);
+
 if(isset($_SESSION['idTerCorr'])){
     $idTerCorr = $_SESSION['idTerCorr'];
     $allSc = terapiaControl::recuperaSchede($idTerCorr);
     for($i=0;$i<count($allSc);$i++){
       if($allSc[$i]->getTipo() == 'Scheda Assessment Focalizzato'){
         $schAssFoc[] = $allSc[$i];
+        if($allSc[$i]->getData() == $dataCorr){
+          $_SESSION['idSCorr'] = $allSc[$i]->getIdScheda();
+        }
       }
     }
 }
@@ -30,12 +36,6 @@ else{
 }
 
 $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
-
-/*if(isset($_SESSION['idSCorr'])){
-  $idSchedaCorr = $_SESSION['idSCorr'];
-}*/
-$dataCorr = date("Y,m,d");
-$dataCorr = str_replace(',','-',$dataCorr);
 $exists = false;
 
  ?>
@@ -111,7 +111,7 @@ $exists = false;
             </a>
           </li>
           <li class="nav-item has-treeview menu-open">
-            <a href="Pazienti.html" class="nav-link">
+            <a href="Pazienti.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pazienti
@@ -135,7 +135,7 @@ $exists = false;
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="cartellaClinica.html" class="nav-link">
+                    <a href="cartellaClinica.php" class="nav-link">
                       <i class="fas fa-notes-medical nav-icon"></i>
                       <p>Cartella clinica</p>
                     </a>
@@ -155,21 +155,21 @@ $exists = false;
                       </a>
                       <ul class="nav nav-treeview" style="padding-left: 1%;">
                         <li class="nav-item">
-                          <a href="SchedaPrimoColloquio.html" class="nav-link">
+                          <a href="SchedaPrimoColloquio.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Primo colloquio
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaAssessmentGeneralizzato.html" class="nav-link">
+                          <a href="SchedaAssessmentGeneralizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment generalizzato
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaAssessmentFocalizzato.html" class="nav-link active">
+                          <a href="#" class="nav-link active">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment focalizzato
                             </p>
@@ -213,7 +213,7 @@ $exists = false;
 
           </li>
           <li class="nav-item has-treeview">
-            <a href="Pacchetti.html" class="nav-link">
+            <a href="gestionePacchettiProf.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Pacchetti
@@ -294,7 +294,6 @@ $exists = false;
                 echo("<button type='button' id='btnAddAnEp' class='btn btn-block btn-primary' onclick='anEp(".$schAssFoc[$i]->getIdScheda().")' style='width:100px'>+ episodio</button>");
               }
                 ?>
-                <!--<button type="button" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px">+ episodio</button>-->
               <?php for($j=0;$j<count($schedeConEp[$i][1]);$j++){ ?>
             <div class="card-bodyEp"><!--inizio episodio-->
               <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
@@ -325,19 +324,16 @@ $exists = false;
                   </table>
                 </div>
                 <!-- /.card-body -->
-
-
               <div class="form-group">
                 <label for="appunti">Appunti Terapeuta</label>
                 <textarea id="appunti" name="appunti" class="form-control" rows="4" readonly><?php echo $schedeConEp[$i][1][$j]->getAppunti(); ?></textarea>
               </div>
-
             </div>
             <!-- /.card-body -->
             <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
             <div class="col-12">
-              <a href="#" class="btn btn-secondary">Cancella episodio</a>
-              <input type="submit" value="Modifica episodio" class="btn btn-success" style=" float: right">
+              <button type="submit" name="action" value="delEpisodio" class="btn btn-secondary" style=" float: right">Cancella episodio</button>
+              <button type="submit" name="action" value="modEpisodio" class="btn btn-success" style=" float: right">Modifica episodio</button>
             </div>
           <?php } ?>
           <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
@@ -369,7 +365,6 @@ $exists = false;
                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
               </div>
           </div>
-        <!--  <input type="text" id="idTerapia" name="idTerapia" value="1" hidden/> -->
           <?php
           echo("<button type='button' class='btn btn-success' id='btnAddScheda' onclick=\"saveScheda(document.getElementById('da').value,".$idTerCorr.")\" style='float: right'>Aggiungi Scheda</button>");
            ?>
