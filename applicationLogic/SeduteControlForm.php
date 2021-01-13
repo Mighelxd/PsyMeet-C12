@@ -31,6 +31,15 @@ if($action == "saveScheda"){
   $ris = array("ok"=>$ok,"idScheda"=>$idSchedaCorr);
   echo json_encode($ris);
 }
+else if($action == 'delScheda'){
+    $idScheda = $_SESSION['idSCorr'];
+    $key = array("id_scheda"=>$idScheda);
+    $ok = DatabaseInterface::deleteQuery($key,'schedaassessmentfocalizzato');
+    if($ok){
+      $_SESSION['idSCorr'] = "";
+      header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+    }
+}
 else if($action == "recoveryScheda"){
   $idScheda = $_POST['idScheda'];
   $key = array("id_scheda"=>$idScheda);

@@ -24,10 +24,14 @@ function getXmlHttpRequest() {
 	return xhr;
 }
 
+$('#newScheda').hide();
 function viewScheda(){
-  var sch=document.getElementById('newScheda');
-  sch.hidden = false;
+  $('#newScheda').show();
   $('#btnNew').hide();
+}
+function annulla(){
+	$('#newScheda').hide();
+	$('#btnNew').show();
 }
 
 function createEp(scheda){
@@ -330,6 +334,7 @@ function saveScheda(dataS,idT){
         document.getElementById('hideIdScheda').value = res.idScheda;
         document.getElementById('btnAddEp').hidden = false;
         $('#btnAddScheda').hide();
+				$('#annCreateScheda').hide();
       }
 		}
 	};

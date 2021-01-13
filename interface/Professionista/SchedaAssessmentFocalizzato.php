@@ -103,7 +103,7 @@ $exists = false;
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
-            <a href="indexProfessionista.html" class="nav-link">
+            <a href="indexProfessionista.php" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Area Informativa
@@ -176,14 +176,14 @@ $exists = false;
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaFollowUp.html" class="nav-link">
+                          <a href="SchedaFollowUp.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Follow-up
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaModelloEziologico.html" class="nav-link">
+                          <a href="SchedaModelloEziologico.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Modello eziologico
                             </p>
@@ -342,12 +342,15 @@ $exists = false;
           </div>
           <?php } ?>
           <!-- /.card fine episodi-->
+          <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
+          <form method="post" action="../../applicationLogic/SeduteControlForm.php"><button type"submit" name="action" value="delScheda" class="btn btn-danger">Elimina Scheda</button></form>
+          <?php } ?>
         </div>
       </div>
     <?php } ?>
 
     <!-- Scheda nascosta che si vuole creare -->
-    <div class="card card-primary" id="newScheda" hidden>
+    <div class="card card-primary" id="newScheda">
       <div class="card-header">
         <h3 class="card-title">Assessment Focalizzato</h3>
         <div class="card-tools">
@@ -364,10 +367,13 @@ $exists = false;
               <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
               </div>
-          </div>
+          </div><br>
+          <div>
           <?php
           echo("<button type='button' class='btn btn-success' id='btnAddScheda' onclick=\"saveScheda(document.getElementById('da').value,".$idTerCorr.")\" style='float: right'>Aggiungi Scheda</button>");
            ?>
+           <button type='button' class="btn btn-secondary" id="annCreateScheda" onclick="annulla()">Annulla</button>
+         </div>
         </div>
       <input type="text" id="hideIdScheda" hidden/>
       <button type="button" id="btnAddEp" class="btn btn-block btn-primary" onclick="newEp(document.getElementById('hideIdScheda').value)" style="width: 100px"/hidden>+ episodio</button>
