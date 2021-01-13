@@ -120,7 +120,21 @@ else if($action == 'modEpisodio'){
     $idSchedaCorr = $_SESSION['idSCorr'];
   }
 
+  $attRec=array("numero"=>$numEp,"id_scheda"=>$idSchedaCorr);
+  $recEp=DatabaseInterface::selectQueryByAtt($attRec,'episodio');
+  while($row=$recEp->fetch_array()){
+    $ep = new Episodio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
+  }
+  $ep->setAnalisiFun($analisi);
+  $ep->setMA($mA);
+  $ep->setMB($mB);
+  $ep->setMC($mC);
+  $ep->setAppunti($appunti);
 
+  $upd = DatabaseInterface::updateQueryById($ep->getArray(),'episodio');
+  if($upd){
+    header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+  }
 }
 
  ?>

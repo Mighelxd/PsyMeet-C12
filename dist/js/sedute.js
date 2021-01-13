@@ -40,8 +40,10 @@ function createEp(scheda){
 
   var inputNumEp = document.createElement('input');
   inputNumEp.type = 'text';
+	inputNumEp.className = "nEp";
   inputNumEp.name = "numero";
   inputNumEp.value = parseInt(scheda.n_episodi) + 1;
+	inputNumEp.readOnly = true;
   var p = document.createElement('p');
   p.innerHTML = "Episodio";
   p.appendChild(inputNumEp);
@@ -191,8 +193,10 @@ function createAnEp(scheda){
 
   var inputNumEp = document.createElement('input');
   inputNumEp.type = 'text';
+	inputNumEp.className = "nEp";
   inputNumEp.name = "numero";
   inputNumEp.value = parseInt(scheda.n_episodi) + 1;
+	inputNumEp.readOnly = true;
   var p = document.createElement('p');
   p.innerHTML = "Episodio";
   p.appendChild(inputNumEp);

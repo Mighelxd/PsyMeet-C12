@@ -299,10 +299,10 @@ $exists = false;
               <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
               <form method="post" class="anEpisodio" action="../../applicationLogic/SeduteControlForm.php">
               <?php } ?>
-              <p>Episodio<input type="text" name ="numero" value='<?php echo $schedeConEp[$i][1][$j]->getNum(); ?>' style="width:40px;text-align:center;border:none;" readonly/></p>
+              <p>Episodio<input type="text" class="nEp" name ="numero" value='<?php echo $schedeConEp[$i][1][$j]->getNum(); ?>' readonly/></p>
               <div class="form-group">
                 <label for="inputDescription">Analisi Funzionale</label>
-                <textarea id="inputDescription" name="analisi" class="form-control" rows="4" readonly><?php echo $schedeConEp[$i][1][$j]->getAnalisiFun(); ?></textarea>
+                <textarea id="inputDescription" name="analisi" class="form-control" rows="4"><?php echo $schedeConEp[$i][1][$j]->getAnalisiFun(); ?></textarea>
               </div>
               <div class="form-group">
                 <div class="card-bodyTb">
@@ -316,9 +316,9 @@ $exists = false;
                     </thead>
                     <tbody>
                       <tr>
-                        <td><textarea name="a" class="textABC" readonly><?php echo $schedeConEp[$i][1][$j]->getMA(); ?></textarea></td>
-                        <td><textarea name="b" class="textABC" readonly><?php echo $schedeConEp[$i][1][$j]->getMB(); ?></textarea></td>
-                        <td><textarea name="c" class="textABC" readonly><?php echo $schedeConEp[$i][1][$j]->getMC(); ?></textarea></td>
+                        <td><textarea name="a" class="textABC"><?php echo $schedeConEp[$i][1][$j]->getMA(); ?></textarea></td>
+                        <td><textarea name="b" class="textABC"><?php echo $schedeConEp[$i][1][$j]->getMB(); ?></textarea></td>
+                        <td><textarea name="c" class="textABC"><?php echo $schedeConEp[$i][1][$j]->getMC(); ?></textarea></td>
                       </tr>
                     </tbody>
                   </table>
@@ -326,7 +326,7 @@ $exists = false;
                 <!-- /.card-body -->
               <div class="form-group">
                 <label for="appunti">Appunti Terapeuta</label>
-                <textarea id="appunti" name="appunti" class="form-control" rows="4" readonly><?php echo $schedeConEp[$i][1][$j]->getAppunti(); ?></textarea>
+                <textarea id="appunti" name="appunti" class="form-control" rows="4"><?php echo $schedeConEp[$i][1][$j]->getAppunti(); ?></textarea>
               </div>
             </div>
             <!-- /.card-body -->
