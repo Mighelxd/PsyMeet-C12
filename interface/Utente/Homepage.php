@@ -49,8 +49,8 @@ $professionisti = professionistaControl::recuperaProfessionisti();
   <nav>
     <img src="../../dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3"style="opacity: .8">
     <span >PsyMeet</span>
-    <a href="../Professionista/registrazioneProfessionista.php" class="btnReg">Registrati</a>
-    <a href='#' class="btnAccess">Accedi</a>
+    <a href="registrazioneProfessionista.php" class="btnReg">Registrati</a>
+    <a href='login.php' class="btnAccess">Accedi</a>
   </nav>
   <h1 id="welcomeTitle">Benvenuti in PsyMeet</h1>
   <!--slideshow-->
