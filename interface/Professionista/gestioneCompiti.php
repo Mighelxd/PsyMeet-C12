@@ -338,7 +338,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
        for($i=0; $i<count($compito); $i++) {
         ?>
 
-      <form  nome"correz" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php" onSubmit="return controlla();">
+      <form  nome"correz" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
         <input type="text" name="action" value="correzione" hidden="true">
       <div class="row">
           <div class="col-md-12">
@@ -366,7 +366,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
                 </div>
                 <div class="form-group">
                   <label for="svolgimento">Svolgimento Compito</label>
-                  <textarea class="svolgimento" name="svolgimento" class="form-control" rows="3" readonly>  <?php echo $compito[$i]->getSvolgimento(); ?> </textarea>
+                  <textarea id="svl" name="svolgimento" class="form-control" rows="3" readonly>  <?php echo $compito[$i]->getSvolgimento(); ?> </textarea>
                     <span id="svolgSpan"> </span>
                 </div>
                 <div class="form-group">
@@ -391,13 +391,14 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
 
                   <div class="form-group">
                     <label for="effettuato">Effettuato</label>
-                    <input type="checkbox"  value="0" name="effettuato" class="form-control" rows="1"  >
+                    <input type="checkbox"  value="0" name="effettuato" class="form-control" rows="1">
                   </div>
 
             <?php }  ?>
 
-
+                <?php if($compito[$i]->getSvolgimento() != ""){ ?>
                   <input type="submit" value="Correggi Compito" class="btn btn-success float-right" >
+                <?php } ?>
               </div>
               <!-- /.card-body -->
 
@@ -460,35 +461,6 @@ function data_validation(data){
 		return true;
 	}
 }
-
-function controlla(){
-
-  var svolgi= document.getElementsByClassName("svolgimento");
-  console.log(svolgi[0].value); 
-
-  if(checkbox_controllo(svolgi[1].value)) {
-    return;
-  }
-
-  return false;
-
-}
-
-
-function checkbox_controllo(svolg){
-  if (svolg=="") {
-
-      $("#svolgSpan").text("Il campo svolgimento è vuoto!");
-      $("#svolgSpan").css("color", "red");
-
-
-  }
-
-}
-
-
-
-
 </script>
 
 <!-- jQuery -->
