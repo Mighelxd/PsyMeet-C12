@@ -7,6 +7,7 @@
     * 2020 Copyright by PsyMeet - University of Salerno
 */
 session_start();
+include '../plugins/libArray/FunArray.php';
 include '../storage/DatabaseInterface.php';
 include '../storage/Appuntamento.php';
 
@@ -17,10 +18,10 @@ else{
     $action = $_GET['action'];
 }
 
+$cfProf = $_SESSION["codiceFiscale"];
 define("TABLE_NAME", "appuntamento");
 /*Questa action recupera tutti gli appuntamenti di un professionista recuperando per ognuno il nome dei pazienti.*/
 if($action == 'recoveryAll'){
-  $cfProf = $_POST['key'];
   $arrKey = array("cf_prof"=>$cfProf);
   $allAppProf = DatabaseInterface::selectQueryByAtt($arrKey,TABLE_NAME);
   $allObj= array();

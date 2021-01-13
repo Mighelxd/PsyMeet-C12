@@ -9,15 +9,17 @@ body {
 /* Float four columns side by side */
 .columnApp {
     float: left;
-    width: 262px;
+    width: 244px;
     height: 320px;
-    padding: 0 10px;
-    background-color: cadetblue;
+    margin-right: 2%;
+    /*padding: 0 10px;
+    background-color: cadetblue;*/
 }
 
 /* Remove extra left and right margins, due to padding */
 #appuntamenti {
-    margin: 0 -5px;
+    margin: 2px 10px;
+    width:73%;
 }
 
 /* Clear floats after the columns */
@@ -80,18 +82,19 @@ body {
 }
 
 .bottoneMod{
-  width:50%;
+  width:103%;
   float:left;
   border:none;
   background-color: yellow;
   text-align: center;
+  margin-bottom: unset;
 }
 .bottoneDel{
-  width:50%;
+  width:103%;
   border:none;
   background-color: red;
   text-align: center;
-  float: right;
+  float: left;
 }
 
 .bottoneMod:hover {
@@ -101,4 +104,8 @@ body {
 .bottoneDel:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     cursor:pointer;
+}
+/*fissa il menù a SINISTRA*/
+#menuSx{
+  position:fixed;
 }

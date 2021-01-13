@@ -112,10 +112,15 @@ function createApp(appu) {
 			elH3.innerHTML = appu[i].descrizione;
 			var elPdata = document.createElement('p');
 			elPdata.className = "dataApp";
-			elPdata.innerHTML = "data: " + appu[i].data;
+			var d = new Date(appu[i].data);
+			var month = appu[i].data.substr(5,2);
+			var dFoIt = d.getDate()+"/"+month+"/"+d.getFullYear();
+			elPdata.innerHTML = "data: " + dFoIt;
 			var elPora = document.createElement('p');
 			elPora.className = "oraApp";
-			elPora.innerHTML = "ora: " + appu[i].ora;
+			var o = appu[i].ora;
+			var hhmm = o.substr(0,5);
+			elPora.innerHTML = "ora: " + hhmm;
 			var elPpaz = document.createElement('p');
 			elPpaz.className = "pazApp";
 			elPpaz.innerHTML = "paziente: " + appu[i].cf;
@@ -140,14 +145,14 @@ $(function () {
 	var xhttp = getXmlHttpRequest();
 	xhttp.onreadystatechange = function () {
 		if (this.readyState == 4 && this.status == 200) {
+			console.log(this.responseText);
 			var app = JSON.parse(this.responseText);
 			createApp(app);
 		}
 	};
-	var str = 'RSSMRC80R12H703U';
 	xhttp.open("POST", "/PsyMeet-C12/applicationLogic/AppuntamentoControl.php", true);
 	xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	xhttp.send("action=recoveryAll&key="+str);
+	xhttp.send("action=recoveryAll");
 })
 
 /*Questa funzione inserisce il codice fiscale del paziente di cui si conosce nome e cognome*/
@@ -163,6 +168,7 @@ function insertCf(res) {
 
 		for (paz of res) {
 			var option = document.createElement('option');
+			option.className = "form-control";
 			option.value = paz.cf;
 			option.innerHTML = paz.cf;
 
@@ -250,6 +256,7 @@ function createForm(action){
 	if(action == 'newApp'){
 		var form = document.getElementById('addForm');
 		var inNome = document.createElement('input');
+		inNome.className = "form-control";
 		inNome.name = "nome";
 		inNome.id = "inputNome";
 		inNome.type = "text";
@@ -271,6 +278,7 @@ function createForm(action){
 		spanNome.id = "nomeSpan";
 
 		var select = document.createElement('select');
+		select.className = "form-control";
 		select.name = "codF";
 		select.id = "codF";
 		select.required = true;
@@ -281,6 +289,7 @@ function createForm(action){
 		spanSelect.id = "codFspan";
 
 		var inData = document.createElement('input');
+		inData.className = "form-control";
 		inData.name = "data";
 		inData.id = "inputData";
 		inData.type = "date";
@@ -296,6 +305,7 @@ function createForm(action){
 		spanData.id = "dataSpan";
 
 		var inOra = document.createElement('input');
+		inOra.className = "form-control";
 		inOra.name = "ora";
 		inOra.id = "inputOra";
 		inOra.type = "time";
@@ -312,6 +322,7 @@ function createForm(action){
 		spanOra.id = "oraSpan";
 
 		var inDesc = document.createElement('input');
+		inDesc.className = "form-control";
 		inDesc.name = "descrizione";
 		inDesc.id = "inputDescrizione";
 		inDesc.type = "text";
@@ -324,11 +335,25 @@ function createForm(action){
 		spanDesc.id = "descrizioneSpan";
 
 		var btnAdd = document.createElement('button');
+		btnAdd.className = "btn btn-success";
 		btnAdd.id= "btnFormAdd";
 		btnAdd.name = "action";
 		btnAdd.value = "addApp";
 		btnAdd.type= "submit";
 		btnAdd.innerHTML = "Aggiungi";
+
+		var btnBack = document.createElement('button');
+		btnBack.className = "btn btn-secondary";
+		btnBack.id= "btnFormAddBack";
+		btnBack.type= "button";
+		btnBack.innerHTML = "Annulla";
+		btnBack.onclick = function(){
+			while (form.hasChildNodes()) {
+				form.removeChild(form.childNodes[0]);
+			}
+			$("#newApp").show();
+		}
+
 
 		form.appendChild(labNome);
 		form.appendChild(inNome);
@@ -351,6 +376,7 @@ function createForm(action){
 		form.appendChild(spanDesc);
 
 		form.appendChild(btnAdd);
+		form.appendChild(btnBack);
 
 		var br = document.createElement('br');
 		form.insertBefore(br,labSelect);
@@ -378,6 +404,7 @@ function createForm(action){
 	else if(action == 'modApp'){
 		var form = document.getElementById('modForm');
 		var inNome = document.createElement('input');
+		inNome.className = "form-control";
 		inNome.name = "nome";
 		inNome.id = "inputNome";
 		inNome.type = "text";
@@ -399,6 +426,7 @@ function createForm(action){
 		spanNome.id = "nomeSpan";
 
 		var select = document.createElement('select');
+		select.className = "form-control";
 		select.name = "codF";
 		select.id = "codF";
 		select.required = true;
@@ -409,6 +437,7 @@ function createForm(action){
 		spanSelect.id = "codFspan";
 
 		var inData = document.createElement('input');
+		inData.className = "form-control";
 		inData.name = "data";
 		inData.id = "inputData";
 		inData.type = "date";
@@ -424,6 +453,7 @@ function createForm(action){
 		spanData.id = "dataSpan";
 
 		var inOra = document.createElement('input');
+		inOra.className = "form-control";
 		inOra.name = "ora";
 		inOra.id = "inputOra";
 		inOra.type = "time";
@@ -440,6 +470,7 @@ function createForm(action){
 		spanOra.id = "oraSpan";
 
 		var inDesc = document.createElement('input');
+		inDesc.className = "form-control";
 		inDesc.name = "descrizione";
 		inDesc.id = "inputDescrizione";
 		inDesc.type = "text";
@@ -478,11 +509,23 @@ function createForm(action){
 			oldCf.hidden = true;
 
 		var btnMod = document.createElement('button');
+		btnMod.className="btn btn-secondary";
 		btnMod.id= "btnFormModify";
 		btnMod.name = "action";
 		btnMod.value = "modApp";
 		btnMod.type= "submit";
 		btnMod.innerHTML = "Modifica";
+
+		var btnBack = document.createElement('button');
+		btnBack.className = "btn btn-secondary";
+		btnBack.id= "btnFormAddBack";
+		btnBack.type= "button";
+		btnBack.innerHTML = "Annulla";
+		btnBack.onclick = function(){
+			while (form.hasChildNodes()) {
+				form.removeChild(form.childNodes[0]);
+			}
+		}
 
 		form.appendChild(labNome);
 		form.appendChild(inNome);
@@ -511,6 +554,7 @@ function createForm(action){
 		form.appendChild(oldDesc);
 
 		form.appendChild(btnMod);
+		form.appendChild(btnBack);
 
 		var br = document.createElement('br');
 		form.insertBefore(br,labSelect);
@@ -570,6 +614,7 @@ function createDelForm(app){
 	var form = document.getElementById('delForm');
 
 	var inNome = document.createElement('input');
+	inNome.className = "form-control";
 	inNome.name = "nome";
 	inNome.id = "inputNome";
 	inNome.type = "text";
@@ -581,6 +626,7 @@ function createDelForm(app){
 	labNome.innerHTML = "Paziente:"
 
 	var select = document.createElement('select');
+	select.className = "form-control";
 	select.name = "codF";
 	select.id = "codF";
 	select.autofocus = true;
@@ -590,11 +636,13 @@ function createDelForm(app){
 	labSelect.innerHTML = "Codice fiscale:"
 
 	var opt = document.createElement('option');
+	opt.className = "form-control";
 	opt.value = cf;
 	opt.innerHTML = cf;
 	select.appendChild(opt);
 
 	var inData = document.createElement('input');
+	inData.className = "form-control";
 	inData.name = "data";
 	inData.id = "inputData";
 	inData.type = "date";
@@ -606,6 +654,7 @@ function createDelForm(app){
 	labData.innerHTML = "Data:"
 
 	var inOra = document.createElement('input');
+	inOra.className = "form-control";
 	inOra.name = "ora";
 	inOra.id = "inputOra";
 	inOra.type = "time";
@@ -617,6 +666,7 @@ function createDelForm(app){
 	labOra.innerHTML = "Ora:"
 
 	var inDesc = document.createElement('input');
+	inDesc.className = "form-control";
 	inDesc.name = "descrizione";
 	inDesc.id = "inputDescrizione";
 	inDesc.type = "text";
@@ -628,11 +678,23 @@ function createDelForm(app){
 	labDesc.innerHTML = "Descrizione:"
 
 	var btnDe = document.createElement('button');
+	btnDe.className = "btn btn-danger";
 	btnDe.id= "btnFormDelete";
 	btnDe.name = "action";
 	btnDe.value = "delApp";
 	btnDe.type= "submit";
 	btnDe.innerHTML = "Conferma eliminazione";
+
+	var btnBack = document.createElement('button');
+	btnBack.className = "btn btn-secondary";
+	btnBack.id= "btnFormAddBack";
+	btnBack.type= "button";
+	btnBack.innerHTML = "Annulla";
+	btnBack.onclick = function(){
+		while (form.hasChildNodes()) {
+			form.removeChild(form.childNodes[0]);
+		}
+	}
 
 	form.appendChild(labNome);
 	form.appendChild(inNome);
@@ -650,6 +712,7 @@ function createDelForm(app){
 	form.appendChild(inDesc);
 
 	form.appendChild(btnDe);
+	form.appendChild(btnBack);
 
 	var br = document.createElement('br');
 	form.insertBefore(br,labSelect);
