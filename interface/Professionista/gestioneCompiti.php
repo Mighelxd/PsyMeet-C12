@@ -1,17 +1,17 @@
-<?php
+<?php declare(strict_types=1);
 
 
 
-include ('../../storage/Compito.php');
-include ('../../storage/DatabaseInterface.php');
+include '../../storage/Compito.php';
+include '../../storage/DatabaseInterface.php';
 include '../../plugins/libArray/FunArray.php';
 include '../../applicationLogic/CompitoControl.php';
 
 session_start();
-$tipoUtente = $_SESSION["tipo"];
-$cf= $_SESSION["codiceFiscale"];
-if($tipoUtente != "professionista"){
-  header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+$cf= $_SESSION['codiceFiscale'];
+if ($tipoUtente != 'professionista') {
+	header('Location: ../Utente/login.php');
 }
 
 
@@ -335,8 +335,8 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
         </div>
 
       <?php
-       for($i=0; $i<count($compito); $i++) {
-        ?>
+	   for ($i=0; $i<count($compito); $i++) {
+	   	?>
 
       <form  nome"correz" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
         <input type="text" name="action" value="correzione" hidden="true">
@@ -376,9 +376,9 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
 
 
               <?php
-                $effett=$compito[$i]->getEffettuato();
-                if($effett=="1"){
-                  ?>
+				$effett=$compito[$i]->getEffettuato();
+	   	if ($effett=='1') {
+	   		?>
 
                 <div class="form-group">
                   <label for="effettuato">Effettuato</label>
@@ -386,17 +386,18 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
                 </div>
 
               <?php
-            } else {
-             ?>
+			} else {
+				?>
 
                   <div class="form-group">
                     <label for="effettuato">Effettuato</label>
                     <input type="checkbox"  value="0" name="effettuato" class="form-control" rows="1">
                   </div>
 
-            <?php }  ?>
+            <?php
+			} ?>
 
-                <?php if($compito[$i]->getSvolgimento() != ""){ ?>
+                <?php if ($compito[$i]->getSvolgimento() != '') { ?>
                   <input type="submit" value="Correggi Compito" class="btn btn-success float-right" >
                 <?php } ?>
               </div>
@@ -410,7 +411,8 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
           </div>
 
             </form>
-  <?php  }  ?>
+  <?php
+	   }  ?>
 
   </div>
     </section>
