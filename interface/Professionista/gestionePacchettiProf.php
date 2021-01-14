@@ -289,7 +289,7 @@ to get the desired effect
                     <th></th>
                   </tr>
                   </thead>
-                  <?php for($i=0;$i-count($pacchettoByProf);$i++){
+                  <?php for($i=0;$i < count($pacchettoByProf);$i++){
 
                     $p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto());
 
