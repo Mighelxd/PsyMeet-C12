@@ -41,6 +41,9 @@
             $this->polizzaRc=$polRc;
             $this->immagineProfessionista=$img;
         }
+        public function setCfProf($cf){
+            $this->cfProf=$cf;
+        }
 
         public function setNome($n){
             $this->nome=$n;
@@ -110,6 +113,9 @@
             $this->immagineProfessionista;
         }
 
+        public function getCfProf(){
+            return $this->cfProf;
+        }
         public function getNome(){
             return $this->nome;
         }
@@ -180,10 +186,10 @@
 
 
         public function getArray(){
-            return array("cf_prof" => $this->cfProf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "cellulare" => $this->cellulare, "passwor"=> $this->password, "indirizzo_studio"=> $this->indirizzoStudio, "esperienze" => $this->esperienze, "pubblicazioni" => $this->pubblicazioni, "titolo_studio" => $this->titoloStudio, "n_iscrizione_albo" => $this->nIscrizioneAlbo, "partita_iva" => $this->partitaIva, "pec" => $this->partitaIva, "specializzazione" => $this->specializzazione, "polizza_rc" => $this->polizzaRc, "foto_profilo_professionista" => $this->immagineProfessionista);
+            return array("cf_prof" => $this->cfProf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "cellulare" => $this->cellulare, "passwor"=> $this->password, "indirizzo_studio"=> $this->indirizzoStudio, "esperienze" => $this->esperienze, "pubblicazioni" => $this->pubblicazioni, "titolo_studio" => $this->titoloStudio, "n_iscrizione_albo" => $this->nIscrizioneAlbo, "partita_iva" => $this->partitaIva, "pec" => $this->pec, "specializzazione" => $this->specializzazione, "polizza_rc" => $this->polizzaRc, "foto_profilo_professionista" => $this->immagineProfessionista);
         }
         public function getArrayNoVideo(){
-            return array("cf_prof" => $this->cfProf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "cellulare" => $this->cellulare, "passwor"=> $this->password, "indirizzo_studio"=> $this->indirizzoStudio, "esperienze" => $this->esperienze, "pubblicazioni" => $this->pubblicazioni, "titolo_studio" => $this->titoloStudio, "n_iscrizione_albo" => $this->nIscrizioneAlbo, "partita_iva" => $this->partitaIva, "pec" => $this->partitaIva, "specializzazione" => $this->specializzazione, "polizza_rc" => $this->polizzaRc);
+            return array("cf_prof" => $this->cfProf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "cellulare" => $this->cellulare, "passwor"=> $this->password, "indirizzo_studio"=> $this->indirizzoStudio, "esperienze" => $this->esperienze, "pubblicazioni" => $this->pubblicazioni, "titolo_studio" => $this->titoloStudio, "n_iscrizione_albo" => $this->nIscrizioneAlbo, "partita_iva" => $this->partitaIva, "pec" => $this->pec, "specializzazione" => $this->specializzazione, "polizza_rc" => $this->polizzaRc);
         }
     }
 ?>

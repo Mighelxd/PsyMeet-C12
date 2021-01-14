@@ -88,7 +88,7 @@
               if(data.tipo=="professionista")
                 window.location.replace("../Professionista/indexProfessionista.html");
               else
-                  window.location.replace("../Paziente/homePagePaziente.php");
+                  window.location.replace("../Paziente/areaPersonalePaziente.php");
             }else{
                   $('.alert-danger').show();
                   $('.alert-danger')[0].innerHTML=data.errore;
@@ -104,7 +104,5 @@
       });
   })
 </script>
-
-
 </body>
 </html>
