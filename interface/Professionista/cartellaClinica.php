@@ -270,7 +270,7 @@
                     </div>
                     <div class="form-group">
                        <label for="data">Data</label>
-		    		   <input type="date" id="data" name="data" <?php if(!isset($cartellaClinica)){ ?><?php echo "value=\"".date(Y-m-d)."\"";}?> <?php if(isset($cartellaClinica)){ ?><?php echo "value=\"".$cartellaClinica->getData()."\"";}?>  readonly>
+		    		   <input type="date" id="data" name="data" <?php if(!isset($cartellaClinica)){ ?><?php echo "value=\"".date("Y-m-d")."\"";}?> <?php if(isset($cartellaClinica)){ ?><?php echo "value=\"".$cartellaClinica->getData()."\"";}?>  readonly>
                     </div>
                     <div class="form-group">
                        <label for="professione">Professione</label>
@@ -305,15 +305,15 @@
                   
                   <?php if(!isset($cartellaClinica)){ ?>
                   <div class="card-footer" style="background-color: white">
-                    <input type="text" name="azione" value="modifica" hidden ="true">
-                    <button type="submit" class="btn btn-primary" style="float: right">Aggiungi</button>
+                    <input type="text" name="azione" value="aggiungi" hidden ="true">
+                    <button type="submit" id="sottometti" class="btn btn-primary" style="float: right">Aggiungi</button>
                     <div class="alert alert-success" style="display:none;">Cartella Clinica aggiunta con successo!</div>
                   </div>
                   <?php } else { ?>
                   <div class="card-footer" style="background-color: white">
                     <input type="text" name="azione" value="modifica" hidden ="true">
                     <div class="alert alert-success" style="display:none;">Cartella Clinica modificata con successo</div>
-                    <button type="submit" class="btn btn-primary" style="float:right">Modifica</button>
+                    <button type="submit" id="sottometti" class="btn btn-primary" style="float:right">Modifica</button>
                   </div>
                   <?php } ?>
                 </form>
@@ -329,7 +329,7 @@
 
 <?php
   $_SESSION["datiPaziente"]=NULL;
-  $_SESSION["cartellaClinica"]=NULL
+  $_SESSION["cartellaClinica"]=NULL;
 ?>
 
  <!-- INIZIO PIE DI PAGINA -->
@@ -373,6 +373,7 @@
               var response=JSON.parse(data);
               if(response.esito==true){
                  $(".alert-success").show();
+                 $("#sottometti").attr("disabled", true);
                   setTimeout(function(){
                     window.location.replace("Pazienti.php");
                   },5000)

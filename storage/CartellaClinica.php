@@ -100,5 +100,8 @@ class CartellaClinica {
     public function getArray(){
          return array("id_cartella_clinica" => $this->id,"data_creazione"=>$this->dataCreazione, "farmaci" => $this->farmaci, "q_umore" => $this->qualitaUmore, "q_relazioni" => $this->qualitaRelazioni, "patologie_pregresse" => $this->patologiePregresse, "cf_prof" => $this->cfProf, "cf" => $this->cfPaz);
      }
+     public function getArraySenzaId(){
+        return array("data_creazione"=>$this->dataCreazione, "farmaci" => $this->farmaci, "q_umore" => $this->qualitaUmore, "q_relazioni" => $this->qualitaRelazioni, "patologie_pregresse" => $this->patologiePregresse, "cf_prof" => $this->cfProf, "cf" => $this->cfPaz);
+    }
 }
 ?>
