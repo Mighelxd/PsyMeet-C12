@@ -382,7 +382,7 @@ else{
       if(!$exist){
         echo("<div class=\"row\">");
           echo("<div class=\"col-12\">");
-              echo("<input type=\"submit\" value=\"Crea Scheda\" class=\"btn btn-success float-right\">");
+              echo("<button type=\"button\" id=\"creaSch\" class=\"btn btn-success\" onclick=\"mostraForm()\">Crea Scheda</button>");
           echo("</div>");
         echo("</div>");
       }?>
@@ -492,8 +492,9 @@ else{
             </div>
           </section>
     <?php  }?>
-    <form method='POST' action='../../applicationLogic/SeduteControlForm.php' id='formGen'>
-    <section class="content">
+
+    <section class="content" id='formGen'>
+      <form method='POST' action='../../applicationLogic/SeduteControlForm.php'>
       <div class="row">
         <div class="col-md-6">
           <div class="card card-primary">
@@ -508,11 +509,11 @@ else{
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspPosAut" class="form-control" rows="4" readonly></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspNegAut" class="form-control" rows="4" readonly></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -531,11 +532,11 @@ else{
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspPosCog" class="form-control" rows="4" readonly></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspNegCog" class="form-control" rows="4" readonly></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -554,11 +555,11 @@ else{
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspPosSM" class="form-control" rows="4" readonly></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspNegSM" class="form-control" rows="4" readonly></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -577,11 +578,11 @@ else{
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspPosSo" class="form-control" rows="4" readonly></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspNegSo" class="form-control" rows="4" readonly></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -591,24 +592,15 @@ else{
       </div>
       <div class="row">
         <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancella</a>
-          <input type="submit" value="Salva Scheda" class="btn btn-success float-right">
+          <button type="submit" name="action" value="addSchGen" class="btn btn-success float-right">Aggiungi Scheda</button>
         </div>
       </div>
+      </form>
+      <button id="annForm" class="btn btn-secondary" onclick="hide()">Annulla</button>
     </section>
-  </form>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.5
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
-  </footer>
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -626,5 +618,16 @@ else{
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 <script src="../../dist/js/generalizzato.js"></script>
+<script>
+$('#formGen').hide();
+function mostraForm(){
+  $('#formGen').show();
+  $('#creaSch').hide();
+}
+function hide(){
+  $('#formGen').hide();
+  $('#creaSch').show();
+}
+</script>
 </body>
 </html>

@@ -145,5 +145,18 @@ else if($action == 'modEpisodio'){
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
 }
+/////////////////////////////////////////////////////////////Generalizzato
+else if($action='addSchGen'){
+  $aspPosAut = $_POST['aspPosAut'];
+  $aspNegAut = $_POST['aspNegAut'];
+  $aspPosCog = $_POST['aspPosCog'];
+  $aspNegCog = $_POST['aspNegCog'];
+  $aspPosSM = $_POST['aspPosSM'];
+  $aspNegSM = $_POST['aspNegSM'];
+  $aspPosSo = $_POST['aspPosSo'];
+  $aspNegSo = $_POST['aspNegSo'];
+  $idSchedaCorr = $_SESSION['idSCorr'];
 
+  $att = array("data" => $this->data, "au_pos" => $aspPosAut, "au_neg" => $aspNegAut, "co_pos" => $aspPosCog, "co_neg" => $aspNegCog, "se_pos" => $aspPosSM,"se_neg" => $aspNegSM, "so_pos" => $aspPosSo, "so_neg" => $aspNegSo,  "id_terapia" => $this->id_terapia, "tipo" =>"Scheda Assessment Generalizzato");
+}
  ?>

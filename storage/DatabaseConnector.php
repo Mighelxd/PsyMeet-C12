@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
      * DatabaseConnector
      * Questa classe contiene i metodi per la connessione al Database MySQL
@@ -7,13 +7,15 @@
      * 2020 Copyright by PsyMeet - University of Salerno
      */
     class DatabaseConnector{
-
-        public static function connect($user = "psyuser" , $host = "localhost" , $dbname = "psydb" , $password = "psyuserR1!" ){
-            return new mysqli($host, $user, $password, $dbname);
+      static $conn = null;
+      public static function connect($user = "psyuser" , $host = "localhost" , $dbname = "psydb" , $password = "psyuserR1!" ){
+            $conn = new mysqli($host, $user, $password, $dbname);
+            return $conn;
         }
 
         public static function close($connection){
-            return $connection->close();
+            $conn = $connection->close();
+            return $conn;
         }
     }
 ?>
