@@ -509,11 +509,11 @@ else{
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" name="aspPosAut" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspPosAut" class="form-control" rows="4"></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" name="aspNegAut" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspNegAut" class="form-control" rows="4"></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -532,11 +532,11 @@ else{
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" name="aspPosCog" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspPosCog" class="form-control" rows="4"></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" name="aspNegCog" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspNegCog" class="form-control" rows="4"></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -555,11 +555,11 @@ else{
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" name="aspPosSM" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspPosSM" class="form-control" rows="4"></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" name="aspNegSM" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspNegSM" class="form-control" rows="4"></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -578,11 +578,11 @@ else{
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Aspetti Positivi</label>
-                <textarea id="inputDescription" name="aspPosSo" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspPosSo" class="form-control" rows="4"></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspetti Negativi</label>
-                <textarea id="inputDescription" name="aspNegSo" class="form-control" rows="4" readonly></textarea>
+                <textarea id="inputDescription" name="aspNegSo" class="form-control" rows="4"></textarea>
               </div>
             </div>
             <!-- /.card-body -->

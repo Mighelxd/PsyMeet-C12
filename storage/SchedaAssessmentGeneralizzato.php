@@ -20,8 +20,8 @@ class SchedaAssessmentGeneralizzato
     private $self_management_positivi;
     private $id_terapia;
     private $tipo;
-    public static $tableName="SchedaAssessmentGeneralizzato";
-    
+    public static $tableName="schedaassessmentgeneralizzato";
+
     public function __construct($id_scheda, $data, $autoreg_positivi, $autoreg_negativi, $cognitive_positivi, $cognitive_negativi, $self_management_positivi, $self_management_negativi, $sociali_positivi, $sociali_negativi, $id_terapia, $tipo)
     {
         $this->id_scheda = $id_scheda;
@@ -64,7 +64,7 @@ class SchedaAssessmentGeneralizzato
     public function getSelfManagementNegativi()
     {
         return $this -> self_management_negativi;
-    } 
+    }
     public function getSocialiPositivi()
     {
         return $this -> sociali_positivi;
@@ -76,7 +76,7 @@ class SchedaAssessmentGeneralizzato
     public function getSelfManagementPositivi()
     {
         return $this -> self_management_positivi;
-    } 
+    }
     public function getIdTerapia()
     {
         return $this -> id_terapia;
@@ -137,4 +137,3 @@ class SchedaAssessmentGeneralizzato
          $this -> tipo =$tipo;
     }
 }
-
