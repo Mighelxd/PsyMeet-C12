@@ -41,6 +41,9 @@
             $this->polizzaRc=$polRc;
             $this->immagineProfessionista=$img;
         }
+        public function setCfProf($cf){
+            $this->cfProf=$cf;
+        }
 
         public function setNome($n){
             $this->nome=$n;
@@ -110,6 +113,9 @@
             $this->immagineProfessionista;
         }
 
+        public function getCfProf(){
+            return $this->cfProf;
+        }
         public function getNome(){
             return $this->nome;
         }

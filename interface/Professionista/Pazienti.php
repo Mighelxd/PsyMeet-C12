@@ -210,9 +210,20 @@ $_SESSION["cfPazTer"] = "";
 
                       </td>
                       <td style=" padding-left: 35px;">
-                        <a href="SchedaPaziente.html" class="text-muted">
+
+                        <form class="" action="SchedaPaziente.php" method="post">
+                          <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
+                            <button type="submit" class="btn btn-primary btn-sm" name="button" >
+
+                              <i class="fas fa-search" ></i>
+                            </button>
+
+                            </form>
+                      <!--      <a href="SchedaPaziente.html" class="text-muted">
                           <i class="fas fa-search"></i>
-                        </a>
+                        </a>-->
+
+
                       </td>
                       <td class="project-actions text-right">
                       <form class="" action="../../applicationLogic/CartellaClinicaControl.php" method="post">
