@@ -7,10 +7,24 @@
     * Versione: 0.1
     * 2020 Copyright by PsyMeet - University of Salerno
 */
+include ("../../plugins/libArray/FunArray.php");
 include "../../storage/DatabaseInterface.php";
 include "../../storage/Professionista.php";
 include "../../applicationLogic/ProfessionistaControl.php";
-$Professionista = professionistaControl::recuperaProfessionisti();
+//include "../../applicationLogic/modificaProfessionistaControl.php";
+
+
+session_start();
+$tipoUtente = $_SESSION["tipo"];
+if($tipoUtente != "professionista"){
+  header("Location: ../Utente/login.php");
+}
+$cfProfessionista = $_SESSION["codiceFiscale"];
+
+$Professionista = professionistaControl::getProf($cfProfessionista);
+$img=base64_encode($Professionista->getImmagineProfessionista());
+
+
 ?>
 
 
@@ -19,7 +33,7 @@ $Professionista = professionistaControl::recuperaProfessionisti();
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | User Profile</title>
+  <title>Area Personale</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -49,49 +63,9 @@ $Professionista = professionistaControl::recuperaProfessionisti();
       </li>
     </ul>
 
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+    
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
 
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-
-    </ul>
   </nav>
   <!-- /.navbar -->
 
@@ -111,10 +85,17 @@ $Professionista = professionistaControl::recuperaProfessionisti();
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <?php if ($img != NULL) {
+            echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
+          }
+          else {
+              echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+          }
+
+          ?>
         </div>
         <div class="info">
-          <a href="areaPersonale.html" class="d-block">Alexander Pierce <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+          <a href="areaPersonale.html" class="d-block"><?php echo $Professionista->getNome() ." ". $Professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
         </div>
       </div>
 
@@ -195,58 +176,58 @@ $Professionista = professionistaControl::recuperaProfessionisti();
 
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
-            <?php for($i=0;$i<count($Professionista);$i++) { 
-              ?>
+
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle"
-                       src="../../dist/img/user4-128x128.jpg"
-                       alt="User profile picture">
+                  <?php if ($img != NULL){
+                     echo '<img class="profile-user-img img-fluid img-circle" src="data:image/jpeg;base64,'.$img.'"/>';
+                  }
+                  else {
+                    echo '<img class="profile-user-img img-fluid img-circle"
+                         src="../../dist/img/user4-128x128.jpg"
+                         alt="User profile picture">';
+                  }?>
+
+
                 </div>
-                 <td>
-                    <?php echo $Professionista[$i]->getNome() , $Professionista[$i]->getCognome();
-                      ?>
-                 </td>
-                <p class="text-muted text-center">// </p>
+
+                <p class="text-muted text-center"><?php echo $Professionista->getNome() ." ". $Professionista->getCognome(); ?></p>
 
                 <ul class="list-group list-group-unbordered mb-3">
 				  <li class="list-group-item">
-                    <b>Data di Nascita:</b> <td> <?php echo $Professionista[$i]->getDataNascita();?></td>
+                    <b>Data di Nascita:</b> <td> <?php echo $Professionista->getDataNascita();?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>N iscrizione albo</b>       <td> <?php echo $Professionista[$i]->getNIscrizioneAlbo();?></td>
+                    <b>N iscrizione albo</b>       <td> <?php echo $Professionista->getNIscrizioneAlbo();?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>Email</b> <td> <?php echo $Professionista[$i]->getEmail();?></td>
+                    <b>Email</b> <td> <?php echo $Professionista->getEmail();?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>Telefono</b> <td> <?php echo $Professionista[$i]->getTelefono();?></td>
+                    <b>Telefono</b> <td> <?php echo $Professionista->getTelefono();?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>Cellulare</b> <td> <?php echo $Professionista[$i]->getCellulare();?></td>
+                    <b>Cellulare</b> <td> <?php echo $Professionista->getCellulare();?></td>
                   </li>
 				  	  <li class="list-group-item">
-                    <b>P.IVA</b> <td> <?php echo $Professionista[$i]->getPartitaIva();?></td>
+                    <b>P.IVA</b> <td> <?php echo $Professionista->getPartitaIva();?></td>
                   </li>
 				  	  <li class="list-group-item">
-                    <b>Polizza RC</b> <td> <?php echo $Professionista[$i]->getPolizzaRc();?></td>
+                    <b>Polizza RC</b> <td> <?php echo $Professionista->getPolizzaRc();?></td>
                   </li>
 				  	  <li class="list-group-item">
-                    <b>PEC</b> <td> <?php echo $Professionista[$i]->getPec();?></td>
+                    <b>PEC</b> <td> <?php echo $Professionista->getPec();?></td>
                   </li>
                 </ul>
               </div>
               <!-- /.card-body -->
             </div>
-            <?php 
-            }
-          ?>
+
             <!-- /.card -->
 
             <!-- About Me Box -->
             <div class="card card-primary">
-            <?php for($i=0;$i<count($Professionista);$i++) { 
-              ?>
+
               <div class="card-header">
                 <h3 class="card-title">Scheda tecnica</h3>
               </div>
@@ -254,29 +235,27 @@ $Professionista = professionistaControl::recuperaProfessionisti();
               <div class="card-body">
 
 			  <strong><i class="fas fa-graduation-cap"></i> Titolo di studio</strong>
-          <td>  
-            <?php echo $Professionista[$i]->getTitoloStudio();?>
+          <td>
+            <?php echo $Professionista->getTitoloStudio();?>
           </td>
                 <hr>
         <strong><i class="fas fa-book mr-1"></i> Pubblicazioni</strong>
-          <td>  
-            <?php echo $Professionista[$i]->getPubblicazioni();?>
+          <td>
+            <?php echo $Professionista->getPubblicazioni();?>
           </td>
                 <hr>
           <strong><i class="fas fa-map-marker-alt mr-1"></i> Indirizzo studio fisico</strong>
-          <td>  
-            <?php echo $Professionista[$i]->getIndirizzoStudio();?>
+          <td>
+            <?php echo $Professionista->getIndirizzoStudio();?>
           </td>
                 <hr>
           <strong><i class="fas fa-handshake"></i> Esperienze</strong>
-          <td>  
-            <?php echo $Professionista[$i]->getEsperienze();?>
+          <td>
+            <?php echo $Professionista->getEsperienze();?>
           </td>
               <hr>
               </div>
-              <?php 
-                }
-              ?>
+
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -294,8 +273,8 @@ $Professionista = professionistaControl::recuperaProfessionisti();
                 <div class="tab-content">
 
                   <div class="tab-pane fade show active" id="settings">
-                    <form class="form-horizontal" action="../../applicationLogic/modificaProfessionistaControl.php" method="post"> 
-              
+                    <form class="form-horizontal" action="../../applicationLogic/modificaProfessionistaControl.php" method="post">
+
 					     <div class="form-group row">
                         <label for="cellulare" class="col-sm-2 col-form-label">Cellulare</label>
                         <div class="col-sm-10">
@@ -347,37 +326,38 @@ $Professionista = professionistaControl::recuperaProfessionisti();
                         </div>
                       </div>
 
-  					<div class="form-group row">
-              <label for="videoPresentazione" class="col-sm-2 col-form-label">Video di Presentazione</label>
-              <div class="col-sm-10">
-                <div class="input-group">
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                    <label class="custom-file-label" for="exampleInputFile">Seleziona file</label>
-                  </div>
-                  <div class="input-group-append">
-                    <span class="input-group-text" id="">Upload</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+
 
 
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" name="action" value="aggiornaDati"class="btn btn-danger">Conferma</button> 
+                          <button type="submit" name="action" value="aggiornaDati"class="btn btn-danger">Conferma</button>
                         </div>
                       </div>
                     </form>
+
+
+                    <form enctype="multipart/form-data" action="../../applicationLogic/modificaProfessionistaControl.php" method="post" id="modificaFoto" >
+                     <div class="form-group row">
+                       <label for="videoPresentazione" class="col-sm-2 col-form-label">Foto Profilo</label>
+                       <div class="col-sm-10">
+                         <div class="input-group">
+                           <div class="custom-file">
+                             <input type="file" class="custom-file-input" name="fotoProfiloProf" id="fotoProfiloProf" name="immagine" accept=".jpg,.jpeg,.png,.bmp" required>
+                             <label class="custom-file-label" for="exampleInputFile">Seleziona file</label>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                     <div class="form-group row">
+                       <div class="offset-sm-2 col-sm-10">
+                     <input type="text" name="action" value="modificaFoto" hidden = "true">
+                     <input type="submit" class="btn btn-danger" name="modificaFoto" value="modifica foto">
+                    </div>
+                    </div>
+                    </form>
+
+
                   </div>
                   <!-- /.tab-pane -->
                 </div>
@@ -385,7 +365,7 @@ $Professionista = professionistaControl::recuperaProfessionisti();
               </div><!-- /.card-body -->
             </div>
             <!-- /.nav-tabs-custom -->
-          </div> 
+          </div>
           <!-- /.col -->
         </div>
         <!-- /.row -->
@@ -394,13 +374,6 @@ $Professionista = professionistaControl::recuperaProfessionisti();
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.5
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
-  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

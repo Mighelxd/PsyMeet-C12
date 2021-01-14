@@ -10,7 +10,8 @@
  include "../storage/DatabaseInterface.php";
  include "../storage/Professionista.php";
 
- $cf_prof="RSSMRC80R12H703U";
+ session_start();
+ $cf_prof = $_SESSION["codiceFiscale"];
 
  if($_POST["action"] == "aggiornaDati"){
     $telefono = $_POST["telefono"];
@@ -25,7 +26,7 @@
     $arr = array("cf_prof" => $cf_prof);
     $result = DatabaseInterface::selectQueryById($arr,"professionista");
     $arr = $result -> fetch_array();
-    $professionista = new Professionista($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $arr[11], $arr[12], $arr[12], $arr[13], $arr[14], $arr[15], $arr[16], $arr[17]);
+    $professionista = new Professionista($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $arr[11], $arr[12], $arr[13], $arr[14], $arr[15], $arr[16], $arr[17]);
 
     if ($telefono != "") {
       $professionista->setTelefono($telefono);
@@ -63,14 +64,41 @@
         $professionista->setIndirizzoStudio($indirizzo_studio);
     }
     $result = DatabaseInterface::updateQueryById($professionista->getArrayNoVideo(), "professionista");
-  }
+    if($result){
+      header("Location: ../interface/Professionista/areaPersonaleProfessionista.php");
+    }
+    else{
+      echo "non va";
+    }
 
-if($result){
-  header("Location: ../interface/Professionista/areaPersonaleProfessionista.php");
-}
-else{
-  echo "non va";
-}
+
+  }
+  else if($_POST["action"] == "modificaFoto"){
+    if(isset($_FILES["fotoProfiloProf"]))
+        $immagine=addslashes(file_get_contents($_FILES["fotoProfiloProf"]["tmp_name"]));
+    else
+        $immagine=NULL;
+
+    if($immagine != NULL){
+      $arr = array("cf_prof" => $cf_prof,);
+      $result = DatabaseInterface::selectQueryById($arr,"professionista");
+      $arr = $result -> fetch_array();
+      $professionista = new Professionista($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $arr[11], $arr[12], $arr[13], $arr[14], $arr[15], $arr[16], $immagine);
+
+
+      $result = DatabaseInterface::updateQueryById($professionista->getArray(), "professionista");
+      var_dump($result);
+      if($result){
+        header("Location: ../interface/Professionista/areaPersonaleProfessionista.php");
+      }
+      else{
+        echo "non va";
+      }
+    }
+    else {
+        echo "non va per foto = null";
+    }
+  }
 
 
 

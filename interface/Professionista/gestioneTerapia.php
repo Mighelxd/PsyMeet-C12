@@ -16,7 +16,9 @@ include "../../storage/SchedaAssessmentGeneralizzato.php";
 include "../../storage/SchedaAssessmentFocalizzato.php";
 include "../../applicationLogic/terapiaControl.php";
 include "../../applicationLogic/PazienteControl.php";
+include "../../applicationLogic/ProfessionistaControl.php";
 include "../../storage/Paziente.php";
+include "../../storage/Professionista.php";
 
 session_start();
 $tipoUtente = $_SESSION["tipo"];
@@ -35,6 +37,10 @@ else if ($cfPazienteTer == "") {
   $cfPazienteTer = $_SESSION["cfPazTer"];
 }
 
+
+$professionista = professionistaControl::getProf($cfProfessionista);
+$img=base64_encode($professionista->getImmagineProfessionista());
+
 $pazienteTer = PazienteControl::getPaz($cfPazienteTer);
 
 $terapia = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
@@ -52,7 +58,7 @@ else
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Projects</title>
+  <title>Terapia</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -83,50 +89,7 @@ else
       </li>
     </ul>
 
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-
-    </ul>
   </nav>
   <!-- /.navbar -->
 
@@ -146,10 +109,17 @@ else
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <?php if ($img != NULL) {
+            echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
+          }
+          else {
+              echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+          }
+
+          ?>
         </div>
         <div class="info">
-          <a href="areaPersonale.html" class="d-block">Alexander Pierce <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+          <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
         </div>
       </div>
 
@@ -283,7 +253,7 @@ else
           </li>
 
         </ul>
-      </nav> -->
+      </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -314,8 +284,8 @@ else
 
       <!-- Default box -->
       <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Terapie in corso</h3>
+        <div class="card-header" style="background-color : #007bff;">
+          <h3 class="card-title" style="color : #ffffff;">Terapie in corso</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
