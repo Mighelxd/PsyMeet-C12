@@ -4,6 +4,7 @@ include '..\plugins\libArray\FunArray.php';
 include '../storage/DatabaseInterface.php';
 include '../storage/SchedaAssessmentFocalizzato.php';
 include '../storage/Episodio.php';
+include '../storage/SchedaAssessmentGeneralizzato.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $action = $_POST['action'];
@@ -155,8 +156,14 @@ else if($action='addSchGen'){
   $aspNegSM = $_POST['aspNegSM'];
   $aspPosSo = $_POST['aspPosSo'];
   $aspNegSo = $_POST['aspNegSo'];
-  $idSchedaCorr = $_SESSION['idSCorr'];
+  $idTerCorr = $_SESSION['idTerCorr'];
+  $dataCorr = date("Y,m,d");
+  $dataCorr = str_replace(',','-',$dataCorr);
 
-  $att = array("data" => $this->data, "au_pos" => $aspPosAut, "au_neg" => $aspNegAut, "co_pos" => $aspPosCog, "co_neg" => $aspNegCog, "se_pos" => $aspPosSM,"se_neg" => $aspNegSM, "so_pos" => $aspPosSo, "so_neg" => $aspNegSo,  "id_terapia" => $this->id_terapia, "tipo" =>"Scheda Assessment Generalizzato");
+  $att = array("data" => $dataCorr, "au_pos" => $aspPosAut, "au_neg" => $aspNegAut, "co_pos" => $aspPosCog, "co_neg" => $aspNegCog, "se_pos" => $aspPosSM,"se_neg" => $aspNegSM, "so_pos" => $aspPosSo, "so_neg" => $aspNegSo,  "id_terapia" => $idTerCorr, "tipo" =>"Scheda Assessment Generalizzato");
+  $ok = DatabaseInterface::insertQuery($att, SchedaAssessmentGeneralizzato::$tableName);
+  if($ok) {
+    header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
+  }
 }
  ?>
