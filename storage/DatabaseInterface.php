@@ -34,7 +34,6 @@
             $insert .= ") ";
             $values = substr($values,0,-1);
             $values .= ");";
-            echo $insert.$values; 
             $result = $connection->query($insert.$values);
             DatabaseConnector::close($connection);
             return $result;

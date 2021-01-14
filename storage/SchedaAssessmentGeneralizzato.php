@@ -86,7 +86,7 @@ class SchedaAssessmentGeneralizzato
         return $this -> tipo;
     }
     public function getArray(){
-        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "au_pos" => $this->autoreg_positivi, "au_neg" => $this->autoreg_negativi, "co_pos" => $this->cognitive_positivi, "co_neg" => $this->cognitive_negativi, "se_pos" => $this->self_management_positivi,"se_neg" => $this->self_management_negativi, "so_pos" => $this->sociali_positivi, "so_neg" => $this->sociali_negativi,  "id_terapia" => $this->id_terapia, "tipo" =>$this->tipo);
+        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "autoreg_positivi" => $this->autoreg_positivi, "autoreg_negativi" => $this->autoreg_negativi, "cognitive_positivi" => $this->cognitive_positivi, "cognitive_negativi" => $this->cognitive_negativi, "self_management_positivi" => $this->self_management_positivi,"self_management_negativi" => $this->self_management_negativi, "sociali_positivi" => $this->sociali_positivi, "sociali_negativi" => $this->sociali_negativi, "id_terapia" => $this->id_terapia, "tipo" =>$this->tipo);
     }
     public function setIdScheda($id_scheda)
     {

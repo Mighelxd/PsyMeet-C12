@@ -87,118 +87,6 @@ else{
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-    </ul>
-
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -242,7 +130,7 @@ else{
             </a>
           </li>
           <li class="nav-item has-treeview menu-open">
-            <a href="Pazienti.html" class="nav-link">
+            <a href="Pazienti.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pazienti
@@ -259,14 +147,14 @@ else{
                 </a>
                 <ul class="nav nav-treeview" style="padding-left: 2%;">
                   <li class="nav-item has-treeview">
-                    <a href="gestioneTerapia.html" class="nav-link">
+                    <a href="gestioneTerapia.php" class="nav-link">
                       <i class="fas fa-clipboard nav-icon"></i>
                       <p>Terapia
                       </p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="cartellaClinica.html" class="nav-link">
+                    <a href="cartellaClinica.php" class="nav-link">
                       <i class="fas fa-notes-medical nav-icon"></i>
                       <p>Cartella clinica</p>
                     </a>
@@ -293,14 +181,14 @@ else{
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaAssessmentGeneralizzato.html" class="nav-link active">
+                          <a href="#" class="nav-link active">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment generalizzato
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaAssessmentFocalizzato.html" class="nav-link">
+                          <a href="SchedaAssessmentFocalizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment focalizzato
                             </p>
@@ -323,7 +211,7 @@ else{
                       </ul>
                     </li>
                     <li class="nav-item">
-                      <a href="gestioneCompiti.html" class="nav-link">
+                      <a href="gestioneCompiti.php" class="nav-link">
                         <i class="fas fa-sticky-note nav-icon"></i>
                         <p>Compiti
                         </p>
@@ -344,7 +232,7 @@ else{
 
           </li>
           <li class="nav-item has-treeview">
-            <a href="Pacchetti.html" class="nav-link">
+            <a href="gestionePacchettiProf.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Pacchetti
@@ -389,12 +277,12 @@ else{
       <?php
         if($exist){?>
           <section class="content">
+            <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
             <div class="row">
               <div class="col-md-6">
                 <div class="card card-primary">
                   <div class="card-header">
                     <h3 class="card-title">Autoregolazione</h3>
-
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fas fa-minus"></i></button>
@@ -403,11 +291,11 @@ else{
                   <div class="card-body">
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Positivi</label>
-                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getAutoregPositivi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspPosAut' class="form-control" rows="4" readonly><?php echo $schAssGen -> getAutoregPositivi(); ?></textarea>
                     </div>
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Negativi</label>
-                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getAutoregNegativi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspNegAut' class="form-control" rows="4" readonly><?php echo $schAssGen -> getAutoregNegativi(); ?></textarea>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -426,11 +314,11 @@ else{
                   <div class="card-body">
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Positivi</label>
-                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getCognitivePositivi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspPosCog' class="form-control" rows="4" readonly><?php echo $schAssGen -> getCognitivePositivi(); ?></textarea>
                     </div>
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Negativi</label>
-                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getCognitiveNegativi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspNegCog' class="form-control" rows="4" readonly><?php echo $schAssGen -> getCognitiveNegativi(); ?></textarea>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -449,11 +337,11 @@ else{
                   <div class="card-body">
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Positivi</label>
-                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getSelfManagementPositivi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspPosSM' class="form-control" rows="4" readonly><?php echo $schAssGen -> getSelfManagementPositivi(); ?></textarea>
                     </div>
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Negativi</label>
-                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getSelfManagementNegativi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspNegSM' class="form-control" rows="4" readonly><?php echo $schAssGen -> getSelfManagementNegativi(); ?></textarea>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -472,11 +360,11 @@ else{
                   <div class="card-body">
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Positivi</label>
-                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getSocialiPositivi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspPosSo' class="form-control" rows="4" readonly><?php echo $schAssGen -> getSocialiPositivi(); ?></textarea>
                     </div>
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Negativi</label>
-                      <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $schAssGen -> getSocialiNegativi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspNegSo' class="form-control" rows="4" readonly><?php echo $schAssGen -> getSocialiNegativi(); ?></textarea>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -486,10 +374,14 @@ else{
             </div>
             <div class="row">
               <div class="col-12">
-                <a href="#" class="btn btn-secondary">Cancella</a>
-                <input type="submit" value="Salva Scheda" class="btn btn-success float-right">
+                <button type="button" id="btnAbMod" class="btn btn-success float-right" onclick="abilita()">Modifica Scheda</button>
+                <button type="submit" id="confMod" class="btn btn-success float-right" name="action" value="modSchGen">Conferma Modifica</button>
               </div>
             </div>
+          </form>
+          <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
+            <button type="submit" class="btn btn-danger float-right" name="action" value="delSchGen">Cancella Scheda</button>
+          </form>
           </section>
     <?php  }?>
 
@@ -596,7 +488,7 @@ else{
         </div>
       </div>
       </form>
-      <button id="annForm" class="btn btn-secondary" onclick="hide()">Annulla</button>
+      <button id="annForm" class="btn btn-secondary float-right" onclick="hide()">Annulla</button>
     </section>
     <!-- /.content -->
   </div>
@@ -617,17 +509,6 @@ else{
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
-<script src="../../dist/js/generalizzato.js"></script>
-<script>
-$('#formGen').hide();
-function mostraForm(){
-  $('#formGen').show();
-  $('#creaSch').hide();
-}
-function hide(){
-  $('#formGen').hide();
-  $('#creaSch').show();
-}
-</script>
+<script src="../../dist/js/sedute.js"></script>
 </body>
 </html>

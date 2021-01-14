@@ -147,7 +147,7 @@ else if($action == 'modEpisodio'){
   }
 }
 /////////////////////////////////////////////////////////////Generalizzato
-else if($action='addSchGen'){
+else if($action =='addSchGen'){
   $aspPosAut = $_POST['aspPosAut'];
   $aspNegAut = $_POST['aspNegAut'];
   $aspPosCog = $_POST['aspPosCog'];
@@ -159,10 +159,49 @@ else if($action='addSchGen'){
   $idTerCorr = $_SESSION['idTerCorr'];
   $dataCorr = date("Y,m,d");
   $dataCorr = str_replace(',','-',$dataCorr);
-
-  $att = array("data" => $dataCorr, "au_pos" => $aspPosAut, "au_neg" => $aspNegAut, "co_pos" => $aspPosCog, "co_neg" => $aspNegCog, "se_pos" => $aspPosSM,"se_neg" => $aspNegSM, "so_pos" => $aspPosSo, "so_neg" => $aspNegSo,  "id_terapia" => $idTerCorr, "tipo" =>"Scheda Assessment Generalizzato");
+  $att = array("data" => $dataCorr, "autoreg_positivi" => $aspPosAut, "autoreg_negativi" => $aspNegAut, "cognitive_positivi" => $aspPosCog, "cognitive_negativi" => $aspNegCog, "self_management_positivi" => $aspPosSM,"self_management_negativi" => $aspNegSM, "sociali_positivi" => $aspPosSo, "sociali_negativi" => $aspNegSo,  "id_terapia" => $idTerCorr, "tipo" =>"Scheda Assessment Generalizzato");
   $ok = DatabaseInterface::insertQuery($att, SchedaAssessmentGeneralizzato::$tableName);
   if($ok) {
+    header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
+  }
+}
+else if($action =='delSchGen'){
+  $idTerCorr = $_SESSION['idTerCorr'];
+  $key = array("id_terapia"=>$idTerCorr);
+  $ok=DatabaseInterface::deleteQuery($key,SchedaAssessmentGeneralizzato::$tableName);
+  if($ok){
+    header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
+  }
+}
+else if($action == 'modSchGen'){
+  $aspPosAut = $_POST['aspPosAut'];
+  $aspNegAut = $_POST['aspNegAut'];
+  $aspPosCog = $_POST['aspPosCog'];
+  $aspNegCog = $_POST['aspNegCog'];
+  $aspPosSM = $_POST['aspPosSM'];
+  $aspNegSM = $_POST['aspNegSM'];
+  $aspPosSo = $_POST['aspPosSo'];
+  $aspNegSo = $_POST['aspNegSo'];
+  $idTerCorr = $_SESSION['idTerCorr'];
+
+  $key = array("id_terapia"=>$idTerCorr);
+
+  $recSchGen = DatabaseInterface::selectQueryById($key,SchedaAssessmentGeneralizzato::$tableName);
+  while($row = $recSchGen->fetch_array()){
+    $schGen = new SchedaAssessmentGeneralizzato($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11]);
+  }
+  $schGen->setAutoregPositivi($aspPosAut);
+  $schGen->setAutoregNegativi($aspNegAut);
+  $schGen->setCognitivePositivi($aspPosCog);
+  $schGen->setCognitiveNegativi($aspNegCog);
+  $schGen->setSelfManagementPositivi($aspPosSM);
+  $schGen->setSelfManagementNegativi($aspNegSM);
+  $schGen->setSocialiPositivi($aspPosSo);
+  $schGen->setSocialiNegativi($aspNegSo);
+
+  $upd=DatabaseInterface::updateQueryById($schGen->getArray(),SchedaAssessmentGeneralizzato::$tableName);
+
+  if($upd){
     header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
   }
 }

@@ -342,3 +342,22 @@ function saveScheda(dataS,idT){
 	xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	xhttp.send("action=saveScheda&idTerapia="+idT+"&data="+dataS);
 }
+///////////////////////////////////////////////////////////////////////////////Generalizzato
+$('#formGen').hide();
+$('#confMod').hide();
+function mostraForm(){
+  $('#formGen').show();
+  $('#creaSch').hide();
+}
+function hide(){
+  $('#formGen').hide();
+  $('#creaSch').show();
+}
+function abilita(){
+  var textarea = document.getElementsByClassName('form-control');
+  for(var i=0;i<textarea.length;i++){
+    textarea[i].readOnly = false;
+  }
+  $('#btnAbMod').hide();
+  $('#confMod').show();
+}
