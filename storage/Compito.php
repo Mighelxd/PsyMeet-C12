@@ -19,11 +19,20 @@ class Compito
 	private $effettuato;
 	private $cfPaz;
 	private $cfProf;
-	private static $tableName="compito";
+	private static $tableName='compito';
 
 
-	public function __construct($id, $data, $effettuato, $titolo, $descrizione, $svolgimento, $correzione, $cfProf, $cfPaz)
-	{
+	public function __construct(
+		$id,
+		$data,
+		$effettuato,
+		$titolo,
+		$descrizione,
+		$svolgimento,
+		$correzione,
+		$cfProf,
+		$cfPaz
+	) {
 		$this->id= $id;
 		$this->data = $data;
 		$this->effettuato= $effettuato;
@@ -128,6 +137,6 @@ class Compito
 
 	public function getArray()
 	{
-		return array("id_compito"=>$this->id, "data"=>$this->data, "effettuato"=>$this->effettuato, "titolo"=>$this->titolo, "descrizione"=>$this->descrizione, "svolgimento"=>$this->svolgimento, "correzione"=>$this->correzione, "cf_prof"=>$this->cfProf, "cf"=>$this->cfPaz);
+		return ['id_compito'=>$this->id, 'data'=>$this->data, 'effettuato'=>$this->effettuato, 'titolo'=>$this->titolo, 'descrizione'=>$this->descrizione, 'svolgimento'=>$this->svolgimento, 'correzione'=>$this->correzione, 'cf_prof'=>$this->cfProf, 'cf'=>$this->cfPaz];
 	}
 }
