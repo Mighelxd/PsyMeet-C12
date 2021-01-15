@@ -221,17 +221,32 @@
 
         <!-- Main content -->
         <section class="content">
-
+            <div class="col-lg-12">
             <!-- Default box -->
-            <div class="card">
+            <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Videochiamata con <?php echo $paziente->getNome()." ".$paziente->getCognome();  ?></h3>
                 </div>
                 <div class="card-body">
-                    <div id="videochiamata" hidden="true">
-
+                    <div class="row">
+                        <div class="col-lg-6" id="videochiamata">
+                        </div>
+                        <div class="col-lg-3" id="bottoni">
+                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Cartella Clinica</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Dati Paziente</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Compiti</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede" onclick="terminaChiamata()">Termina chiamata</button>
+                        </div>
+                        <div class="col-lg-3" id="sedute">
+                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Scheda Primo Colloquio</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Scheda Assessment Focalizzato</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Scheda Assessment Generalizzato</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Scheda Assessment FollowUp</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Scheda Assessment ModelloEziologico</button>
+                        </div>
                     </div>
                 </div>
+            </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <form id="formChiamata" method="post">
@@ -247,7 +262,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
+</div>
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
             <b>Version</b> 3.0.5
@@ -264,6 +279,7 @@
 </div>
 <!-- ./wrapper -->
 <script>
+    $(".card-body").hide();
     $("#formChiamata").submit(function(e){
         e.preventDefault();
         $.ajax({
@@ -274,8 +290,8 @@
                 var response=JSON.parse(data);
                 if(response.esito==true){
                     $("#formChiamata").remove();
-                    $("#videochiamata").show();
-                    var api=videoChiamata("<?php echo md5($professionista->getNome().$professionista->getCognome().$paziente->getCognome().$paziente->getNome().rand(1,100)); ?>")
+                    $(".card-body").show();
+                    var api=iniziaChiamata("<?php echo md5($paziente->getCognome().$paziente->getNome()); ?>")
                 }
                 console.log(response);
             },
@@ -286,6 +302,5 @@
     })
 </script>
 </body>
-
 
 </html>
