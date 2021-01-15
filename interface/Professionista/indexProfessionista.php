@@ -347,13 +347,26 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach($pazienti as $paziente){?>
+                                    <?php
+                                     if($pazienti != NULL){
+
+                                        foreach($pazienti as $paziente){ ?>
                                         <tr>
                                             <td><?php echo $paziente->getNome(); ?></td>
                                             <td><?php echo $paziente->getCognome(); ?></td>
                                             <td><a href="../../applicationLogic/videoConferenzaControl.php" class="btn btn-block btn-danger btn-sm"><i class="fas fa-book"></i></a></td>
                                         </tr>
-                                    <?php } ?>
+                                    <?php }
+                                     }
+
+                                    else{
+                                        echo '<tr>
+                                            <td>vuoto</td>
+                                            <td>vuoto</td>
+                                            <td>vuoto</td>
+                                        </tr>';
+                                    }
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
