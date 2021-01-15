@@ -375,14 +375,7 @@ else
           </div><br>
           <label for="descTer">Descrizione</label>
           <input type="text" name="descTer" class="form-control" required/>
-          <label for="selPaz">Pazienti</label><br>
-          <select id="selPaz" name="selPaz">
-              <?php
-              $listaPazienti = PazienteControl::getListPaz();
-              for($i=0;$i<count($listaPazienti);$i++){ ?>
-                  <option value='<?php $listaPazienti[$i]->getCf() ?>'> <?php echo $listaPazienti[$i]->getNome()." ".$listaPazienti[$i]->getCognome() ?> </option>
-           <?php   } ?>
-          </select> <br><br>
+          <br>
           <button type="submit" id="modBtnTer" name="action" value="modTer" class="btn btn-primary float-right">Conferma Modifica</button>
           <button type="submit" id="addBtnTer" name="action" value="addTer" class="btn btn-primary float-right">Aggiungi Terapia</button>
           <button type="button" id="btnAnMod" class="btn btn-secondary" onclick="annModTer()">Annulla</button>

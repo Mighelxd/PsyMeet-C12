@@ -27,6 +27,9 @@ if(isset($_SESSION['idTerCorr'])){
     }
   }
 }
+else{
+    header("Location: Pazienti.php");
+}
   ?>
 <!DOCTYPE html>
 <html>

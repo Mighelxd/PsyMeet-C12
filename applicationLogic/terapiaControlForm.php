@@ -14,9 +14,7 @@ else{
 if($action == 'addTer'){
    $cfPaz = $_SESSION["cfPazTer"];
    $cfProf = $_SESSION["codiceFiscale"];
-   $cfPaz = $_POST['selPaz'];
    $data = date("Y-m-d");
-
    $desc = $_POST['descTer'];
 
    $att = array("data" => $data, "descrizione" => $desc, "cf_prof" => $cfProf, "cf" => $cfPaz);
@@ -47,7 +45,7 @@ else if($action == 'delTer'){
 
   $ok=DatabaseInterface::deleteQuery($key,Terapia::$tableName);
   if($ok){
-    header("Location: ../interface/Professionista/gestioneTerapia.php");
+    header("Location: ../interface/Professionista/Pazienti.php");
   }
 }
 

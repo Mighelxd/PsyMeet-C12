@@ -20,6 +20,18 @@ if($tipoUtente != "professionista" || $tipoUtente == null){
 
 $cfProfessionista = $_SESSION["codiceFiscale"];
 $listPaz = PazienteControl::getPazientiByProf($cfProfessionista);
+$listPazNonCur = PazienteControl::getListPaz();
+if($listPazNonCur != null && $listPaz !=null){
+    for($j=0;$j<count($listPaz);$j++){
+        for($i=0;$i<count($listPazNonCur);$i++){
+            if($listPazNonCur[$i]->getCf() == $listPaz[$j]->getCf()){
+                unset($listPazNonCur[$i]);
+                $listPazNonCur = array_values($listPazNonCur);
+                break;
+            }
+        }
+    }
+}
 $_SESSION["cfPazTer"] = "";
 
  ?>
@@ -163,109 +175,201 @@ $_SESSION["cfPazTer"] = "";
     <section class="content" >
       <div class="container-fluid">
         <div class="row">
-<div class="col-lg-12" >
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-body p-0">
-          <table class="table table-striped projects">
-              <thead>
-                  <tr>
-                      <th >
-                          Nome e Cognome
-                      </th>
-                      <th >
-                          Avatar
-                      </th>
-                      <th>
-                        Dettagli
-                      </th>
+        <div class="col-lg-12" >
+              <!-- Default box -->
+              <div class="card">
+                <div class="card-body p-0">
+                  <table class="table table-striped projects">
+                      <thead>
+                          <tr>
+                              <th >
+                                  Nome e Cognome
+                              </th>
+                              <th >
+                                  Avatar
+                              </th>
+                              <th>
+                                Dettagli
+                              </th>
 
-                      <th >
-                      </th>
-                  </tr>
-              </thead>
-              <?php if($listPaz != null){ ?>
-              <tbody>
+                              <th >
+                              </th>
+                          </tr>
+                      </thead>
+                      <?php if($listPaz != null){ ?>
+                      <tbody>
 
-                <?php for($i=0 ; $i < count($listPaz) ; $i++){
-                  $img=base64_encode($listPaz[$i]->getFotoProfiloPaz()); ?>
-                  <tr>
+                        <?php for($i=0 ; $i < count($listPaz) ; $i++){
+                          $img=base64_encode($listPaz[$i]->getFotoProfiloPaz()); ?>
+                          <tr>
 
-                      <td>
-                          <a>
-                              <?php echo $listPaz[$i]->getNome() ." ". $listPaz[$i]->getCognome();?>
-                          </a>
-                          <br/>
+                              <td>
+                                  <a>
+                                      <?php echo $listPaz[$i]->getNome() ." ". $listPaz[$i]->getCognome();?>
+                                  </a>
+                                  <br/>
 
-                      </td>
-                      <td>
-                            <?php if($img != NULL){
-                               echo '<img class="table-avatar" src="data:image/jpeg;base64,'.$img.'"/>';
-                            }
+                              </td>
+                              <td>
+                                    <?php if($img != NULL){
+                                       echo '<img class="table-avatar" src="data:image/jpeg;base64,'.$img.'"/>';
+                                    }
 
-                            else {
-                              echo '<img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">';
-                            }
-                            ?>
-
-
-                      </td>
-                      <td style=" padding-left: 35px;">
-
-                        <form class="" action="SchedaPaziente.php" method="post">
-                          <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
-                            <button type="submit" class="btn btn-primary btn-sm" name="button" >
-
-                              <i class="fas fa-search" ></i>
-                            </button>
-
-                            </form>
-                      <!--      <a href="SchedaPaziente.html" class="text-muted">
-                          <i class="fas fa-search"></i>
-                        </a>-->
+                                    else {
+                                      echo '<img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">';
+                                    }
+                                    ?>
 
 
-                      </td>
-                      <td class="project-actions text-right">
-                      <form class="" action="../../applicationLogic/CartellaClinicaControl.php" method="post">
-                        <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
-                        <input type="text" name="azione" value="visualizza" hidden ="true">
-                          <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
-                              <i class="nav-icon fas fa-table">
-                                Cartella Clinica
-                              </i>
-                      </form>
-                      <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
-                      <form class="" action="gestioneTerapia.php" method="post">
-                        <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
-                          <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
-                              <i class="nav-icon fas fa-table">
-                                Terapia
-                              </i>
+                              </td>
+                              <td style=" padding-left: 35px;">
 
-                          </button>
+                                <form class="" action="SchedaPaziente.php" method="post">
+                                  <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
+                                    <button type="submit" class="btn btn-primary btn-sm" name="button" >
 
-                          </form>
-                      </td>
-                  </tr>
-                <?php } ?>
-              </tbody>
-              <?php } ?>
-          </table>
+                                      <i class="fas fa-search" ></i>
+                                    </button>
+
+                                    </form>
+                              <!--      <a href="SchedaPaziente.html" class="text-muted">
+                                  <i class="fas fa-search"></i>
+                                </a>-->
+
+
+                              </td>
+                              <td class="project-actions text-right">
+                              <form class="" action="../../applicationLogic/CartellaClinicaControl.php" method="post">
+                                <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
+                                <input type="text" name="azione" value="visualizza" hidden ="true">
+                                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
+                                      <i class="nav-icon fas fa-table">
+                                        Cartella Clinica
+                                      </i>
+                              </form>
+                              <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
+                              <form class="" action="gestioneTerapia.php" method="post">
+                                <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
+                                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
+                                      <i class="nav-icon fas fa-table">
+                                        Terapia
+                                      </i>
+
+                                  </button>
+
+                                  </form>
+                              </td>
+                          </tr>
+                        <?php } ?>
+                      </tbody>
+                      <?php } ?>
+                  </table>
+                </div>
+              </div>
+            </div>
+        <?php echo $_SESSION["cfPazTer"]; ?>
+
+
+                <!-- /.card-body -->
         </div>
-      </div>
-    </div>
-<?php echo $_SESSION["cfPazTer"]; ?>
-
-
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
-
-
-
+              <!-- /.card -->
     </section>
     <!-- /.content -->
+
+
+          <section class="content">
+              <h5>Pazienti non in cura</h5>
+              <!-- Lista Pazienti non in cura-->
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-lg-12" >
+                          <!-- Default box -->
+                          <div class="card">
+                              <div class="card-body p-0">
+                                  <table class="table table-striped projects">
+                                      <thead>
+                                      <tr>
+                                          <th >
+                                              Nome e Cognome
+                                          </th>
+                                          <th >
+                                              Avatar
+                                          </th>
+                                          <th>
+                                              Dettagli
+                                          </th>
+
+                                          <th >
+                                          </th>
+                                      </tr>
+                                      </thead>
+                                      <?php if($listPazNonCur != null){ ?>
+                                          <tbody>
+
+                                          <?php for($i=0 ; $i < count($listPazNonCur) ; $i++){
+                                              $img=base64_encode($listPazNonCur[$i]->getFotoProfiloPaz()); ?>
+                                              <tr>
+
+                                                  <td>
+                                                      <a>
+                                                          <?php echo $listPazNonCur[$i]->getNome() ." ". $listPazNonCur[$i]->getCognome();?>
+                                                      </a>
+                                                      <br/>
+
+                                                  </td>
+                                                  <td>
+                                                      <?php if($img != NULL){
+                                                          echo '<img class="table-avatar" src="data:image/jpeg;base64,'.$img.'"/>';
+                                                      }
+
+                                                      else {
+                                                          echo '<img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">';
+                                                      }
+                                                      ?>
+
+
+                                                  </td>
+                                                  <td style=" padding-left: 35px;">
+
+                                                      <form class="" action="SchedaPaziente.php" method="post">
+                                                          <input type="text" name="codFiscalePaz" value="<?php echo $listPazNonCur[$i]->getCf();  ?>" hidden ="true">
+                                                          <button type="submit" class="btn btn-primary btn-sm" name="button" >
+
+                                                              <i class="fas fa-search" ></i>
+                                                          </button>
+
+                                                      </form>
+                                                      <!--      <a href="SchedaPaziente.html" class="text-muted">
+                                                          <i class="fas fa-search"></i>
+                                                        </a>-->
+
+
+                                                  </td>
+                                                  <td class="project-actions text-right">
+                                                      <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
+                                                      <form class="" action="gestioneTerapia.php" method="post">
+                                                          <input type="text" name="codFiscalePaz" value="<?php echo $listPazNonCur[$i]->getCf();  ?>" hidden ="true">
+                                                          <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
+                                                              <i class="nav-icon fas fa-table">
+                                                                  Inizia una terapia
+                                                              </i>
+
+                                                          </button>
+
+                                                      </form>
+                                                  </td>
+                                              </tr>
+                                          <?php } ?>
+                                          </tbody>
+                                      <?php } ?>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+          </section>
 
 
   </div>
