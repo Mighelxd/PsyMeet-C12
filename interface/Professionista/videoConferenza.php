@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 <html>
+<?php
+    include "../../storage/DatabaseInterface.php";
+    include "../../storage/Professionista.php";
+    include "../../storage/Terapia.php";
+    include  "../../storage/Paziente.php";
+    include "../../plugins/libArray/FunArray.php";
+    include "../../applicationLogic/PazienteControl.php";
+    session_start();
+    if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
+    header("Location: ../Utente/login.php");
+    exit();
+    }
+    $cf=$_SESSION["codiceFiscale"];
+    if(!isset($_SESSION["paziente"])){
+        header("Location: indexProfessionista.php");
+        exit();
+    }
+?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -183,7 +201,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Blank Page</h1>
+                        <h1></h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
