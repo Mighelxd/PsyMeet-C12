@@ -5,6 +5,7 @@ include '../storage/DatabaseInterface.php';
 include '../storage/SchedaAssessmentFocalizzato.php';
 include '../storage/Episodio.php';
 include '../storage/SchedaAssessmentGeneralizzato.php';
+include '../storage/SchedaPrimoColloquio.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $action = $_POST['action'];
@@ -203,6 +204,58 @@ else if($action == 'modSchGen'){
 
   if($upd){
     header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
+  }
+}
+/////////////////////////////////////////////////////////////SPQ
+else if($action == 'addSPQ'){
+  $data = date("Y/m/d");
+  $defP = $_POST['defP'];
+  $aspP = $_POST['aspP'];
+  $mot = $_POST['mot'];
+  $obt = $_POST['obt'];
+  $defC = $_POST['defC'];
+  $tipo= "Scheda Primo Colloquio";
+  $idTerCorr = $_SESSION['idTerCorr'];
+
+  $att = array("data" => $data, "problema" => $defP, "aspettative" => $aspP, "motivazione" => $mot, "obiettivi" => $obt,"cambiamento" => $defC, "id_terapia" => $idTerCorr,"tipo" =>$tipo);
+
+  $ok = DatabaseInterface::insertQuery($att,SchedaPrimoColloquio::$tableName);
+  if($ok){
+    header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
+  }
+}
+else if($action == 'modSPQ'){
+  $defP = $_POST['defP'];
+  $aspP = $_POST['aspP'];
+  $mot = $_POST['mot'];
+  $obt = $_POST['obt'];
+  $defC = $_POST['defC'];
+  $tipo= "Scheda Primo Colloquio";
+  $idTerCorr = $_SESSION['idTerCorr'];
+
+  $key=array("id_terapia"=>$idTerCorr);
+  $rec=DatabaseInterface::selectQueryById($key,SchedaPrimoColloquio::$tableName);
+  while($row = $rec->fetch_array()){
+    $sPq = new SchedaPrimoColloquio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
+  }
+  $sPq->setProblema($defP);
+  $sPq->setAspettative($aspP);
+  $sPq->setMotivazione($mot);
+  $sPq->setObiettivi($obt);
+  $sPq->setCambiamento($defC);
+
+  $upd = DatabaseInterface::updateQueryById($sPq->getArray(),SchedaPrimoColloquio::$tableName);
+  if($upd){
+    header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
+  }
+}
+else if($action == 'delSPQ'){
+  $idTerCorr = $_SESSION['idTerCorr'];
+
+  $key=array("id_terapia"=>$idTerCorr);
+  $ok=DatabaseInterface::deleteQuery($key,SchedaPrimoColloquio::$tableName);
+  if($ok){
+    header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
   }
 }
  ?>

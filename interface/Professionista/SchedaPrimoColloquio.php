@@ -16,14 +16,19 @@ if($tipoUtente != "professionista" || $tipoUtente == null){
   header("Location: ../Utente/login.php");
 }
 
+$exist = false;
 if(isset($_SESSION['idTerCorr'])){
   $idTerCorr = $_SESSION['idTerCorr'];
   $allSc = terapiaControl::recuperaSchede($idTerCorr);
   for($i=0;$i<count($allSc);$i++){
     if($allSc[$i]->getTipo() == 'Scheda Primo Colloquio'){
       $schPrimoColl[] = $allSc[$i];
+      $exist = true;
     }
   }
+}
+else{
+  header("Location: Pazienti.php");
 }
 ?>
 <!DOCTYPE html>
@@ -237,7 +242,7 @@ if(isset($_SESSION['idTerCorr'])){
             </a>
           </li>
           <li class="nav-item has-treeview menu-open">
-            <a href="Pazienti.html" class="nav-link">
+            <a href="Pazienti.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pazienti
@@ -254,14 +259,14 @@ if(isset($_SESSION['idTerCorr'])){
                 </a>
                 <ul class="nav nav-treeview" style="padding-left: 2%;">
                   <li class="nav-item has-treeview">
-                    <a href="gestioneTerapia.html" class="nav-link">
+                    <a href="gestioneTerapia.php" class="nav-link">
                       <i class="fas fa-clipboard nav-icon"></i>
                       <p>Terapia
                       </p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="cartellaClinica.html" class="nav-link">
+                    <a href="cartellaClinica.php" class="nav-link">
                       <i class="fas fa-notes-medical nav-icon"></i>
                       <p>Cartella clinica</p>
                     </a>
@@ -281,35 +286,35 @@ if(isset($_SESSION['idTerCorr'])){
                       </a>
                       <ul class="nav nav-treeview" style="padding-left: 1%;">
                         <li class="nav-item">
-                          <a href="SchedaPrimoColloquio.html" class="nav-link active">
+                          <a href="SchedaPrimoColloquio.php" class="nav-link active">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Primo colloquio
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaAssessmentGeneralizzato.html" class="nav-link">
+                          <a href="SchedaAssessmentGeneralizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment generalizzato
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaAssessmentFocalizzato.html" class="nav-link">
+                          <a href="SchedaAssessmentFocalizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment focalizzato
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaFollowUp.html" class="nav-link">
+                          <a href="SchedaFollowUp.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Follow-up
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaModelloEziologico.html" class="nav-link">
+                          <a href="SchedaModelloEziologico.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Modello eziologico
                             </p>
@@ -318,7 +323,7 @@ if(isset($_SESSION['idTerCorr'])){
                       </ul>
                     </li>
                     <li class="nav-item">
-                      <a href="gestioneCompiti.html" class="nav-link">
+                      <a href="gestioneCompiti.php" class="nav-link">
                         <i class="fas fa-sticky-note nav-icon"></i>
                         <p>Compiti
                         </p>
@@ -339,7 +344,7 @@ if(isset($_SESSION['idTerCorr'])){
 
           </li>
           <li class="nav-item has-treeview">
-            <a href="Pacchetti.html" class="nav-link">
+            <a href="gestionePacchettiProf.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Pacchetti
@@ -375,7 +380,9 @@ if(isset($_SESSION['idTerCorr'])){
     </section>
 
     <!-- Main content -->
+    <?php if($exist){ ?>
     <section class="content">
+      <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
       <div class="row">
         <div class="col-md-12">
           <div class="card card-primary">
@@ -390,23 +397,23 @@ if(isset($_SESSION['idTerCorr'])){
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Definizione Problema</label>
-                <textarea id="inputDescription" class="form-control" rows="3"></textarea>
+                <textarea id="inputDescription" name="defP" class="form-control" rows="3"><?php echo $schPrimoColl[0]->getProblema(); ?></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Aspettative Paziente</label>
-                <textarea id="inputDescription" class="form-control" rows="3"></textarea>
+                <textarea id="inputDescription" name="aspP" class="form-control" rows="3"><?php echo $schPrimoColl[0]->getAspettative(); ?></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Motivazione</label>
-                <textarea id="inputDescription" class="form-control" rows="3"></textarea>
+                <textarea id="inputDescription" name="mot" class="form-control" rows="3"><?php echo $schPrimoColl[0]->getMotivazione(); ?></textarea>
               </div>
               <div class="form-group">
-                <label for="inputDescription">Obiettivo</label>
-                <textarea id="inputDescription" class="form-control" rows="3"></textarea>
+                <label for="inputDescription">Obiettivi</label>
+                <textarea id="inputDescription" name="obt" class="form-control" rows="3"><?php echo $schPrimoColl[0]->getObiettivi(); ?></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Definizione di cambiamento</label>
-                <textarea id="inputDescription" class="form-control" rows="3"></textarea>
+                <textarea id="inputDescription" name="defC" class="form-control" rows="3"><?php echo $schPrimoColl[0]->getCambiamento(); ?></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -418,22 +425,73 @@ if(isset($_SESSION['idTerCorr'])){
       </div>
       <div class="row">
         <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancella scheda</a>
-          <input type="submit" value="Salva Scheda" class="btn btn-success float-right">
+          <button type='submit' id='BtnModNPQ' name="action" value="modSPQ" class='btn btn-primary float-right'>Modifica</button>
         </div>
       </div>
+    </form>
+    <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
+      <button type='submit' id='BtnDelNPQ' name="action" value="delSPQ" class='btn btn-danger'>Elimina</button>
+    </form>
     </section>
     <!-- /.content -->
+  <?php }
+        else{
+          echo("<button type='button' id='btnNPQ' class='btn btn-primary' onclick='newSchPQ()'>Nuova Scheda</button>");
+        } ?>
+
+        <section class="content" id="nuovoPQ">
+          <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Scheda Primo Colloquio</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                      <i class="fas fa-minus"></i></button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="inputDescription">Definizione Problema</label>
+                    <textarea id="inputDescription" name="defP" class="form-control" rows="3"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDescription">Aspettative Paziente</label>
+                    <textarea id="inputDescription" name="aspP" class="form-control" rows="3"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDescription">Motivazione</label>
+                    <textarea id="inputDescription" name="mot" class="form-control" rows="3"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDescription">Obiettivo</label>
+                    <textarea id="inputDescription" name="obt" class="form-control" rows="3"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDescription">Definizione di cambiamento</label>
+                    <textarea id="inputDescription" name="defC" class="form-control" rows="3"></textarea>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+
+              <!-- /.card -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button type='button' id='AnnBtnNPQ' class='btn btn-secondary' onclick='AnnNewSchPQ()'>Annulla</button>
+              <button type='submit' id='BtnAddNPQ' name="action" value="addSPQ" class='btn btn-primary float-right'>Aggiungi</button>
+            </div>
+          </div>
+        </form>
+        </section>
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.5
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
-  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -451,5 +509,16 @@ if(isset($_SESSION['idTerCorr'])){
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+<script>
+$('#nuovoPQ').hide();
+function newSchPQ(){
+  $('#nuovoPQ').show();
+  $('#btnNPQ').hide();
+}
+function AnnNewSchPQ(){
+  $('#nuovoPQ').hide();
+  $('#btnNPQ').show();
+}
+</script>
 </body>
 </html>
