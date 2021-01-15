@@ -112,7 +112,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
-            <a href="indexProfessionista.html" class="nav-link">
+            <a href="indexProfessionista.php" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Area Informativa

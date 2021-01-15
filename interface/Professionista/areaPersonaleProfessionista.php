@@ -95,7 +95,7 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
           ?>
         </div>
         <div class="info">
-          <a href="areaPersonale.html" class="d-block"><?php echo $Professionista->getNome() ." ". $Professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+          <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $Professionista->getNome() ." ". $Professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
         </div>
       </div>
 
@@ -105,7 +105,7 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
-            <a href="indexProfessionista.html" class="nav-link">
+            <a href="indexProfessionista.php" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Area Informativa
