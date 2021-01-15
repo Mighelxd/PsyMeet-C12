@@ -16,12 +16,14 @@ if($tipoUtente != "professionista" || $tipoUtente == null){
   header("Location: ../Utente/login.php");
 }
 
+$exist = false;
 if(isset($_SESSION['idTerCorr'])){
   $idTerCorr = $_SESSION['idTerCorr'];
   $allSc = terapiaControl::recuperaSchede($idTerCorr);
   for($i=0;$i<count($allSc);$i++){
     if($allSc[$i]->getTipo() == 'Scheda Follow Up'){
       $schFollow[] = $allSc[$i];
+      $exist = true;
     }
   }
 }
@@ -283,7 +285,7 @@ if(isset($_SESSION['idTerCorr'])){
               </a>
             </li>
             <li class="nav-item has-treeview menu-open">
-              <a href="Pazienti.html" class="nav-link">
+              <a href="Pazienti.php" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Pazienti
@@ -300,14 +302,14 @@ if(isset($_SESSION['idTerCorr'])){
                   </a>
                   <ul class="nav nav-treeview" style="padding-left: 2%;">
                     <li class="nav-item has-treeview">
-                      <a href="gestioneTerapia.html" class="nav-link">
+                      <a href="gestioneTerapia.php" class="nav-link">
                         <i class="fas fa-clipboard nav-icon"></i>
                         <p>Terapia
                         </p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="cartellaClinica.html" class="nav-link">
+                      <a href="cartellaClinica.php" class="nav-link">
                         <i class="fas fa-notes-medical nav-icon"></i>
                         <p>Cartella clinica</p>
                       </a>
@@ -327,35 +329,35 @@ if(isset($_SESSION['idTerCorr'])){
                         </a>
                         <ul class="nav nav-treeview" style="padding-left: 1%;">
                           <li class="nav-item">
-                            <a href="SchedaPrimoColloquio.html" class="nav-link">
+                            <a href="SchedaPrimoColloquio.php" class="nav-link">
                               <i class="fas fa-clipboard nav-icon"></i>
                               <p>Primo colloquio
                               </p>
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="SchedaAssessmentGeneralizzato.html" class="nav-link">
+                            <a href="SchedaAssessmentGeneralizzato.php" class="nav-link">
                               <i class="fas fa-clipboard nav-icon"></i>
                               <p>Assessment generalizzato
                               </p>
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="SchedaAssessmentFocalizzato.html" class="nav-link">
+                            <a href="SchedaAssessmentFocalizzato.php" class="nav-link">
                               <i class="fas fa-clipboard nav-icon"></i>
                               <p>Assessment focalizzato
                               </p>
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="SchedaFollowUp.html" class="nav-link active">
+                            <a href="SchedaFollowUp.php" class="nav-link active">
                               <i class="fas fa-clipboard nav-icon"></i>
                               <p>Follow-up
                               </p>
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="SchedaModelloEziologico.html" class="nav-link">
+                            <a href="SchedaModelloEziologico.php" class="nav-link">
                               <i class="fas fa-clipboard nav-icon"></i>
                               <p>Modello eziologico
                               </p>
@@ -364,7 +366,7 @@ if(isset($_SESSION['idTerCorr'])){
                         </ul>
                       </li>
                       <li class="nav-item">
-                        <a href="gestioneCompiti.html" class="nav-link">
+                        <a href="gestioneCompiti.php" class="nav-link">
                           <i class="fas fa-sticky-note nav-icon"></i>
                           <p>Compiti
                           </p>
@@ -385,7 +387,7 @@ if(isset($_SESSION['idTerCorr'])){
 
             </li>
             <li class="nav-item has-treeview">
-              <a href="Pacchetti.html" class="nav-link">
+              <a href="gestionePacchettiProf.php" class="nav-link">
                 <i class="nav-icon fas fa-shopping-cart"></i>
                 <p>
                   Pacchetti
@@ -420,7 +422,9 @@ if(isset($_SESSION['idTerCorr'])){
     </section>
 
     <!-- Main content -->
+    <?php if($exist){ ?>
     <section class="content">
+      <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
       <div class="row">
         <div class="col-md-12">
           <div class="card card-primary">
@@ -435,11 +439,11 @@ if(isset($_SESSION['idTerCorr'])){
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Ricadute</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" name="ric" class="form-control" rows="4"><?php echo $schFollow[0]->getRicadute(); ?></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Esiti Positivi</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" name="esPos" class="form-control" rows="4"><?php echo $schFollow[0]->getEsitiPositivi(); ?></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -451,22 +455,60 @@ if(isset($_SESSION['idTerCorr'])){
       </div>
       <div class="row">
         <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancella</a>
-          <input type="submit" value="Salva Scheda" class="btn btn-success float-right">
+          <button type='submit' id='BtnModNFU' name="action" value="modSFU" class='btn btn-primary float-right'>Modifica</button>
         </div>
       </div>
+    </form>
+    <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
+      <button type='submit' id='BtnDelNFU' name="action" value="delSFU" class='btn btn-danger'>Elimina</button>
+    </form>
     </section>
     <!-- /.content -->
+  <?php }
+        else{
+          echo("<button type='button' id='btnNFU' class='btn btn-primary' onclick='newSchFU()'>Nuova Scheda</button>");
+        } ?>
+
+        <section class="content" id="nuovoFU">
+          <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Scheda Follow Up</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                      <i class="fas fa-minus"></i></button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="inputDescription">Ricadute</label>
+                    <textarea id="inputDescription" name="ric" class="form-control" rows="4"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDescription">Esiti Positivi</label>
+                    <textarea id="inputDescription" name="esPos" class="form-control" rows="4"></textarea>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+
+
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button type='button' id='AnnBtnNFU' class='btn btn-secondary' onclick='AnnNewSchFU()'>Annulla</button>
+              <button type='submit' id='BtnAddNFU' name="action" value="addSFU" class='btn btn-primary float-right'>Aggiungi</button>
+            </div>
+          </div>
+        </form>
+        </section>
   </div>
   <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.5
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
-  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -484,5 +526,16 @@ if(isset($_SESSION['idTerCorr'])){
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+<script>
+$('#nuovoFU').hide();
+function newSchFU(){
+  $('#nuovoFU').show();
+  $('#btnNFU').hide();
+}
+function AnnNewSchFU(){
+  $('#nuovoFU').hide();
+  $('#btnNFU').show();
+}
+</script>
 </body>
 </html>

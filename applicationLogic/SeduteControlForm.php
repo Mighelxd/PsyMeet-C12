@@ -6,6 +6,7 @@ include '../storage/SchedaAssessmentFocalizzato.php';
 include '../storage/Episodio.php';
 include '../storage/SchedaAssessmentGeneralizzato.php';
 include '../storage/SchedaPrimoColloquio.php';
+include '../storage/SchedaFollowUp.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $action = $_POST['action'];
@@ -256,6 +257,48 @@ else if($action == 'delSPQ'){
   $ok=DatabaseInterface::deleteQuery($key,SchedaPrimoColloquio::$tableName);
   if($ok){
     header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
+  }
+}
+/////////////////////////////////////////////Follow up
+else if($action == 'addSFU'){
+  $data = date("Y-m-d");
+  $ric = $_POST['ric'];
+  $esPos = $_POST['esPos'];
+  $tipo= "Scheda Follow Up";
+  $idTerCorr = $_SESSION['idTerCorr'];
+
+  $att = array("data" => $data, "ricadute" => $ric, "esiti_positivi" => $esPos, "id_terapia" => $idTerCorr,"tipo" => $tipo);
+
+  $ok = DatabaseInterface::insertQuery($att,SchedaFollowUp::$tableName);
+  if($ok){
+    header("Location: ../interface/Professionista/SchedaFollowUp.php");
+  }
+}
+else if($action == 'modSFU'){
+  $ric = $_POST['ric'];
+  $esPos = $_POST['esPos'];
+  $idTerCorr = $_SESSION['idTerCorr'];
+
+  $key=array("id_terapia"=>$idTerCorr);
+  $rec=DatabaseInterface::selectQueryById($key,SchedaFollowUp::$tableName);
+  while($row = $rec->fetch_array()){
+    $sFu = new SchedaFollowUp($row[0],$row[1],$row[2],$row[3],$row[4],$row[5]);
+  }
+  $sFu->setRicadute($ric);
+  $sFu->setEsitiPositivi($esPos);
+
+  $upd = DatabaseInterface::updateQueryById($sFu->getArray(),SchedaFollowUp::$tableName);
+  if($upd){
+    header("Location: ../interface/Professionista/SchedaFollowUp.php");
+  }
+}
+else if($action == 'delSFU'){
+  $idTerCorr = $_SESSION['idTerCorr'];
+
+  $key=array("id_terapia"=>$idTerCorr);
+  $ok=DatabaseInterface::deleteQuery($key,SchedaFollowUp::$tableName);
+  if($ok){
+    header("Location: ../interface/Professionista/SchedaFollowUp.php");
   }
 }
  ?>
