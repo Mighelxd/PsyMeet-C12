@@ -1,3 +1,26 @@
+<?php
+    include "../../storage/DatabaseInterface.php";
+    include "../../storage/Professionista.php";
+    include "../../storage/Terapia.php";
+    include  "../../storage/Paziente.php";
+    include "../../plugins/libArray/FunArray.php";
+    include "../../applicationLogic/PazienteControl.php";
+    session_start();
+    if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
+        header("Location: ../Utente/login.php");
+        exit();
+    }
+    $cf=$_SESSION["codiceFiscale"];
+    $result=DatabaseInterface::selectQueryById(array("cf_prof"=>$cf), Professionista::$tableName);
+    if(!isset($result)||$result==false || $result->num_rows!=1){
+        header("Location: ../Utente/login.php");
+        exit();
+    }
+    $result=$result->fetch_array();
+    $professionista = new Professionista($cf, $result["nome"],$result["cognome"],$result["data_nascita"],$result["email"],$result["telefono"],$result["cellulare"],$result["passwor"],$result["indirizzo_studio"],$result["esperienze"],$result["pubblicazioni"],$result["titolo_studio"],$result["n_iscrizione_albo"],$result["partita_iva"],$result["pec"],$result["specializzazione"],$result["polizza_RC"],$result["foto_profilo_professionista"]);
+    $pazienti=PazienteControl::getPazientiByProf($cf);
+    ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,135 +54,13 @@
 <body class="hold-transition sidebar-mini layout-fixed" onload="rimuovi()">
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-    </ul>
-
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a href="indexProfessionista.php" class="brand-link">
+      <img src="../../dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">PsyMeet</span>
     </a>
 
     <!-- Sidebar -->
@@ -167,10 +68,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img <?php if($professionista->getImmagineProfessionista()!=null){ ?>src="<?php  echo '<img src="data:image/jpeg;base64,'. base64_encode($professionista->getImmagineProfessionista()) .'"/>' ?>" <?php } ?> class="img-circle elevation-2" alt="User Image" style="max-width: 160px; max-height: 160px;>
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?php echo $professionista->getNome() ?></a>
         </div>
       </div>
 
@@ -179,7 +80,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" >
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="indexProfessionista.php" class="brand-link">
       <img src="../../dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">PsyMeet</span>
@@ -193,7 +94,7 @@
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="areaPersonale.html" class="d-block">Alexander Pierce <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+          <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . " " . $professionista->getCognome() ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
         </div>
       </div>
 
@@ -258,7 +159,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="../Utente/Homepage.php">Home</a></li>
               <li class="breadcrumb-item active">Area Professionista</li>
             </ol>
           </div><!-- /.col -->
@@ -279,17 +180,17 @@
             <div class="card card-widget widget-user">
               <!-- Add the bg color to the header using any of the bg-* classes -->
               <div class="widget-user-header bg-info">
-                <h3 class="widget-user-username">Ugo Arturo</h3>
-                <h5 class="widget-user-desc">Psicoterapeuta</h5>
+                <h3 class="widget-user-username"><?php echo $professionista->getNome()." ".$professionista->getCognome() ?></h3>
+                <h5 class="widget-user-desc"><?php echo $professionista->getSpecializzazione() ?></h5>
               </div>
               <div class="widget-user-image">
-                <img id="imageprof" class="img-circle elevation-2" src="../../dist/img/user2-160x160.jpg" alt="User Avatar" style="max-width: 90; max-height: 90px;">
+                <img id="imageprof" class="img-circle elevation-2" <?php if($professionista->getImmagineProfessionista()!=null){ ?>src="<?php  echo '<img src="data:image/jpeg;base64,'. base64_encode($professionista->getImmagineProfessionista()) .'"/>' ?>" <?php } ?> alt="User Image" style="max-width: 90px; max-height: 90px;">
               </div>
               <div class="card-footer">
                 <div class="row">
                   <div class="col-sm-4 border-right">
                     <div class="description-block">
-                      <h5 class="description-header">fittizio@pec.it</h5>
+                      <h5 class="description-header"><?php echo $professionista->getPec() ?></h5>
                       <span class="description-text">PEC</span>
                     </div>
                     <!-- /.description-block -->
@@ -297,7 +198,7 @@
                   <!-- /.col -->
                   <div class="col-sm-4 border-right">
                     <div class="description-block">
-                      <h5 class="description-header">1234567890</h5>
+                      <h5 class="description-header"><?php echo $professionista->getCellulare() ?></h5>
                       <span class="description-text">CELLULARE</span>
                     </div>
                     <!-- /.description-block -->
@@ -305,7 +206,7 @@
                   <!-- /.col -->
                   <div class="col-sm-4">
                     <div class="description-block">
-                      <h5 class="description-header">Via mazzini 3</h5>
+                      <h5 class="description-header"><?php echo $professionista->getIndirizzoStudio() ?></h5>
                       <span class="description-text">Indirizzo Studio</span>
                     </div>
                     <!-- /.description-block -->
@@ -401,57 +302,6 @@
           <!-- /.Left col -->
           <!-- right col (We are only adding the ID to make the widgets sortable)-->
           <section class="col-lg-5 connectedSortable">
-           <!-- Calendar -->
-           <div class="card bg-gradient-success">
-            <div class="card-header border-0">
-
-              <h3 class="card-title">
-                <i class="far fa-calendar-alt"></i>
-                Calendar
-              </h3>
-              <!-- tools card -->
-              <div class="card-tools">
-                <!-- button with a dropdown -->
-                <div class="btn-group">
-                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                    <i class="fas fa-bars"></i></button>
-                  <div class="dropdown-menu" role="menu">
-                    <a href="#" class="dropdown-item">Add new event</a>
-                    <a href="#" class="dropdown-item">Clear events</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">View calendar</a>
-                  </div>
-                </div>
-                <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body pt-0">
-              <!--The calendar -->
-              <div id="calendar" style="width: 100%"></div>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
-                    <div id="sparkline-1"></div>
-                  <!-- ./col -->
-
-                    <div id="sparkline-2"></div>
-
-
-                  <!-- ./col -->
-
-                    <div id="sparkline-3"></div>
-
-
-                  <!-- ./col -->
            <!-- /.Table pazienti -->
            <div class="card">
             <div class="card-header">
@@ -460,7 +310,7 @@
             <!-- /.card-header -->
             <div class="card-body">
               <table class="table table-bordered">
-                <thead>
+                  <thead>
                   <tr>
                     <th>Nome</th>
                     <th>Cognome</th>
@@ -468,27 +318,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Mario</td>
-                    <td>Rossi</td>
-                    <td><a href="#" class="btn btn-block btn-danger btn-sm"><i class="fas fa-book"></i></a></td>
+                <?php foreach($pazienti as $paziente){?>
+                <tr>
+                    <td><?php echo $paziente->getNome(); ?></td>
+                    <td><?php echo $paziente->getCognome(); ?></td>
+                    <td><a href="../../applicationLogic/videoConferenzaControl.php" class="btn btn-block btn-danger btn-sm"><i class="fas fa-book"></i></a></td>
                   </tr>
-                  <tr>
-                    <td>Franco</td>
-                    <td>Bernardo</td>
-                    <td><a href="#" class="btn btn-block btn-danger btn-sm"><i class="fas fa-book"></i></a></td></td>
-                  </tr>
-                  <tr>
-                    <td>Francesco</td>
-                    <td>Capone</td>
-                    </td>
-                    <td><a href="#" class="btn btn-block btn-danger btn-sm"><i class="fas fa-book"></i></a></td></td>
-                  </tr>
-                  <tr>
-                    <td>Giuseppe</td>
-                    <td>D'Avino</td>
-                    <td><a href="#" class="btn btn-block btn-danger btn-sm"><i class="fas fa-book"></i></a></td></td>
-                  </tr>
+                <?php } ?>
                 </tbody>
               </table>
             </div>

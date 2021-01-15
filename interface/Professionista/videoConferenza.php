@@ -39,7 +39,7 @@
                     <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="areaPersonale.html" class="d-block">Alexander Pierce <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonaleProfessionista.php" class="d-block">Alexander Pierce <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
                                             <p>Cartella clinica</p>
                                         </a>
                                     <li class="nav-item">
-                                        <a href="schedaPaziente.html" class="nav-link">
+                                        <a href="schedaPaziente.php" class="nav-link">
                                             <i class="fas fa-id-card-alt nav-icon"></i>
                                             <p>Dati Paziente
                                             </p>

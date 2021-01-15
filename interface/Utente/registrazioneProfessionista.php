@@ -149,6 +149,13 @@
             </div>
           </div>
         </div>
+          <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="PEC" name="pec" id="pec" id="pec" required>
+              <div class="input-group-append">
+                  <div class="input-group-text">
+                  </div>
+              </div>
+          </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Password" id="password" name="password" pattern=".{8,25}" title="da 8 a 25 caratteri (Quaslaisi carattere consentito)" required>
           <div class="input-group-append">
