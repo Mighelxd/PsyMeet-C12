@@ -7,6 +7,7 @@ include '../storage/Episodio.php';
 include '../storage/SchedaAssessmentGeneralizzato.php';
 include '../storage/SchedaPrimoColloquio.php';
 include '../storage/SchedaFollowUp.php';
+include '../storage/SchedaModelloEziologico.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $action = $_POST['action'];
@@ -299,6 +300,53 @@ else if($action == 'delSFU'){
   $ok=DatabaseInterface::deleteQuery($key,SchedaFollowUp::$tableName);
   if($ok){
     header("Location: ../interface/Professionista/SchedaFollowUp.php");
+  }
+}
+/////////////////////////////////////////////////////////Scheda modello eziologico
+else if($action == 'addSME'){
+  $data = date("Y-m-d");
+  $idTerCorr = $_SESSION['idTerCorr'];
+  $tipo = "Scheda Modello Eziologico";
+  $fc = $_POST['fc'];
+  $fm = $_POST['fm'];
+  $fp = $_POST['fp'];
+  $rf = $_POST['rf'];
+
+  $mEz = new SchedaModelloEziologico(null,$data,$fc,$fp,$fm,$rf,$idTerCorr,$tipo);
+
+  $ok = DatabaseInterface::insertQuery($mEz->getArray(),SchedaModelloEziologico::$tableName);
+  if($ok){
+    header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
+  }
+}
+else if($action == 'modSME'){
+  $idTerCorr = $_SESSION['idTerCorr'];
+  $fc = $_POST['fc'];
+  $fm = $_POST['fm'];
+  $fp = $_POST['fp'];
+  $rf = $_POST['rf'];
+
+  $key= array("id_terapia"=>$idTerCorr);
+  $rec = DatabaseInterface::selectQueryById($key,SchedaModelloEziologico::$tableName);
+  while($row = $rec->fetch_array()){
+    $scME = new SchedaModelloEziologico($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
+  }
+  $scME->setFattoriCausativi($fc);
+  $scME->setFattoriMantenimento($fm);
+  $scME->getFattoriPrecipitanti($fp);
+  $scME->setRelazioneFinale($rf);
+
+  $upd = DatabaseInterface::updateQueryById($scME->getArray(),SchedaModelloEziologico::$tableName);
+  if($upd){
+    header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
+  }
+}
+else if($action == 'delSME'){
+  $idTerCorr = $_SESSION['idTerCorr'];
+  $key=array("id_terapia"=>$idTerCorr);
+  $ok=DatabaseInterface::deleteQuery($key,SchedaModelloEziologico::$tableName);
+  if($ok){
+    header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
   }
 }
  ?>

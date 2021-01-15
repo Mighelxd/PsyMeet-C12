@@ -15,18 +15,19 @@ $tipoUtente = $_SESSION["tipo"];
 if($tipoUtente != "professionista" || $tipoUtente == null){
   header("Location: ../Utente/login.php");
 }
-
+$exist=false;
 if(isset($_SESSION['idTerCorr'])){
   $idTerCorr = $_SESSION['idTerCorr'];
   $allSc = terapiaControl::recuperaSchede($idTerCorr);
   for($i=0;$i<count($allSc);$i++){
     if($allSc[$i]->getTipo() == 'Scheda Modello Eziologico'){
       $schModEz[] = $allSc[$i];
+      $exist=true;
     }
   }
 }
 ?>
-../../<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -206,7 +207,7 @@ if(isset($_SESSION['idTerCorr'])){
             </a>
           </li>
           <li class="nav-item has-treeview menu-open">
-            <a href="Pazienti.html" class="nav-link">
+            <a href="Pazienti.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pazienti
@@ -223,14 +224,14 @@ if(isset($_SESSION['idTerCorr'])){
                 </a>
                 <ul class="nav nav-treeview" style="padding-left: 2%;">
                   <li class="nav-item has-treeview">
-                    <a href="gestioneTerapia.html" class="nav-link">
+                    <a href="gestioneTerapia.php" class="nav-link">
                       <i class="fas fa-clipboard nav-icon"></i>
                       <p>Terapia
                       </p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="cartellaClinica.html" class="nav-link">
+                    <a href="cartellaClinica.php" class="nav-link">
                       <i class="fas fa-notes-medical nav-icon"></i>
                       <p>Cartella clinica</p>
                     </a>
@@ -250,35 +251,35 @@ if(isset($_SESSION['idTerCorr'])){
                       </a>
                       <ul class="nav nav-treeview" style="padding-left: 1%;">
                         <li class="nav-item">
-                          <a href="SchedaPrimoColloquio.html" class="nav-link">
+                          <a href="SchedaPrimoColloquio.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Primo colloquio
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaAssessmentGeneralizzato.html" class="nav-link">
+                          <a href="SchedaAssessmentGeneralizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment generalizzato
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaAssessmentFocalizzato.html" class="nav-link">
+                          <a href="SchedaAssessmentFocalizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment focalizzato
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaFollowUp.html" class="nav-link">
+                          <a href="SchedaFollowUp.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Follow-up
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="SchedaModelloEziologico.html" class="nav-link active">
+                          <a href="SchedaModelloEziologico.php" class="nav-link active">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Modello eziologico
                             </p>
@@ -287,7 +288,7 @@ if(isset($_SESSION['idTerCorr'])){
                       </ul>
                     </li>
                     <li class="nav-item">
-                      <a href="gestioneCompiti.html" class="nav-link">
+                      <a href="gestioneCompiti.php" class="nav-link">
                         <i class="fas fa-sticky-note nav-icon"></i>
                         <p>Compiti
                         </p>
@@ -308,7 +309,7 @@ if(isset($_SESSION['idTerCorr'])){
 
           </li>
           <li class="nav-item has-treeview">
-            <a href="Pacchetti.html" class="nav-link">
+            <a href="gestionePacchettiProf.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Pacchetti
@@ -343,7 +344,9 @@ if(isset($_SESSION['idTerCorr'])){
     </section>
 
     <!-- Main content -->
+    <?php if($exist){ ?>
     <section class="content">
+      <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
       <div class="row">
         <div class="col-md-12">
           <div class="card card-primary">
@@ -357,19 +360,19 @@ if(isset($_SESSION['idTerCorr'])){
             <div class="card-body">
               <div class="form-group">
                 <label for="inputDescription">Fattori Causativi</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" name="fc" class="form-control" rows="4"><?php echo $schModEz[0]->getFattoriCausativi(); ?></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Fattori Precipitanti</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" name="fp" class="form-control" rows="4"><?php echo $schModEz[0]->getFattoriPrecipitanti(); ?></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Fattori Mantenimento</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" name="fm" class="form-control" rows="4"><?php echo $schModEz[0]->getFattoriMantenimento(); ?></textarea>
                 </div>
               <div class="form-group">
                 <label for="inputDescription">Relazione Finale</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" name="rf" class="form-control" rows="4"><?php echo $schModEz[0]->getRelazioneFinale(); ?></textarea>
               </div>
 
             </div>
@@ -382,12 +385,66 @@ if(isset($_SESSION['idTerCorr'])){
       </div>
       <div class="row">
         <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancella</a>
-          <input type="submit" value="Sottometi Scheda" class="btn btn-success float-right">
+          <button type='submit' id='BtnModNME' name="action" value="modSME" class='btn btn-primary float-right'>Modifica</button>
         </div>
       </div>
+    </form>
+    <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
+      <button type='submit' id='BtnDelNME' name="action" value="delSME" class='btn btn-danger'>Elimina</button>
+    </form>
     </section>
     <!-- /.content -->
+  <?php }
+        else{
+          echo("<button type='button' id='btnNME' class='btn btn-primary' onclick='newSchME()'>Nuova Scheda</button>");
+        } ?>
+
+        <section class="content" id="nuovoME">
+          <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Modello Eziologico</h3>
+                </div>
+                <div class="card-body">
+
+
+
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="inputDescription">Fattori Causativi</label>
+                    <textarea id="inputDescription" name="fc" class="form-control" rows="4"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDescription">Fattori Precipitanti</label>
+                    <textarea id="inputDescription" name="fp" class="form-control" rows="4"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputDescription">Fattori Mantenimento</label>
+                    <textarea id="inputDescription" name="fm" class="form-control" rows="4"></textarea>
+                    </div>
+                  <div class="form-group">
+                    <label for="inputDescription">Relazione Finale</label>
+                    <textarea id="inputDescription" name="rf" class="form-control" rows="4"></textarea>
+                  </div>
+
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button type='button' id='AnnBtnNME' class='btn btn-secondary' onclick='AnnNewSchME()'>Annulla</button>
+              <button type='submit' id='BtnAddNME' name="action" value="addSME" class='btn btn-primary float-right'>Aggiungi</button>
+            </div>
+          </div>
+        </form>
+        </section>
   </div>
   <!-- /.content-wrapper -->
 
@@ -425,6 +482,17 @@ if(isset($_SESSION['idTerCorr'])){
         format: 'L'
       });
    })
+</script>
+<script>
+$('#nuovoME').hide();
+function newSchME(){
+  $('#nuovoME').show();
+  $('#btnNME').hide();
+}
+function AnnNewSchME(){
+  $('#nuovoME').hide();
+  $('#btnNME').show();
+}
 </script>
 <!-- date-range-picker -->
 
