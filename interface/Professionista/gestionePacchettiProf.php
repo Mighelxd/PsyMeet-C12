@@ -293,7 +293,7 @@ to get the desired effect
                   <?php  if($pacchettoByProf !=NULL){
                       for($i=0;$i<count($pacchettoByProf);$i++){
 
-                  for($i=0;$i < count($pacchettoByProf);$i++){
+                  
                     $p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto());
                     ?>
                     <form method="post" action="../../applicationLogic/PacchettoControlForm.php">
@@ -313,7 +313,7 @@ to get the desired effect
                   </tr>
                   </tbody>
                    </form>
-            <?php }
+            <?php
                  }
                }
                  else{
