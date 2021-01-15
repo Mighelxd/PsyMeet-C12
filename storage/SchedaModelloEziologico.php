@@ -16,8 +16,8 @@ class SchedaModelloEziologico
     private $relazione_finale;
     private $id_terapia;
     private $tipo;
-    private static $tableName="schedaModelloEziologico";
-    
+    public static $tableName="schedamodelloeziologico";
+
     public function __construct($id_scheda, $data, $fattori_causativi, $fattori_precipitanti, $fattori_mantenimento,$relazione_finale, $id_terapia, $tipo)
     {
         $this->id_scheda = $id_scheda;
@@ -28,7 +28,7 @@ class SchedaModelloEziologico
         $this->relazione_finale =$relazione_finale;
         $this->id_terapia = $id_terapia;
         $this->tipo = $tipo;
-        
+
     }
     public function getIdScheda()
     {
@@ -63,7 +63,7 @@ class SchedaModelloEziologico
         return $this -> tipo;
     }
     public function getArray(){
-        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "fa_cau" => $this->fattori_causativi, "fa_pre" => $this->fattori_precipitanti, "fa_man" => $this->fattori_mantenimento, "rel_fin" => $this->relazione_finale, "id_terapia" => $this->id_terapia,"tipo" =>$this->tipo);
+        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "fattori_causativi" => $this->fattori_causativi, "fattori_precipitanti" => $this->fattori_precipitanti, "fattori_mantenimento" => $this->fattori_mantenimento, "relazione_finale" => $this->relazione_finale, "id_terapia" => $this->id_terapia,"tipo" =>$this->tipo);
     }
     public function setIdScheda($id_scheda)
     {
@@ -98,4 +98,3 @@ class SchedaModelloEziologico
          $this -> tipo =$tipo;
     }
 }
-

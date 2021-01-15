@@ -19,7 +19,7 @@ if($_POST["action"] == "ModificaPaziente"){
     $arr = array("cf" => $cfPaziente,);
     $result = DatabaseInterface::selectQueryById($arr,"paziente");
     $arr = $result -> fetch_array();
-    $paziente = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $arr[11]);
+    $paziente = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $arr[11], $arr[12]);
 
     if ($telefonoPaz != "") {
       $paziente->setTelefono($telefonoPaz);
@@ -63,7 +63,7 @@ else if($_POST["action"] == "modificaFoto"){
     $arr = array("cf" => $cfPaziente,);
     $result = DatabaseInterface::selectQueryById($arr,"paziente");
     $arr = $result -> fetch_array();
-    $paziente = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $immagine);
+    $paziente = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $immagine, $arr[12]);
 
 
     $result = DatabaseInterface::updateQueryById($paziente->getArray(), "paziente");
