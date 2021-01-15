@@ -8,6 +8,7 @@ session_start();
 
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
+
   $action=$_POST['action'];
 
 }
@@ -17,7 +18,6 @@ else {
 if($action=='addPacchetto'){
   $id=0;
   $pacchetto=$_POST['pac'];
-  echo $pacchetto;
   $att=array('tipologia'=>$pacchetto);
   $coll=array('*');
   $recuperapacc =DatabaseInterface::selectDinamicQuery($coll,$att,Pacchetto::$tableName);
@@ -33,10 +33,24 @@ if($action=='addPacchetto'){
   }else {
     $_SESSION['Errore']='';
     $arryid=array('cf_prof'=>$_SESSION['codiceFiscale'],'id_pacchetto'=>$id);
-    $ok=DatabaseInterface::insertQuery($arryid,Scelta::$tableName);
+    $ok=DatabaseInterface::insertQuery($arryid,scelta::$tableName);
     if($ok){
       header('Location: ../interface/Professionista/gestionePacchettiProf.php');
+   }
   }
- }
 }
+if($action=='delPacchetto'){
+
+  $idProf=$_SESSION['codiceFiscale'];
+  $pacchetto=$_POST['idPacchetto'];
+  $key= array('cf_prof'=>$idProf,'id_pacchetto'=>$pacchetto);
+  $del=DatabaseInterface::deleteQuery($key,scelta::$tableName);
+  if($del){
+  //  $_SESSION['codiceFiscale'] = "";
+   header('Location: ../interface/Professionista/gestionePacchettiProf.php');
+  }
+}
+
+
+
  ?>
