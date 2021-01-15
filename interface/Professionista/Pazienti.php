@@ -98,7 +98,7 @@ $_SESSION["cfPazTer"] = "";
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="areaPersonale.html" class="d-block">Alexander Pierce <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+          <a href="areaPersonale.php" class="d-block">Alexander Pierce <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
         </div>
       </div>
 
@@ -116,7 +116,7 @@ $_SESSION["cfPazTer"] = "";
             </a>
           </li>
           <li class="nav-item">
-            <a href="Pazienti.html" class="nav-link active">
+            <a href="Pazienti.php" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pazienti
@@ -134,7 +134,7 @@ $_SESSION["cfPazTer"] = "";
 
           </li>
           <li class="nav-item has-treeview">
-            <a href="Pacchetti.html" class="nav-link">
+            <a href="gestionePacchettiProf.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Pacchetti
@@ -242,15 +242,16 @@ $_SESSION["cfPazTer"] = "";
                               <form class="" action="../../applicationLogic/CartellaClinicaControl.php" method="post">
                                 <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
                                 <input type="text" name="azione" value="visualizza" hidden ="true">
-                                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
+                                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff; margin-bottom:1%;">
                                       <i class="nav-icon fas fa-table">
                                         Cartella Clinica
                                       </i>
                               </form>
+
                               <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
                               <form class="" action="gestioneTerapia.php" method="post">
                                 <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
-                                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
+                                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;width:38.2%;">
                                       <i class="nav-icon fas fa-table">
                                         Terapia
                                       </i>
