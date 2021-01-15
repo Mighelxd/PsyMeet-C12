@@ -184,6 +184,7 @@ $_SESSION["cfPazTer"] = "";
                       </th>
                   </tr>
               </thead>
+              <?php if($listPaz != null){ ?>
               <tbody>
 
                 <?php for($i=0 ; $i < count($listPaz) ; $i++){
@@ -249,6 +250,7 @@ $_SESSION["cfPazTer"] = "";
                   </tr>
                 <?php } ?>
               </tbody>
+              <?php } ?>
           </table>
         </div>
       </div>
