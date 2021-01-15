@@ -31,7 +31,6 @@ class PacchettoControl{
     while ($row =$allScelte->fetch_array()) {
         $pacscelta= new Scelta($row[0],$row[1],$row[2]);
         $arrs[]=$pacscelta;
-
     }
     //var_dump($arrs);
   return $arrs;

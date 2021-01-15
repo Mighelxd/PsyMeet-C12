@@ -1,11 +1,11 @@
 <?php
+session_start();
  include ('../../storage/Pacchetto.php');
  include ('../../storage/scelta.php');
  include '../../plugins/libArray/FunArray.php';
  include ('../../storage/DatabaseInterface.php');
  include '../../applicationLogic/PacchettoControl.php';
 
- session_start();
  $tipoUtente= $_SESSION["tipo"];
  $cf=$_SESSION["codiceFiscale"];
  if($tipoUtente !="professionista"){
@@ -289,36 +289,50 @@ to get the desired effect
                     <th></th>
                   </tr>
                   </thead>
+<<<<<<< HEAD
+                  <?php  if($pacchettoByProf !=NULL){
+                      for($i=0;$i<count($pacchettoByProf);$i++){
+=======
                   <?php for($i=0;$i < count($pacchettoByProf);$i++){
+>>>>>>> 53b9ed4d2b4876158122b3ba1008eeacde941d9c
 
                     $p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto());
 
 
                     ?>
+                    <form method="post" action="../../applicationLogic/PacchettoControlForm.php">
+                        <input type="text" name="action" value="delPacchetto" hidden="true">
+                        <input type="text" name="idPacchetto" value= <?php echo $p->getIdPacchetto(); ?> hidden="true">
                   <tbody>
                   <tr>
-                    <td>
+                    <td >
                       <?php echo $p->getTipologia(); ?>
                     </td>
-                    <td>
+                    <td >
                    <?php echo $p->getPrezzo(); ?>
                     </td>
-
-
                     <td>
-
-                      <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Rimuovi
-                          </a>
+                      <button type"submit"  class="btn btn-danger">Elimina Pacchetto</button>
                     </td>
-
+                  </tr>
+                  </tbody>
+                   </form>
+            <?php }
+                 }
+                 else{
+                echo "<tbody>
+                  <tr>
+                    <td >
+                        vuota
+                    </td>
+                    <td >
+                     vuota
+                    </td>
+                    <td></td>
                   </tr>
 
-                  </tbody>
-              <?php  }
-                ?>
+                  </tbody>";
+              } ?>
                 </table>
               </div>
             </div>
