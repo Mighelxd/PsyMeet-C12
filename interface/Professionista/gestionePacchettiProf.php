@@ -289,16 +289,12 @@ to get the desired effect
                     <th></th>
                   </tr>
                   </thead>
-<<<<<<< HEAD
+
                   <?php  if($pacchettoByProf !=NULL){
                       for($i=0;$i<count($pacchettoByProf);$i++){
-=======
-                  <?php for($i=0;$i < count($pacchettoByProf);$i++){
->>>>>>> 53b9ed4d2b4876158122b3ba1008eeacde941d9c
 
+                  for($i=0;$i < count($pacchettoByProf);$i++){
                     $p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto());
-
-
                     ?>
                     <form method="post" action="../../applicationLogic/PacchettoControlForm.php">
                         <input type="text" name="action" value="delPacchetto" hidden="true">
@@ -319,6 +315,7 @@ to get the desired effect
                    </form>
             <?php }
                  }
+               }
                  else{
                 echo "<tbody>
                   <tr>
