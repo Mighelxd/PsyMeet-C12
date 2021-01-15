@@ -8,21 +8,67 @@ declare(strict_types=1);
  * 2020 Copyright by PsyMeet - University of Salerno
 */
 
+/**
+ * Class Compito
+ */
+
 class Compito
 {
-	private $id;
-	private $data;
-	private $titolo;
-	private $descrizione;
-	private $svolgimento;
-	private $correzione;
-	private $effettuato;
-	private $cfPaz;
-	private $cfProf;
-	private static $tableName='compito';
+    /**
+     * @var
+     */
+    private $id;
+    /**
+     * @var
+     */
+    private $data;
+    /**
+     * @var
+     */
+    private $titolo;
+    /**
+     * @var
+     */
+    private $descrizione;
+    /**
+     * @var
+     */
+    private $svolgimento;
+    /**
+     * @var
+     */
+    private $correzione;
+    /**
+     * @var
+     */
+    private $effettuato;
+    /**
+     * @var
+     */
+    private $cfPaz;
+    /**
+     * @var
+     */
+    private $cfProf;
+    /**
+     * @var string
+     */
+    private static $tableName='compito';
 
 
-	public function __construct(
+    /**
+     * Compito constructor.
+     * @param $id
+     * @param $data
+     * @param $effettuato
+     * @param $titolo
+     * @param $descrizione
+     * @param $svolgimento
+     * @param $correzione
+     * @param $cfProf
+     * @param $cfPaz
+     */
+    public function __construct(
 		$id,
 		$data,
 		$effettuato,
@@ -45,97 +91,145 @@ class Compito
 	}
 
 
-	public function getId()
+    /**
+     * @return mixed
+     */
+    public function getId()
 	{
 		return $this->id;
 	}
 
 
-	public function getCfPaz()
+    /**
+     * @return mixed
+     */
+    public function getCfPaz()
 	{
 		return $this->cfPaz;
 	}
 
 
-	public function getCfProf()
+    /**
+     * @return mixed
+     */
+    public function getCfProf()
 	{
 		return $this->cfProf;
 	}
 
 
-	public function getData()
+    /**
+     * @return mixed
+     */
+    public function getData()
 	{
 		return $this->data;
 	}
 
 
-	public function setData($data)
+    /**
+     * @param $data
+     */
+    public function setData($data)
 	{
 		$this->data = $data;
 	}
 
 
-	public function getTitolo()
+    /**
+     * @return mixed
+     */
+    public function getTitolo()
 	{
 		return $this->titolo;
 	}
 
 
-	public function setTitolo($titolo)
+    /**
+     * @param $titolo
+     */
+    public function setTitolo($titolo)
 	{
 		$this->titolo = $titolo;
 	}
 
 
-	public function getDescrizione()
+    /**
+     * @return mixed
+     */
+    public function getDescrizione()
 	{
 		return $this->descrizione;
 	}
 
 
-	public function setDescrizione($descrizione)
+    /**
+     * @param $descrizione
+     */
+    public function setDescrizione($descrizione)
 	{
 		$this->descrizione = $descrizione;
 	}
 
 
-	public function getSvolgimento()
+    /**
+     * @return mixed
+     */
+    public function getSvolgimento()
 	{
 		return $this->svolgimento;
 	}
 
 
-	public function setSvolgimento($svolgimento)
+    /**
+     * @param $svolgimento
+     */
+    public function setSvolgimento($svolgimento)
 	{
 		$this->svolgimento = $svolgimento;
 	}
 
 
-	public function getCorrezione()
+    /**
+     * @return mixed
+     */
+    public function getCorrezione()
 	{
 		return $this->correzione;
 	}
 
 
-	public function setCorrezione($correzione)
+    /**
+     * @param $correzione
+     */
+    public function setCorrezione($correzione)
 	{
 		$this->correzione = $correzione;
 	}
 
 
-	public function getEffettuato()
+    /**
+     * @return mixed
+     */
+    public function getEffettuato()
 	{
 		return $this->effettuato;
 	}
 
 
-	public function setEffettuato($effettuato)
+    /**
+     * @param $effettuato
+     */
+    public function setEffettuato($effettuato)
 	{
 		$this->effettuato = $effettuato;
 	}
 
 
-	public function getArray()
+    /**
+     * @return array
+     */
+    public function getArray()
 	{
 		return ['id_compito'=>$this->id, 'data'=>$this->data, 'effettuato'=>$this->effettuato, 'titolo'=>$this->titolo, 'descrizione'=>$this->descrizione, 'svolgimento'=>$this->svolgimento, 'correzione'=>$this->correzione, 'cf_prof'=>$this->cfProf, 'cf'=>$this->cfPaz];
 	}

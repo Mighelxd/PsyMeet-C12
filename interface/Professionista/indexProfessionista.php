@@ -379,13 +379,26 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach($pazienti as $paziente){?>
+                                    <?php
+                                     if($pazienti != NULL){
+
+                                        foreach($pazienti as $paziente){ ?>
                                         <tr>
                                             <td><?php echo $paziente->getNome(); ?></td>
                                             <td><?php echo $paziente->getCognome(); ?></td>
                                             <td><button type="button" id="call" class="btn btn-block btn-danger btn-sm" onclick="buttonCall()" <?php if($paziente->getVideo()) echo "disabled" ?>><i class="fas fa-phone"></i></button></td>
                                         </tr>
-                                    <?php } ?>
+                                    <?php }
+                                     }
+
+                                    else{
+                                        echo '<tr>
+                                            <td>vuoto</td>
+                                            <td>vuoto</td>
+                                            <td>vuoto</td>
+                                        </tr>';
+                                    }
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>

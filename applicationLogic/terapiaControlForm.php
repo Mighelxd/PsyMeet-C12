@@ -14,6 +14,7 @@ else{
 if($action == 'addTer'){
    $cfPaz = $_SESSION["cfPazTer"];
    $cfProf = $_SESSION["codiceFiscale"];
+   $cfPaz = $_POST['selPaz'];
    $data = date("Y-m-d");
 
    $desc = $_POST['descTer'];

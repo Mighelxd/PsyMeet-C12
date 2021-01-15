@@ -10,13 +10,24 @@ declare(strict_types=1);
 */
 
 
+/**
+ *
+ */
 define('TABLE_NAME', 'compito');
 
 
-
+/**
+ * Class CompitoControl
+ *
+ * @method string selcetAllCompitiProf(string $cfProf)
+ */
 class CompitoControl
 {
-	public static function selectAllCompitiProf($cfProf)
+    /**
+     * @param $cfProf
+     * @return array
+     */
+    public static function selectAllCompitiProf($cfProf)
 	{
 		$arrKey = ['cf_prof'=>$cfProf];
 		$allCompProf = DatabaseInterface::selectQueryByAtt($arrKey, TABLE_NAME);
@@ -30,7 +41,12 @@ class CompitoControl
 
 
 	// metodo aggiunto per selezionare tutti i compiti relativi al paziente
-	public static function selectAllCompitiPaz($cfPaz)
+
+    /**
+     * @param $cfPaz
+     * @return array
+     */
+    public static function selectAllCompitiPaz($cfPaz)
 	{
 		$arrKey = ['cf'=>$cfPaz];
 		$allCompPaz = DatabaseInterface::selectQueryByAtt($arrKey, TABLE_NAME);
