@@ -46,7 +46,7 @@ class terapiaControl{
     public static function getTerapie($cfPaz, $cfProf){
       $arrKey= array('cf' => $cfPaz, 'cf_prof' => $cfProf);
 
-      $arrayTerapie = [];
+      $arrayTerapie = array();
       $listTerapie = DatabaseInterface::selectQueryByAtt($arrKey, "terapia");
 
       while ($row = $listTerapie->fetch_array()) {

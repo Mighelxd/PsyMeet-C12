@@ -174,7 +174,7 @@ else{
                       </a>
                       <ul class="nav nav-treeview" style="padding-left: 1%;">
                         <li class="nav-item">
-                          <a href="SchedaPrimoColloquio.html" class="nav-link">
+                          <a href="SchedaPrimoColloquio.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Primo colloquio
                             </p>

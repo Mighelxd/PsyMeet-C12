@@ -14,7 +14,7 @@ class Terapia
     private $cf_prof;
     private $cf;
     public static $tableName="terapia";
-    
+
     public function __construct($id_ter, $date,$descriz, $cf_professionista, $cf_pa)
     {
         $this->id_terapia = $id_ter;
@@ -22,7 +22,7 @@ class Terapia
         $this->descrizione= $descriz;
         $this->cf_prof = $cf_professionista;
         $this->cf = $cf_pa;
-        
+
     }
     public function __constructD(){
         $this->id_terapia = -1;
@@ -52,7 +52,7 @@ class Terapia
         return $this -> cf;
     }
     public function getArray(){
-        return array("id_terapia" => $this->id_terapia, "data" => $this->data, "descr" => $this->descrizione, "cf_prof" => $this->cf_prof, "cf" => $this->cf);
+        return array("id_terapia" => $this->id_terapia, "data" => $this->data, "descrizione" => $this->descrizione, "cf_prof" => $this->cf_prof, "cf" => $this->cf);
     }
     public function setData($data)
     {

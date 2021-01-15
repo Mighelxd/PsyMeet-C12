@@ -44,6 +44,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
 $pazienteTer = PazienteControl::getPaz($cfPazienteTer);
 
 $terapia = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
+
 /*if(count($listTerapie) > 0 ){
   for($i=0;$i<count($listTerapie);$i++){
     $terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
@@ -137,7 +138,7 @@ else
             </a>
           </li>
           <li class="nav-item has-treeview menu-open">
-            <a href="Pazienti.html" class="nav-link">
+            <a href="Pazienti.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Paziente
@@ -153,20 +154,21 @@ else
                   </p>
                 </a>
                 <?php
-                    $terapie = terapiaControl::recuperaSchede($terapia[0]->getIdTerapia());
+                if(count($terapia)>0){
+                    $terapie = terapiaControl::recuperaSchede($terapia[0]->getIdTerapia());//$terapie sono tutte le schede della terapia
                     $_SESSION['idTerCorr'] = $terapia[0]->getIdTerapia();
-
+                }
                 ?>
                 <ul class="nav nav-treeview" style="padding-left: 2%;"><!--inizio blocco terapie-->
                   <li class="nav-item has-treeview">
-                    <a href="gestioneTerapia.html" class="nav-link active">
+                    <a href="#" class="nav-link active">
                       <i class="fas fa-clipboard nav-icon"></i>
-                      <p>Terapia <?php echo $terapia[0]->getIdTerapia(); ?>
+                      <p>Terapia <?php if(count($terapia)>0){ echo $terapia[0]->getIdTerapia();} ?>
                       </p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="cartellaClinica.html" class="nav-link">
+                    <a href="cartellaClinica.php" class="nav-link">
                       <i class="fas fa-notes-medical nav-icon"></i>
                       <p>Cartella clinica</p>
                     </a>
@@ -178,7 +180,7 @@ else
                       </a>
                     </li>
                     <li class="nav-item has-treeview">
-                      <a href="gestioneTerapia.html" class="nav-link">
+                      <a href="#" class="nav-link">
                       <i class="fas fa-brain nav-icon"></i>
                       <p>Sedute
                         <i class="right fas fa-angle-left"></i>
@@ -186,21 +188,21 @@ else
                       </a>
                       <ul class="nav nav-treeview" style="padding-left: 1%;">
                         <li class="nav-item">
-                          <a href="schedaPrimoColloquio.html" class="nav-link">
+                          <a href="schedaPrimoColloquio.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Primo colloquio
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="schedaAssessmentGeneralizzato.html" class="nav-link">
+                          <a href="SchedaAssessmentGeneralizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment generalizzato
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="schedaAssessmentFocalizzato.php" class="nav-link">
+                          <a href="SchedaAssessmentFocalizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment focalizzato
                             </p>
@@ -220,14 +222,14 @@ else
                             </p>
                           </a>
                         </li>
+                        <li class="nav-item">
+                          <a href="gestioneCompiti.php" class="nav-link">
+                            <i class="fas fa-sticky-note nav-icon"></i>
+                            <p>Compiti
+                            </p>
+                          </a>
+                        </li>
                       </ul>
-                    </li>
-                    <li class="nav-item">
-                      <a href="gestioneCompiti.html" class="nav-link">
-                        <i class="fas fa-sticky-note nav-icon"></i>
-                        <p>Compiti
-                        </p>
-                      </a>
                     </li>
                 </ul><!--fine blocco terapie-->
               </li>
@@ -244,7 +246,7 @@ else
 
           </li>
           <li class="nav-item has-treeview">
-            <a href="Pacchetti.html" class="nav-link">
+            <a href="gestionePacchettiProf.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Pacchetti
@@ -281,17 +283,15 @@ else
 
     <!-- Main content -->
     <section class="content">
-
+      <?php if(count($terapia)>0){ ?>
       <!-- Default box -->
       <div class="card">
         <div class="card-header" style="background-color : #007bff;">
-          <h3 class="card-title" style="color : #ffffff;">Terapie in corso</h3>
+          <h3 class="card-title" style="color : #ffffff;">Terapia <?php echo $terapia[0]->getDescrizione(); ?> | Data inizio: <?php $d=$terapia[0]->getData(); echo substr($d,8)."/".substr($d,5,2)."/".substr($d,0,4) ?></h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
           </div>
         </div>
         <div class="card-body p-0">
@@ -337,7 +337,7 @@ else
                       <td class="project-actions text-right">
                           <?php
                             $tipo = str_replace(' ','',$terapie[$i]->getTipo());
-                            $tipo = $tipo.".html";
+                            $tipo = $tipo.".php";
                            // echo($tipo);
                           ?>
                           <a class="btn btn-primary btn-sm" href='<?php echo($tipo) ?>'>
@@ -357,7 +357,30 @@ else
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-
+      <button type="button" id="modTer1" class="btn btn-primary float-right" onclick="modTer()">Modifica Terapia</button>
+      <form method="POST" action="../../applicationLogic/terapiaControlForm.php"><button type="submit" id="btnDelTer" name="action" value="delTer" class="btn btn-danger">Elimina Terapia</button></form>
+    <?php } ?>
+    <?php if(count($terapia)==0){
+      echo("<button type='button' id='newTer' class='btn btn-primary' onclick=\"newTer()\">Nuova Terapia</button>");
+    } ?>
+      <div id="formNewTer" style="width:50%;">
+        <form method="POST" action="../../applicationLogic/terapiaControlForm.php">
+          <?php $dataCorr = date("d/m/Y"); ?>
+          <label for="dataTer">Data</label>
+          <div class="input-group date" id="reservationdate">
+            <input type="text" name="dataTer" value="<?php echo $dataCorr; ?>" class="form-control" data-target="#reservationdate" readonly>
+            <div class="input-group-append" data-target="#reservationdate">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+          </div><br>
+          <label for="descTer">Descrizione</label>
+          <input type="text" name="descTer" class="form-control" required/><br>
+          <button type="submit" id="modBtnTer" name="action" value="modTer" class="btn btn-primary float-right">Conferma Modifica</button>
+          <button type="submit" id="addBtnTer" name="action" value="addTer" class="btn btn-primary float-right">Aggiungi Terapia</button>
+          <button type="button" id="btnAnMod" class="btn btn-secondary" onclick="annModTer()">Annulla</button>
+          <button type="button" id="btnAnAdd" class="btn btn-secondary" onclick="annAddTer()">Annulla</button>
+        </form>
+      </div>
     </section>
     <!-- /.content -->
   </div>
@@ -381,5 +404,6 @@ else
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+<script src="../../dist/js/terapia.js"></script>
 </body>
 </html>

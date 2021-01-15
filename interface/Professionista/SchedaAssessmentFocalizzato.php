@@ -16,17 +16,23 @@ if($tipoUtente != "professionista" || $tipoUtente == null){
   header("Location: ../Utente/login.php");
 }
 
-$dataCorr = date("Y,m,d");
-$dataCorr = str_replace(',','-',$dataCorr);
+$dataCorr = date("Y-m-d");
+//echo "oggi: ".$dataCorr;
+//$dataCorr = str_replace(',','-',$dataCorr);
 
 if(isset($_SESSION['idTerCorr'])){
     $idTerCorr = $_SESSION['idTerCorr'];
     $allSc = terapiaControl::recuperaSchede($idTerCorr);
-    for($i=0;$i<count($allSc);$i++){
-      if($allSc[$i]->getTipo() == 'Scheda Assessment Focalizzato'){
-        $schAssFoc[] = $allSc[$i];
-        if($allSc[$i]->getData() == $dataCorr){
-          $_SESSION['idSCorr'] = $allSc[$i]->getIdScheda();
+    $schAssFoc = array();
+    $exists = false;
+    if(count($allSc)>0){
+      for($i=0;$i<count($allSc);$i++){
+        if($allSc[$i]->getTipo() == 'Scheda Assessment Focalizzato'){
+          $schAssFoc[] = $allSc[$i];
+          if($allSc[$i]->getData() == $dataCorr){
+            $_SESSION['idSCorr'] = $allSc[$i]->getIdScheda();
+            $exists = true;
+          }
         }
       }
     }
@@ -35,8 +41,9 @@ else{
   header("Location: Pazienti.php");
 }
 
-$schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
-$exists = false;
+if(count($schAssFoc)>0){
+  $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
+}
 
  ?>
 
@@ -251,7 +258,9 @@ $exists = false;
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <?php for($i=0;$i<count($schAssFoc);$i++){
+          <?php
+          if(count($schAssFoc)>0){
+          for($i=0;$i<count($schAssFoc);$i++){
             if($schAssFoc[$i]->getData() == $dataCorr){
                 echo("<div class=\"card card-primary\">");////////////////////////////////
             }else{?>
@@ -259,7 +268,7 @@ $exists = false;
           <?php } ?>
             <div class="card-header">
               <?php
-              if($schAssFoc[$i]->getData() == $dataCorr){$exists = true;}
+              //if($schAssFoc[$i]->getData() == $dataCorr){$exists = true;}
               $date=date_create($schAssFoc[$i]->getData()); $dS = date_format($date,"d/m/Y"); ?>
               <h3 class="card-title">Assessment Focalizzato <?php echo $dS; ?> </h3>
 
@@ -347,7 +356,8 @@ $exists = false;
           <?php } ?>
         </div>
       </div>
-    <?php } ?>
+    <?php }
+  } ?>
 
     <!-- Scheda nascosta che si vuole creare -->
     <div class="card card-primary" id="newScheda">

@@ -52,7 +52,7 @@ class PazienteControl {
 
     $arrKey = array('cf_prof' =>  $cfProf, );
     $listTerapie = DatabaseInterface::selectQueryByAtt($arrKey,"terapia");
-  
+
     while ($row = $listTerapie->fetch_array()) {
       $terapia = new Terapia($row[0], $row[1], $row[2], $row[3], $row[4]);
       $arrPaz = array("cf" => $terapia -> getCf());
