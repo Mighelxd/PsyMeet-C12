@@ -4,8 +4,8 @@
     include "Appuntamento.php";
     include "Paziente.php";
 
-
-
+    //session_start();
+   // $_SESSION["codFiscalePaz"]="NSTFNC94M23H703G";
     /*$arr = array("id_cartella_clinica" => 1,);
     $result = DatabaseInterface::selectQueryById($arr,"cartellaclinica");
     $arr = $result -> fetch_array();

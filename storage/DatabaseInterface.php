@@ -48,12 +48,13 @@
             foreach($obj as $key => $value){
                 if(gettype($value) == "string")
                     $update .= $key . " = " . "\"" .$value . "\"". " , ";
+                elseif(!isset($value))
+                    $update .= $key . " = " ."NULL" . " , ";
                 else
                     $update .= $key . " = " .$value . " , ";
 
-        }
+            }
             $update = substr($update,0,-2);
-            $result = $connection->query($update . $where);
             DatabaseConnector::close($connection);
             return $result;
 

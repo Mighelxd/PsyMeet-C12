@@ -13,10 +13,12 @@
     exit();
     }
     $cf=$_SESSION["codiceFiscale"];
-    if(!isset($_SESSION["paziente"])){
+    if(!isset($_SESSION["paziente"]) || !isset($_SESSION["professionista"])){
         header("Location: indexProfessionista.php");
         exit();
     }
+    $paziente=$_SESSION["paziente"];
+    $professionista=$_SESSION["professionista"];
 ?>
 <head>
     <meta charset="utf-8">
@@ -33,6 +35,16 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <script src="../../dist/js/videoChiamata.js"></script>
+    <script src='https://meet.jit.si/external_api.js'></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -203,12 +215,6 @@
                     <div class="col-sm-6">
                         <h1></h1>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Blank Page</li>
-                        </ol>
-                    </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -219,21 +225,19 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Title</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="fas fa-minus"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                            <i class="fas fa-times"></i></button>
-                    </div>
+                    <h3 class="card-title">Videochiamata con <?php echo $paziente->getNome()." ".$paziente->getCognome();  ?></h3>
                 </div>
                 <div class="card-body">
-                    Start creating your amazing application!
+                    <div id="videochiamata" hidden="true">
+
+                    </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    Footer
+                    <form id="formChiamata" method="post">
+                        <input type="text" name="azione" value="avvia" hidden="true">
+                        <button type="submit" id="sottometti" class="btn btn-primary">Avvia Videochiamata</button>
+                    </form>
                 </div>
                 <!-- /.card-footer-->
             </div>
@@ -259,14 +263,29 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script>
+    $("#formChiamata").submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: '../../applicationLogic/videoConferenzaControl.php',
+            data: $("#formChiamata").serialize(),
+            type: 'post',
+            success:function(data){
+                var response=JSON.parse(data);
+                if(response.esito==true){
+                    $("#formChiamata").remove();
+                    $("#videochiamata").show();
+                    var api=videoChiamata("<?php echo md5($professionista->getNome().$professionista->getCognome().$paziente->getCognome().$paziente->getNome().rand(1,100)); ?>")
+                }
+                console.log(response);
+            },
+            error: function(err){
+                console.log(err);
+            }
+        })
+    })
+</script>
 </body>
+
+
 </html>
