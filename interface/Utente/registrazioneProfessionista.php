@@ -52,14 +52,14 @@
 
       <form enctype="multipart/form-data" method="post" id="registerProf">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="nome" id="nome" placeholder="nome" pattern="[A-Za-z']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" name="nome" id="nome" placeholder="nome" pattern="[A-Z a-z ']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cognome" id="cognome" name="cognome" pattern="[A-Za-z']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" placeholder="Cognome" id="cognome" name="cognome" pattern="[A-Z a-z ']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -80,28 +80,35 @@
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Titolo di studio" id="titoloStudio" name="titoloStudio" pattern="[A-Za-z']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" placeholder="Titolo di studio" id="titoloStudio" name="titoloStudio" pattern="[A-Z a-z ']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Pubblicazioni" id="pubblicazioni" name="pubblicazioni" pattern="[A-Za-z0-9']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" placeholder="Pubblicazioni" id="pubblicazioni" name="pubblicazioni" pattern="[A-Z a-z 0-9']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Esperienze" id="esperienze" name="esperienze" pattern="[A-Za-z0-9']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" placeholder="Esperienze" id="esperienze" name="esperienze" pattern="[A-Z a-z 0-9']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
+          <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Specializzazione" id="specializzazione" name="specializzazione" pattern="[A-Z a-z ']{2,500}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
+              <div class="input-group-append">
+                  <div class="input-group-text">
+                  </div>
+              </div>
+          </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Indirizzo studio" id="indirizzoStudio" name="indirizzoStudio" pattern="[A-Za-z0-9']{2,250}" title="Da 2 a 250 caratteri Alfanumerici(Apostrofi Consentiti)" required>
+          <input type="text" class="form-control" placeholder="Indirizzo studio" id="indirizzoStudio" name="indirizzoStudio" pattern="[A-Z a-z 0-9']{2,250}" title="Da 2 a 250 caratteri Alfanumerici(Apostrofi Consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -136,7 +143,7 @@
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="N° iscrizione albo" id="nIscrizioneAlbo" name="nIscrizioneAlbo" pattern="[A-Za-z0-9]{2,20}" title="da 2 a 20 Caratteri Alfanumerici" required>
+          <input type="text" class="form-control" placeholder="N° iscrizione albo" id="nIscrizioneAlbo" name="nIscrizioneAlbo" pattern="[A-Z a-z 0-9]{2,20}" title="da 2 a 20 Caratteri Alfanumerici" required>
           <div class="input-group-append">
             <div class="input-group-text">             
             </div>
@@ -149,6 +156,13 @@
             </div>
           </div>
         </div>
+          <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="PEC" name="pec" id="pec" id="pec" required>
+              <div class="input-group-append">
+                  <div class="input-group-text">
+                  </div>
+              </div>
+          </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Password" id="password" name="password" pattern=".{8,25}" title="da 8 a 25 caratteri (Quaslaisi carattere consentito)" required>
           <div class="input-group-append">

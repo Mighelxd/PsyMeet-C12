@@ -30,7 +30,7 @@
                 $immagine=addslashes(file_get_contents($_FILES["immagine"]["tmp_name"]));
             else
                 $immagine=NULL;
-            $paziente = new Paziente($codiceFiscale,$nome,$cognome,$dataNascita,$email,$telefono,$password,$indirizzo,$istruzione,$lavoro,$diffCura,$immagine);
+            $paziente = new Paziente($codiceFiscale,$nome,$cognome,$dataNascita,$email,$telefono,$password,$indirizzo,$istruzione,$lavoro,$diffCura,$immagine,false);
             $select = DatabaseInterface::selectQueryById($paziente->getArray(),Paziente::$tableName);
             if(mysqli_num_rows($select)!=0){
                 $errore = array("esito" => false,"errore" => "Codice fiscale gia' presente.");

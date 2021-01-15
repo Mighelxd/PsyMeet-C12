@@ -41,7 +41,6 @@
     </ul>
     </nav>  <!-- /.navbar -->
   </div>
-
   <!-- MENU' A SINISTRA -->
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation" id="menuSx">

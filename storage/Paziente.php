@@ -22,9 +22,10 @@ class Paziente
     private $lavoro;
     private $difficolCura;
     private $fotoProfiloPaz;
+    private $videochiamata;
     public static $tableName="paziente";
 
-    public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura, $fotoProfiloPaz)
+    public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura, $fotoProfiloPaz, $video)
     {
         $this->cf = $cf;
         $this->nome = $nome;
@@ -38,6 +39,7 @@ class Paziente
         $this->lavoro = $lavoro;
         $this->difficolCura = $difficolCura;
         $this->fotoProfiloPaz = $fotoProfiloPaz;
+        $this->videochiamata = $video;
     }
 
     public function getCf()
@@ -99,7 +101,9 @@ class Paziente
     {
         return $this->fotoProfiloPaz;
     }
-
+    public function getVideo(){
+        return $this->videochiamata;
+    }
     public function setCf($cf)
     {
         $this->cf = $cf;
@@ -155,6 +159,9 @@ class Paziente
         $this->difficolCura = $difficolCura;
     }
 
+    public function setVideo($video){
+        $this->videochiamata = $video;
+    }
     public function setFotoProfiloPaz($fotoProfiloPaz)
     {
          $this->$fotoProfiloPaz = $fotoProfiloPaz;
@@ -162,11 +169,11 @@ class Paziente
 
     public function getArray()
     {
-      return array("cf" => $this->cf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "passwor" => $this->password, "indirizzo" => $this->indirizzo, "istruzione" => $this->istruzione,"lavoro" => $this->lavoro, "difficol_cura" => $this->difficolCura, "foto_profilo_paz" => $this->fotoProfiloPaz);
+      return array("cf" => $this->cf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "passwor" => $this->password, "indirizzo" => $this->indirizzo, "istruzione" => $this->istruzione,"lavoro" => $this->lavoro, "difficol_cura" => $this->difficolCura, "foto_profilo_paz" => $this->fotoProfiloPaz, "videochiamata" => $this->videochiamata);
     }
 
     public function getArrayNoFoto()
     {
-      return array("cf" => $this->cf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "passwor" => $this->password, "indirizzo" => $this->indirizzo, "istruzione" => $this->istruzione,"lavoro" => $this->lavoro, "difficol_cura" => $this->difficolCura);
+      return array("cf" => $this->cf, "nome" => $this->nome, "cognome" => $this->cognome, "data_nascita" => $this->dataNascita, "email" => $this->email, "telefono" => $this->telefono, "passwor" => $this->password, "indirizzo" => $this->indirizzo, "istruzione" => $this->istruzione,"lavoro" => $this->lavoro, "difficol_cura" => $this->difficolCura, "videochiamata" => $this->videochiamata);
     }
 }

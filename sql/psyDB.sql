@@ -44,6 +44,7 @@ CREATE TABLE paziente(
  lavoro VARCHAR(100) not null,
  difficol_cura INT not null,
  foto_profilo_paz MEDIUMBLOB,
+ videochiamata boolean,
  PRIMARY KEY(cf)
 );
 
