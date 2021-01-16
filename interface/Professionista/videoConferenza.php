@@ -232,27 +232,28 @@
                         <div class="col-lg-6" id="videochiamata">
                         </div>
                         <div class="col-lg-3" id="bottoni">
-                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Cartella Clinica</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Dati Paziente</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Compiti</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede" onclick="terminaChiamata()">Termina chiamata</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneCart">Cartella Clinica</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneDat">Dati Paziente</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneCom">Compiti</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneTermina" onclick="terminaChiamata()">Termina chiamata</button>
                         </div>
                         <div class="col-lg-3" id="sedute">
-                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Scheda Primo Colloquio</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Scheda Assessment Focalizzato</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Scheda Assessment Generalizzato</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Scheda Assessment FollowUp</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoniSchede">Scheda Assessment ModelloEziologico</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottonePr">Scheda Primo Colloquio</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneAssFoc">Scheda Assessment Focalizzato</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneAssGen">Scheda Assessment Generalizzato</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoniFoll">Scheda FollowUp</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneMod">Scheda ModelloEziologico</button>
                         </div>
+                        <div id="messaggio" class="col-lg-12 alert alert-success"></div>
                     </div>
                 </div>
-            </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <form id="formChiamata" method="post">
                         <input type="text" name="azione" value="avvia" hidden="true">
                         <button type="submit" id="sottometti" class="btn btn-primary">Avvia Videochiamata</button>
                     </form>
+                    <div id="messaggioChiamata" class="col-lg-12 alert alert-success" ></div>
                 </div>
                 <!-- /.card-footer-->
             </div>
@@ -280,6 +281,7 @@
 <!-- ./wrapper -->
 <script>
     $(".card-body").hide();
+    $(".alert-success").hide();
     $("#formChiamata").submit(function(e){
         e.preventDefault();
         $.ajax({
@@ -291,7 +293,9 @@
                 if(response.esito==true){
                     $("#formChiamata").remove();
                     $(".card-body").show();
-                    var api=iniziaChiamata("<?php echo md5($paziente->getCognome().$paziente->getNome()); ?>")
+                    $("#messaggioChiamata")[0].innerHTML="Per terminare la chiamata usare il tasto termina chiamata a sinistra.";
+                    $("#messaggioChiamata").show()
+                    var api=iniziaChiamata("<?php echo md5($paziente->getCognome().$paziente->getNome()); ?>");
                 }
                 console.log(response);
             },

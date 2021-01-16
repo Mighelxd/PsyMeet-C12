@@ -34,14 +34,28 @@
             session_start();
             $paziente=$_SESSION["paziente"];
             $paziente->setVideo(true);
-            /*$result=DatabaseInterface::updateQueryById($paziente->getArray(),Paziente::$tableName);
+            $result=DatabaseInterface::updateQueryById($paziente->getArray(),Paziente::$tableName);
             if($result){
                 echo json_encode(array("esito"=>true));
                 exit();
             }
             else{
                 echo json_encode(array("esito"=>false,"errore"=>"errore update"));
-            }*/
+            }
+            echo json_encode(array("esito"=>true));
+        }
+        elseif($_POST["azione"]=="termina"){
+            session_start();
+            $paziente=$_SESSION["paziente"];
+            $paziente->setVideo(0);
+            $result=DatabaseInterface::updateQueryById($paziente->getArray(),Paziente::$tableName);
+            if($result){
+                echo json_encode(array("esito"=>true));
+                exit();
+            }
+            else{
+                echo json_encode(array("esito"=>false,"errore"=>"errore update"));
+            }
             echo json_encode(array("esito"=>true));
         }
 ?>

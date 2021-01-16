@@ -24,7 +24,13 @@
     $result=$result->fetch_array();
     $professionista = new Professionista($cf, $result["nome"],$result["cognome"],$result["data_nascita"],$result["email"],$result["telefono"],$result["cellulare"],$result["passwor"],$result["indirizzo_studio"],$result["esperienze"],$result["pubblicazioni"],$result["titolo_studio"],$result["n_iscrizione_albo"],$result["partita_iva"],$result["pec"],$result["specializzazione"],$result["polizza_RC"],$result["foto_profilo_professionista"]);
     */
-    $professionista = ProfessionistaControl::getProf($cf);
+
+
+    $_SESSION["paziente"] = NULL;
+    $_SESSION["professionista"] = NULL;
+    $_SESSION["codFiscalePaz"] = NULL;
+
+$professionista = ProfessionistaControl::getProf($cf);
     $pazienti=PazienteControl::getPazientiByProf($cf);
 
     $pacchettoByProf= PacchettoControl::selectAllPacchettoProf($cf);
@@ -89,6 +95,8 @@
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <script src="../../dist/js/test.js"></script>
+    <script src="../../dist/js/adminlte.min.js"></script>
+
     <!-- jQuery UI 1.11.4 -->
     <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -443,6 +451,7 @@
         <?php $_SESSION["codFiscalePaz"]=$paziente->getCf(); ?>
         window.location.replace("../../applicationLogic/videoConferenzaControl.php");
     }
+
 </script>
 </body>
 </html>
