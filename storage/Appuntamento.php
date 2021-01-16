@@ -7,7 +7,7 @@
     * 2020 Copyright by PsyMeet - University of Salerno 
 */
 class Appuntamento{
-private $id_appuntamento;
+private $idAppuntamento;
 private $data;
 private $ora;
 private $desc;
@@ -19,7 +19,10 @@ public static $tableName="appuntamento";
     date_default_timezone_set("Europe/Rome");
     $currDate = date("Y-m-d");
     $currHour = date("H:i:s");
-    if($date < $currDate){
+    if($date == null || $hour == null || $des == null || $cfPr == null || $cfPa == null){
+      throw new Exception("Alcuni valori non definiti!");
+    }
+    else if($date < $currDate){
       throw new Exception("Data non disponibile!");
     }
     else if($date == $currDate && $hour<=$currHour){
@@ -31,7 +34,7 @@ public static $tableName="appuntamento";
     else if(strlen($cfPa)!=16){
       throw new Exception("Codice fiscale paziente non valido!");
     }
-    $this->id_appuntamento = $id;
+    $this->idAppuntamento = $id;
     $this->data = $date;
     $this->ora = $hour;
     $this->desc = $des;
@@ -39,7 +42,10 @@ public static $tableName="appuntamento";
     $this->cfPaz = $cfPa;
   }
   function getId(){
-    return $this->id_appuntamento;
+    if($this->idAppuntamento <=0 || $this->idAppuntamento == null){
+      throw new Exception("Id appuntamento non valido!");
+    }
+    return $this->idAppuntamento;
   }
   function getData(){
     return $this->data;
@@ -58,26 +64,46 @@ public static $tableName="appuntamento";
   }
 
   function setId($newId){
-    $this->id_appuntamento = $newId;
+    if($newId<=0 || $newId==null){
+      throw new Exception('Nuovo id appuntamento non valido!');
+    }
+    $this->idAppuntamento = $newId;
   }
   function setData($newDate){
+    date_default_timezone_set("Europe/Rome");
+    $currDate = date("Y-m-d");
+    if($newDate == null || $newDate<$currDate){
+      throw new Exception('Nuova data appuntamento non valido!');
+    }
     $this->data = $newDate;
   }
   function setOra($newOra){
+    if($newOra == null){
+      throw new Exception('Nuova ora appuntamento non valido!');
+    }
     $this->ora = $newOra;
   }
   function setDesc($newDesc){
+    if($newDesc == null){
+      throw new Exception('Nuova descrizione appuntamento non valido!');
+    }
     $this->desc = $newDesc;
   }
   function setCfProf($newCfProf){
+    if($newCfProf==null || strlen($newCfProf)!=16){
+      throw new Exception('Nuovo CF Professionista in appuntamento non valido!');
+    }
     $this->cfProf = $newCfProf;
   }
   function setCfPaz($newCfPaz){
+    if($newCfPaz==null || strlen($newCfPaz)!=16){
+      throw new Exception('Nuovo CF Paziente in appuntamento non valido!');
+    }
     $this->cfPaz = $newCfPaz;
   }
 
-  public function getArray(){
-       return array("id_appuntamento" => $this->id_appuntamento,"data" => $this->data, "ora" => $this->ora, "descrizione" => $this->desc, "cf_prof" => $this->cfProf, "cf" => $this->cfPaz);
+  function getArray(){
+       return array("id_appuntamento" => $this->idAppuntamento,"data" => $this->data, "ora" => $this->ora, "descrizione" => $this->desc, "cf_prof" => $this->cfProf, "cf" => $this->cfPaz);
    }
 }
 

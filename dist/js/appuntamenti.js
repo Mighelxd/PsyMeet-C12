@@ -30,9 +30,13 @@ function selectApp(a) {
 	var ora = a.ora;
 	var descrizione = a.descrizione;
 	var cf = a.cf;
+	var id = a.id_appuntamento;
 
 	var cCf = cf.substr(0, cf.indexOf('-') - 1);
 	var nomCompleto = cf.substr(cf.indexOf('-') + 2);
+
+	var idIn = document.getElementById('oldId');
+	idIn.value = id;
 
 	var nome = document.getElementById('inputNome');
 	nome.value = nomCompleto;
@@ -483,6 +487,11 @@ function createForm(action){
 		spanDesc.id = "descrizioneSpan";
 
 		/*Creo i campi che conterranno le info dei vecchi appuntamenti*/
+			var oldId = document.createElement('input');
+			oldId.name = 'oldId';
+			oldId.id = 'oldId';
+			oldId.type = 'text';
+			oldId.hidden = true;
 			var oldNome = document.createElement('input');
 			oldNome.name = 'oldName';
 			oldNome.id = 'oldName';
@@ -547,6 +556,7 @@ function createForm(action){
 		form.appendChild(inDesc);
 		form.appendChild(spanDesc);
 
+		form.appendChild(oldId);
 		form.appendChild(oldNome);
 		form.appendChild(oldCf);
 		form.appendChild(oldData);
@@ -606,12 +616,18 @@ function createDelForm(app){
 			rootMod.removeChild(rootMod.childNodes[0]);
 		}
 	}
-
+	//console.log(app);
 	var cf = app.cf;
 	var nomeCompleto = cf.substr(cf.indexOf('-')+1);
 	cf = cf.substr(0,cf.indexOf('-')-1);
 
 	var form = document.getElementById('delForm');
+
+	var idApp = document.createElement('input');
+	idApp.type = "text";
+	idApp.name="id";
+	idApp.value = app.id_appuntamento;
+	idApp.hidden = true;
 
 	var inNome = document.createElement('input');
 	inNome.className = "form-control";
@@ -696,6 +712,7 @@ function createDelForm(app){
 		}
 	}
 
+	form.appendChild(idApp);
 	form.appendChild(labNome);
 	form.appendChild(inNome);
 
