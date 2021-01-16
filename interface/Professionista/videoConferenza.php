@@ -7,6 +7,7 @@
     include  "../../storage/Paziente.php";
     include "../../plugins/libArray/FunArray.php";
     include "../../applicationLogic/PazienteControl.php";
+    include "../../applicationLogic/terapiaControl.php";
     session_start();
     if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
     header("Location: ../Utente/login.php");
@@ -19,6 +20,11 @@
     }
     $paziente=$_SESSION["paziente"];
     $professionista=$_SESSION["professionista"];
+    $terapie=terapiaControl::getTerapie($paziente->getCf(),$professionista->getCfProf());
+    if(!isset($terapie[0])){
+        header("Location: indexProfessionista.php");
+    }
+    $_SESSION["idTerCorr"]=$terapie[0]->getIdTerapia();
 ?>
 <head>
     <meta charset="utf-8">
@@ -296,6 +302,8 @@
                     $("#messaggioChiamata")[0].innerHTML="Per terminare la chiamata usare il tasto termina chiamata a sinistra.";
                     $("#messaggioChiamata").show()
                     var api=iniziaChiamata("<?php echo md5($paziente->getCognome().$paziente->getNome()); ?>");
+                    $(".nav-link active").removeClass("active");
+                    $(".nav-link").addClass("disabled")
                 }
                 console.log(response);
             },

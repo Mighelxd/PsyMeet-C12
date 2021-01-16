@@ -26,10 +26,6 @@
     */
 
 
-    $_SESSION["paziente"] = NULL;
-    $_SESSION["professionista"] = NULL;
-    $_SESSION["codFiscalePaz"] = NULL;
-
 $professionista = ProfessionistaControl::getProf($cf);
     $pazienti=PazienteControl::getPazientiByProf($cf);
 
