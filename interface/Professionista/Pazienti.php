@@ -11,6 +11,7 @@ include ("../../plugins/libArray/FunArray.php");
 include "../../applicationLogic/PazienteControl.php";
 include "../../storage/Paziente.php";
 include "../../storage/Terapia.php";
+include '../../applicationLogic/AuntenticazioneControl.php';
 
 session_start();
 $tipoUtente = $_SESSION["tipo"];
@@ -33,6 +34,8 @@ if($listPazNonCur != null && $listPaz !=null){
     }
 }
 $_SESSION["cfPazTer"] = "";
+
+
 
  ?>
 <!DOCTYPE html>
@@ -69,7 +72,8 @@ $_SESSION["cfPazTer"] = "";
           <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
           </li>
-          <a href="logout.php">Logout</a>
+
+
         </ul>
 
 
@@ -141,9 +145,34 @@ $_SESSION["cfPazTer"] = "";
               </p>
             </a>
           </li>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <li id="btnLogout" class="nav-item">
+                <form method="post">
+                    <input type="text" name="action" value="logout" hidden>
+                    <input type="submit" value="logout">
 
+                </form>
+                <?php
+                if(isset($_POST['action'])) {
+                    $logt = $_POST['action'];
+                    if($logt=='logout') {
+                        AuntenticazioneControl::Logout();
+                    }
+                }
+
+                ?>
+            </li>
         </ul>
-      </nav> -->
+
+      </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -377,18 +406,6 @@ $_SESSION["cfPazTer"] = "";
   <!-- /.content-wrapper -->
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
