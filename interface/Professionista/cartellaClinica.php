@@ -366,7 +366,7 @@
   $("#formCartella").submit(function(e){
       e.preventDefault();
       $.ajax({
-            url: '../../applicationLogic/CartellaClinicaControl.php',
+            url: '../../applicationLogic/GestioneCartellaClinica.php',
             data: $("#formCartella").serialize(),
             type: 'post',
             success:function(data){
