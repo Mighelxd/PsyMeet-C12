@@ -8,6 +8,7 @@
 */
     include "../storage/DatabaseInterface.php ";
     include "../storage/paziente.php";
+    include "AreaInformativaControl.php";
     include '../plugins/libArray/FunArray.php';
     if(!$_SERVER["REQUEST_METHOD"] == "POST"){
         header("Location: ../interface/paziente/registrazionepaziente.php");
@@ -31,24 +32,20 @@
             else
                 $immagine=NULL;
             $paziente = new Paziente($codiceFiscale,$nome,$cognome,$dataNascita,$email,$telefono,$password,$indirizzo,$istruzione,$lavoro,$diffCura,$immagine,false);
-            $select = DatabaseInterface::selectQueryById($paziente->getArray(),Paziente::$tableName);
-            if(mysqli_num_rows($select)!=0){
-                $errore = array("esito" => false,"errore" => "Codice fiscale gia' presente.");
-                echo json_encode($errore);
-            }
-            $select = DatabaseInterface::selectQueryByAtt(array("email" => $paziente->getEmail()),Paziente::$tableName);
-            if(mysqli_num_rows($select)!=0){
-                $errore=array("esito" => "false","errore" => "Email gia' presente.");
-                echo json_encode($errore);
+            $result = AreaInformativaControl::checkPaz($paziente);
+            if(isset($result)){
+                $esito=array("esito"=>false, "errore" => $result);
+                echo json_encode($esito);
                 exit();
             }
-            $result = DatabaseInterface::insertQuery($paziente->getArray(),Paziente::$tableName);
+            $result = AreaInformativaControl::savePaz($paziente);
             if($result==true){
                 session_start();
                 $_SESSION["codiceFiscale"]=$codiceFiscale;
                 $_SESSION["tipo"]="paziente";
                 $esito=array("esito" => true, "errore" => "nessuno");
                 echo json_encode($esito);
+                exit();
             }
         }
 ?>

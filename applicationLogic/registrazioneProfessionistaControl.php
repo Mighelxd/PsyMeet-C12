@@ -7,7 +7,8 @@
     * 2020 Copyright by PsyMeet - University of Salerno 
 */
     include "../storage/DatabaseInterface.php ";
-    include "../storage/professionista.php";
+    include "../storage/Professionista.php";
+    include "AreaInformativaControl.php";
     include '../plugins/libArray/FunArray.php';
     if(!$_SERVER["REQUEST_METHOD"] == "POST"){
         header("Location: ../interface/Professionista/registrazioneProfessionista.php");
@@ -38,20 +39,13 @@
                 $immagine=NULL;
             $professionista = new Professionista($codice_fiscale,$nome,$cognome,$data_nascita,$email,$telefono,$cellulare,$password,$indirizzo_studio,$esperienze,$pubblicazioni,$titolo_studio,$n_iscrizione_albo,$p_iva,$pec,$spec,$polizza_rc,$immagine);
             
-            $select = DatabaseInterface::selectQueryById($professionista->getArray(),Professionista::$tableName);
-            if(mysqli_num_rows($select)!=0){
-                $errore = array("esito" => false,"errore" => "Codice fiscale gia' presente.");
-                echo json_encode($errore);
+            $result=AreaInformativaControl::checkProf($professionista);
+            if(isset($result)){
+                $esito=array("esito"=>false, "errore" => $result);
+                echo json_encode($esito);
                 exit();
             }
-            $select = DatabaseInterface::selectQueryByAtt(array("email" => $professionista->getEmail()),Professionista::$tableName);
-            if(mysqli_num_rows($select)!=0){
-                $errore=array("esito" => "false","errore" => "Email gia' presente.");
-                 echo json_encode($errore);
-                 exit();
-            }
-            $result = DatabaseInterface::insertQuery($professionista->getArray(),Professionista::$tableName);
-            if($result==true){
+            elseif(AreaInformativaControl::saveProf($professionista)) {
                 session_start();
                 $_SESSION["codiceFiscale"]=$codice_fiscale;
                 $_SESSION["tipo"]="professionista";
