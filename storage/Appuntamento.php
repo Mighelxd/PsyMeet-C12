@@ -13,9 +13,24 @@ private $ora;
 private $desc;
 private $cfProf;
 private $cfPaz;
-private static $tableName="appuntamento";
+public static $tableName="appuntamento";
 
   function __construct($id,$date,$hour,$des,$cfPr,$cfPa){
+    date_default_timezone_set("Europe/Rome");
+    $currDate = date("Y-m-d");
+    $currHour = date("H:i:s");
+    if($date < $currDate){
+      throw new Exception("Data non disponibile!");
+    }
+    else if($date == $currDate && $hour<=$currHour){
+      throw new Exception("Orario non disponibile! Inserisci un ora dopo le $currHour");
+    }
+    else if(strlen($cfPr)!=16){
+      throw new Exception("Codice fiscale professionista non valido!");
+    }
+    else if(strlen($cfPa)!=16){
+      throw new Exception("Codice fiscale paziente non valido!");
+    }
     $this->id_appuntamento = $id;
     $this->data = $date;
     $this->ora = $hour;

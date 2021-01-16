@@ -129,6 +129,7 @@
 
             <!-- Main content (calendario)-->
             <section class="content">
+                <span style="color:red;"><?php if(isset($_SESSION['erroreApp'])){ echo $_SESSION['erroreApp'];} ?></span>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-3">

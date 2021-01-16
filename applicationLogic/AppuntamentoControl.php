@@ -19,11 +19,12 @@ else{
 }
 
 $cfProf = $_SESSION["codiceFiscale"];
-define("TABLE_NAME", "appuntamento");
+$_SESSION['erroreApp']="";
+
 /*Questa action recupera tutti gli appuntamenti di un professionista recuperando per ognuno il nome dei pazienti.*/
 if($action == 'recoveryAll'){
   $arrKey = array("cf_prof"=>$cfProf);
-  $allAppProf = DatabaseInterface::selectQueryByAtt($arrKey,TABLE_NAME);
+  $allAppProf = DatabaseInterface::selectQueryByAtt($arrKey,Appuntamento::$tableName);
   $allObj= array();
 
   while($row = $allAppProf->fetch_array()){
@@ -46,11 +47,19 @@ else if($action == 'addApp'){
     $ora = $_POST['ora'];
     $descrizione = $_POST['descrizione'];
     $cf = $_POST['codF'];
-    $arrAtt = array("data"=>$data,"ora"=>$ora,"descrizione"=>$descrizione,"cf_prof"=>'RSSMRC80R12H703U',"cf"=>$cf);
-
-    $ok = DatabaseInterface::insertQuery($arrAtt,TABLE_NAME);
+    try{
+        $newApp = new Appuntamento(null,$data,$ora,$descrizione,$cf,$cfProf);
+    }catch(Exception $e){
+        $_SESSION['erroreApp'] = $e->getMessage();
+        header('Location: ../interface/Professionista/calendario.php');
+    }
+    $ok = DatabaseInterface::insertQuery($newApp->getArray(),TABLE_NAME);
     if($ok){
       header('Location: ../interface/Professionista/calendario.php');
+    }
+    else{
+        $_SESSION['erroreApp'] = "Appuntamento non aggiunto!";
+        header('Location: ../interface/Professionista/calendario.php');
     }
 }
 /*Questa action cancella un appuntamento*/
