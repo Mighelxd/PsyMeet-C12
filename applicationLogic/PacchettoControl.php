@@ -44,5 +44,26 @@ class PacchettoControl{
 
    return $pacrec;
  }
+
+    static function selectAllPacchettoPaz($cfPaziente){
+        $arrs = NULL;
+        $arrscelte= array('cf' =>$cfPaziente);
+        $allFatture= DatabaseInterface::selectQueryByAtt($arrscelte,"fattura");
+        while ($row =$allFatture->fetch_array()) {
+            $pacFattura = new Fattura($row[0],$row[1],$row[2], $row[3]);
+            //$arrayFatture[] = $pacFattura;
+            $arr = array("id_scelta" => $pacFattura->getIdScelta());
+            $scelta = DatabaseInterface::selectQueryById($arr, "scelta");
+            $sc = $scelta->fetch_array();
+            $pacscelta= new Scelta($sc[0],$sc[1],$sc[2]);
+            $arrayScelta = array("id_pacchetto"=> $pacscelta->getIdPacchetto());
+            $selectPacchetto = DatabaseInterface::selectQueryById($arrayScelta,"pacchetto");
+            $pac = $selectPacchetto->fetch_array();
+            $pacchetto = new Pacchetto($pac[0],$pac[1],$pac[2],$pac[3]);
+            $arrs[]=$pacchetto;
+        }
+        //var_dump($arrs);
+        return $arrs;
+    }
 }
  ?>

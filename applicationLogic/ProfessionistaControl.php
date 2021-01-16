@@ -18,6 +18,21 @@ class professionistaControl{
 
     return $prof;
   }
+
+  public static function getProfessionistByPaz($cfPaziente){
+    $professionisti = NULL;
+
+    $arr = array("cf" => $cfPaziente);
+    $result = DatabaseInterface::selectQueryByAtt($arr,"terapia");
+
+    while ($row = $result->fetch_array()){
+      $terapie = new Terapia($row[0],$row[1],$row[2],$row[3],$row[4]);
+      $prof = self::getProf($terapie->getCfProf());
+      $professionisti[] = $prof;
+    }
+
+    return $professionisti;
+  }
 }
 
 

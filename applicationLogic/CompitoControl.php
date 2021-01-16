@@ -13,7 +13,7 @@ declare(strict_types=1);
 /**
  *
  */
-define('TABLE_NAME', 'compito');
+//define('TABLE_NAME', 'compito');
 
 
 /**
@@ -30,7 +30,7 @@ class CompitoControl
     public static function selectAllCompitiProf($cfProf)
 	{
 		$arrKey = ['cf_prof'=>$cfProf];
-		$allCompProf = DatabaseInterface::selectQueryByAtt($arrKey, TABLE_NAME);
+		$allCompProf = DatabaseInterface::selectQueryByAtt($arrKey, 'compito');
 		while ($row=$allCompProf->fetch_array()) {
 			$comp= new Compito($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8]);
 			$arr[]=$comp;
@@ -49,7 +49,7 @@ class CompitoControl
     public static function selectAllCompitiPaz($cfPaz)
 	{
 		$arrKey = ['cf'=>$cfPaz];
-		$allCompPaz = DatabaseInterface::selectQueryByAtt($arrKey, TABLE_NAME);
+		$allCompPaz = DatabaseInterface::selectQueryByAtt($arrKey, 'compito');
 		while ($row=$allCompPaz->fetch_array()) {
 			$comp= new Compito($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8]);
 			$arr[]=$comp;

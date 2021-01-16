@@ -56,7 +56,7 @@ class Pacchetto
     /**
      * @return mixed
      */
-    public function geNSedute()
+    public function getNSedute()
     {
         return $this -> n_sedute;
     }

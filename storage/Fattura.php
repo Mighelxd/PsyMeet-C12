@@ -20,7 +20,7 @@ class Fattura
     $this->idFattura= $idFattura;
     $this->data = $data;
     $this->cfPaz= $cfPaz;
-    $this->id_scelta= $idScelta;
+    $this->idScelta= $idScelta;
   }
 
   public function getIdFattura()
