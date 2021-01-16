@@ -304,15 +304,15 @@
                   <input type="text" name="codFiscalePaz" value="<?php echo $paziente->getCf() ?>" hidden="true">
                   
                   <?php if(!isset($cartellaClinica)){ ?>
-                  <div class="card-footer" style="background-color: white">
-                    <input type="text" name="azione" value="aggiungi" hidden ="true">
-                    <button type="submit" id="sottometti" class="btn btn-primary" style="float: right">Aggiungi</button>
-                    <div class="alert alert-success" style="display:none;">Cartella Clinica aggiunta con successo!</div>
-                  </div>
+                      <div class="card-footer" style="background-color: white">
+                          <input type="text" name="azione" value="aggiungi" hidden ="true">
+                          <div class="alert alert-success" style="display:none;">Cartella Clinica aggiunta con successo. <br> Verrai reindirizzato tra 5 secondi alla pagina dei Pazienti</div>
+                          <button type="submit" id="sottometti" class="btn btn-primary" style="float:right">Aggiungi</button>
+                      </div>
                   <?php } else { ?>
                   <div class="card-footer" style="background-color: white">
                     <input type="text" name="azione" value="modifica" hidden ="true">
-                    <div class="alert alert-success" style="display:none;">Cartella Clinica modificata con successo</div>
+                    <div class="alert alert-success" style="display:none;">Cartella Clinica modificata con successo. <br>Verrai reindirizzato tra 5 secondi alla pagina dei Pazienti.</div>
                     <button type="submit" id="sottometti" class="btn btn-primary" style="float:right">Modifica</button>
                   </div>
                   <?php } ?>
@@ -373,7 +373,7 @@
               var response=JSON.parse(data);
               if(response.esito==true){
                  $(".alert-success").show();
-                 $("#sottometti").attr("disabled", true);
+                 $("#sottometti").addClass("disabled");
                   setTimeout(function(){
                     window.location.replace("Pazienti.php");
                   },5000)

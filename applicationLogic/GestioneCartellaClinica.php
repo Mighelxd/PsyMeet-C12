@@ -2,6 +2,7 @@
   include "../storage/DatabaseInterface.php";
   include "../storage/cartellaClinica.php";
   include "../storage/Paziente.php";
+  include "CartellaClinicaControl.php";
   include "../plugins/libArray/FunArray.php";
     if(!isset($_POST["azione"])){
         header("Location: ../interface/Professionista/pazienti.php");
@@ -23,10 +24,8 @@ if($_POST["azione"]=="visualizza"){
 else
     if($_POST["azione"]=="modifica"){
         $cfPaz=$_POST["codFiscalePaz"];
-        $result=CartellaClinicaControl::getCartellaClinica($cfPaz,$cfProf);
-        $idCartella=$result["id_cartella_clinica"];
+        $cartellaClinica=CartellaClinicaControl::getCartellaClinica($cfPaz,$cfProf);
         $date=date("Y-m-d");
-        $cartellaClinica=new CartellaClinica($result["id_cartella_clinica"],$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
         $result=CartellaClinicaControl::updateCartellaClinica($cartellaClinica);
         if(gettype($result) == "string"){
             echo json_encode(array("esito"=>false, "errore" => $result));
