@@ -244,7 +244,7 @@ $(document).ready(function () {
               data=JSON.parse(data);
               console.log(data);
                 if(data.esito==true){
-                  window.location.replace("../Professionista/indexProfessionista.html");
+                  window.location.replace("../Professionista/indexProfessionista.php");
                 }else{
                    $('.alert-danger').show();
                    $('.alert-danger')[0].innerHTML=data.errore;

@@ -86,7 +86,7 @@
             console.log(data);
             if(data.esito==true){
               if(data.tipo=="professionista")
-                window.location.replace("../Professionista/indexProfessionista.html");
+                window.location.replace("../Professionista/indexProfessionista.php");
               else
                   window.location.replace("../Paziente/areaPersonalePaziente.php");
             }else{
