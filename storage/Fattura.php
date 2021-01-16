@@ -11,16 +11,16 @@ class Fattura
 {
   public static $tableName = 'fattura';
   private $idFattura;
-	private $data;
+  private $data;
   private $cfPaz;
-  private $idPacchetto;
+  private $idScelta;
 
-  public function __construct($idFattura, $data, $cfPaz, $idPacchetto)
+  public function __construct($idFattura, $data, $cfPaz,$idScelta)
   {
     $this->idFattura= $idFattura;
     $this->data = $data;
     $this->cfPaz= $cfPaz;
-    $this->id_pacchetto= $idPacchetto;
+    $this->id_scelta= $idScelta;
   }
 
   public function getIdFattura()
@@ -33,9 +33,9 @@ class Fattura
     return $this->cfPaz;
   }
 
-  public function getIdPacchetto()
+  public function getIdScelta()
   {
-    return $this->id_pacchetto;
+    return $this->idScelta;
   }
 
   public function getData()
@@ -50,7 +50,6 @@ class Fattura
 
   public function getArray()
   {
-    return ['id_fattura'->$idFattura, 'data'->$data, 'cf'->$cfPaz, 'id_pacchetto'->$idPacchetto];
+    return array("id_fattura"=>$this->idFattura, "data"=>$this->data, "cf"=>$this->cfPaz, "id_scelta"=>$this->idScelta);
   }
-
 }
