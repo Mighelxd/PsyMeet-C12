@@ -1,3 +1,10 @@
+/*
+    * appuntamenti.js
+    * Questi script forniscono diverse operazioni che si possono fare per Appuntamento
+    * Autore: Marco Campione
+    * Versione: 0.1
+    * 2020 Copyright by PsyMeet - University of Salerno
+*/
 /*Qusta funzione istanzia e restituisce un nuovo oggetto XMLHttpRequest*/
 function getXmlHttpRequest() {
 

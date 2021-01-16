@@ -18,29 +18,52 @@ class CartellaClinica {
     public static $tableName="cartellaclinica";
 
     public function setFarmaci($fa){
+        if($fa == null){
+            throw new Exception("Nuovo campo farmaci non valido!");
+        }
         $this->farmaci = $fa;
     }
 
     public function setQualitaUmore($qum){
+        if($qum<1 || $qum>5 || $qum == null){
+            throw new Exception("Nuovo valore qualit. umore non valido!");
+        }
         $this->QualitaUmore = $qum;
     } 
 
     public function setPatologiePregresse($pat){
+        if($pat == null){
+            throw new Exception("Nuovo campo patologie pregresse non valido!");
+        }
         $this->patologiePregresse = $pat;
     }
 
     public function setQualitaRelazioni($qur){
+        if($qur<1 || $qur>5 || $qur == null){
+            throw new Exception("Nuovo valore qualit. relazioni non valido!");
+        }
         $this->qualitaRelazioni = $qur;
     }
 
     public function setCfProf($cfPro){
+        if($cfPro==null || strlen($cfPro)!=16){
+            throw new Exception('Nuovo CF Professionista in cartella clinica non valido!');
+        }
         $this->cfProf = $cfPro;
     }
 
     public function setCfPaz($cfPa){
+        if($cfPa==null || strlen($cfPa)!=16){
+            throw new Exception('Nuovo CF Paziente in cartella clinica non valido!');
+        }
         $this->cfPaz = $cfPa;
     }
     public function setData($d){
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+        if($d == null || $d < $currDate){
+            throw new Exception("Nuova data non valida!");
+        }
         $this->dataCreazione = $d;
     }
 
@@ -87,6 +110,26 @@ class CartellaClinica {
      }
 
     public function __construct($i, $d, $qum, $qur, $pat, $fa, $cfPro, $cfPa){
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+        if($d == null || $qum == null || $qur == null || $pat == null || $fa == null || $cfPro == null || $cfPa == null){
+            throw new Exception("Alcuni valori non definiti!");
+        }
+        else if($qum<1 || $qum>5){
+            throw new Exception("Valore qualit. umore non corretto!");
+        }
+        else if($qur<1 || $qur>5){
+            throw new Exception("Valore qualit. relazione non corretto!");
+        }
+        else if($d < $currDate){
+            throw new Exception("Data non disponibile!");
+        }
+        else if(strlen($cfPro)!=16){
+            throw new Exception("Codice fiscale professionista non valido!");
+        }
+        else if(strlen($cfPa)!=16){
+            throw new Exception("Codice fiscale paziente non valido!");
+        }
         $this->id = $i;
         $this->dataCreazione=$d;
         $this->farmaci = $fa;
