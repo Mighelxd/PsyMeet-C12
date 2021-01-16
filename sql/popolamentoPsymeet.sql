@@ -36,10 +36,9 @@ insert into cartellaClinica(data_creazione,q_umore,q_relazioni,patologie_pregres
 
 insert into compito(data,effettuato,titolo,descrizione,svolgimento,correzione,cf_prof,cf) value('2020-10-21','1','Buio','NA', 'svolgimento1', 'correzione1', 'RSSMRC80R12H703U','NSTFNC94M23H703G');
 
-insert into fattura(data,cf,id_pacchetto) value('2020-10-01','NSTFNC94M23H703G','1');
-
 insert into scelta(cf_prof,id_pacchetto) value('RSSMRC80R12H703U','1');
 
+insert into fattura(data,cf,id_scelta) value('2020-10-01','NSTFNC94M23H703G','1');
 
 /*load data local infile'/home/marco/Scrivania/datiPsymeet/datiProf.sql'
 into table professionista(nome,cognome,data_nascita,cf_prof,email,telefono,cellulare,passwor,indirizzo_studio,esperienze,pubblicazioni,titolo_studio,n_iscrizione_albo,partita_iva,pec,specializzazione,polizza_RC);

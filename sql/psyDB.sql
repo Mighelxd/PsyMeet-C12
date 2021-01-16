@@ -211,18 +211,7 @@ CREATE TABLE compito(
  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS fattura;
-CREATE TABLE fattura(
- id_fattura INT unsigned auto_increment not null,
- data DATE not null,
- cf CHAR(16) not null,
- id_pacchetto INT unsigned not null,
- PRIMARY KEY(id_fattura),
- FOREIGN KEY(cf) REFERENCES paziente(cf)
- ON DELETE CASCADE ON UPDATE CASCADE,
- FOREIGN KEY(id_pacchetto) REFERENCES pacchetto(id_pacchetto)
- ON DELETE CASCADE ON UPDATE CASCADE
-);
+
 
 DROP TABLE IF EXISTS scelta;
 CREATE TABLE scelta(
@@ -233,5 +222,18 @@ CREATE TABLE scelta(
  FOREIGN KEY(cf_prof) REFERENCES professionista(cf_prof)
  ON DELETE CASCADE ON UPDATE CASCADE,
  FOREIGN KEY(id_pacchetto) REFERENCES pacchetto(id_pacchetto)
+ ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS fattura;
+CREATE TABLE fattura(
+ id_fattura INT unsigned auto_increment not null,
+ data DATE not null,
+ cf CHAR(16) not null,
+ id_scelta INT unsigned not null,
+ PRIMARY KEY(id_fattura),
+ FOREIGN KEY(cf) REFERENCES paziente(cf)
+ ON DELETE CASCADE ON UPDATE CASCADE,
+ FOREIGN KEY(id_scelta) REFERENCES scelta(id_scelta)
  ON DELETE CASCADE ON UPDATE CASCADE
 );
