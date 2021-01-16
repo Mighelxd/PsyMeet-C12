@@ -21,6 +21,7 @@
     $paziente=$_SESSION["paziente"];
     $professionista=$_SESSION["professionista"];
     $terapie=terapiaControl::getTerapie($paziente->getCf(),$professionista->getCfProf());
+    $_SESSION["cfPazTer"]=$paziente->getCf();
     if(!isset($terapie[0])){
         header("Location: indexProfessionista.php");
     }
@@ -238,17 +239,17 @@
                         <div class="col-lg-6" id="videochiamata">
                         </div>
                         <div class="col-lg-3" id="bottoni">
-                            <button type="button" class="btn-lg btn-primary" id="bottoneCart">Cartella Clinica</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoneDat">Dati Paziente</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoneCom">Compiti</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneCart" onclick="apriFinestra('../../applicationLogic/GestioneCartellaClinica.php',1000,1000)">Cartella Clinica</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneDat" onclick="apriFinestra('schedaPaziente.php',1000,1000)">Dati Paziente</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneCom" onclick="apriFinestra('gestioneCompiti.php',1000,1000)">Compiti</button>
                             <button type="button" class="btn-lg btn-primary" id="bottoneTermina" onclick="terminaChiamata()">Termina chiamata</button>
                         </div>
                         <div class="col-lg-3" id="sedute">
-                            <button type="button" class="btn-lg btn-primary" id="bottonePr">Scheda Primo Colloquio</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoneAssFoc">Scheda Assessment Focalizzato</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoneAssGen">Scheda Assessment Generalizzato</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoniFoll">Scheda FollowUp</button>
-                            <button type="button" class="btn-lg btn-primary" id="bottoneMod">Scheda ModelloEziologico</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottonePr" onclick="apriFinestra('SchedaPrimoColloquio.php',1000,1000)">Scheda Primo Colloquio</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneAssFoc" onclick="apriFinestra('SchedaAssessmentFocalizzato.php',1000,1000)">Scheda Assessment Focalizzato</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneAssGen" onclick="apriFinestra('SchedaAssessmentGeneralizzato.php',1000,1000)">Scheda Assessment Generalizzato</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoniFoll" onclick="apriFinestra('SchedaFollowUp.php',1000,1000)">Scheda FollowUp</button>
+                            <button type="button" class="btn-lg btn-primary" id="bottoneMod" onclick="apriFinestra('SchedaModelloEziologico.php',1000,1000)">Scheda ModelloEziologico</button>
                         </div>
                         <div id="messaggio" class="col-lg-12 alert alert-success"></div>
                     </div>

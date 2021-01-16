@@ -288,7 +288,7 @@
                       </div>
                       <div class="form-group">
                           <label for="umore">Qualità dell'umore</label>
-  	    				<textarea id="umore" name="umo" <?php if(!isset($cartellaClinica)){ ?>placeholder="scrivi...." <?php } ?> style="height:200px" required><?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaUmore() ?></textarea>
+  	    				<input type="text" id="umore" pattern="[0-5]{1}" title="Un numero da 0 a 5" name="umo" value="<?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaUmore() ?>" <?php if(!isset($cartellaClinica)){ ?>placeholder="scrivi...." <?php } ?> required>
                       </div>
                       <div class="form-group">
                           <label for="patologia">Patologie pregresse psichiche/fisiche</label>
@@ -296,7 +296,7 @@
                       </div>
                       <div class="form-group">
                           <label for="relazioni">Qualità relazioni affettive</label>
-  	    				<textarea id="relazioni" name="relaz" placeholder="scrivi..." style="height:200px" required><?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaRealazioni() ?></textarea>
+  	    				<input type="text" id="relazioni" name="relaz" value="<?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaRealazioni() ?>" placeholder="Un numero da 0 a 5" pattern="[0-5]{1}" title="Un numero da 0 a 5"required>
                     </div>
                     </div>
                   </div>
@@ -306,13 +306,13 @@
                   <?php if(!isset($cartellaClinica)){ ?>
                       <div class="card-footer" style="background-color: white">
                           <input type="text" name="azione" value="aggiungi" hidden ="true">
-                          <div class="alert alert-success" style="display:none;">Cartella Clinica aggiunta con successo. <br> Verrai reindirizzato tra 5 secondi alla pagina dei Pazienti</div>
+                          <div class="alert alert-success" style="display:none;">Cartella Clinica aggiunta con successo.</div>
                           <button type="submit" id="sottometti" class="btn btn-primary" style="float:right">Aggiungi</button>
                       </div>
                   <?php } else { ?>
                   <div class="card-footer" style="background-color: white">
                     <input type="text" name="azione" value="modifica" hidden ="true">
-                    <div class="alert alert-success" style="display:none;">Cartella Clinica modificata con successo. <br>Verrai reindirizzato tra 5 secondi alla pagina dei Pazienti.</div>
+                    <div class="alert alert-success" style="display:none;">Cartella Clinica modificata con successo.</div>
                     <button type="submit" id="sottometti" class="btn btn-primary" style="float:right">Modifica</button>
                   </div>
                   <?php } ?>
@@ -374,9 +374,6 @@
               if(response.esito==true){
                  $(".alert-success").show();
                  $("#sottometti").addClass("disabled");
-                  setTimeout(function(){
-                    window.location.replace("Pazienti.php");
-                  },5000)
               }
               else{
                 $(".alert").removeClass("alert-success");
