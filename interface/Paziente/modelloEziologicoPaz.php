@@ -18,15 +18,12 @@ if ($tipoUtente != 'paziente') {
     header('Location: ../Utente/login.php');
 }
 
-if(isset($_SESSION['idTerCorr'])){
-    $idTerCorr = $_SESSION['idTerCorr'];
-    $allSc = terapiaControl::recuperaSchede($idTerCorr);
-    for($i=0;$i<count($allSc);$i++){
-        if($allSc[$i]->getTipo() == 'Scheda Modello Eziologico'){
-            $schModEz[] = $allSc[$i];
-        }
-    }
-}
+$modEz = SeduteControl::recAllModEzPaz($cf);
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -147,31 +144,36 @@ if(isset($_SESSION['idTerCorr'])){
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
+                            <?php
+                            if($modEz!=null){
+                            for ($i=0; $i<count($modEz); $i++) {
+                            ?>
                             <h3 class="card-title">Modello Eziologico</h3>
                         </div>
                         <div class="card-body">
-
-
-
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputDescription">Fattori Causativi</label>
-                                    <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                                    <textarea id="inputDescription" class="form-control" rows="4" readonly> <?php echo $modEz[$i]->getFattoriCausativi(); ?> </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputDescription">Fattori Precipitanti</label>
-                                    <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                                    <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $modEz[$i]->getFattoriPrecipitanti(); ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputDescription">Fattori Mantenimento</label>
-                                    <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                                    <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $modEz[$i]->getFattoriMantenimento(); ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputDescription">Relazione Finale</label>
-                                    <textarea id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                                    <textarea id="inputDescription" class="form-control" rows="4" readonly><?php echo $modEz[$i]->getRelazioneFinale(); ?></textarea>
                                 </div>
 
                             </div>
+                            <?php
+                                }
+                            }
+                            ?>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
