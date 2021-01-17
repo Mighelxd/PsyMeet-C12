@@ -8,38 +8,54 @@
  */
 class SchedaAssessmentGeneralizzato
 {
-    private $id_scheda;
+    private $idScheda;
     private $data;
-    private $autoreg_positivi;
-    private $autoreg_negativi;
-    private $cognitive_positivi;
-    private $cognitive_negativi;
-    private $self_management_negativi;
-    private $sociali_positivi;
-    private $sociali_negativi;
-    private $self_management_positivi;
-    private $id_terapia;
+    private $autoregPositivi;
+    private $autoregNegativi;
+    private $cognitivePositivi;
+    private $cognitiveNegativi;
+    private $self_managementNegativi;
+    private $socialiPositivi;
+    private $socialiNegativi;
+    private $self_managementPositivi;
+    private $idTerapia;
     private $tipo;
     public static $tableName="schedaassessmentgeneralizzato";
 
-    public function __construct($id_scheda, $data, $autoreg_positivi, $autoreg_negativi, $cognitive_positivi, $cognitive_negativi, $self_management_positivi, $self_management_negativi, $sociali_positivi, $sociali_negativi, $id_terapia, $tipo)
+    public function __construct($idScheda, $data, $autoregPositivi, $autoregNegativi, $cognitivePositivi, $cognitiveNegativi, $selfManagementPositivi, $selfManagementNegativi, $socialiPositivi, $socialiNegativi, $idTerapia, $tipo)
     {
-        $this->id_scheda = $id_scheda;
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+        if($data == null || $autoregNegativi == null || $autoregPositivi == null || $cognitivePositivi == null
+        || $cognitiveNegativi == null || $selfManagementNegativi == null || $selfManagementPositivi == null
+        || $socialiNegativi == null || $socialiPositivi == null || $idTerapia == null || $tipo == null){
+            throw new Exception("Alcuni valori non validi!");
+        }
+        else if($data<$currDate){
+            throw new Exception("Data non isponibile!");
+        }
+        else if($idTerapia<1){
+            throw new Exception("Id terapia non valida!");
+        }
+        else if($tipo != "Scheda Assessment Generalizzato"){
+            throw new Exception("Tipo scheda non compatibile!");
+        }
+        $this->idScheda = $idScheda;
         $this->data = $data;
-        $this->autoreg_positivi= $autoreg_positivi;
-        $this->autoreg_negativi = $autoreg_negativi;
-        $this->cognitive_positivi = $cognitive_positivi;
-        $this->cognitive_negativi =$cognitive_negativi;
-        $this->self_management_negativi =$self_management_negativi;
-        $this->sociali_positivi =$sociali_positivi;
-        $this->sociali_negativi =$sociali_negativi;
-        $this->self_management_positivi =$self_management_positivi;
-        $this->id_terapia = $id_terapia;
+        $this->autoregPositivi= $autoregPositivi;
+        $this->autoregNegativi = $autoregNegativi;
+        $this->cognitivePositivi = $cognitivePositivi;
+        $this->cognitiveNegativi =$cognitiveNegativi;
+        $this->selfManagementNegativi =$selfManagementNegativi;
+        $this->socialiPositivi =$socialiPositivi;
+        $this->socialiNegativi =$socialiNegativi;
+        $this->selfManagementPositivi =$selfManagementPositivi;
+        $this->idTerapia = $idTerapia;
         $this->tipo = $tipo;
     }
     public function getIdScheda()
     {
-        return $this -> id_scheda;
+        return $this -> idScheda;
     }
     public function getData()
     {
@@ -47,93 +63,128 @@ class SchedaAssessmentGeneralizzato
     }
     public function getAutoregPositivi()
     {
-        return $this -> autoreg_positivi;
+        return $this -> autoregPositivi;
     }
     public function getAutoregNegativi()
     {
-        return $this -> autoreg_negativi;
+        return $this -> autoregNegativi;
     }
     public function getCognitivePositivi()
     {
-        return $this -> cognitive_positivi;
+        return $this -> cognitivePositivi;
     }
     public function getCognitiveNegativi()
     {
-        return $this -> cognitive_negativi;
+        return $this -> cognitiveNegativi;
     }
     public function getSelfManagementNegativi()
     {
-        return $this -> self_management_negativi;
+        return $this -> selfManagementNegativi;
     }
     public function getSocialiPositivi()
     {
-        return $this -> sociali_positivi;
+        return $this -> socialiPositivi;
     }
     public function getSocialiNegativi()
     {
-        return $this -> sociali_negativi;
+        return $this -> socialiNegativi;
     }
     public function getSelfManagementPositivi()
     {
-        return $this -> self_management_positivi;
+        return $this -> selfManagementPositivi;
     }
     public function getIdTerapia()
     {
-        return $this -> id_terapia;
+        return $this -> idTerapia;
     }
     public function getTipo()
     {
         return $this -> tipo;
     }
     public function getArray(){
-        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "autoreg_positivi" => $this->autoreg_positivi, "autoreg_negativi" => $this->autoreg_negativi, "cognitive_positivi" => $this->cognitive_positivi, "cognitive_negativi" => $this->cognitive_negativi, "self_management_positivi" => $this->self_management_positivi,"self_management_negativi" => $this->self_management_negativi, "sociali_positivi" => $this->sociali_positivi, "sociali_negativi" => $this->sociali_negativi, "id_terapia" => $this->id_terapia, "tipo" =>$this->tipo);
+        return array("id_scheda" => $this->idScheda, "data" => $this->data, "autoreg_positivi" => $this->autoregPositivi, "autoreg_negativi" => $this->autoregNegativi, "cognitive_positivi" => $this->cognitivePositivi, "cognitive_negativi" => $this->cognitiveNegativi, "self_management_positivi" => $this->selfManagementPositivi,"self_management_negativi" => $this->selfManagementNegativi, "sociali_positivi" => $this->socialiPositivi, "sociali_negativi" => $this->socialiNegativi, "id_terapia" => $this->idTerapia, "tipo" =>$this->tipo);
     }
-    public function setIdScheda($id_scheda)
+    public function setIdScheda($idScheda)
     {
-         $this -> id_scheda= $id_scheda;
+         $this -> idScheda= $idScheda;
     }
     public function setData($data)
     {
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+        if($data==null || $data<$currDate){
+            throw new Exception("Nuova data non disponibile!");
+        }
          $this -> data = $data;
     }
-    public function setAutoregPositivi($autoreg_positivi)
+    public function setAutoregPositivi($autoregPositivi)
     {
-         $this -> autoreg_positivi = $autoreg_positivi;
+        if($autoregPositivi == null){
+            throw new Exception("Nuovo campo autoregolazioni positive non valido!");
+        }
+         $this -> autoregPositivi = $autoregPositivi;
     }
-    public function setAutoregNegativi($autoreg_negativi)
+    public function setAutoregNegativi($autoregNegativi)
     {
-         $this -> autoreg_negativi = $autoreg_negativi;
+        if($autoregNegativi == null){
+            throw new Exception("Nuovo campo autoregolazioni negative non valido!");
+        }
+         $this -> autoregNegativi = $autoregNegativi;
     }
-    public function setCognitivePositivi($cognitive_positivi)
+    public function setCognitivePositivi($cognitivePositivi)
     {
-         $this -> cognitive_positivi = $cognitive_positivi;
+        if($cognitivePositivi == null){
+            throw new Exception("Nuovo campo cognitive positive non valido!");
+        }
+         $this -> cognitivePositivi = $cognitivePositivi;
     }
-    public function setCognitiveNegativi($cognitive_negativi)
+    public function setCognitiveNegativi($cognitiveNegativi)
     {
-         $this -> cognitive_negativi = $cognitive_negativi;
+        if($cognitiveNegativi == null){
+            throw new Exception("Nuovo campo cognitive negative non valido!");
+        }
+         $this -> cognitiveNegativi = $cognitiveNegativi;
     }
-    public function setSelfManagementNegativi($self_management_negativi)
+    public function setSelfManagementNegativi($selfManagementNegativi)
     {
-        $this -> self_management_negativi = $self_management_negativi;
+        if($selfManagementNegativi == null){
+            throw new Exception("Nuovo campo self management negativo non valido!");
+        }
+        $this -> self_managementNegativi = $selfManagementNegativi;
     }
-    public function setSocialiPositivi($sociali_positivi)
+    public function setSocialiPositivi($socialiPositivi)
     {
-         $this -> sociali_positivi = $sociali_positivi;
+        if($socialiPositivi == null){
+            throw new Exception("Nuovo campo sociali positivi non valido!");
+        }
+         $this -> socialiPositivi = $socialiPositivi;
     }
-    public function setSocialiNegativi($sociali_negativi)
+    public function setSocialiNegativi($socialiNegativi)
     {
-         $this -> sociali_negativi = $sociali_negativi;
+        if($socialiNegativi == null){
+            throw new Exception("Nuovo campo sociali negativo non valido!");
+        }
+         $this -> socialiNegativi = $socialiNegativi;
     }
-    public function setSelfManagementPositivi($self_management_positivi)
+    public function setSelfManagementPositivi($selfManagementPositivi)
     {
-         $this -> self_management_positivi = $self_management_positivi;
+        if($selfManagementPositivi == null){
+            throw new Exception("Nuovo campo self management positivo non valido!");
+        }
+         $this -> selfManagementPositivi = $selfManagementPositivi;
     }
-    public function setIdTerapia($id_terapia)
+    public function setIdTerapia($idTerapia)
     {
-         $this -> id_terapia = $id_terapia;
+        if($idTerapia == null || $idTerapia<1){
+            throw new Exception("Nuovo id terapia non valido!");
+        }
+         $this -> idTerapia = $idTerapia;
     }
     public function setTipo($tipo)
     {
+        if($tipo == null || $tipo!="Scheda Assessment Generalizzato"){
+            throw new Exception("Nuovo tipo scheda non compatibile!");
+        }
          $this -> tipo =$tipo;
     }
 }

@@ -17,6 +17,23 @@ class SchedaAssessmentFocalizzato
 
     public function __construct($idScheda, $data, $nEpisodi, $idTerapia, $tipo)
     {
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+        if($data == null || $nEpisodi == null || $idTerapia == null || $tipo == null){
+            throw new Exception("Alcuni valori non validi!");
+        }
+        else if($data < $currDate){
+            throw new Exception("Data non disponibile!");
+    }
+        else if($nEpisodi<0){
+            throw new Exception("Numero episodi non valido!");
+        }
+        else if($idTerapia<1){
+            throw new Exception("Id terapia non valida!");
+        }
+        else if($tipo!="Scheda Assessment Focalizzato"){
+            throw new Exception("Tipo non compatibile!");
+        }
         $this->idScheda = $idScheda;
         $this->data = $data;
         $this->nEpisodi =$nEpisodi;
@@ -52,18 +69,32 @@ class SchedaAssessmentFocalizzato
     }
     public function setData($data)
     {
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+        if($data == null || $data<$currDate){
+            throw new Exception("Nuova data non valida!");
+        }
         $this->data = $data;
     }
     public function setNEpisodi($nEpisodi)
     {
+        if($nEpisodi == null || $nEpisodi<0){
+            throw new Exception("Nuovo numero episodi non valido!");
+        }
         $this->nEpisodi = $nEpisodi;
     }
     public function setIdTerapia($idTerapia)
     {
+        if($idTerapia == null ||$idTerapia<1){
+            throw new Exception("Nuovo id terapia non valido!");
+        }
         $this->idTerapia = $idTerapia;
     }
     public function setTipo($tipo)
     {
+        if($tipo == null || $tipo != "Scheda Assessment Focalizzato"){
+            throw new Exception("Nuovo tipo non compatibile!");
+        }
         $this->tipo =$tipo;
     }
 }
