@@ -10,6 +10,9 @@
       static $conn = null;
       public static function connect($user = "psyuser" , $host = "localhost" , $dbname = "psydb" , $password = "psyuserR1!" ){
             $conn = new mysqli($host, $user, $password, $dbname);
+            if($conn->connect_error){
+                throw new Exception("Connessione fallita : ".$conn->connect_error);
+            }
             return $conn;
         }
 

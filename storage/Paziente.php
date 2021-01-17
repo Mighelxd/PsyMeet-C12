@@ -27,6 +27,22 @@ class Paziente
 
     public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura, $fotoProfiloPaz, $video)
     {
+        if($cf == null || $nome == null || $cognome == null || $dataNascita == null || $email == null || $telefono == null
+        || $password == null || $indirizzo == null || $istruzione == null || $lavoro == null || $difficolCura == null){
+            throw new Exception("Alcuni valori non definiti!");
+        }
+        else if(strlen($cf)!=16){
+            throw new Exception("Codice Fiscale non valido!");
+        }
+        else if(strlen($telefono)<9){
+            throw new Exception("Numero non valido!");
+        }
+        else if(strlen(password)<8 || strlen(password)>25){
+            throw new Exception("Password non valida!");
+        }
+        else if($difficolCura<1 || $difficolCura>5){
+            throw new Exception("Difficol. cura non valida!");
+        }
         $this->cf = $cf;
         $this->nome = $nome;
         $this->cognome = $cognome;
@@ -111,51 +127,81 @@ class Paziente
 
     public function setNome($nome)
     {
+        if($nome == null){
+            throw new Exception("Nuovo nome non valido!");
+        }
         $this->nome = $nome;
     }
 
     public function setCognome($cognome)
     {
+        if($cognome == null){
+            throw new Exception("Nuovo cognome non valido!");
+        }
         $this->cognome = $cognome;
     }
 
     public function setDataNascita($dataNascita)
     {
+        if($dataNascita == null){
+            throw new Exception("Nuovo data di nascita non valido!");
+        }
         $this->dataNascita = $dataNascita;
     }
 
     public function setEmail($email)
     {
+        if($email == null){
+            throw new Exception("Nuova email non valida!");
+        }
         $this->email = $email;
     }
 
     public function setTelefono($telefono)
     {
+        if($telefono == null || strlen($telefono)<9){
+            throw new Exception("Nuovo numero di telefono non valido!");
+        }
         $this->telefono = $telefono;
     }
 
     public function setPassword($password)
     {
+        if($password == null || strlen($password)<8 || strlen($password)>25){
+            throw new Exception("Nuova password non valida!");
+        }
         $this->password = $password;
     }
 
     public function setIndirizzo($indirizzo)
     {
+        if($indirizzo == null){
+            throw new Exception("Nuovo indirizzo non valido!");
+        }
         $this->indirizzo = $indirizzo;
     }
 
     public function setIstruzione($istruzione)
     {
+        if($istruzione == null){
+            throw new Exception("Nuovo campo istruzione non valido!");
+        }
         $this->istruzione = $istruzione;
     }
 
     public function setLavoro($lavoro)
     {
+        if($lavoro == null){
+            throw new Exception("Nuovo campo lavoro non valido!");
+        }
         $this->lavoro = $lavoro;
     }
 
     public function setDifficolCura($difficolCura)
     {
+        if($difficolCura == null || $difficolCura<1 || $difficolCura>5){
+            throw new Exception("Nuovo valore difficolt. cura non valido!");
+    }
         $this->difficolCura = $difficolCura;
     }
 

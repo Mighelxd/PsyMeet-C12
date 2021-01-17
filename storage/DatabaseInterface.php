@@ -10,7 +10,11 @@
 //    include '..\plugins\libArray\FunArray.php';
     class DatabaseInterface{
         public static function insertQuery(array $obj, $tablename){
-            $connection = DatabaseConnector::connect();
+            try{
+                $connection = DatabaseConnector::connect();
+            }catch(Exception $e) {
+                echo $e->getMessage();
+            }
             $insert = "INSERT INTO $tablename (";
             $values = "VALUES(";
 
@@ -39,7 +43,11 @@
             return $result;
         }
         public static function updateQueryById(array $obj, $tablename){
-            $connection = DatabaseConnector::connect();
+            try{
+                $connection = DatabaseConnector::connect();
+            }catch(Exception $e) {
+                echo $e->getMessage();
+            }
             $update = "UPDATE $tablename SET ";
             if(gettype($obj[FunArray::array_key_first($obj)] == "string"))
                 $where = "WHERE " .FunArray::array_key_first($obj) . " = " . "'".  $obj[FunArray::array_key_first($obj)] . "'";
@@ -61,7 +69,11 @@
 
         }
         public static function selectQueryById(array $array, $tablename){
-            $connection = DatabaseConnector::connect();
+            try{
+                $connection = DatabaseConnector::connect();
+            }catch(Exception $e) {
+                echo $e->getMessage();
+            }
             $select = "SELECT * FROM $tablename ";
             if(gettype($array[FunArray::array_key_first($array)]) == "string")
                 $where = "WHERE " . FunArray::array_key_first($array) . " = " ."\"". $array[FunArray::array_key_first($array)]. "\"";
@@ -73,7 +85,11 @@
         }
 
         public static function selectQueryByAtt(array $array, $tablename){
-            $connection = DatabaseConnector::connect();
+            try{
+                $connection = DatabaseConnector::connect();
+            }catch(Exception $e) {
+                echo $e->getMessage();
+            }
 
             $select = "SELECT * FROM $tablename ";
             $where = "WHERE ";
@@ -100,7 +116,11 @@
 
 		public static function selectDinamicQuery(array $arrCol,array $arrAtt,$tablename)
 		{
-            $connection = DatabaseConnector::connect();
+            try{
+                $connection = DatabaseConnector::connect();
+            }catch(Exception $e) {
+                echo $e->getMessage();
+            }
             $select = "SELECT ";
             $where = "WHERE ";
 
@@ -125,7 +145,11 @@
             return $result;
         }
         public static function deleteQuery(array $arrAtt, $tablename){
-            $connection = DatabaseConnector::connect();
+            try{
+                $connection = DatabaseConnector::connect();
+            }catch(Exception $e) {
+                echo $e->getMessage();
+            }
             $delete = "DELETE FROM $tablename ";
             $where = "WHERE ";
 
@@ -145,7 +169,11 @@
 
         public static function selectAllQuery($tablename)
         {
-          $connection = DatabaseConnector::connect();
+            try{
+                $connection = DatabaseConnector::connect();
+            }catch(Exception $e) {
+                echo $e->getMessage();
+            }
           $select = "SELECT * ";
 
           $select .= " FROM $tablename ";

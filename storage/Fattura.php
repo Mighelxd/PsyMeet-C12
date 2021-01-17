@@ -17,10 +17,21 @@ class Fattura
 
   public function __construct($idFattura, $data, $cfPaz,$idScelta)
   {
+      date_default_timezone_set("Europe/Rome");
+      $currDate = date("Y-m-d");
+      if($data == null || $cfPaz == null || $idScelta == null){
+          throw new Exception("Alcuni valori non definiti!");
+      }
+      else if($data<$currDate){
+          throw new Exception("Data non disponibile!");
+      }
+      else if($idScelta<1){
+          throw new Exception("Id scelta pacchetto non valido!");
+      }
     $this->idFattura= $idFattura;
     $this->data = $data;
     $this->cfPaz= $cfPaz;
-    $this->id_scelta= $idScelta;
+    $this->idScelta= $idScelta;
   }
 
   public function getIdFattura()
@@ -45,6 +56,11 @@ class Fattura
 
   public function setData($data)
   {
+      date_default_timezone_set("Europe/Rome");
+      $currDate = date("Y-m-d");
+      if($data == null || $data<$currDate){
+          throw new Exception("Nuova data non disponibile!");
+      }
     $this->data = $data;
   }
 

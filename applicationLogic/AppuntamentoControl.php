@@ -23,42 +23,52 @@ $_SESSION['erroreApp']="";
 
 /*Questa action recupera tutti gli appuntamenti di un professionista recuperando per ognuno il nome dei pazienti.*/
 if($action == 'recoveryAll'){
-  $arrKey = array("cf_prof"=>$cfProf);
-  $allAppProf = DatabaseInterface::selectQueryByAtt($arrKey,Appuntamento::$tableName);
-  $allObj= array();
+    try {
+        $arrKey = array("cf_prof" => $cfProf);
+        $allAppProf = DatabaseInterface::selectQueryByAtt($arrKey, Appuntamento::$tableName);
+        if($allAppProf === false){
+            throw new Exception('recupero appuntamenti professionista fallita!');
+        }
+        $allObj = array();
 
-  while($row = $allAppProf->fetch_array()){
-    $arrKeyPaz = array("cf"=>$row['cf']);
-    $pazienteQuery = DatabaseInterface::selectQueryByAtt($arrKeyPaz,"paziente");
-    while($rowP = $pazienteQuery->fetch_array()){
-        $paziente = $rowP['nome']." ".$rowP['cognome'];
-    }
-    $a[] = $row;
-    $row['cf'] .= " - $paziente";
-    $allObj[]= $row;
-  }
+        while ($row = $allAppProf->fetch_array()) {
+            $arrKeyPaz = array("cf" => $row['cf']);
+            $pazienteQuery = DatabaseInterface::selectQueryByAtt($arrKeyPaz, "paziente");
+            if($pazienteQuery === false){
+                throw new Exception('recupero dei pazienti associati agli appuntamenti fallita!');
+            }
+            while ($rowP = $pazienteQuery->fetch_array()) {
+                $paziente = $rowP['nome'] . " " . $rowP['cognome'];
+            }
+            $a[] = $row;
+            $row['cf'] .= " - $paziente";
+            $allObj[] = $row;
+        }
 
-  $_SESSION["appuntamenti"] = $a;
-  echo json_encode($allObj);
-}
-/*Questa action aggiunge un nuovo appuntamento*/
-else if($action == 'addApp'){
-    $data = $_POST['data'];
-    $ora = $_POST['ora'];
-    $descrizione = $_POST['descrizione'];
-    $cf = $_POST['codF'];
-    try{
-        $newApp = new Appuntamento(null,$data,$ora,$descrizione,$cf,$cfProf);
+        $_SESSION["appuntamenti"] = $a;
+        echo json_encode($allObj);
     }catch(Exception $e){
         $_SESSION['erroreApp'] = $e->getMessage();
         header('Location: ../interface/Professionista/calendario.php');
     }
-    $ok = DatabaseInterface::insertQuery($newApp->getArray(),TABLE_NAME);
-    if($ok){
-      header('Location: ../interface/Professionista/calendario.php');
-    }
-    else{
-        $_SESSION['erroreApp'] = "Appuntamento non aggiunto!";
+}
+/*Questa action aggiunge un nuovo appuntamento*/
+else if($action == 'addApp'){
+    try{
+        $data = $_POST['data'];
+        $ora = $_POST['ora'];
+        $descrizione = $_POST['descrizione'];
+        $cf = $_POST['codF'];
+        $newApp = new Appuntamento(null,$data,$ora,$descrizione,$cfProf,$cf);
+        $ok = DatabaseInterface::insertQuery($newApp->getArray(),Appuntamento::$tableName);
+        if($ok){
+            header('Location: ../interface/Professionista/calendario.php');
+        }
+        else{
+            throw new Exception("Errore: Appuntamento non aggiunto!");
+        }
+    }catch(Exception $e){
+        $_SESSION['erroreApp'] = $e->getMessage();
         header('Location: ../interface/Professionista/calendario.php');
     }
 }
@@ -68,45 +78,51 @@ else if($action == 'delApp'){
     $ora = $_POST['ora'];
     $descrizione = $_POST['descrizione'];
     $cf = $_POST['codF'];
-
-    $arrAtt = array("data"=>$data,"ora"=>$ora,"descrizione"=>$descrizione,"cf_prof"=>'RSSMRC80R12H703U',"cf"=>$cf);
-    $ok = DatabaseInterface::deleteQuery($arrAtt,TABLE_NAME);
-    if($ok){
+    $id = $_POST['id'];
+    try{
+        $delApp = new Appuntamento($id,$data,$ora,$descrizione,$cfProf,$cf);
+        $ok = DatabaseInterface::deleteQuery($delApp->getArray(),Appuntamento::$tableName);
+        if($ok){
+            header('Location: ../interface/Professionista/calendario.php');
+        }
+        else{
+            throw new Exception("Errore: Appuntamento non eliminato!");
+        }
+    }catch(Exception $e){
+        $_SESSION['erroreApp'] = $e->getMessage();
         header('Location: ../interface/Professionista/calendario.php');
     }
 }
 /*Questa action modifica un appuntamento*/
 else if($action == 'modApp'){
+    $id = $_POST['oldId'];
+
     $oldData = $_POST['oldData'];
     $oldOra = $_POST['oldOra'];
     $oldDescrizione = $_POST['oldDesc'];
     $oldCf = $_POST['oldCodF'];
 
-    $arrOldAtt = array("data"=>$oldData,"ora"=>$oldOra,"descrizione"=>$oldDescrizione,"cf_prof"=>'RSSMRC80R12H703U',"cf"=>$oldCf);
-
     $data = $_POST['data'];
     $ora = $_POST['ora'];
     $descrizione = $_POST['descrizione'];
     $cf = $_POST['codF'];
+    try{
+        $oldApp = new Appuntamento($id,$oldData,$oldOra,$oldDescrizione,$cfProf,$oldCf);
+        $oldApp->setData($data);
+        $oldApp->setOra($ora);
+        $oldApp->setDesc($descrizione);
+        $oldApp->setCfPaz($cf);
 
-    $colOld = array('*');
-    $selOldApp = DatabaseInterface::selectDinamicQuery($colOld,$arrOldAtt,TABLE_NAME);
-    while($row = $selOldApp->fetch_array()){
-        $oldApp = new Appuntamento($row['id_appuntamento'],$row['data'],$row['ora'],$row['descrizione'],$row['cf_prof'],$row['cf']);
-    }
-
-    $oldApp->setData($data);
-    $oldApp->setOra($ora);
-    $oldApp->setDesc($descrizione);
-    $oldApp->setCfPaz($cf);
-
-    $isUpdate = DatabaseInterface::updateQueryById($oldApp->getArray(),TABLE_NAME);
-
-    if($isUpdate){
+        $isUpdate = DatabaseInterface::updateQueryById($oldApp->getArray(),Appuntamento::$tableName);
+        if($isUpdate){
+            header('Location: ../interface/Professionista/calendario.php');
+        }
+        else{
+            throw new Exception("Errore: Appuntamento non modificato!");
+        }
+    }catch(Exception $e){
+        $_SESSION['erroreApp'] = $e->getMessage();
         header('Location: ../interface/Professionista/calendario.php');
-    }
-    else{
-        echo "no aggiornato";
     }
 }
 /*Questa action cerca il codice fiscale del paziente di cui si sa nome e cognome*/

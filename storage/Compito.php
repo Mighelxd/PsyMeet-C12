@@ -53,7 +53,7 @@ class Compito
     /**
      * @var string
      */
-    private static $tableName='compito';
+    public static $tableName='compito';
 
 
     /**
@@ -79,6 +79,15 @@ class Compito
 		$cfProf,
 		$cfPaz
 	) {
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+        if($data == null || $effettuato == null || $titolo == null || $descrizione == null
+            || $cfProf == null || $cfPaz == null){
+            throw new Exception("Alcuni valori non validi!");
+        }
+        else if($data<$currDate){
+            throw new Exception("Data non valida!");
+        }
 		$this->id= $id;
 		$this->data = $data;
 		$this->effettuato= $effettuato;
@@ -132,6 +141,11 @@ class Compito
      */
     public function setData($data)
 	{
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+	    if($data == null || $data<$currDate){
+	        throw new Exception("Nuova Data non valida!");
+        }
 		$this->data = $data;
 	}
 
@@ -150,6 +164,9 @@ class Compito
      */
     public function setTitolo($titolo)
 	{
+	    if($titolo == null){
+	        throw new Exception("Nuovo titolo non valido!");
+        }
 		$this->titolo = $titolo;
 	}
 
@@ -168,6 +185,9 @@ class Compito
      */
     public function setDescrizione($descrizione)
 	{
+        if($descrizione == null){
+            throw new Exception("Nuova descrizione non valida!");
+        }
 		$this->descrizione = $descrizione;
 	}
 
@@ -186,6 +206,9 @@ class Compito
      */
     public function setSvolgimento($svolgimento)
 	{
+        if($svolgimento == null){
+            throw new Exception("Nuovo svolgimento non valido!");
+        }
 		$this->svolgimento = $svolgimento;
 	}
 
@@ -204,6 +227,9 @@ class Compito
      */
     public function setCorrezione($correzione)
 	{
+        if($correzione == null){
+            throw new Exception("Nuova correzione non valida!");
+        }
 		$this->correzione = $correzione;
 	}
 
@@ -222,6 +248,9 @@ class Compito
      */
     public function setEffettuato($effettuato)
 	{
+        if($effettuato == null){
+            throw new Exception("Nuovo effettuato non valido!");
+        }
 		$this->effettuato = $effettuato;
 	}
 
