@@ -38,3 +38,10 @@ function apriFinestra(url,w,h){
     window.open(url, this.target, 'left=' + leftOffset + ',top=' + topOffset + ',width=' + w + ',height=' + h + ',resizable,scrollbars=yes');
 }
 
+function terminaChiamataPaz(){
+    $("#videochiamata").remove();
+    $("#messaggioChiamata")[0].innerHTML="Chiamata terminata, verrai reindirizzato all'area informativa in 5 secondi";
+    setTimeout(function () {
+        window.location.replace("indexPaziente.php");
+    },5000);
+}
