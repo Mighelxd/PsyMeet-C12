@@ -37,7 +37,7 @@
                 $immagine=addslashes(file_get_contents($_FILES["immagine"]["tmp_name"]));
             else
                 $immagine=NULL;
-            $professionista = new Professionista($codice_fiscale,$nome,$cognome,$data_nascita,$email,$telefono,$cellulare,$password,$indirizzo_studio,$esperienze,$pubblicazioni,$titolo_studio,$n_iscrizione_albo,$p_iva,$pec,$spec,$polizza_rc,$immagine);
+            $professionista = new Professionista($codice_fiscale,$nome,$cognome,$data_nascita,$email,$telefono,$cellulare,$password,$indirizzo_studio,$esperienze,$pubblicazioni,$titolo_studio,$n_iscrizione_albo,$p_iva,$pec,$specializzazione,$polizza_rc,$immagine);
             
             $result=AreaInformativaControl::checkProf($professionista);
             if(isset($result)){

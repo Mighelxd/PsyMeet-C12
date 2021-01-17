@@ -11,7 +11,7 @@ include ("../../storage/DatabaseInterface.php");
 include ("../../plugins/libArray/FunArray.php");
 include "../../applicationLogic/PazienteControl.php";
 include "../../applicationLogic/PacchettoControl.php";
-include "../../applicationLogic/ProfessionistaControl.php";
+include "../../applicationLogic/AreaInformativaControl.php";
 include "../../applicationLogic/terapiaControl.php";
 include "../../applicationLogic/CompitoControl.php";
 
@@ -29,7 +29,7 @@ $paz = PazienteControl::getPaz($cfPaziente);
 $img=base64_encode($paz->getFotoProfiloPaz());
 
 $pacchettiPaz = PacchettoControl::selectAllPacchettoPaz($cfPaziente);
-$professionistiByPaz = ProfessionistaControl::getProfessionistByPaz($cfPaziente);
+$professionistiByPaz = AreaInformativaControl::getProfessionistByPaz($cfPaziente);
 $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
 ?>
 

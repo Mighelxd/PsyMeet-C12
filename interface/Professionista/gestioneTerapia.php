@@ -16,7 +16,7 @@ include "../../storage/SchedaAssessmentGeneralizzato.php";
 include "../../storage/SchedaAssessmentFocalizzato.php";
 include "../../applicationLogic/terapiaControl.php";
 include "../../applicationLogic/PazienteControl.php";
-include "../../applicationLogic/ProfessionistaControl.php";
+include "../../applicationLogic/AreaInformativaControl.php";
 include "../../storage/Paziente.php";
 include "../../storage/Professionista.php";
 
@@ -38,7 +38,7 @@ else if ($cfPazienteTer == "") {
 }
 
 
-$professionista = professionistaControl::getProf($cfProfessionista);
+$professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($professionista->getImmagineProfessionista());
 
 $pazienteTer = PazienteControl::getPaz($cfPazienteTer);

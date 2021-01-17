@@ -2,9 +2,9 @@
 include "../../storage/professionista.php";
 include ("../../storage/DatabaseInterface.php");
 include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/ProfessionistaControl.php";
+include "../../applicationLogic/AreaInformativaControl.php";
 
-$listProf = ProfessionistaControl::recuperaProfessionisti();
+$listProf = AreaInformativaControl::recuperaProfessionisti();
  ?>
 
 <!DOCTYPE html>

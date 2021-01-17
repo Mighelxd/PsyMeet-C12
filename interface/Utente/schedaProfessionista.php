@@ -3,11 +3,11 @@
 include "../../storage/professionista.php";
 include ("../../storage/DatabaseInterface.php");
 include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/ProfessionistaControl.php";
+include "../../applicationLogic/AreaInformativaControl.php";
 
 $cfProf = $_POST["codFiscaleProf"];
 
-$prof = professionistaControl::getProf($cfProf);
+$prof = AreaInformativaControl::getProf($cfProf);
  ?>
 
  <!DOCTYPE html>

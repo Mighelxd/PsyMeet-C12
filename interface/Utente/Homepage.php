@@ -1,9 +1,9 @@
 <?php
 include '../../storage/DatabaseInterface.php';
 include '../../storage/Professionista.php';
-include '../../applicationLogic/ProfessionistaControl.php';
+include '../../applicationLogic/AreaInformativaControl.php';
 
-$professionisti = professionistaControl::recuperaProfessionisti();
+$professionisti = AreaInformativaControl::recuperaProfessionisti();
 
 //var_dump($professionisti);
  ?>

@@ -10,7 +10,7 @@
 include ("../../plugins/libArray/FunArray.php");
 include "../../storage/DatabaseInterface.php";
 include "../../storage/Professionista.php";
-include "../../applicationLogic/ProfessionistaControl.php";
+include "../../applicationLogic/AreaInformativaControl.php";
 //include "../../applicationLogic/modificaProfessionistaControl.php";
 
 
@@ -21,7 +21,7 @@ if($tipoUtente != "professionista"){
 }
 $cfProfessionista = $_SESSION["codiceFiscale"];
 
-$Professionista = professionistaControl::getProf($cfProfessionista);
+$Professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($Professionista->getImmagineProfessionista());
 
 

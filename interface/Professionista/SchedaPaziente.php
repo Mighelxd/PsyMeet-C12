@@ -3,7 +3,6 @@
 include "../../storage/professionista.php";
 include ("../../storage/DatabaseInterface.php");
 include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/ProfessionistaControl.php";
 include "../../applicationLogic/PazienteControl.php";
 include "../../storage/Paziente.php";
 

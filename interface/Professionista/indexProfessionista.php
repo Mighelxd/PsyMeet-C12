@@ -8,7 +8,7 @@
     include "../../storage/Pacchetto.php";
     include "../../storage/scelta.php";
     include "../../applicationLogic/PacchettoControl.php";
-    include "../../applicationLogic/ProfessionistaControl.php";
+    include "../../applicationLogic/AreaInformativaControl.php";
 
     session_start();
     if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
@@ -26,7 +26,7 @@
     */
 
 
-$professionista = ProfessionistaControl::getProf($cf);
+$professionista = AreaInformativaControl::getProf($cf);
     $pazienti=PazienteControl::getPazientiByProf($cf);
 
     $pacchettoByProf= PacchettoControl::selectAllPacchettoProf($cf);
