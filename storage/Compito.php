@@ -82,7 +82,7 @@ class Compito
         date_default_timezone_set("Europe/Rome");
         $currDate = date("Y-m-d");
         if($data == null || $effettuato == null || $titolo == null || $descrizione == null
-            || $svolgimento == null || $correzione == null || $cfProf == null || $cfPaz == null){
+            || $cfProf == null || $cfPaz == null){
             throw new Exception("Alcuni valori non validi!");
         }
         else if($data<$currDate){
