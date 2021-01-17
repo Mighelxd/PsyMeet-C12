@@ -18,10 +18,30 @@
         private $specializzazione;
         private $polizzaRc;
         private $immagineProfessionista;
-        private $videoProfessionista;
+
         public static $tableName="professionista";
 
         public function __construct($cf,$n,$c,$date,$e,$tel,$cell,$pass,$indiSt,$esp,$pub,$titSt,$nIsc,$pIva,$p,$spec,$polRc,$img){
+            if($cf == null || $n == null || $c == null || $date == null || $e == null || $tel == null
+            || $cell == null || $pass == null || $indiSt == null || $esp == null || $pub == null || $titSt == null
+            || $nIsc == null || $pIva == null || $p == null || $polRc == null){
+                throw new Exception("Alcuni valori non definiti!");
+            }
+            else if(strlen($cf)!=16){
+                throw new Exception("Codice fiscale non valido!");
+            }
+            else if(strlen($tel)<9){
+                throw new Exception("Numero telefono non valido!");
+            }
+            else if(strlen($cell)<10){
+                throw new Exception("Numero cellulare non valido!");
+            }
+            else if(strlen($pass)<8 || strlen($pass)>25){
+                throw new Exception("Password non valida!");
+            }
+            else if(strlen($pIva)!=11){
+                throw new Exception("Partita Iva non valida!");
+            }
             $this->cfProf=$cf;
             $this->nome=$n;
             $this->cognome=$c;
@@ -42,62 +62,107 @@
             $this->immagineProfessionista=$img;
         }
         public function setCfProf($cf){
+            if($cf == null || strlen($cf)!=16){
+                throw new Exception("Nuovo codice fiscale non valido!");
+            }
             $this->cfProf=$cf;
         }
 
         public function setNome($n){
+            if($n==null){
+                throw new Exception("Nuovo nome non valido!");
+            }
             $this->nome=$n;
         }
 
         public function setCognome($c){
+            if($c==null){
+                throw new Exception("Nuovo cognome non valido!");
+            }
             $this->cognome=$c;
         }
 
         public function setDataNascita($d){
+            if($d == null){
+                throw new Exception("Nuova data nascita non valida!");
+            }
             $this->dataNascita=$d;
         }
 
         public function setEsperienze($esp){
+            if($esp == null){
+                throw new Exception("Nuovo campo esperienze non valido!");
+            }
             $this->esperienze=$esp;
         }
 
         public function setTelefono($tel){
+            if($tel == null || strlen($tel)<8){
+                throw new Exception("Nuovo numero telefono non valido!");
+            }
             $this->telefono=$tel;
         }
 
         public function setCellulare($cell){
+            if($cell == null || strlen($cell)<10){
+                throw new Exception("Nuovo numero cellulare non valido!");
+            }
             $this->cellulare=$cell;
         }
 
         public function setPassword($pass){
+            if($pass == null || strlen($pass)<8 || strlen($pass)>25){
+                throw new Exception("Lunghezza nuova password non valida!");
+            }
             $this->password=$pass;
         }
 
         public function setIndirizzoStudio($indiSt){
+            if($indiSt == null){
+                throw new Exception("Nuovo indirizzo studio non valido!");
+            }
             $this->indirizzoStudio=$indiSt;
         }
 
         public function setEmail($e){
+            if($e == null){
+                throw new Exception("Nuova email non valida!");
+            }
             $this->email=$e;
         }
 
         public function setPubblicazione($pub){
+            if($pub == null){
+                throw new Exception("Nuovo campo pubblicazione non valido!");
+            }
             $this->pubblicazione=$pub;
         }
 
         public function setTitoloStudio($titSt){
+            if($titSt == null){
+                throw new Exception("Nuovo campo titolo studio non valido!");
+            }
             $this->titoloStudio=$titSt;
         }
 
         public function setNIscrizioneAlbo($nIsc){
+            if($nIsc == null){
+                throw new Exception("Nuovo campo numero iscrizione album non valido!");
+            }
             $this->nIscrizioneAlbo=$nIsc;
         }
 
         public function setPartitaIva($pIva){
+            if($pIva == null || strlen($pIva)!=11){
+                throw new Exception("Nuova partita iva non valida!");
+            }
             $this->partitaIva=$pIva;
         }
 
         public function setPec($p){
+            if($p == null){
+                throw new Exception("Nuova pec non valida!");
+            }
             $this->pec=$p;
         }
 
@@ -106,6 +171,9 @@
         }
 
         public function setPolizzaRc($polRc){
+            if($polRc == null){
+                throw new Exception("Nuovo campo polizza RC non valido!");
+            }
             $this->polizzaRc=$polRc;
         }
 

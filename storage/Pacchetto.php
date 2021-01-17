@@ -35,6 +35,15 @@ class Pacchetto
      */
     public function __construct($id_pack, $n_sed, $price, $type)
     {
+        if($n_sed == null || $price == null || $type == null){
+            throw new Exception("Alcuni valori non definiti!");
+        }
+        else if($n_sed != 1 && $n_sed!=6 && $n_sed!=10 && $n_sed!=20){
+            throw new Exception("Numero sedute errate!");
+        }
+        else if($price != 60 && $price!= 320 && $price!=500 && $price!=800){
+            throw new Exception("Prezzo errato!");
+        }
         $this->id_pacchetto = $id_pack;
         $this->n_sedute = $n_sed;
         $this->prezzo= $price;
@@ -89,15 +98,21 @@ class Pacchetto
      */
     public function setNSedute($n_sedute)
     {
+        if($n_sedute == null || ($n_sedute != 1 && $n_sedute!=6 && $n_sedute!=10 && $n_sedute!=20)){
+            throw new Exception("Nuovo numero sedute errato!");
+        }
          $this -> n_sedute = $n_sedute;
     }
 
     /**
-     * @param $prezzo
+     * @param $price
      */
-    public function setPrezzo($prezzo)
+    public function setPrezzo($price)
     {
-         $this -> prezzo = $prezzo;
+        if($price==null || ($price != 60 && $price!= 320 && $price!=500 && $price!=800)){
+            throw new Exception("Nuovo prezzo non valido!");
+        }
+         $this -> prezzo = $price;
     }
 
     /**
@@ -105,6 +120,9 @@ class Pacchetto
      */
     public function setTipologia($tipologia)
     {
+        if($tipologia == null){
+            throw new Exception("Nuovo campo tipologia non valido!");
+        }
          $this -> tipologia = $tipologia;
     }
 }

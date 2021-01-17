@@ -34,7 +34,7 @@ class Paziente
         else if(strlen($cf)!=16){
             throw new Exception("Codice Fiscale non valido!");
         }
-        else if(strlen($telefono)<10){
+        else if(strlen($telefono)<9){
             throw new Exception("Numero non valido!");
         }
         else if(strlen(password)<8 || strlen(password)>25){
@@ -159,7 +159,7 @@ class Paziente
 
     public function setTelefono($telefono)
     {
-        if($telefono == null || strlen($telefono)<10){
+        if($telefono == null || strlen($telefono)<9){
             throw new Exception("Nuovo numero di telefono non valido!");
         }
         $this->telefono = $telefono;
