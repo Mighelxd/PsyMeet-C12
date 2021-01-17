@@ -37,9 +37,6 @@ class Paziente
         else if(strlen($telefono)<9){
             throw new Exception("Numero non valido!");
         }
-        else if(strlen(password)<8 || strlen(password)>25){
-            throw new Exception("Password non valida!");
-        }
         else if($difficolCura<1 || $difficolCura>5){
             throw new Exception("Difficol. cura non valida!");
         }
@@ -167,7 +164,7 @@ class Paziente
 
     public function setPassword($password)
     {
-        if($password == null || strlen($password)<8 || strlen($password)>25){
+        if($password == null){
             throw new Exception("Nuova password non valida!");
         }
         $this->password = $password;

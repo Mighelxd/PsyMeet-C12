@@ -36,9 +36,6 @@
             else if(strlen($cell)<10){
                 throw new Exception("Numero cellulare non valido!");
             }
-            else if(strlen($pass)<8 || strlen($pass)>25){
-                throw new Exception("Password non valida!");
-            }
             else if(strlen($pIva)!=11){
                 throw new Exception("Partita Iva non valida!");
             }
@@ -111,7 +108,7 @@
         }
 
         public function setPassword($pass){
-            if($pass == null || strlen($pass)<8 || strlen($pass)>25){
+            if($pass == null){
                 throw new Exception("Lunghezza nuova password non valida!");
             }
             $this->password=$pass;

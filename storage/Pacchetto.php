@@ -38,10 +38,10 @@ class Pacchetto
         if($n_sed == null || $price == null || $type == null){
             throw new Exception("Alcuni valori non definiti!");
         }
-        else if($n_sed != 1 && $n_sed!=6 && $n_sed!=10 && $n_sed!=20){
+        else if($n_sed != 1 && $n_sed!=6 && $n_sed!=10 && $n_sed!=20 && $n_sed!=0){
             throw new Exception("Numero sedute errate!");
         }
-        else if($price != 60 && $price!= 320 && $price!=500 && $price!=800){
+        else if($price != 50 && $price != 60 && $price!= 320 && $price!=500 && $price!=800){
             throw new Exception("Prezzo errato!");
         }
         $this->id_pacchetto = $id_pack;
@@ -98,7 +98,7 @@ class Pacchetto
      */
     public function setNSedute($n_sedute)
     {
-        if($n_sedute == null || ($n_sedute != 1 && $n_sedute!=6 && $n_sedute!=10 && $n_sedute!=20)){
+        if($n_sedute == null || ($n_sedute != 1 && $n_sedute!=6 && $n_sedute!=10 && $n_sedute!=20 && $n_sedute!=0)){
             throw new Exception("Nuovo numero sedute errato!");
         }
          $this -> n_sedute = $n_sedute;
@@ -109,7 +109,7 @@ class Pacchetto
      */
     public function setPrezzo($price)
     {
-        if($price==null || ($price != 60 && $price!= 320 && $price!=500 && $price!=800)){
+        if($price==null || ($price != 50 && $price != 60 && $price!= 320 && $price!=500 && $price!=800)){
             throw new Exception("Nuovo prezzo non valido!");
         }
          $this -> prezzo = $price;
