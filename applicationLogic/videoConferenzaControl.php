@@ -2,6 +2,7 @@
     include "../storage/DatabaseInterface.php";
     include "../storage/Professionista.php";
     include "../storage/Paziente.php";
+    include "PazienteControl.php";
     include "../plugins/libArray/FunArray.php";
         if(!isset($_POST["azione"])){
         session_start();
@@ -57,5 +58,17 @@
                 echo json_encode(array("esito"=>false,"errore"=>"errore update"));
             }
             echo json_encode(array("esito"=>true));
+        }
+        elseif($_POST["azione"]=="checkChiamata"){
+            session_start();
+            $paziente=PazienteControl::getPaz($_SESSION["codiceFiscale"]);
+            if($paziente->getVideo()){
+                echo json_encode(array("esito"=>true));
+                exit();
+            }
+            else{
+                echo json_encode(array("esito"=>false));
+                exit();
+            }
         }
 ?>
