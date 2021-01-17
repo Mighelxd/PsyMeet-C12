@@ -8,31 +8,46 @@
  */
 class SchedaModelloEziologico
 {
-    private  $id_scheda;
+    private  $idScheda;
     private $data;
-    private $fattori_causativi;
-    private $fattori_precipitanti;
-    private $fattori_mantenimento;
-    private $relazione_finale;
-    private $id_terapia;
+    private $fattoriCausativi;
+    private $fattoriPrecipitanti;
+    private $fattoriMantenimento;
+    private $relazioneFinale;
+    private $idTerapia;
     private $tipo;
     public static $tableName="schedamodelloeziologico";
 
-    public function __construct($id_scheda, $data, $fattori_causativi, $fattori_precipitanti, $fattori_mantenimento,$relazione_finale, $id_terapia, $tipo)
+    public function __construct($idScheda, $data, $fattoriCausativi, $fattoriPrecipitanti, $fattoriMantenimento,$relazioneFinale, $idTerapia, $tipo)
     {
-        $this->id_scheda = $id_scheda;
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+        if($data == null || $fattoriCausativi == null || $fattoriPrecipitanti == null || $fattoriMantenimento == null
+        || $relazioneFinale == null || $idTerapia == null || $tipo == null){
+            throw new Exception("Alcuni valori non validi!");
+        }
+        else if($data < $currDate){
+            throw new Exception("Data non disponibile!");
+        }
+        else if($idTerapia<1){
+            throw new Exception("Id terapia non valido!");
+        }
+        else if($tipo != "Scheda Modello Eziologico"){
+            throw new Exception("Tipo scheda non compatibile!");
+        }
+        $this->idScheda = $idScheda;
         $this->data = $data;
-        $this->fattori_causativi= $fattori_causativi;
-        $this->fattori_precipitanti = $fattori_precipitanti;
-        $this->fattori_mantenimento = $fattori_mantenimento;
-        $this->relazione_finale =$relazione_finale;
-        $this->id_terapia = $id_terapia;
+        $this->fattoriCausativi= $fattoriCausativi;
+        $this->fattoriPrecipitanti = $fattoriPrecipitanti;
+        $this->fattoriMantenimento = $fattoriMantenimento;
+        $this->relazioneFinale =$relazioneFinale;
+        $this->idTerapia = $idTerapia;
         $this->tipo = $tipo;
 
     }
     public function getIdScheda()
     {
-        return $this -> id_scheda;
+        return $this -> idScheda;
     }
     public function getData()
     {
@@ -40,61 +55,84 @@ class SchedaModelloEziologico
     }
     public function getFattoriCausativi()
     {
-        return $this -> fattori_causativi;
+        return $this -> fattoriCausativi;
     }
     public function getFattoriPrecipitanti()
     {
-        return $this -> fattori_precipitanti;
+        return $this -> fattoriPrecipitanti;
     }
     public function getFattoriMantenimento()
     {
-        return $this -> fattori_mantenimento;
+        return $this -> fattoriMantenimento;
     }
     public function getRelazioneFinale()
     {
-        return $this -> relazione_finale;
+        return $this -> relazioneFinale;
     }
     public function getIdTerapia()
     {
-        return $this -> id_terapia;
+        return $this -> idTerapia;
     }
     public function getTipo()
     {
         return $this -> tipo;
     }
     public function getArray(){
-        return array("id_scheda" => $this->id_scheda, "data" => $this->data, "fattori_causativi" => $this->fattori_causativi, "fattori_precipitanti" => $this->fattori_precipitanti, "fattori_mantenimento" => $this->fattori_mantenimento, "relazione_finale" => $this->relazione_finale, "id_terapia" => $this->id_terapia,"tipo" =>$this->tipo);
+        return array("id_scheda" => $this->idScheda, "data" => $this->data, "fattori_causativi" => $this->fattoriCausativi, "fattori_precipitanti" => $this->fattoriPrecipitanti, "fattori_mantenimento" => $this->fattoriMantenimento, "relazione_finale" => $this->relazioneFinale, "id_terapia" => $this->idTerapia,"tipo" =>$this->tipo);
     }
-    public function setIdScheda($id_scheda)
+    public function setIdScheda($idScheda)
     {
-         $this -> id_scheda= $id_scheda;
+         $this -> idScheda= $idScheda;
     }
     public function setData($data)
     {
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+        if($data == null || $data < $currDate){
+            throw new Exception("Nuova data non disponibile!");
+        }
          $this -> data = $data;
     }
-    public function setFattoriCausativi($fattori_causativi)
+    public function setFattoriCausativi($fattoriCausativi)
     {
-         $this -> fattori_causativi = $fattori_causativi;
+        if($fattoriCausativi == null){
+            throw new Exception("Nuovo campo fattori causativi non valido!");
+        }
+         $this -> fattoriCausativi = $fattoriCausativi;
     }
-    public function setFattoriPrecipitanti($fattori_precipitanti)
+    public function setFattoriPrecipitanti($fattoriPrecipitanti)
     {
-         $this -> fattori_precipitanti = $fattori_precipitanti;
+        if($fattoriPrecipitanti == null){
+            throw new Exception("Nuovo campo fattori precipitanti non valido!");
+        }
+         $this -> fattoriPrecipitanti = $fattoriPrecipitanti;
     }
-    public function setFattoriMantenimento($fattori_mantenimento)
+    public function setFattoriMantenimento($fattoriMantenimento)
     {
-         $this -> fattori_mantenimento = $fattori_mantenimento;
+        if($fattoriMantenimento == null){
+            throw new Exception("Nuovo campo fattori di mantenimento non valido!");
+        }
+         $this -> fattoriMantenimento = $fattoriMantenimento;
     }
-    public function setRelazioneFinale($relazione_finale)
+    public function setRelazioneFinale($relazioneFinale)
     {
-         $this -> relazione_finale = $relazione_finale;
+        if($relazioneFinale == null){
+            throw new Exception("Nuovo campo relazione finale non valido!");
+        }
+         $this -> relazioneFinale = $relazioneFinale;
     }
-    public function setIdTerapia($id_terapia)
+    public function setIdTerapia($idTerapia)
     {
-         $this -> id_terapia = $id_terapia;
+        if($idTerapia == null || $idTerapia<1){
+            throw new Exception("Nuovo id terapia non valido!");
+        }
+         $this -> idTerapia = $idTerapia;
     }
     public function setTipo($tipo)
     {
+        if($tipo == null || $tipo != "Scheda Modello Eziologico"){
+            throw new Exception("Nuovo tipo non valido!");
+        }
          $this -> tipo =$tipo;
     }
 }

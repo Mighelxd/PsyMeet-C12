@@ -8,36 +8,48 @@
  */
 class Scelta
 {
-    private $id_scelta;
-    private $cf_prof;
-    private $id_pacchetto;
+    private $idScelta;
+    private $cfProf;
+    private $idPacchetto;
     public static $tableName="scelta";
 
-    public function __construct($id_choice, $cf_profess, $id_pack)
+    public function __construct($idChoice, $cfProfess, $idPack)
     {
-        $this->id_pacchetto = $id_pack;
-        $this->id_scelta = $id_choice;
-        $this->cf_prof= $cf_profess;
+        if($cfProfess == null || $idPack == null){
+            throw new Exception("Alcuni valori non validi!");
+        }
+        else if(strlen($cfProfess)!=16){
+            throw new Exception("Codice Fiscale Professionista non valido!");
+        }
+        else if($idPack<1){
+            throw new Exception("Id pacchetto non valido!");
+        }
+        $this->idPacchetto = $idPack;
+        $this->idScelta = $idChoice;
+        $this->cfProf= $cfProfess;
     }
   
     public function getIdPacchetto()
     {
-        return $this -> id_pacchetto;
+        return $this -> idPacchetto;
     }
     public function getIdScelta()
     {
-        return $this -> id_scelta;
+        return $this -> idScelta;
     }
     public function geCfProf()
     {
-        return $this -> cf_prof;
+        return $this -> cfProf;
     }
 
     public function getArray(){
-        return array("id_scelta" => $this->id_scelta, "cf_prof" => $this->cf_prof, "id_pacchetto" => $this->id_pacchetto);
+        return array("id_scelta" => $this->idScelta, "cf_prof" => $this->cfProf, "id_pacchetto" => $this->idPacchetto);
     }
-    public function setCfProf($cf_prof)
+    public function setCfProf($cfProf)
     {
-         $this -> cf_prof = $cf_prof;
+        if($cfProf == null || strlen($cfProf)!=16){
+            throw new Exception("Nuovo codice fiscale professionista non valido!");
+        }
+         $this -> cfProf = $cfProf;
     }
 }
