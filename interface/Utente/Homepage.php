@@ -87,7 +87,7 @@ $professionisti = AreaInformativaControl::recuperaProfessionisti();
   </div>
   <br>
   <!-- Titolo intro -->
-  <h4 id="intro">Incontra i nostri professionisti</h4>
+  <h4 id="intro"><a href="listaProfessionisti.php">Incontra i nostri professionisti</a></h4>
   <!-- Main content -->
   <section class="content">
       <div class="container-fluid">
@@ -141,13 +141,6 @@ $professionisti = AreaInformativaControl::recuperaProfessionisti();
         <?php }
           } ?>
   </section>
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.5
-    </div>
-  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

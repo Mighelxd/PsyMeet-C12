@@ -198,14 +198,16 @@ $listProf = AreaInformativaControl::recuperaProfessionisti();
 
                     <form class="" action="schedaProfessionista.php" method="post">
                       <input type="text" name="codFiscaleProf" value="<?php echo $listProf[$i]->getCfProf();  ?>" hidden ="true">
-                        <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #007bff; border-color: #007bff;">
+                        <button type="submit" class="btn btn-primary float-right" name="button" style="background-color: #007bff; border-color: #007bff;">
                             <i class="nav-icon fas fa-table">
                               View Profile
                             </i>
-
                         </button>
-
-                        </form>
+                    </form>
+                      <form method="post" action="../Paziente/pacchetti.php">
+                          <input type="text" name="cfProfessionista" value="<?php echo $listProf[$i]->getCfProf();  ?>" hidden ="true">
+                          <button type="submit" class="btn btn-success float-left" name="button" >View Pacchetti</button>
+                      </form>
 
 </div>
                 </div>
