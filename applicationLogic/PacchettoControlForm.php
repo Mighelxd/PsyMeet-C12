@@ -1,10 +1,12 @@
 <?php
 session_start();
 
+include ("../plugins/libArray/FunArray.php");
  include ('../storage/DatabaseInterface.php');
  include ('../storage/Pacchetto.php');
  include ('../storage/scelta.php');
-
+include ('../storage/Fattura.php');
+ include "PacchettoControl.php";
 
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -63,6 +65,30 @@ else if($action=='delPacchetto'){
     }catch(Exception $e){
         $_SESSION['eccezione']=$e->getMessage();
         header('Location: ../interface/Professionista/gestionePacchettiProf.php');
+    }
+}
+
+else if ($action == "compraPacchetto"){
+    try {
+        $data = date("Y-m-d");
+        $cfProf=$_POST["cfProf"];
+        $cfPaz=$_POST["cfPaz"];
+        $idScelta =$_POST["idScelta"];
+        $arr = array("id_scelta" =>$idScelta,);
+        $rowScelta = DatabaseInterface::selectQueryById($arr, "scelta");
+        $row = $rowScelta->fetch_array();
+        $scelta = new Scelta($row[0],$row[1],$row[2]);
+        $pacchetto = PacchettoControl::recuperaPacchetto($scelta->getIdPacchetto());
+
+        $fattura = new Fattura(null,$data,$cfPaz,$idScelta,$pacchetto->getNSedute());
+        $result = DatabaseInterface::insertQuery($fattura->getArray(),"fattura");
+        var_dump($result);
+        if ($result){
+            header('Location: ../interface/Paziente/pacchetti.php');
+        }
+    }catch (Exception $e){
+        $_SESSION['eccezione']=$e->getMessage();
+        header('Location: ../interface/Paziente/pacchetti.php');
     }
 }
 

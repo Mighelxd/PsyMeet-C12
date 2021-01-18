@@ -61,7 +61,7 @@ class PacchettoControl{
           $arrscelte= array('cf' =>$cfPaziente);
           $allFatture= DatabaseInterface::selectQueryByAtt($arrscelte,"fattura");
           while ($row =$allFatture->fetch_array()) {
-              $pacFattura = new Fattura($row[0],$row[1],$row[2], $row[3]);
+              $pacFattura = new Fattura($row[0],$row[1],$row[2], $row[3],$row[4]);
               //$arrayFatture[] = $pacFattura;
               $arr = array("id_scelta" => $pacFattura->getIdScelta());
               $scelta = DatabaseInterface::selectQueryById($arr, "scelta");
