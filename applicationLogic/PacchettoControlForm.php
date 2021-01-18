@@ -82,9 +82,10 @@ else if ($action == "compraPacchetto"){
 
         $fattura = new Fattura(null,$data,$cfPaz,$idScelta,$pacchetto->getNSedute());
         $result = DatabaseInterface::insertQuery($fattura->getArray(),"fattura");
-        var_dump($result);
         if ($result){
             header('Location: ../interface/Paziente/pacchetti.php');
+        }else{
+            throw new Exception("Errore: acquisto fallito!");
         }
     }catch (Exception $e){
         $_SESSION['eccezione']=$e->getMessage();
