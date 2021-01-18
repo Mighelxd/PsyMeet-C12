@@ -251,6 +251,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Videochiamata con <?php echo $paziente->getNome()." ".$paziente->getCognome();  ?></h3>
                 </div>
+                <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6" id="videochiamata">
@@ -287,13 +288,6 @@
     </div>
     <!-- /.content-wrapper -->
 </div>
-    <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.0.5
-        </div>
-        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-        reserved.
-    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

@@ -176,7 +176,7 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
 
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
-                <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
+                <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
               <div class="card-body box-profile">
                 <div class="text-center">
                   <?php if ($img != NULL){

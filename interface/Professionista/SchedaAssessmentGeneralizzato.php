@@ -264,6 +264,7 @@ else{
           </div>
         </div>
       </div><!-- /.container-fluid -->
+        <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
     </section>
     <!-- Main content -->
     <?php

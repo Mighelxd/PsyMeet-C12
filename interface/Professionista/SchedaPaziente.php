@@ -302,7 +302,7 @@ $paziente = PazienteControl::getPaz($cfPazienteTer);
       <!-- /.card -->
 
 
-
+          <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
     </section>
     <!-- /.content -->
 

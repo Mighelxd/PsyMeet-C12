@@ -329,7 +329,7 @@
                   </div>
                   <?php } ?>
                 </form>
-                  <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
+                  <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
               </div>
 
             </div>
