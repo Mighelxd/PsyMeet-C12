@@ -331,7 +331,7 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
 
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" name="action" value="aggiornaDati"class="btn btn-danger">Conferma</button><span style="color:red"><?php echo $_SESSION['noUpdate'] ?></span>
+                          <button type="submit" name="action" value="aggiornaDati"class="btn btn-danger">Conferma</button><span style="color:red"><?php if(isset($_SESSION['noUpdate'])){ echo $_SESSION['noUpdate'];} ?></span>
                         </div>
                       </div>
                     </form>
@@ -352,11 +352,11 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
                      <div class="form-group row">
                        <div class="offset-sm-2 col-sm-10">
                      <input type="text" name="action" value="modificaFoto" hidden = "true">
-                     <input type="submit" class="btn btn-danger" name="modificaFoto" value="modifica foto"><span style="color:red"><?php echo $_SESSION['noUpdatePhoto'] ?></span>
+                     <input type="submit" class="btn btn-danger" name="modificaFoto" value="modifica foto"><span style="color:red"><?php if (isset($_SESSION['noUpdatePhoto'])){echo $_SESSION['noUpdatePhoto'];} ?></span>
                     </div>
                     </div>
                     </form>
-                      <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
+                      <span style="color:red"><?php if (isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
                   </div>
                   <!-- /.tab-pane -->
                 </div>
