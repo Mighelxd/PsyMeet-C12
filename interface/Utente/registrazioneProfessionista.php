@@ -87,14 +87,14 @@
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Pubblicazioni" id="pubblicazioni" name="pubblicazioni" pattern="[A-Z a-z 0-9']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" placeholder="Pubblicazioni" id="pubblicazioni" name="pubblicazioni" pattern="[A-Z a-z 0-9 ']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Esperienze" id="esperienze" name="esperienze" pattern="[A-Z a-z 0-9']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" placeholder="Esperienze" id="esperienze" name="esperienze" pattern="[A-Z a-z 0-9 ']{2,500}" title="da 2 a 500 Lettere(Apostrofi consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -108,7 +108,7 @@
               </div>
           </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Indirizzo studio" id="indirizzoStudio" name="indirizzoStudio" pattern="[A-Z a-z 0-9']{2,250}" title="Da 2 a 250 caratteri Alfanumerici(Apostrofi Consentiti)" required>
+          <input type="text" class="form-control" placeholder="Indirizzo studio" id="indirizzoStudio" name="indirizzoStudio" pattern="[A-Z a-z 0-9 ']{2,250}" title="Da 2 a 250 caratteri Alfanumerici(Apostrofi Consentiti)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
