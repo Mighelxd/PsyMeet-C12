@@ -1,5 +1,4 @@
 <?php
-session_start();
 define("TABLE_NAME","pacchetto");
 
 class PacchettoControl{

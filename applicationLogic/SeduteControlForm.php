@@ -8,345 +8,556 @@ include '../storage/SchedaAssessmentGeneralizzato.php';
 include '../storage/SchedaPrimoColloquio.php';
 include '../storage/SchedaFollowUp.php';
 include '../storage/SchedaModelloEziologico.php';
+include "../storage/Professionista.php";
+include "../storage/Paziente.php";
+include "PazienteControl.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
+if(isset($_POST['action'])) {
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = $_POST['action'];
-}
-else{
+  } else {
     $action = $_GET['action'];
-}
-
-if($action == "saveScheda"){
-  $data = $_POST['data'];
-  $idTerapia = $_POST['idTerapia'];
-  $numEp = '0';
-  $data = str_replace('/','-',$data);
-  $data=date_create($data);
-  $data = date_format($data,"Y/m/d");
-  $scheda = array("data"=>$data,"n_episodi"=>$numEp,"id_terapia"=>$idTerapia,"tipo"=>"Scheda Assessment Focalizzato");
-
-  $ok = DatabaseInterface::insertQuery($scheda,"schedaassessmentfocalizzato");
-
-  $recIdScheda = DatabaseInterface::selectQueryByAtt($scheda,"schedaassessmentfocalizzato");
-  while($row = $recIdScheda->fetch_array()){
-    $idSchedaCorr = $row[0];
   }
-  $_SESSION['idSCorr'] = $idSchedaCorr;
-  $ris = array("ok"=>$ok,"idScheda"=>$idSchedaCorr);
-  echo json_encode($ris);
+}
+$_SESSION['eccezioni']="";
+if($action == "saveScheda"){
+  try{
+    $data = $_POST['data'];
+    $idTerapia = $_POST['idTerapia'];
+    $numEp = '0';
+    $data = str_replace('/','-',$data);
+    $data=date_create($data);
+    $data = date_format($data,"Y/m/d");
+
+    $scheda = new SchedaAssessmentFocalizzato(null,$data,$numEp,$idTerapia,"Scheda Assessment Focalizzato");
+    $ok = DatabaseInterface::insertQuery($scheda->getArray(),"schedaassessmentfocalizzato");
+
+    $recIdScheda = DatabaseInterface::selectQueryByAtt($scheda->getArray(),"schedaassessmentfocalizzato");
+    while($row = $recIdScheda->fetch_array()){
+      $idSchedaCorr = $row[0];
+    }
+    $_SESSION['idSCorr'] = $idSchedaCorr;
+    $ris = array("ok"=>$ok,"idScheda"=>$idSchedaCorr);
+    echo json_encode($ris);
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
+    header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+  }
 }
 else if($action == 'delScheda'){
+  try{
     $idScheda = $_SESSION['idSCorr'];
     $key = array("id_scheda"=>$idScheda);
     $ok = DatabaseInterface::deleteQuery($key,'schedaassessmentfocalizzato');
     if($ok){
       $_SESSION['idSCorr'] = "";
       header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+    }else{
+      throw new Exception("Errore: scheda non eliminata!");
     }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
+    header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+  }
 }
 else if($action == "recoveryScheda"){
-  $idScheda = $_POST['idScheda'];
-  $key = array("id_scheda"=>$idScheda);
-
-  $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
-  while($row = $recScheda->fetch_array()){
-    $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
-  }
-  echo json_encode($scheda->getArray());
-}
-else if($action == "addEpisodio"){
-  $numEp = $_POST['numero'];
-  $analisi = $_POST['analisi'];
-  $mA = $_POST['a'];
-  $mB = $_POST['b'];
-  $mC = $_POST['c'];
-  $appunti = $_POST['appunti'];
-  if(isset($_POST['hIdS'])){
-    $idScheda = $_POST['hIdS'];
-  }
-  else{
-    $idScheda = $_SESSION['idSCorr'];
-  }
-
-  $attEp = array("numero"=>$numEp,"analisi_fun"=>$analisi,"m_a"=>$mA,"m_b"=>$mB,"m_c"=>$mC,"appunti"=>$appunti,"id_scheda"=>$idScheda);
-  $insOk = DatabaseInterface::insertQuery($attEp,'episodio');
-  if($insOk){
+  try{
+    $idScheda = $_POST['idScheda'];
     $key = array("id_scheda"=>$idScheda);
+
     $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
     while($row = $recScheda->fetch_array()){
       $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
     }
-    $newNumEp = $scheda->getNEpisodi() + 1;
-    $scheda->setNEpisodi($newNumEp);
-    $updateScheda = DatabaseInterface::updateQueryById($scheda->getArray(),'schedaassessmentfocalizzato');
-    $_SESSION['idSCorr'] = $idScheda;
+    echo json_encode($scheda->getArray());
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
+    header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+  }
+
+}
+else if($action == "addEpisodio"){
+  try{
+    $numEp = $_POST['numero'];
+    $analisi = $_POST['analisi'];
+    $mA = $_POST['a'];
+    $mB = $_POST['b'];
+    $mC = $_POST['c'];
+    $appunti = $_POST['appunti'];
+    if(isset($_POST['hIdS'])){
+      $idScheda = $_POST['hIdS'];
+    }
+    else{
+      $idScheda = $_SESSION['idSCorr'];
+    }
+
+    $attEp = new Episodio(null,$numEp,$analisi,$mA,$mB,$mC,$appunti,$idScheda);
+    $insOk = DatabaseInterface::insertQuery($attEp->getArray(),'episodio');
+    if($insOk){
+      $key = array("id_scheda"=>$idScheda);
+      $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
+      while($row = $recScheda->fetch_array()){
+        $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
+      }
+      $newNumEp = $scheda->getNEpisodi() + 1;
+      $scheda->setNEpisodi($newNumEp);
+      $updateScheda = DatabaseInterface::updateQueryById($scheda->getArray(),'schedaassessmentfocalizzato');
+      if($updateScheda){
+        $_SESSION['idSCorr'] = $idScheda;
+        header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+      }else{
+        throw new Exception("Errore: numero episodi in scheda non aggiornato!");
+      }
+    }else{
+      throw new Exception("Errore: episodio non inserito!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
 }
 else if($action == 'delEpisodio'){
-  $numEp = $_POST['numero'];
-  $analisi = $_POST['analisi'];
-  $mA = $_POST['a'];
-  $mB = $_POST['b'];
-  $mC = $_POST['c'];
-  $appunti = $_POST['appunti'];
-  if(isset($_SESSION['idSCorr'])){
-    $idSchedaCorr = $_SESSION['idSCorr'];
-  }
+  try{
+    $numEp = $_POST['numero'];
+    $analisi = $_POST['analisi'];
+    $mA = $_POST['a'];
+    $mB = $_POST['b'];
+    $mC = $_POST['c'];
+    $appunti = $_POST['appunti'];
+    if(isset($_SESSION['idSCorr'])){
+      $idSchedaCorr = $_SESSION['idSCorr'];
+    }
 
-  $attEp = array("numero"=>$numEp,"analisi_fun"=>$analisi,"m_a"=>$mA,"m_b"=>$mB,"m_c"=>$mC,"appunti"=>$appunti,"id_scheda"=>$idSchedaCorr);
-  $ok = DatabaseInterface::deleteQuery($attEp,'episodio');
-  if($ok){
-    $key = array("id_scheda"=>$idSchedaCorr);
-    $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
-    while($row = $recScheda->fetch_array()){
-      $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
+    $attEp = new Episodio(null,$numEp,$analisi,$mA,$mB,$mC,$appunti,$idScheda);
+    $ok = DatabaseInterface::deleteQuery($attEp->getArray(),'episodio');
+    if($ok){
+      $key = array("id_scheda"=>$idSchedaCorr);
+      $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
+      while($row = $recScheda->fetch_array()){
+        $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
+      }
+      $oldNumEpForSch = $scheda->getNEpisodi();
+      $newNumEp = $oldNumEpForSch - 1;
+      $scheda->setNEpisodi($newNumEp);
+      $updateScheda = DatabaseInterface::updateQueryById($scheda->getArray(),'schedaassessmentfocalizzato');
+      if($updateScheda){
+        $att=array("id_scheda"=>$idSchedaCorr);
+        $allEpForSch = DatabaseInterface::selectQueryByAtt($att,'episodio');
+        while($row = $allEpForSch->fetch_array()){
+          $listEp[] = new Episodio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
+        }
+        $posDaScalare = $oldNumEpForSch - (int)$numEp;
+        $startIndex = $newNumEp - $posDaScalare;
+        for($i=$startIndex;$i<count($listEp);$i++){
+          $oldNumEp = $listEp[$i]->getNum();
+          $listEp[$i]->setNum($oldNumEp - 1);
+          $up=DatabaseInterface::updateQueryById($listEp[$i]->getArray(),'episodio');
+          if(!$up){
+            throw new Exception("Errore: numero episodio in episodio non aggiornato!");
+          }
+        }
+        header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+      }else{
+        throw new Exception("Errore: numero episodio in scheda non modificato!");
+      }
+    }else{
+      throw new Exception("Errore: episodio non eliminato!");
     }
-    $oldNumEpForSch = $scheda->getNEpisodi();
-    $newNumEp = $oldNumEpForSch - 1;
-    $scheda->setNEpisodi($newNumEp);
-    $updateScheda = DatabaseInterface::updateQueryById($scheda->getArray(),'schedaassessmentfocalizzato');
-
-    $att=array("id_scheda"=>$idSchedaCorr);
-    $allEpForSch = DatabaseInterface::selectQueryByAtt($att,'episodio');
-    while($row = $allEpForSch->fetch_array()){
-      $listEp[] = new Episodio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
-    }
-    $posDaScalare = $oldNumEpForSch - (int)$numEp;
-    $startIndex = $newNumEp - $posDaScalare;
-    for($i=$startIndex;$i<count($listEp);$i++){
-      $oldNumEp = $listEp[$i]->getNum();
-      $listEp[$i]->setNum($oldNumEp - 1);
-      $up=DatabaseInterface::updateQueryById($listEp[$i]->getArray(),'episodio');
-    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
 }
 else if($action == 'modEpisodio'){
-  $numEp = $_POST['numero'];
-  $analisi = $_POST['analisi'];
-  $mA = $_POST['a'];
-  $mB = $_POST['b'];
-  $mC = $_POST['c'];
-  $appunti = $_POST['appunti'];
-  if(isset($_SESSION['idSCorr'])){
-    $idSchedaCorr = $_SESSION['idSCorr'];
-  }
+  try{
+    $numEp = $_POST['numero'];
+    $analisi = $_POST['analisi'];
+    $mA = $_POST['a'];
+    $mB = $_POST['b'];
+    $mC = $_POST['c'];
+    $appunti = $_POST['appunti'];
+    if(isset($_SESSION['idSCorr'])){
+      $idSchedaCorr = $_SESSION['idSCorr'];
+    }
 
-  $attRec=array("numero"=>$numEp,"id_scheda"=>$idSchedaCorr);
-  $recEp=DatabaseInterface::selectQueryByAtt($attRec,'episodio');
-  while($row=$recEp->fetch_array()){
-    $ep = new Episodio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
-  }
-  $ep->setAnalisiFun($analisi);
-  $ep->setMA($mA);
-  $ep->setMB($mB);
-  $ep->setMC($mC);
-  $ep->setAppunti($appunti);
+    $attRec=array("numero"=>$numEp,"id_scheda"=>$idSchedaCorr);
+    $recEp=DatabaseInterface::selectQueryByAtt($attRec,'episodio');
+    while($row=$recEp->fetch_array()){
+      $ep = new Episodio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
+    }
+    $ep->setAnalisiFun($analisi);
+    $ep->setMA($mA);
+    $ep->setMB($mB);
+    $ep->setMC($mC);
+    $ep->setAppunti($appunti);
 
-  $upd = DatabaseInterface::updateQueryById($ep->getArray(),'episodio');
-  if($upd){
+    $upd = DatabaseInterface::updateQueryById($ep->getArray(),'episodio');
+    if($upd){
+      header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
+    }else{
+      throw new Exception("Errore: episodio non modificato!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
+
 }
 /////////////////////////////////////////////////////////////Generalizzato
 else if($action =='addSchGen'){
-  $aspPosAut = $_POST['aspPosAut'];
-  $aspNegAut = $_POST['aspNegAut'];
-  $aspPosCog = $_POST['aspPosCog'];
-  $aspNegCog = $_POST['aspNegCog'];
-  $aspPosSM = $_POST['aspPosSM'];
-  $aspNegSM = $_POST['aspNegSM'];
-  $aspPosSo = $_POST['aspPosSo'];
-  $aspNegSo = $_POST['aspNegSo'];
-  $idTerCorr = $_SESSION['idTerCorr'];
-  $dataCorr = date("Y,m,d");
-  $dataCorr = str_replace(',','-',$dataCorr);
-  $att = array("data" => $dataCorr, "autoreg_positivi" => $aspPosAut, "autoreg_negativi" => $aspNegAut, "cognitive_positivi" => $aspPosCog, "cognitive_negativi" => $aspNegCog, "self_management_positivi" => $aspPosSM,"self_management_negativi" => $aspNegSM, "sociali_positivi" => $aspPosSo, "sociali_negativi" => $aspNegSo,  "id_terapia" => $idTerCorr, "tipo" =>"Scheda Assessment Generalizzato");
-  $ok = DatabaseInterface::insertQuery($att, SchedaAssessmentGeneralizzato::$tableName);
-  if($ok) {
+  try{
+    $aspPosAut = $_POST['aspPosAut'];
+    $aspNegAut = $_POST['aspNegAut'];
+    $aspPosCog = $_POST['aspPosCog'];
+    $aspNegCog = $_POST['aspNegCog'];
+    $aspPosSM = $_POST['aspPosSM'];
+    $aspNegSM = $_POST['aspNegSM'];
+    $aspPosSo = $_POST['aspPosSo'];
+    $aspNegSo = $_POST['aspNegSo'];
+    $idTerCorr = $_SESSION['idTerCorr'];
+    $dataCorr = date("Y,m,d");
+    $dataCorr = str_replace(',','-',$dataCorr);
+    $att = new SchedaAssessmentGeneralizzato(null,$dataCorr,$aspPosAut,$aspNegAut,$aspPosCog,$aspNegCog,$aspPosSM,$aspNegSM,$aspPosSo,$aspNegSo,$idTerCorr,"Scheda Assessment Generalizzato");
+    $ok = DatabaseInterface::insertQuery($att->getArray(), SchedaAssessmentGeneralizzato::$tableName);
+    if($ok) {
+      header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
+    }else{
+      throw new Exception("Errore: scheda non aggiunta!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
   }
 }
 else if($action =='delSchGen'){
-  $idTerCorr = $_SESSION['idTerCorr'];
-  $key = array("id_terapia"=>$idTerCorr);
-  $ok=DatabaseInterface::deleteQuery($key,SchedaAssessmentGeneralizzato::$tableName);
-  if($ok){
+  try{
+    $idTerCorr = $_SESSION['idTerCorr'];
+    $key = array("id_terapia"=>$idTerCorr);
+    $ok=DatabaseInterface::deleteQuery($key,SchedaAssessmentGeneralizzato::$tableName);
+    if($ok){
+      header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
+    }else{
+      throw new Exception("Errore: scheda non eliminata!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
   }
 }
 else if($action == 'modSchGen'){
-  $aspPosAut = $_POST['aspPosAut'];
-  $aspNegAut = $_POST['aspNegAut'];
-  $aspPosCog = $_POST['aspPosCog'];
-  $aspNegCog = $_POST['aspNegCog'];
-  $aspPosSM = $_POST['aspPosSM'];
-  $aspNegSM = $_POST['aspNegSM'];
-  $aspPosSo = $_POST['aspPosSo'];
-  $aspNegSo = $_POST['aspNegSo'];
-  $idTerCorr = $_SESSION['idTerCorr'];
+  try{
+    $aspPosAut = $_POST['aspPosAut'];
+    $aspNegAut = $_POST['aspNegAut'];
+    $aspPosCog = $_POST['aspPosCog'];
+    $aspNegCog = $_POST['aspNegCog'];
+    $aspPosSM = $_POST['aspPosSM'];
+    $aspNegSM = $_POST['aspNegSM'];
+    $aspPosSo = $_POST['aspPosSo'];
+    $aspNegSo = $_POST['aspNegSo'];
+    $idTerCorr = $_SESSION['idTerCorr'];
 
-  $key = array("id_terapia"=>$idTerCorr);
+    $key = array("id_terapia"=>$idTerCorr);
 
-  $recSchGen = DatabaseInterface::selectQueryById($key,SchedaAssessmentGeneralizzato::$tableName);
-  while($row = $recSchGen->fetch_array()){
-    $schGen = new SchedaAssessmentGeneralizzato($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11]);
-  }
-  $schGen->setAutoregPositivi($aspPosAut);
-  $schGen->setAutoregNegativi($aspNegAut);
-  $schGen->setCognitivePositivi($aspPosCog);
-  $schGen->setCognitiveNegativi($aspNegCog);
-  $schGen->setSelfManagementPositivi($aspPosSM);
-  $schGen->setSelfManagementNegativi($aspNegSM);
-  $schGen->setSocialiPositivi($aspPosSo);
-  $schGen->setSocialiNegativi($aspNegSo);
+    $recSchGen = DatabaseInterface::selectQueryById($key,SchedaAssessmentGeneralizzato::$tableName);
+    while($row = $recSchGen->fetch_array()){
+      $schGen = new SchedaAssessmentGeneralizzato($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11]);
+    }
+    $schGen->setAutoregPositivi($aspPosAut);
+    $schGen->setAutoregNegativi($aspNegAut);
+    $schGen->setCognitivePositivi($aspPosCog);
+    $schGen->setCognitiveNegativi($aspNegCog);
+    $schGen->setSelfManagementPositivi($aspPosSM);
+    $schGen->setSelfManagementNegativi($aspNegSM);
+    $schGen->setSocialiPositivi($aspPosSo);
+    $schGen->setSocialiNegativi($aspNegSo);
 
-  $upd=DatabaseInterface::updateQueryById($schGen->getArray(),SchedaAssessmentGeneralizzato::$tableName);
+    $upd=DatabaseInterface::updateQueryById($schGen->getArray(),SchedaAssessmentGeneralizzato::$tableName);
 
-  if($upd){
+    if($upd){
+      header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
+    }else{
+      throw new Exception("Errore: scheda non modificata!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
   }
 }
 /////////////////////////////////////////////////////////////SPQ
 else if($action == 'addSPQ'){
-  $data = date("Y/m/d");
-  $defP = $_POST['defP'];
-  $aspP = $_POST['aspP'];
-  $mot = $_POST['mot'];
-  $obt = $_POST['obt'];
-  $defC = $_POST['defC'];
-  $tipo= "Scheda Primo Colloquio";
-  $idTerCorr = $_SESSION['idTerCorr'];
+  try{
+    $data = date("Y/m/d");
+    $defP = $_POST['defP'];
+    $aspP = $_POST['aspP'];
+    $mot = $_POST['mot'];
+    $obt = $_POST['obt'];
+    $defC = $_POST['defC'];
+    $tipo= "Scheda Primo Colloquio";
+    $idTerCorr = $_SESSION['idTerCorr'];
 
-  $att = array("data" => $data, "problema" => $defP, "aspettative" => $aspP, "motivazione" => $mot, "obiettivi" => $obt,"cambiamento" => $defC, "id_terapia" => $idTerCorr,"tipo" =>$tipo);
-
-  $ok = DatabaseInterface::insertQuery($att,SchedaPrimoColloquio::$tableName);
-  if($ok){
+    $att = new SchedaPrimoColloquio(null,$data,$defP,$aspP,$mot,$obt,$defC,$idTerCorr,$tipo);
+    $ok = DatabaseInterface::insertQuery($att->getArray(),SchedaPrimoColloquio::$tableName);
+    if($ok){
+      header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
+    }else{
+      throw new Exception("Errore: scheda non aggiunta!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
   }
 }
 else if($action == 'modSPQ'){
-  $defP = $_POST['defP'];
-  $aspP = $_POST['aspP'];
-  $mot = $_POST['mot'];
-  $obt = $_POST['obt'];
-  $defC = $_POST['defC'];
-  $tipo= "Scheda Primo Colloquio";
-  $idTerCorr = $_SESSION['idTerCorr'];
+  try{
+    $defP = $_POST['defP'];
+    $aspP = $_POST['aspP'];
+    $mot = $_POST['mot'];
+    $obt = $_POST['obt'];
+    $defC = $_POST['defC'];
+    $tipo= "Scheda Primo Colloquio";
+    $idTerCorr = $_SESSION['idTerCorr'];
 
-  $key=array("id_terapia"=>$idTerCorr);
-  $rec=DatabaseInterface::selectQueryById($key,SchedaPrimoColloquio::$tableName);
-  while($row = $rec->fetch_array()){
-    $sPq = new SchedaPrimoColloquio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
-  }
-  $sPq->setProblema($defP);
-  $sPq->setAspettative($aspP);
-  $sPq->setMotivazione($mot);
-  $sPq->setObiettivi($obt);
-  $sPq->setCambiamento($defC);
+    $key=array("id_terapia"=>$idTerCorr);
+    $rec=DatabaseInterface::selectQueryById($key,SchedaPrimoColloquio::$tableName);
+    while($row = $rec->fetch_array()){
+      $sPq = new SchedaPrimoColloquio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
+    }
+    $sPq->setProblema($defP);
+    $sPq->setAspettative($aspP);
+    $sPq->setMotivazione($mot);
+    $sPq->setObiettivi($obt);
+    $sPq->setCambiamento($defC);
 
-  $upd = DatabaseInterface::updateQueryById($sPq->getArray(),SchedaPrimoColloquio::$tableName);
-  if($upd){
+    $upd = DatabaseInterface::updateQueryById($sPq->getArray(),SchedaPrimoColloquio::$tableName);
+    if($upd){
+      header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
+    }else{
+      throw new Exception("Errore: scheda non modificata!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
   }
 }
 else if($action == 'delSPQ'){
-  $idTerCorr = $_SESSION['idTerCorr'];
+  try{
+    $idTerCorr = $_SESSION['idTerCorr'];
 
-  $key=array("id_terapia"=>$idTerCorr);
-  $ok=DatabaseInterface::deleteQuery($key,SchedaPrimoColloquio::$tableName);
-  if($ok){
+    $key=array("id_terapia"=>$idTerCorr);
+    $ok=DatabaseInterface::deleteQuery($key,SchedaPrimoColloquio::$tableName);
+    if($ok){
+      header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
+    }else{
+      throw new Exception("Errore: scheda non eliminata!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
   }
 }
 /////////////////////////////////////////////Follow up
 else if($action == 'addSFU'){
-  $data = date("Y-m-d");
-  $ric = $_POST['ric'];
-  $esPos = $_POST['esPos'];
-  $tipo= "Scheda Follow Up";
-  $idTerCorr = $_SESSION['idTerCorr'];
+  try{
+    $data = date("Y-m-d");
+    $ric = $_POST['ric'];
+    $esPos = $_POST['esPos'];
+    $tipo= "Scheda Follow Up";
+    $idTerCorr = $_SESSION['idTerCorr'];
 
-  $att = array("data" => $data, "ricadute" => $ric, "esiti_positivi" => $esPos, "id_terapia" => $idTerCorr,"tipo" => $tipo);
+    $att = new SchedaFollowUp(null,$data,$ric,$esPos,$idTerCorr,$tipo);
 
-  $ok = DatabaseInterface::insertQuery($att,SchedaFollowUp::$tableName);
-  if($ok){
+    $ok = DatabaseInterface::insertQuery($att->getArray(),SchedaFollowUp::$tableName);
+    if($ok){
+      header("Location: ../interface/Professionista/SchedaFollowUp.php");
+    }else{
+      throw new Exception("Errore: scheda non aggiunta!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaFollowUp.php");
   }
 }
 else if($action == 'modSFU'){
-  $ric = $_POST['ric'];
-  $esPos = $_POST['esPos'];
-  $idTerCorr = $_SESSION['idTerCorr'];
+  try{
+    $ric = $_POST['ric'];
+    $esPos = $_POST['esPos'];
+    $idTerCorr = $_SESSION['idTerCorr'];
 
-  $key=array("id_terapia"=>$idTerCorr);
-  $rec=DatabaseInterface::selectQueryById($key,SchedaFollowUp::$tableName);
-  while($row = $rec->fetch_array()){
-    $sFu = new SchedaFollowUp($row[0],$row[1],$row[2],$row[3],$row[4],$row[5]);
-  }
-  $sFu->setRicadute($ric);
-  $sFu->setEsitiPositivi($esPos);
+    $key=array("id_terapia"=>$idTerCorr);
+    $rec=DatabaseInterface::selectQueryById($key,SchedaFollowUp::$tableName);
+    while($row = $rec->fetch_array()){
+      $sFu = new SchedaFollowUp($row[0],$row[1],$row[2],$row[3],$row[4],$row[5]);
+    }
+    $sFu->setRicadute($ric);
+    $sFu->setEsitiPositivi($esPos);
 
-  $upd = DatabaseInterface::updateQueryById($sFu->getArray(),SchedaFollowUp::$tableName);
-  if($upd){
+    $upd = DatabaseInterface::updateQueryById($sFu->getArray(),SchedaFollowUp::$tableName);
+    if($upd){
+      header("Location: ../interface/Professionista/SchedaFollowUp.php");
+    }else{
+      throw new Exception("Errore: scheda non modificata!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaFollowUp.php");
   }
 }
 else if($action == 'delSFU'){
-  $idTerCorr = $_SESSION['idTerCorr'];
+  try{
+    $idTerCorr = $_SESSION['idTerCorr'];
 
-  $key=array("id_terapia"=>$idTerCorr);
-  $ok=DatabaseInterface::deleteQuery($key,SchedaFollowUp::$tableName);
-  if($ok){
+    $key=array("id_terapia"=>$idTerCorr);
+    $ok=DatabaseInterface::deleteQuery($key,SchedaFollowUp::$tableName);
+    if($ok){
+      header("Location: ../interface/Professionista/SchedaFollowUp.php");
+    }else{
+      throw new Exception("Errore: scheda non eliminata!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaFollowUp.php");
   }
 }
 /////////////////////////////////////////////////////////Scheda modello eziologico
 else if($action == 'addSME'){
-  $data = date("Y-m-d");
-  $idTerCorr = $_SESSION['idTerCorr'];
-  $tipo = "Scheda Modello Eziologico";
-  $fc = $_POST['fc'];
-  $fm = $_POST['fm'];
-  $fp = $_POST['fp'];
-  $rf = $_POST['rf'];
+  try{
+    $data = date("Y-m-d");
+    $idTerCorr = $_SESSION['idTerCorr'];
+    $tipo = "Scheda Modello Eziologico";
+    $fc = $_POST['fc'];
+    $fm = $_POST['fm'];
+    $fp = $_POST['fp'];
+    $rf = $_POST['rf'];
 
-  $mEz = new SchedaModelloEziologico(null,$data,$fc,$fp,$fm,$rf,$idTerCorr,$tipo);
+    $mEz = new SchedaModelloEziologico(null,$data,$fc,$fp,$fm,$rf,$idTerCorr,$tipo);
 
-  $ok = DatabaseInterface::insertQuery($mEz->getArray(),SchedaModelloEziologico::$tableName);
-  if($ok){
+    $ok = DatabaseInterface::insertQuery($mEz->getArray(),SchedaModelloEziologico::$tableName);
+    if($ok){
+      header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
+    }else{
+      throw new Exception("Errore: scheda non aggiunta!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
   }
 }
 else if($action == 'modSME'){
-  $idTerCorr = $_SESSION['idTerCorr'];
-  $fc = $_POST['fc'];
-  $fm = $_POST['fm'];
-  $fp = $_POST['fp'];
-  $rf = $_POST['rf'];
+  try{
+    $idTerCorr = $_SESSION['idTerCorr'];
+    $fc = $_POST['fc'];
+    $fm = $_POST['fm'];
+    $fp = $_POST['fp'];
+    $rf = $_POST['rf'];
 
-  $key= array("id_terapia"=>$idTerCorr);
-  $rec = DatabaseInterface::selectQueryById($key,SchedaModelloEziologico::$tableName);
-  while($row = $rec->fetch_array()){
-    $scME = new SchedaModelloEziologico($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
-  }
-  $scME->setFattoriCausativi($fc);
-  $scME->setFattoriMantenimento($fm);
-  $scME->getFattoriPrecipitanti($fp);
-  $scME->setRelazioneFinale($rf);
+    $key= array("id_terapia"=>$idTerCorr);
+    $rec = DatabaseInterface::selectQueryById($key,SchedaModelloEziologico::$tableName);
+    while($row = $rec->fetch_array()){
+      $scME = new SchedaModelloEziologico($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
+    }
+    $scME->setFattoriCausativi($fc);
+    $scME->setFattoriMantenimento($fm);
+    $scME->getFattoriPrecipitanti($fp);
+    $scME->setRelazioneFinale($rf);
 
-  $upd = DatabaseInterface::updateQueryById($scME->getArray(),SchedaModelloEziologico::$tableName);
-  if($upd){
+    $upd = DatabaseInterface::updateQueryById($scME->getArray(),SchedaModelloEziologico::$tableName);
+    if($upd){
+      header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
+    }else{
+      throw new Exception("Errore: scheda non modificata!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
   }
 }
 else if($action == 'delSME'){
-  $idTerCorr = $_SESSION['idTerCorr'];
-  $key=array("id_terapia"=>$idTerCorr);
-  $ok=DatabaseInterface::deleteQuery($key,SchedaModelloEziologico::$tableName);
-  if($ok){
+  try{
+    $idTerCorr = $_SESSION['idTerCorr'];
+    $key=array("id_terapia"=>$idTerCorr);
+    $ok=DatabaseInterface::deleteQuery($key,SchedaModelloEziologico::$tableName);
+    if($ok){
+      header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
+    }else{
+      throw new Exception("Errore: scheda non eliminata!");
+    }
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
   }
 }
- ?>
+//////////////////////////////////////////////////////////////////////Videoconferenza
+if(!isset($_POST["azione"])){
+  //session_start();
+  if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
+    header("Location: ../interface/Utente/login.php");
+    exit();
+  }
+  $cf=$_SESSION["codiceFiscale"];
+  if(!isset($_SESSION["codFiscalePaz"])){
+    header("Location: ../interface/indexProfessionista.php");
+    exit();
+  }
+  $cfpaz=$_SESSION["codFiscalePaz"];
+  $resultp=DatabaseInterface::selectQueryById(array("cf" => $cfpaz), Paziente::$tableName);
+  if($resultp->num_rows!=1){
+    header("Location: ../interface/indexProfessionista.php");
+    exit();
+  }
+  try{
+    $resultp=$resultp->fetch_array();
+    $paziente= new Paziente($resultp["cf"],$resultp["nome"],$resultp["cognome"],$resultp["data_nascita"],$resultp["email"],$resultp["telefono"],$resultp["passwor"],$resultp["indirizzo"],$resultp["istruzione"],$resultp["lavoro"],$resultp["difficol_cura"],$resultp["foto_profilo_paz"],$resultp["videochiamata"]);
+    $resultp=NULL;
+    $_SESSION["paziente"]=$paziente;
+    $result=DatabaseInterface::selectQueryById(array("cf_prof"=> $cf),Professionista::$tableName);
+    $result=$result->fetch_array();
+    $professionista= new Professionista($result[0],$result[1],$result[2],$result[3],$result[4],$result[5],$result[6],$result[7],$result[8],$result[9],$result[10],$result[11],$result[12],$result[13],$result[14],$result[15],$result[16],$result[17]);
+    $_SESSION["professionista"]=$professionista;
+    header("Location: ../interface/professionista/videoConferenza.php");
+  }catch(Exception $e){
+    $_SESSION['eccezioni']=$e->getMessage();
+    header("Location: ../interface/professionista/videoConferenza.php");
+  }
+}
+elseif ($_POST["azione"]=="avvia"){
+  //session_start();
+  $paziente=$_SESSION["paziente"];
+  $paziente->setVideo(true);
+  $result=DatabaseInterface::updateQueryById($paziente->getArray(),Paziente::$tableName);
+  if($result){
+    echo json_encode(array("esito"=>true));
+    exit();
+  }
+  else{
+    echo json_encode(array("esito"=>false,"errore"=>"errore update"));
+  }
+  echo json_encode(array("esito"=>true));
+}
+elseif($_POST["azione"]=="termina"){
+  //session_start();
+  $paziente=$_SESSION["paziente"];
+  $paziente->setVideo(0);
+  $result=DatabaseInterface::updateQueryById($paziente->getArray(),Paziente::$tableName);
+  if($result){
+    echo json_encode(array("esito"=>true));
+    exit();
+  }
+  else{
+    echo json_encode(array("esito"=>false,"errore"=>"errore update"));
+  }
+  echo json_encode(array("esito"=>true));
+}
+elseif($_POST["azione"]=="checkChiamata"){
+  //session_start();
+  $paziente=PazienteControl::getPaz($_SESSION["codiceFiscale"]);
+  if($paziente->getVideo()){
+    echo json_encode(array("esito"=>true));
+    exit();
+  }
+  else{
+    echo json_encode(array("esito"=>false));
+    exit();
+  }
+}
+
+?>

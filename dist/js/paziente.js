@@ -1,7 +1,7 @@
 function checkChiamata(){
     let request= {'azione' : 'checkChiamata'};
     $.ajax({
-        url: "../../applicationLogic/videoConferenzaControl.php",
+        url: "../../applicationLogic/SeduteControlForm.php",
         type: "post",
         data: request,
         success: function (response){

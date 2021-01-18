@@ -446,7 +446,7 @@ $professionista = AreaInformativaControl::getProf($cf);
 <script>
     function buttonCall(){
         <?php $_SESSION["codFiscalePaz"]=$paziente->getCf(); ?>
-        window.location.replace("../../applicationLogic/videoConferenzaControl.php");
+        window.location.replace("../../applicationLogic/SeduteControlForm.php");
     }
 
 </script>

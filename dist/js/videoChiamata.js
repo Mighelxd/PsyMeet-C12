@@ -13,7 +13,7 @@ function iniziaChiamata(link){
 function terminaChiamata(){
     let data= {'azione' : 'termina'};
     $.ajax({
-        url: '../../applicationLogic/videoConferenzaControl.php',
+        url: '../../applicationLogic/SeduteControlForm.php',
         data: data,
         type: 'post',
         success:function (data){

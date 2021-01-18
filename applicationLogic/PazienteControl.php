@@ -10,7 +10,6 @@
 //include ("../storage/DatabaseInterface.php");
 //include ("../plugins/libArray/FunArray.php");
 
-session_start();
 /**
  *
  */

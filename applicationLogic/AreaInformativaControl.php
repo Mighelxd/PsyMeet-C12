@@ -1,5 +1,4 @@
 <?php
-session_start();
 class AreaInformativaControl
 {
     static function checkProf($professionista){

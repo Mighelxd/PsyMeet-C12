@@ -292,7 +292,7 @@
     $("#formChiamata").submit(function(e){
         e.preventDefault();
         $.ajax({
-            url: '../../applicationLogic/videoConferenzaControl.php',
+            url: '../../applicationLogic/SeduteControlForm.php',
             data: $("#formChiamata").serialize(),
             type: 'post',
             success:function(data){

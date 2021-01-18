@@ -6,7 +6,6 @@
 * Versione: 0.1
 * 2020 Copyright by PsyMeet - University of Salerno
 */
-session_start();
 class terapiaControl{
 
 

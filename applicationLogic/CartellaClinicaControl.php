@@ -1,5 +1,4 @@
 <?php
-session_start();
 class CartellaClinicaControl
 {
     static function getCartellaClinica($cfPaz,$cfProf){
