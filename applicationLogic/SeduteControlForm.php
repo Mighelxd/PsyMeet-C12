@@ -488,21 +488,22 @@ else if($action == 'delSME'){
   }
 }
 //////////////////////////////////////////////////////////////////////Videoconferenza
-if(!isset($_POST["action"])){
+if($_POST["action"]=="avvia" && isset($_POST["codiceFiscale"])){
   //session_start();
   if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
-    header("Location: ../interface/Utente/login.php");
+    echo json_encode(array("esito"=>false));
     exit();
   }
   $cf=$_SESSION["codiceFiscale"];
-  if(!isset($_SESSION["codFiscalePaz"])){
+  if(!isset($_POST["codiceFiscale"])){
+    echo json_encode(array("esito"=>false));
     header("Location: ../interface/indexProfessionista.php");
     exit();
   }
-  $cfpaz=$_SESSION["codFiscalePaz"];
+  $cfpaz=$_POST["codiceFiscale"];
   $resultp=DatabaseInterface::selectQueryById(array("cf" => $cfpaz), Paziente::$tableName);
   if($resultp->num_rows!=1){
-    header("Location: ../interface/indexProfessionista.php");
+    echo json_encode(array("esito"=>false));
     exit();
   }
   try{
@@ -514,17 +515,17 @@ if(!isset($_POST["action"])){
     $result=$result->fetch_array();
     $professionista= new Professionista($result[0],$result[1],$result[2],$result[3],$result[4],$result[5],$result[6],$result[7],$result[8],$result[9],$result[10],$result[11],$result[12],$result[13],$result[14],$result[15],$result[16],$result[17]);
     $_SESSION["professionista"]=$professionista;
-    header("Location: ../interface/professionista/videoConferenza.php");
+    echo json_encode(array("esito"=>true));
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
-    header("Location: ../interface/professionista/videoConferenza.php");
+    echo json_encode(array("esito"=>false,"errore"=>$e->getMessage()));
   }
 }
 elseif ($_POST["action"]=="avvia"){
   //session_start();
   $paziente=$_SESSION["paziente"];
-  $paziente->setVideo(true);
-  $result=DatabaseInterface::updateQueryById($paziente->getArray(),Paziente::$tableName);
+  $paziente->setVideo(1);
+  $result=DatabaseInterface::updateQueryById(array("cf"=>$paziente->getCf(),"videochiamata" => $paziente->getVideo()),Paziente::$tableName);
   if($result){
     echo json_encode(array("esito"=>true));
     exit();
@@ -538,7 +539,7 @@ elseif($_POST["action"]=="termina"){
   //session_start();
   $paziente=$_SESSION["paziente"];
   $paziente->setVideo(0);
-  $result=DatabaseInterface::updateQueryById($paziente->getArray(),Paziente::$tableName);
+  $result=DatabaseInterface::updateQueryById(array("cf"=>$paziente->getCf(),"videochiamata" => $paziente->getVideo()),Paziente::$tableName);
   if($result){
     echo json_encode(array("esito"=>true));
     exit();

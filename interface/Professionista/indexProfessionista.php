@@ -25,7 +25,8 @@
     $professionista = new Professionista($cf, $result["nome"],$result["cognome"],$result["data_nascita"],$result["email"],$result["telefono"],$result["cellulare"],$result["passwor"],$result["indirizzo_studio"],$result["esperienze"],$result["pubblicazioni"],$result["titolo_studio"],$result["n_iscrizione_albo"],$result["partita_iva"],$result["pec"],$result["specializzazione"],$result["polizza_RC"],$result["foto_profilo_professionista"]);
     */
 
-
+$_SESSION["professionista"]=null;
+$_SESSION["paziente"]=null;
 $professionista = AreaInformativaControl::getProf($cf);
     $pazienti=PazienteControl::getPazientiByProf($cf);
 
@@ -41,8 +42,11 @@ $professionista = AreaInformativaControl::getProf($cf);
     <title>Home Professionista</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
@@ -88,8 +92,7 @@ $professionista = AreaInformativaControl::getProf($cf);
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link href="../../dist/css/indexProfessionista.css" rel="stylesheet">
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
+
     <script src="../../dist/js/test.js"></script>
     <script src="../../dist/js/adminlte.min.js"></script>
 
@@ -387,11 +390,11 @@ $professionista = AreaInformativaControl::getProf($cf);
                                     <?php
                                      if($pazienti != NULL){
 
-                                        foreach($pazienti as $paziente){ ?>
+                                        foreach($pazienti as $pazienteAtt){ ?>
                                         <tr>
-                                            <td><?php echo $paziente->getNome(); ?></td>
-                                            <td><?php echo $paziente->getCognome(); ?></td>
-                                            <td><button type="button" id="call" class="btn btn-block btn-danger btn-sm" onclick="buttonCall()" <?php if($paziente->getVideo()) echo "disabled" ?>><i class="fas fa-phone"></i></button></td>
+                                            <td><?php echo $pazienteAtt->getNome(); ?></td>
+                                            <td><?php echo $pazienteAtt->getCognome(); ?></td>
+                                            <td><button type="button" id="call" class="btn btn-block btn-danger btn-sm" onclick="buttonCall('<?php echo $pazienteAtt->getCf(); ?>')" <?php if($pazienteAtt->getVideo()) echo "disabled" ?>><i class="fas fa-phone"></i></button></td>
                                         </tr>
                                     <?php }
                                      }
@@ -444,9 +447,18 @@ $professionista = AreaInformativaControl::getProf($cf);
     $.widget.bridge('uibutton', $.ui.button)
 </script>
 <script>
-    function buttonCall(){
-        <?php $_SESSION["codFiscalePaz"]=$paziente->getCf(); ?>
-        window.location.replace("../../applicationLogic/SeduteControlForm.php");
+    function buttonCall(cf){
+        let request= {'action' : 'avvia', 'codiceFiscale' : cf};
+        $.ajax({
+            url: "../../applicationLogic/SeduteControlForm.php",
+            data: request,
+            type: "post",
+            success:function (response){
+                if(response.esito=true){
+                    window.location.replace("videoConferenza.php");
+                }
+            }
+        })
     }
 
 </script>
