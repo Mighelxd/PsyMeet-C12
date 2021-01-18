@@ -359,10 +359,13 @@ to get the desired effect
                       <label for="pacchettoNew">Pacchetto</label>
 
                       <select class="form-control" name="pac">
-                      <?php  for($i=0;$i<count($pacchetto);$i++){ ?>
+                      <?php
+                      if($pacchetto!=null){
+                      for($i=0;$i<count($pacchetto);$i++){ ?>
 
                         <option><?php echo $pacchetto[$i]->getTipologia();?></option>
-<?php } ?>
+                <?php }
+                      } ?>
                       </select>
                       <span style="color:red;"><?php if(isset($_SESSION['Errore'])) {
                            echo $_SESSION['Errore'];
@@ -376,6 +379,7 @@ to get the desired effect
                     <button name='action' type="submit" value="addPacchetto" class="btn btn-primary" style="float: right">Aggiungi</button>
                   </div>
                 </form>
+                  <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
               </div>
 
             </div>
