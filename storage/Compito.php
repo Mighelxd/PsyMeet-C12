@@ -80,13 +80,9 @@ class Compito
 		$cfPaz
 	) {
         date_default_timezone_set("Europe/Rome");
-        $currDate = date("Y-m-d");
         if($data == null || $effettuato == null || $titolo == null || $descrizione == null
             || $cfProf == null || $cfPaz == null){
             throw new Exception("Alcuni valori non validi!");
-        }
-        else if($data>$currDate){
-            throw new Exception("Data non valida!");
         }
 		$this->id= $id;
 		$this->data = $data;
@@ -141,9 +137,7 @@ class Compito
      */
     public function setData($data)
 	{
-        date_default_timezone_set("Europe/Rome");
-        $currDate = date("Y-m-d");
-	    if($data == null || $data>$currDate){
+	    if($data == null){
 	        throw new Exception("Nuova Data non valida!");
         }
 		$this->data = $data;

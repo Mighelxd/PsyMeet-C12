@@ -16,17 +16,8 @@ private $cfPaz;
 public static $tableName="appuntamento";
 
   function __construct($id,$date,$hour,$des,$cfPr,$cfPa){
-    date_default_timezone_set("Europe/Rome");
-    $currDate = date("Y-m-d");
-    $currHour = date("H:i:s");
     if($date == null || $hour == null || $des == null || $cfPr == null || $cfPa == null){
       throw new Exception("Alcuni valori non definiti!");
-    }
-    else if($date < $currDate){
-      throw new Exception("Data non disponibile!");
-    }
-    else if($date == $currDate && $hour<=$currHour){
-      throw new Exception("Orario non disponibile! Inserisci un ora dopo le $currHour");
     }
     else if(strlen($cfPr)!=16){
       throw new Exception("Codice fiscale professionista non valido!");
@@ -70,9 +61,7 @@ public static $tableName="appuntamento";
     $this->idAppuntamento = $newId;
   }
   function setData($newDate){
-    date_default_timezone_set("Europe/Rome");
-    $currDate = date("Y-m-d");
-    if($newDate == null || $newDate<$currDate){
+    if($newDate == null){
       throw new Exception('Nuova data appuntamento non valido!');
     }
     $this->data = $newDate;

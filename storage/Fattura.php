@@ -73,9 +73,7 @@ class Fattura
 
     public function setData($data)
   {
-      date_default_timezone_set("Europe/Rome");
-      $currDate = date("Y-m-d");
-      if($data == null || $data>$currDate){
+      if($data == null){
           throw new Exception("Nuova data non disponibile!");
       }
     $this->data = $data;

@@ -18,13 +18,8 @@ class SchedaFollowUp
 
     public function __construct($idScheda, $data,$ricadute, $esitiPositivi, $idTerapia,$tipo)
     {
-        date_default_timezone_set("Europe/Rome");
-        $currDate = date("Y-m-d");
         if($data == null || $ricadute == null || $esitiPositivi == null || $esitiPositivi == null || $idTerapia == null || $tipo == null){
             throw new Exception("Alcuni valori non definiti!");
-        }
-        else if($data > $currDate){
-            throw new Exception("Data non disponibile!");
         }
         else if($idTerapia<1){
             throw new Exception("Id terapia non valida!");
@@ -74,7 +69,7 @@ class SchedaFollowUp
     {
         date_default_timezone_set("Europe/Rome");
         $currDate = date("Y-m-d");
-        if($data == null || $data>$currDate){
+        if($data == null){
             throw new Exception("Nuova data non disponibile!");
         }
          $this -> data = $data;

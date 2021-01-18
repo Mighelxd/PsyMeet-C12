@@ -59,9 +59,7 @@ class CartellaClinica {
         $this->cfPaz = $cfPa;
     }
     public function setData($d){
-        date_default_timezone_set("Europe/Rome");
-        $currDate = date("Y-m-d");
-        if($d == null || $d > $currDate){
+        if($d == null){
             throw new Exception("Nuova data non valida!");
         }
         $this->dataCreazione = $d;
@@ -110,8 +108,6 @@ class CartellaClinica {
      }
 
     public function __construct($i, $d, $qum, $qur, $pat, $fa, $cfPro, $cfPa){
-        date_default_timezone_set("Europe/Rome");
-        $currDate = date("Y-m-d");
         if($d == null || $qum == null || $qur == null || $pat == null || $fa == null || $cfPro == null || $cfPa == null){
             throw new Exception("Alcuni valori non definiti!");
         }
@@ -120,9 +116,6 @@ class CartellaClinica {
         }
         else if($qur<1 || $qur>5){
             throw new Exception("Valore qualit. relazione non corretto!");
-        }
-        else if($d > $currDate){
-            throw new Exception("Data non disponibile!");
         }
         else if(strlen($cfPro)!=16){
             throw new Exception("Codice fiscale professionista non valido!");

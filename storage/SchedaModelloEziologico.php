@@ -20,14 +20,9 @@ class SchedaModelloEziologico
 
     public function __construct($idScheda, $data, $fattoriCausativi, $fattoriPrecipitanti, $fattoriMantenimento,$relazioneFinale, $idTerapia, $tipo)
     {
-        date_default_timezone_set("Europe/Rome");
-        $currDate = date("Y-m-d");
         if($data == null || $fattoriCausativi == null || $fattoriPrecipitanti == null || $fattoriMantenimento == null
         || $relazioneFinale == null || $idTerapia == null || $tipo == null){
             throw new Exception("Alcuni valori non validi!");
-        }
-        else if($data > $currDate){
-            throw new Exception("Data non disponibile!");
         }
         else if($idTerapia<1){
             throw new Exception("Id terapia non valido!");
@@ -88,7 +83,7 @@ class SchedaModelloEziologico
     {
         date_default_timezone_set("Europe/Rome");
         $currDate = date("Y-m-d");
-        if($data == null || $data > $currDate){
+        if($data == null){
             throw new Exception("Nuova data non disponibile!");
         }
          $this -> data = $data;
