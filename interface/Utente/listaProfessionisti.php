@@ -153,7 +153,10 @@ $listProf = AreaInformativaControl::recuperaProfessionisti();
       <div class="card card-solid">
         <div class="card-body pb-0">
           <div class="row d-flex align-items-stretch">
-            <?php for ($i=0; $i < count($listProf); $i++) {
+              <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
+            <?php
+            if($listProf != null){
+            for ($i=0; $i < count($listProf); $i++) {
               $img=base64_encode($listProf[$i]->getImmagineProfessionista());
             ?>
 
@@ -208,7 +211,8 @@ $listProf = AreaInformativaControl::recuperaProfessionisti();
                 </div>
               </div>
             </div>
-          <?php } ?>
+          <?php }
+            } ?>
 
           </div>
         </div>

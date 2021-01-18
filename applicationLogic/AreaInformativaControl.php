@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class AreaInformativaControl
 {
     static function checkProf($professionista){
@@ -26,7 +26,9 @@ class AreaInformativaControl
     }
     static function recuperaProfessionisti(){
         try{
+            $_SESSION['eccezione'] = "";
             $allProf = DatabaseInterface::selectAllQuery('professionista');
+            $arrProf = null;
 
             while($row = $allProf->fetch_array()){
                 $prof = new professionista($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17]);
@@ -40,6 +42,7 @@ class AreaInformativaControl
     }
     public static function getProf($cfProf){
         try{
+            $_SESSION['eccezione'] = "";
             $arr = array("cf_prof" => $cfProf,);
             $result = DatabaseInterface::selectQueryById($arr,"professionista");
             $arr = $result -> fetch_array();
@@ -54,6 +57,7 @@ class AreaInformativaControl
     }
     public static function getProfessionistByPaz($cfPaziente){
         try{
+            $_SESSION['eccezione'] = "";
             $professionisti = NULL;
 
             $arr = array("cf" => $cfPaziente);

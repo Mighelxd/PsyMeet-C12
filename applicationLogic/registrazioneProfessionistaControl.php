@@ -15,43 +15,48 @@
         exit;
     }
     else{
-            $nome=$_POST["nome"];
-            $cognome=$_POST["cognome"];
-            $data_nascita=$_POST["dataN"];
-            $codice_fiscale=strtoupper($_POST["cf"]);
-            $titolo_studio=$_POST["titoloStudio"];
-            $pubblicazioni=$_POST["pubblicazioni"];
-            $esperienze=$_POST["esperienze"];
-            $indirizzo_studio=$_POST["indirizzoStudio"];
-            $telefono=$_POST["telefono"];
-            $cellulare=$_POST["cellulare"];
-            $p_iva=$_POST["pIva"];
-            $polizza_rc=$_POST["polizzaRc"];
-            $n_iscrizione_albo=$_POST["nIscrizioneAlbo"];
-            $email=$_POST["email"];
-            $password=md5($_POST["password"]);
-            $pec=$_POST["pec"];
-            $specializzazione=$_POST["specializzazione"];
-            $conferma_password=md5($_POST["confermaPassword"]);
-            if(isset($_FILES["immagine"]))
-                $immagine=addslashes(file_get_contents($_FILES["immagine"]["tmp_name"]));
+        $_SESSION['eccezione']="";
+        try {
+            $nome = $_POST["nome"];
+            $cognome = $_POST["cognome"];
+            $data_nascita = $_POST["dataN"];
+            $codice_fiscale = strtoupper($_POST["cf"]);
+            $titolo_studio = $_POST["titoloStudio"];
+            $pubblicazioni = $_POST["pubblicazioni"];
+            $esperienze = $_POST["esperienze"];
+            $indirizzo_studio = $_POST["indirizzoStudio"];
+            $telefono = $_POST["telefono"];
+            $cellulare = $_POST["cellulare"];
+            $p_iva = $_POST["pIva"];
+            $polizza_rc = $_POST["polizzaRc"];
+            $n_iscrizione_albo = $_POST["nIscrizioneAlbo"];
+            $email = $_POST["email"];
+            $password = md5($_POST["password"]);
+            $pec = $_POST["pec"];
+            $specializzazione = $_POST["specializzazione"];
+            $conferma_password = md5($_POST["confermaPassword"]);
+            if (isset($_FILES["immagine"]))
+                $immagine = addslashes(file_get_contents($_FILES["immagine"]["tmp_name"]));
             else
-                $immagine=NULL;
-            $professionista = new Professionista($codice_fiscale,$nome,$cognome,$data_nascita,$email,$telefono,$cellulare,$password,$indirizzo_studio,$esperienze,$pubblicazioni,$titolo_studio,$n_iscrizione_albo,$p_iva,$pec,$specializzazione,$polizza_rc,$immagine);
-            
-            $result=AreaInformativaControl::checkProf($professionista);
-            if(isset($result)){
-                $esito=array("esito"=>false, "errore" => $result);
+                $immagine = NULL;
+            $professionista = new Professionista($codice_fiscale, $nome, $cognome, $data_nascita, $email, $telefono, $cellulare, $password, $indirizzo_studio, $esperienze, $pubblicazioni, $titolo_studio, $n_iscrizione_albo, $p_iva, $pec, $specializzazione, $polizza_rc, $immagine);
+
+            $result = AreaInformativaControl::checkProf($professionista);
+            if (isset($result)) {
+                $esito = array("esito" => false, "errore" => $result);
                 echo json_encode($esito);
                 exit();
-            }
-            elseif(AreaInformativaControl::saveProf($professionista)) {
+            } elseif (AreaInformativaControl::saveProf($professionista)) {
                 session_start();
-                $_SESSION["codiceFiscale"]=$codice_fiscale;
-                $_SESSION["tipo"]="professionista";
-                $esito=array("esito" => true, "errore" => "nessuno");
+                $_SESSION["codiceFiscale"] = $codice_fiscale;
+                $_SESSION["tipo"] = "professionista";
+                $esito = array("esito" => true, "errore" => "nessuno");
                 echo json_encode($esito);
                 exit();
             }
+        }catch(Exception $e){
+            $_SESSION['eccezione']= $e->getMessage();
+            header("Location: ../interface/Professionista/registrazioneProfessionista.php");
         }
+    }
 ?>

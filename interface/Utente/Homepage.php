@@ -94,7 +94,10 @@ $professionisti = AreaInformativaControl::recuperaProfessionisti();
         <!-- /.row -->
         <div class="row">
           <!-- scheda professionista in row -->
-          <?php for($i=0;$i<count($professionisti);$i++){ ?>
+            <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
+          <?php
+          if($professionisti != null){
+          for($i=0;$i<count($professionisti);$i++){ ?>
           <div class="card card-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-info">
@@ -135,7 +138,8 @@ $professionisti = AreaInformativaControl::recuperaProfessionisti();
             </div>
             <!-- /.card-footer-->
           </div>
-        <?php } ?>
+        <?php }
+          } ?>
   </section>
   <footer class="main-footer">
     <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>

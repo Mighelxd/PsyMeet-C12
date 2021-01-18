@@ -15,37 +15,43 @@
         exit;
     }
     else{
-            $nome=$_POST["nome"];
-            $cognome=$_POST["cognome"];
-            $dataNascita=$_POST["dataN"];
-            $codiceFiscale=strtoupper($_POST["cf"]);
-            $indirizzo=$_POST["indirizzo"];
-            $telefono=$_POST["telefono"];
-            $email=$_POST["email"];
-            $diffCura=intval($_POST["diffCura"]);
-            $istruzione=$_POST["istruzione"];
-            $lavoro=$_POST["lavoro"];
-            $password=md5($_POST["password"]);
-            $confermaPassword=md5($_POST["confermaPassword"]);
-            if(isset($_FILES["immagine"]))
-                $immagine=addslashes(file_get_contents($_FILES["immagine"]["tmp_name"]));
+        $_SESSION['eccezione']="";
+        try {
+            $nome = $_POST["nome"];
+            $cognome = $_POST["cognome"];
+            $dataNascita = $_POST["dataN"];
+            $codiceFiscale = strtoupper($_POST["cf"]);
+            $indirizzo = $_POST["indirizzo"];
+            $telefono = $_POST["telefono"];
+            $email = $_POST["email"];
+            $diffCura = intval($_POST["diffCura"]);
+            $istruzione = $_POST["istruzione"];
+            $lavoro = $_POST["lavoro"];
+            $password = md5($_POST["password"]);
+            $confermaPassword = md5($_POST["confermaPassword"]);
+            if (isset($_FILES["immagine"]))
+                $immagine = addslashes(file_get_contents($_FILES["immagine"]["tmp_name"]));
             else
-                $immagine=NULL;
-            $paziente = new Paziente($codiceFiscale,$nome,$cognome,$dataNascita,$email,$telefono,$password,$indirizzo,$istruzione,$lavoro,$diffCura,$immagine,false);
+                $immagine = NULL;
+            $paziente = new Paziente($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine, false);
             $result = AreaInformativaControl::checkPaz($paziente);
-            if(isset($result)){
-                $esito=array("esito"=>false, "errore" => $result);
+            if (isset($result)) {
+                $esito = array("esito" => false, "errore" => $result);
                 echo json_encode($esito);
                 exit();
             }
             $result = AreaInformativaControl::savePaz($paziente);
-            if($result==true){
+            if ($result == true) {
                 session_start();
-                $_SESSION["codiceFiscale"]=$codiceFiscale;
-                $_SESSION["tipo"]="paziente";
-                $esito=array("esito" => true, "errore" => "nessuno");
+                $_SESSION["codiceFiscale"] = $codiceFiscale;
+                $_SESSION["tipo"] = "paziente";
+                $esito = array("esito" => true, "errore" => "nessuno");
                 echo json_encode($esito);
                 exit();
             }
+        }catch(Exception $e){
+            $_SESSION['eccezione'] = $e->getMessage();
+            header("Location: ../interface/paziente/registrazionepaziente.php");
         }
+    }
 ?>

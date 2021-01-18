@@ -283,6 +283,7 @@ else
 
     <!-- Main content -->
     <section class="content">
+        <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
       <?php if(count($terapia)>0){ ?>
       <!-- Default box -->
       <div class="card">
