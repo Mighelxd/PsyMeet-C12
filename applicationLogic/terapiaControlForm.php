@@ -10,43 +10,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 else{
     $action = $_GET['action'];
 }
-
+$_SESSION['eccezione']="";
 if($action == 'addTer'){
-   $cfPaz = $_SESSION["cfPazTer"];
-   $cfProf = $_SESSION["codiceFiscale"];
-   $data = date("Y-m-d");
-   $desc = $_POST['descTer'];
+    try{
+        $cfPaz = $_SESSION["cfPazTer"];
+        $cfProf = $_SESSION["codiceFiscale"];
+        $data = date("Y-m-d");
+        $desc = $_POST['descTer'];
 
-   $att = array("data" => $data, "descrizione" => $desc, "cf_prof" => $cfProf, "cf" => $cfPaz);
-   $ok = DatabaseInterface::insertQuery($att,Terapia::$tableName);
+        $att = new Terapia(null,$data,$desc,$cfProf,$cfPaz);
+        $ok = DatabaseInterface::insertQuery($att->getArray(),Terapia::$tableName);
 
-   if($ok){
-     header("Location: ../interface/Professionista/gestioneTerapia.php");
-   }
+        if($ok){
+            header("Location: ../interface/Professionista/gestioneTerapia.php");
+        }
+        else{
+            throw new Exception("Errore: Terapia non aggiunta!");
+        }
+    }catch(Exception $e){
+        $_SESSION['eccezione']=$e->getMessage();
+        header("Location: ../interface/Professionista/gestioneTerapia.php");
+    }
 }
 else if($action == 'modTer'){
-  $idTer = $_SESSION['idTerCorr'];
-  $desc = $_POST['descTer'];
+    try{
+        $idTer = $_SESSION['idTerCorr'];
+        $desc = $_POST['descTer'];
 
-  $key = array("id_terapia"=>$idTer);
-  $recTer = DatabaseInterface::selectQueryById($key,Terapia::$tableName);
-  while($row = $recTer->fetch_array()){
-    $terapia = new Terapia($row[0],$row[1],$row[2],$row[3],$row[4]);
-  }
-  $terapia->setDescrizione($desc);
-  $upd=DatabaseInterface::updateQueryById($terapia->getArray(),Terapia::$tableName);
-  if($upd){
-    header("Location: ../interface/Professionista/gestioneTerapia.php");
-  }
+        $key = array("id_terapia"=>$idTer);
+        $recTer = DatabaseInterface::selectQueryById($key,Terapia::$tableName);
+        while($row = $recTer->fetch_array()){
+            $terapia = new Terapia($row[0],$row[1],$row[2],$row[3],$row[4]);
+        }
+        $terapia->setDescrizione($desc);
+        $upd=DatabaseInterface::updateQueryById($terapia->getArray(),Terapia::$tableName);
+        if($upd){
+            header("Location: ../interface/Professionista/gestioneTerapia.php");
+        }else{
+            throw new Exception("Errore: Terapia non modificata!");
+        }
+    }catch(Exception $e){
+        $_SESSION['eccezione']=$e->getMessage();
+        header("Location: ../interface/Professionista/gestioneTerapia.php");
+    }
 }
 else if($action == 'delTer'){
-  $idTer = $_SESSION['idTerCorr'];
-  $key = array("id_terapia"=>$idTer);
+    try{
+        $idTer = $_SESSION['idTerCorr'];
+        $key = array("id_terapia"=>$idTer);
 
-  $ok=DatabaseInterface::deleteQuery($key,Terapia::$tableName);
-  if($ok){
-    header("Location: ../interface/Professionista/Pazienti.php");
-  }
+        $ok=DatabaseInterface::deleteQuery($key,Terapia::$tableName);
+        if($ok){
+            header("Location: ../interface/Professionista/Pazienti.php");
+        }else{
+            throw new Exception("Errore: Terapia non eliminata!");
+        }
+    }catch(Exception $e){
+        $_SESSION['eccezione']=$e->getMessage();
+        header("Location: ../interface/Professionista/gestioneTerapia.php");
+    }
 }
 
  ?>
