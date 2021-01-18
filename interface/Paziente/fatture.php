@@ -212,7 +212,7 @@ $pacchetti = PacchettoControl::selectAllPacchettoPaz($cf);
               <div class="card-body">
                 <div class="form-group">
                   <label for="data">Data</label>
-                  <input type="date" name="data" class="form-control" value="<?php $data ?>" rows="1" readonly>
+                  <input type="text" name="data" class="form-control" value="<?php echo $data; ?>" rows="1" readonly>
                 </div>
                 <div class="form-group">
                   <label for="titolo">Tipologia pacchetto</label>
