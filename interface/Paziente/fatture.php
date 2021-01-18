@@ -6,6 +6,7 @@ include ('../../storage/Compito.php');
 include ('../../storage/DatabaseInterface.php');
 include '../../plugins/libArray/FunArray.php';
 include '../../applicationLogic/CompitoControl.php';
+include "../../applicationLogic/PacchettoControl.php";
 
 session_start();
 $tipoUtente = $_SESSION["tipo"];
@@ -13,12 +14,7 @@ $cf= $_SESSION["codiceFiscale"];
 if($tipoUtente != "paziente"){
   header("Location: ../Utente/login.php");
 }
-
-
-
-
-
-
+$fatture = PacchettoControl::selectAllPacchettoPaz($cf);
 ?>
 
 <!DOCTYPE html>
@@ -194,16 +190,14 @@ if($tipoUtente != "paziente"){
 
 
     <section class="content">
-
-
-
-      <form  nome"correz" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
-        <input type="text" name="action" value="correzione" hidden="true">
+        <?php if($fatture != null){
+            for($i=0;$i<count($fatture);$i++){
+        ?>
       <div class="row">
           <div class="col-md-12">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 name="id"  class="card-title">Fattura </h3>
+                <h3 name="id"  class="card-title">Fattura n°<?php echo $fatture->get ?> </h3>
                 <input type="text" name="id"  hidden="true">
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -231,10 +225,9 @@ if($tipoUtente != "paziente"){
             <!-- /.card -->
           </div>
 
-            </form>
-
-
   </div>
+        <?php }
+        } ?>
     </section>
 
 

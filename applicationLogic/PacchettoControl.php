@@ -80,5 +80,19 @@ class PacchettoControl{
           return null;
       }
     }
+    static function getFatture($cfPaziente){
+      try{
+          $fatture = null;
+          $att= array('cf' =>$cfPaziente);
+          $allFatture= DatabaseInterface::selectQueryByAtt($att,"fattura");
+          while($row = $allFatture->fetch_array()){
+              $fatture[] = new Fattura($row[0],$row[1],$row[2],$row[3],$row[4]);
+          }
+          return $fatture;
+      }catch(Exception $e){
+          $_SESSION['eccezione']=$e->getMessage();
+          return null;
+      }
+    }
 }
  ?>
