@@ -11,7 +11,7 @@ function iniziaChiamata(link){
 }
 
 function terminaChiamata(){
-    let data= {'azione' : 'termina'};
+    let data= {'action' : 'termina'};
     $.ajax({
         url: '../../applicationLogic/SeduteControlForm.php',
         data: data,

@@ -1,5 +1,5 @@
 function checkChiamata(){
-    let request= {'azione' : 'checkChiamata'};
+    let request= {'action' : 'checkChiamata'};
     $.ajax({
         url: "../../applicationLogic/SeduteControlForm.php",
         type: "post",

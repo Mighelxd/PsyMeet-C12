@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include '..\plugins\libArray\FunArray.php';
 include '../storage/DatabaseInterface.php';
 include '../storage/SchedaAssessmentFocalizzato.php';
@@ -11,7 +11,7 @@ include '../storage/SchedaModelloEziologico.php';
 include "../storage/Professionista.php";
 include "../storage/Paziente.php";
 include "PazienteControl.php";
-
+session_start();
 if(isset($_POST['action'])) {
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = $_POST['action'];
@@ -19,6 +19,7 @@ if(isset($_POST['action'])) {
     $action = $_GET['action'];
   }
 }
+
 $_SESSION['eccezioni']="";
 if($action == "saveScheda"){
   try{
@@ -487,7 +488,7 @@ else if($action == 'delSME'){
   }
 }
 //////////////////////////////////////////////////////////////////////Videoconferenza
-if(!isset($_POST["azione"])){
+if(!isset($_POST["action"])){
   //session_start();
   if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
     header("Location: ../interface/Utente/login.php");
@@ -519,7 +520,7 @@ if(!isset($_POST["azione"])){
     header("Location: ../interface/professionista/videoConferenza.php");
   }
 }
-elseif ($_POST["azione"]=="avvia"){
+elseif ($_POST["action"]=="avvia"){
   //session_start();
   $paziente=$_SESSION["paziente"];
   $paziente->setVideo(true);
@@ -533,7 +534,7 @@ elseif ($_POST["azione"]=="avvia"){
   }
   echo json_encode(array("esito"=>true));
 }
-elseif($_POST["azione"]=="termina"){
+elseif($_POST["action"]=="termina"){
   //session_start();
   $paziente=$_SESSION["paziente"];
   $paziente->setVideo(0);
@@ -547,7 +548,7 @@ elseif($_POST["azione"]=="termina"){
   }
   echo json_encode(array("esito"=>true));
 }
-elseif($_POST["azione"]=="checkChiamata"){
+elseif($_POST["action"]=="checkChiamata"){
   //session_start();
   $paziente=PazienteControl::getPaz($_SESSION["codiceFiscale"]);
   if($paziente->getVideo()){

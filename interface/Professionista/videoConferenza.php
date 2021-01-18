@@ -257,7 +257,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <form id="formChiamata" method="post">
-                        <input type="text" name="azione" value="avvia" hidden="true">
+                        <input type="text" name="action" value="avvia" hidden="true">
                         <button type="submit" id="sottometti" class="btn btn-primary">Avvia Videochiamata</button>
                     </form>
                     <div id="messaggioChiamata" class="col-lg-12 alert alert-success" ></div>
@@ -265,7 +265,6 @@
                 <!-- /.card-footer-->
             </div>
             <!-- /.card -->
-
         </section>
         <!-- /.content -->
     </div>
