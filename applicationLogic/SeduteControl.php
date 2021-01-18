@@ -1,7 +1,7 @@
 <?php
 
 include '../../storage/Terapia.php';
-session_start();
+//session_start();
 
 class SeduteControl
 {
