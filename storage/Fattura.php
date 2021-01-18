@@ -20,7 +20,7 @@ class Fattura
   {
       date_default_timezone_set("Europe/Rome");
       $currDate = date("Y-m-d");
-      if($data == null || $cfPaz == null || $idScelta == null){
+      if($data == null || $cfPaz == null || $idScelta == null || $nSeduteRim == null){
           throw new Exception("Alcuni valori non definiti!");
       }
       else if($data<$currDate){
@@ -65,6 +65,9 @@ class Fattura
     }
     public function setNSeduteRim($sedute)
     {
+        if($sedute == null || $sedute<0 || $sedute>20){
+            throw new Exception("Nuovo numero sedute non corretto!");
+        }
         $this->nSeduteRim=$sedute;
     }
 

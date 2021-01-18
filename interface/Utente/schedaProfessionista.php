@@ -290,7 +290,10 @@ $prof = AreaInformativaControl::getProf($cfProf);
                <textarea name="name"class="form-control" rows="8" cols="80" readonly ><?php echo $prof->getEsperienze(); ?></textarea>
              </div>
 
-             <button type="button" class="btn btn-primary btn-sm" name="button" >richiedi colloquio</button>
+               <form method="post" action="../Paziente/pacchetti.php">
+                   <input type="text" name="cfProfessionista" value="<?php echo $prof->getCfProf();  ?>" hidden ="true">
+                   <button type="submit" class="btn btn-success float-left" name="button" >View Pacchetti</button>
+               </form>
 
            </div>
            <!-- /.card-body -->

@@ -204,10 +204,6 @@ $listProf = AreaInformativaControl::recuperaProfessionisti();
                             </i>
                         </button>
                     </form>
-                      <form method="post" action="../Paziente/pacchetti.php">
-                          <input type="text" name="cfProfessionista" value="<?php echo $listProf[$i]->getCfProf();  ?>" hidden ="true">
-                          <button type="submit" class="btn btn-success float-left" name="button" >View Pacchetti</button>
-                      </form>
 
 </div>
                 </div>
