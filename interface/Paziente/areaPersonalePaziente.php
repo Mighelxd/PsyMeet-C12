@@ -310,7 +310,7 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
                  </div>
                    </form>
 
-
+                    <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
                    </div>
                    <!-- /.tab-pane -->
 

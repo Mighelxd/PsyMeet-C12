@@ -233,16 +233,13 @@ $pacchetti = PacchettoControl::selectAllPacchettoPaz($cf);
   </div>
         <?php }
         } ?>
+        <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
     </section>
 
 
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
-
-  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

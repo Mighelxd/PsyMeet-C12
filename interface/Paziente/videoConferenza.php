@@ -134,6 +134,7 @@
 
         <!-- Main content -->
         <section class="content">
+            <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
             <div class="col-lg-12">
             <!-- Default box -->
             <div class="card card-primary">
@@ -160,13 +161,6 @@
     </div>
     <!-- /.content-wrapper -->
 </div>
-    <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.0.5
-        </div>
-        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-        reserved.
-    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

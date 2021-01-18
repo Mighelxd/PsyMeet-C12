@@ -188,7 +188,7 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
+                    <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
                     <div class="col-md-6">
                     <div class="card card-widget widget-user">
                         <!-- Add the bg color to the header using any of the bg-* classes -->

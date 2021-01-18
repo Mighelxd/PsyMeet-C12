@@ -181,6 +181,7 @@ $modEz = SeduteControl::recAllModEzPaz($cf);
                 </div>
 
             </div>
+            <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
         </section>
         <!-- /.content -->
     </div>
