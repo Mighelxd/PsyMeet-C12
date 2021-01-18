@@ -153,7 +153,7 @@ $listProf = AreaInformativaControl::recuperaProfessionisti();
       <div class="card card-solid">
         <div class="card-body pb-0">
           <div class="row d-flex align-items-stretch">
-              <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
+              <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
             <?php
             if($listProf != null){
             for ($i=0; $i < count($listProf); $i++) {

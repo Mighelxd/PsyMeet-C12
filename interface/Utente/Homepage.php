@@ -94,7 +94,7 @@ $professionisti = AreaInformativaControl::recuperaProfessionisti();
         <!-- /.row -->
         <div class="row">
           <!-- scheda professionista in row -->
-            <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
+            <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
           <?php
           if($professionisti != null){
           for($i=0;$i<count($professionisti);$i++){ ?>

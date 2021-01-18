@@ -299,7 +299,7 @@ $prof = AreaInformativaControl::getProf($cfProf);
            <!-- /.card-body -->
 
 
-
+           <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
        </div>
 
      </div>
