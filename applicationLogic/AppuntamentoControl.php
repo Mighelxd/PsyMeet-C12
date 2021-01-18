@@ -18,7 +18,12 @@ else{
     $action = $_GET['action'];
 }
 
-$cfProf = $_SESSION["codiceFiscale"];
+if($_SESSION['tipo'] == 'professionista'){
+    $cfProf = $_SESSION["codiceFiscale"];
+}else{
+    $cfPaz = $_SESSION["codiceFiscale"];
+}
+
 $_SESSION['erroreApp']="";
 
 /*Questa action recupera tutti gli appuntamenti di un professionista recuperando per ognuno il nome dei pazienti.*/
@@ -50,6 +55,35 @@ if($action == 'recoveryAll'){
     }catch(Exception $e){
         $_SESSION['erroreApp'] = $e->getMessage();
         header('Location: ../interface/Professionista/calendario.php');
+    }
+}
+/*Questa funzione recupera tutti gli appuntamenti di un paziente*/
+else if($action == 'recoveryAllByPaz'){
+    try{
+        $arrKey = array("cf" => $cfPaz);
+        $allAppPaz = DatabaseInterface::selectQueryByAtt($arrKey, Appuntamento::$tableName);
+        if($allAppPaz === false){
+            throw new Exception('recupero appuntamenti paziente fallita!');
+        }
+        $allObj = array();
+
+        while ($row = $allAppPaz->fetch_array()) {
+            $arrKeyProf = array("cf_prof" => $row['cf_prof']);
+            $profQuery = DatabaseInterface::selectQueryByAtt($arrKeyProf, "professionista");
+            if($profQuery === false){
+                throw new Exception('recupero dei professionisti associati agli appuntamenti fallita!');
+            }
+            while ($rowP = $profQuery->fetch_array()) {
+                $prof = $rowP['nome'] . " " . $rowP['cognome'];
+            }
+            $a[] = $row;
+            $row['cf_prof'] = "Dott. $prof";
+            $allObj[] = $row;
+        }
+        echo json_encode($allObj);
+    }catch(Exception $e){
+        $_SESSION['erroreApp'] = $e->getMessage();
+        header('Location: ../interface/Paziente/calendario.php');
     }
 }
 /*Questa action aggiunge un nuovo appuntamento*/
