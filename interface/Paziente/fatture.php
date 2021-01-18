@@ -211,18 +211,18 @@ $pacchetti = PacchettoControl::selectAllPacchettoPaz($cf);
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label for="data">Data</label>
-                  <input type="text" name="data" class="form-control" value="<?php echo $data; ?>" rows="1" readonly>
+                    <b><i>Tipologia pacchetto</i></b>  <p style="float:right"><?php echo $pacchetti[$i]->getTipologia(); ?></p>
                 </div>
-                <div class="form-group">
-                  <label for="titolo">Tipologia pacchetto</label>
-                  <textarea name="titolo" class="form-control" rows="1" readonly><?php echo $pacchetti[$i]->getTipologia(); ?>  </textarea>
-                </div>
-
-
-
-              <!-- /.card-body -->
-
+                  <div class="form-group">
+                      <b><i>Sedute acquistate</i></b>  <p style="float:right"><?php echo $pacchetti[$i]->getNSedute(); ?></p>
+                  </div>
+                  <div class="form-group">
+                      <b><i>Prezzo</i></b>  <p style="float:right">€<?php echo $pacchetti[$i]->getPrezzo(); ?></p>
+                  </div>
+                  <hr>
+                  <div class="form-group">
+                      <b><i>Totale</i></b>  <p style="float:right">€<?php echo $pacchetti[$i]->getPrezzo(); ?></p>
+                  </div>
             </div>
             <!-- /.card -->
             <!-- /.card -->
