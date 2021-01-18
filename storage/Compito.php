@@ -85,7 +85,7 @@ class Compito
             || $cfProf == null || $cfPaz == null){
             throw new Exception("Alcuni valori non validi!");
         }
-        else if($data<$currDate){
+        else if($data>$currDate){
             throw new Exception("Data non valida!");
         }
 		$this->id= $id;
@@ -143,7 +143,7 @@ class Compito
 	{
         date_default_timezone_set("Europe/Rome");
         $currDate = date("Y-m-d");
-	    if($data == null || $data<$currDate){
+	    if($data == null || $data>$currDate){
 	        throw new Exception("Nuova Data non valida!");
         }
 		$this->data = $data;

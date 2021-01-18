@@ -61,7 +61,7 @@ class CartellaClinica {
     public function setData($d){
         date_default_timezone_set("Europe/Rome");
         $currDate = date("Y-m-d");
-        if($d == null || $d < $currDate){
+        if($d == null || $d > $currDate){
             throw new Exception("Nuova data non valida!");
         }
         $this->dataCreazione = $d;
@@ -121,7 +121,7 @@ class CartellaClinica {
         else if($qur<1 || $qur>5){
             throw new Exception("Valore qualit. relazione non corretto!");
         }
-        else if($d < $currDate){
+        else if($d > $currDate){
             throw new Exception("Data non disponibile!");
         }
         else if(strlen($cfPro)!=16){

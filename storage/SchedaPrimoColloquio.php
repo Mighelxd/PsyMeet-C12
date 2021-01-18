@@ -27,7 +27,7 @@ class SchedaPrimoColloquio
         || $cambiamento == null || $idTerapia == null || $tipo ==null){
             throw new Exception("Alcuni valori non validi!");
         }
-        else if($data < $currDate){
+        else if($data > $currDate){
             throw new Exception("Data non disponibile!");
         }
         else if($idTerapia<1){
@@ -93,7 +93,7 @@ class SchedaPrimoColloquio
     {
         date_default_timezone_set("Europe/Rome");
         $currDate = date("Y-m-d");
-        if($data == null || $data<$currDate){
+        if($data == null || $data>$currDate){
             throw new Exception("Nuova data non disponibile");
         }
          $this -> data = $data;

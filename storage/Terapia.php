@@ -22,7 +22,7 @@ class Terapia
         if($date == null || $descriz == null || $cfProfessionista == null || $cfPa == null){
             throw new Exception("Alcuni valori non validi!");
         }
-        else if($date < $currDate){
+        else if($date > $currDate){
             throw new Exception("Data non disponibile!");
         }
         else if(strlen($cfProfessionista)!=16){
@@ -72,7 +72,7 @@ class Terapia
     {
         date_default_timezone_set("Europe/Rome");
         $currDate = date("Y-m-d");
-        if($data == null || $data < $currDate){
+        if($data == null || $data > $currDate){
             throw new Exception("Nuova data non valida!");
         }
          $this -> data = $data;
