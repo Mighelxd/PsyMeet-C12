@@ -14,8 +14,9 @@ class Fattura
   private $data;
   private $cfPaz;
   private $idScelta;
+  private $nSeduteRim;
 
-  public function __construct($idFattura, $data, $cfPaz,$idScelta)
+  public function __construct($idFattura, $data, $cfPaz,$idScelta, $nSeduteRim)
   {
       date_default_timezone_set("Europe/Rome");
       $currDate = date("Y-m-d");
@@ -28,10 +29,14 @@ class Fattura
       else if($idScelta<1){
           throw new Exception("Id scelta pacchetto non valido!");
       }
+      else if($nSeduteRim !=0 && $nSeduteRim !=1 && $nSeduteRim !=6 && $nSeduteRim !=10 && $nSeduteRim !=20 ){
+          throw new Exception("Numero di visite non valido!");
+      }
     $this->idFattura= $idFattura;
     $this->data = $data;
     $this->cfPaz= $cfPaz;
     $this->idScelta= $idScelta;
+    $this->nSeduteRim = $nSeduteRim;
   }
 
   public function getIdFattura()
@@ -49,12 +54,21 @@ class Fattura
     return $this->idScelta;
   }
 
-  public function getData()
+    public function getData()
   {
     return $this->data;
   }
 
-  public function setData($data)
+    public function getNSeduteRim()
+    {
+        return $this->nSeduteRim;
+    }
+    public function setNSeduteRim($sedute)
+    {
+        $this->nSeduteRim=$sedute;
+    }
+
+    public function setData($data)
   {
       date_default_timezone_set("Europe/Rome");
       $currDate = date("Y-m-d");
@@ -66,6 +80,6 @@ class Fattura
 
   public function getArray()
   {
-    return array("id_fattura"=>$this->idFattura, "data"=>$this->data, "cf"=>$this->cfPaz, "id_scelta"=>$this->idScelta);
+    return array("id_fattura"=>$this->idFattura, "data"=>$this->data, "cf"=>$this->cfPaz, "id_scelta"=>$this->idScelta, "n_sedute_rim"=> $this->nSeduteRim);
   }
 }

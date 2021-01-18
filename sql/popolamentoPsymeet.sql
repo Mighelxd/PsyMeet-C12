@@ -38,7 +38,7 @@ insert into compito(data,effettuato,titolo,descrizione,svolgimento,correzione,cf
 
 insert into scelta(cf_prof,id_pacchetto) value('RSSMRC80R12H703U','1');
 
-insert into fattura(data,cf,id_scelta) value('2021-10-01','NSTFNC94M23H703G','1');
+insert into fattura(data,cf,id_scelta,n_sedute_rim) value('2021-10-01','NSTFNC94M23H703G','1','1');
 
 /*load data local infile'/home/marco/Scrivania/datiPsymeet/datiProf.sql'
 into table professionista(nome,cognome,data_nascita,cf_prof,email,telefono,cellulare,passwor,indirizzo_studio,esperienze,pubblicazioni,titolo_studio,n_iscrizione_albo,partita_iva,pec,specializzazione,polizza_RC);

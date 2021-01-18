@@ -231,6 +231,7 @@ CREATE TABLE fattura(
  data DATE not null,
  cf CHAR(16) not null,
  id_scelta INT unsigned not null,
+ n_sedute_rim INT unsigned not null,
  PRIMARY KEY(id_fattura),
  FOREIGN KEY(cf) REFERENCES paziente(cf)
  ON DELETE CASCADE ON UPDATE CASCADE,
