@@ -17,21 +17,19 @@
             }
             $insert = "INSERT INTO $tablename (";
             $values = "VALUES(";
-
             foreach($obj as $o=>$value){
                 if(gettype($value) == "string"){
                     $insert .= "$o,";
                     $values.= "\"$value\",";
                 }
-                else
-                    if($value == NULL){
-                        $insert .= "$o,";
-                        $values.= "NULL" . ",";
-                }
-                    else{
+                elseif(gettype($value) == "integer"){
                         $insert .= "$o,";
                         $values.= $value . ",";
                     }
+                elseif($value == NULL){
+                $insert .= "$o,";
+                $values.= "NULL" . ",";
+                }
             }
 
             $insert = substr($insert,0,-1);
