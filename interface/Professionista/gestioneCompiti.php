@@ -335,6 +335,7 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
         </div>
 
       <?php
+      if($compito!=null){
 	   for ($i=0; $i<count($compito); $i++) {
 	   	?>
 
@@ -412,8 +413,9 @@ $compito= CompitoControl::selectAllCompitiProf($cf);
 
             </form>
   <?php
-	   }  ?>
-
+	   }
+      } ?>
+    <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
   </div>
     </section>
 
