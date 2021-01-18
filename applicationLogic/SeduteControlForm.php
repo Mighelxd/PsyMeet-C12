@@ -10,6 +10,9 @@ include '../storage/SchedaFollowUp.php';
 include '../storage/SchedaModelloEziologico.php';
 include "../storage/Professionista.php";
 include "../storage/Paziente.php";
+include "../storage/scelta.php";
+include "../storage/Fattura.php";
+include "PacchettoControl.php";
 include "PazienteControl.php";
 session_start();
 if(isset($_POST['action'])) {
@@ -539,6 +542,8 @@ elseif($_POST["action"]=="termina"){
   //session_start();
   $paziente=$_SESSION["paziente"];
   $paziente->setVideo(0);
+  $fattura=PacchettoControl::getFatturaByPazProf($paziente->getCf(),$_SESSION["codiceFiscale"]);
+  DatabaseInterface::updateQueryById(array("id_fattura"=>$fattura->getIdFattura(),"n_sedute_rim"=>$fattura->getNSeduteRim()-1),Fattura::$tableName);
   $result=DatabaseInterface::updateQueryById(array("cf"=>$paziente->getCf(),"videochiamata" => $paziente->getVideo()),Paziente::$tableName);
   if($result){
     echo json_encode(array("esito"=>true));

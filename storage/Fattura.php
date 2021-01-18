@@ -23,13 +23,13 @@ class Fattura
       if($data == null || $cfPaz == null || $idScelta == null || $nSeduteRim == null){
           throw new Exception("Alcuni valori non definiti!");
       }
-      else if($data<$currDate){
+      else if($data>$currDate){
           throw new Exception("Data non disponibile!");
       }
       else if($idScelta<1){
           throw new Exception("Id scelta pacchetto non valido!");
       }
-      else if($nSeduteRim !=0 && $nSeduteRim !=1 && $nSeduteRim !=6 && $nSeduteRim !=10 && $nSeduteRim !=20 ){
+      else if($nSeduteRim<0){
           throw new Exception("Numero di visite non valido!");
       }
     $this->idFattura= $idFattura;
@@ -75,7 +75,7 @@ class Fattura
   {
       date_default_timezone_set("Europe/Rome");
       $currDate = date("Y-m-d");
-      if($data == null || $data<$currDate){
+      if($data == null || $data>$currDate){
           throw new Exception("Nuova data non disponibile!");
       }
     $this->data = $data;

@@ -90,9 +90,23 @@ class PacchettoControl{
           }
           return $fatture;
       }catch(Exception $e){
+          echo "sono in eccezione ".$e->getMessage();
           $_SESSION['eccezione']=$e->getMessage();
           return null;
       }
+    }
+
+    static function getFatturaByPazProf($cfPaz,$cfProf){
+        $fattAtt=Null;
+        $fatts=PacchettoControl::getFatture($cfPaz);
+        $scelte=PacchettoControl::selectAllPacchettoProf($cfProf);
+        foreach ($fatts as $fatt){
+            foreach($scelte as $pacchetto){
+                if($fatt->getIdScelta()==$pacchetto->getIdPacchetto() && $fatt->getNSeduteRim()>0)
+                    $fattAtt=$fatt;
+            }
+        }
+        return $fattAtt;
     }
 }
  ?>

@@ -9,7 +9,7 @@
     include "../../storage/scelta.php";
     include "../../applicationLogic/PacchettoControl.php";
     include "../../applicationLogic/AreaInformativaControl.php";
-
+    include "../../storage/Fattura.php";
     session_start();
     if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
         header("Location: ../Utente/login.php");
@@ -390,11 +390,12 @@ $professionista = AreaInformativaControl::getProf($cf);
                                     <?php
                                      if($pazienti != NULL){
 
-                                        foreach($pazienti as $pazienteAtt){ ?>
+                                        foreach($pazienti as $pazienteAtt){
+                                            $fatturaAtt=PacchettoControl::getFatturaByPazProf($pazienteAtt->getCf(),$_SESSION["codiceFiscale"])?>
                                         <tr>
                                             <td><?php echo $pazienteAtt->getNome(); ?></td>
                                             <td><?php echo $pazienteAtt->getCognome(); ?></td>
-                                            <td><button type="button" id="call" class="btn btn-block btn-danger btn-sm" onclick="buttonCall('<?php echo $pazienteAtt->getCf(); ?>')" <?php if($pazienteAtt->getVideo()) echo "disabled" ?>><i class="fas fa-phone"></i></button></td>
+                                            <td><button type="button" id="call" class="btn btn-block btn-danger btn-sm" onclick="buttonCall('<?php echo $pazienteAtt->getCf(); ?>')" <?php if($pazienteAtt->getVideo() || !isset($fatturaAtt)) echo "disabled" ?>><i class="fas fa-phone"></i></button></td>
                                         </tr>
                                     <?php }
                                      }
