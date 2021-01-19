@@ -14,16 +14,17 @@ if($tipoUtente != "professionista"){
 
 
 $cfProfessionista = $_SESSION["codiceFiscale"];
-//$cfPazienteTer = $_POST["codFiscalePaz"];
-$cfPazienteTer = isset($_POST["codFiscalePaz"]) ? $_POST['codFiscalePaz'] : "";
-if($cfPazienteTer != ""){
-   $_SESSION["cfPazTer"] = $cfPazienteTer;
-}
-else if ($cfPazienteTer == "") {
-  $cfPazienteTer = $_SESSION["cfPazTer"];
-}
 
-$paziente = PazienteControl::getPaz($cfPazienteTer);
+if(isset($_POST["codFiscalePaz"])){
+    $cfPazienteTer=$_POST['codFiscalePaz'];
+    $_SESSION["cfPazTer"] = $cfPazienteTer;
+    $paziente = PazienteControl::getPaz($cfPazienteTer);
+}
+else if(isset($_SESSION["datiPaziente"])){
+    $paziente = $_SESSION['datiPaziente'];
+    $_SESSION["cfPazTer"] = $paziente->getCf();
+    $cfPazienteTer = $paziente->getCf();
+}
 
 ?>
 

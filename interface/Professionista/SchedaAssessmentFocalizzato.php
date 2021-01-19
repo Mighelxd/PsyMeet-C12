@@ -17,8 +17,7 @@ if($tipoUtente != "professionista" || $tipoUtente == null){
 }
 
 $dataCorr = date("Y-m-d");
-//echo "oggi: ".$dataCorr;
-//$dataCorr = str_replace(',','-',$dataCorr);
+
 
 if(isset($_SESSION['idTerCorr'])){
     $idTerCorr = $_SESSION['idTerCorr'];

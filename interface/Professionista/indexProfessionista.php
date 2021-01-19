@@ -9,6 +9,7 @@
     include "../../storage/scelta.php";
     include "../../applicationLogic/PacchettoControl.php";
     include "../../applicationLogic/AreaInformativaControl.php";
+    include '../../applicationLogic/AuntenticazioneControl.php';
     include "../../storage/Fattura.php";
     session_start();
     if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
@@ -111,111 +112,86 @@ $professionista = AreaInformativaControl::getProf($cf);
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
         </ul>
-
-
-
-
     </nav>
-<div class="wrapper">
-    <!-- Navbar -->
+    <!-- /.navbar -->
+    <!-- MENU' A SINISTRA -->
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" >
         <!-- Brand Logo -->
-        <a href="indexProfessionista.php" class="brand-link">
+        <a href="#" class="brand-link">
             <img src="../../dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">PsyMeet</span>
         </a>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <?php if ($img != NULL) {
+                        echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
+                    }
+                    else {
+                        echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+                    }
 
-
-
-            <!-- MENU' A SINISTRA -->
-
-            <!-- Main Sidebar Container -->
-            <aside class="main-sidebar sidebar-dark-primary elevation-4" >
-                <!-- Brand Logo -->
-                <a href="indexProfessionista.php" class="brand-link">
-                    <img src="../../dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                         style="opacity: .8">
-                    <span class="brand-text font-weight-light">PsyMeet</span>
-                </a>
-
-                <!-- Sidebar -->
-                <div class="sidebar">
-                    <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            <?php if ($img != NULL) {
-                                echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                            }
-                            else {
-                                echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                            }
-
-                            ?>
-                        </div>
-                        <div class="info">
-                            <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . " " . $professionista->getCognome() ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Sidebar Menu -->
-                    <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                            <!-- Add icons to the links using the .nav-icon class
-                                 with font-awesome or any other icon font library -->
-                            <li class="nav-item ">
-                                <a href="indexProfessionista.php" class="nav-link active">
-                                    <i class="nav-icon fas fa-address-book"></i>
-                                    <p>
-                                        Area Informativa
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="Pazienti.html" class="nav-link">
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p>
-                                        Pazienti
-                                    </p>
-                                </a>
-                            </li>
-
-                            <li class="nav-item has-treeview">
-                                <a href="calendario.php" class="nav-link">
-                                    <i class="nav-icon fas fa-calendar"></i>
-                                    <p>
-                                        Appuntamenti
-                                    </p>
-                                </a>
-
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="gestionePacchettiProf.php" class="nav-link">
-                                    <i class="nav-icon fas fa-shopping-cart"></i>
-                                    <p>
-                                        Pacchetti
-                                    </p>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </nav> -->
-                    <!-- /.sidebar-menu -->
+                    ?>
                 </div>
-                <!-- /.sidebar -->
-            </aside>
-            <!-- FINE MENU' A SINISTRA -->
+                <div class="info">
+                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                </div>
+            </div>
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item ">
+                        <a href="indexProfessionista.php" class="nav-link">
+                            <i class="nav-icon fas fa-address-book"></i>
+                            <p>
+                                Area Informativa
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Pazienti.php" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Pazienti
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="calendario.php" class="nav-link">
+                            <i class="nav-icon fas fa-calendar"></i>
+                            <p>
+                                Appuntamenti
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="gestionePacchettiProf.php" class="nav-link">
+                            <i class="nav-icon fas fa-shopping-cart"></i>
+                            <p>
+                                Pacchetti
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                       <button class="btn btn-danger">Logout</button>
+                    </li>
+                </ul>
+            </nav> -->
+            <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->
     </aside>
+    <!-- FINE MENU' A SINISTRA -->
+
+
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -227,7 +203,7 @@ $professionista = AreaInformativaControl::getProf($cf);
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="../Utente/Homepage.php">Home</a></li>
+                            <li class="breadcrumb-item active"><?php echo $professionista->getNome() . " " . $professionista->getCognome() ?></li>
                             <li class="breadcrumb-item active">Area Professionista</li>
                         </ol>
                     </div><!-- /.col -->
@@ -461,7 +437,6 @@ $professionista = AreaInformativaControl::getProf($cf);
             }
         })
     }
-
 </script>
 </body>
 </html>

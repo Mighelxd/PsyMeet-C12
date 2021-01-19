@@ -55,22 +55,10 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
     </ul>
-
-    
-
-
   </nav>
   <!-- /.navbar -->
-
-<!-- MENU' A SINISTRA -->
-
+    <!-- MENU' A SINISTRA -->
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" >
     <!-- Brand Logo -->
@@ -79,7 +67,6 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
            style="opacity: .8">
       <span class="brand-text font-weight-light">PsyMeet</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -98,7 +85,6 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
           <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $Professionista->getNome() ." ". $Professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
         </div>
       </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -113,14 +99,13 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
             </a>
           </li>
           <li class="nav-item">
-            <a href="Pazienti.html" class="nav-link">
+            <a href="Pazienti.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pazienti
               </p>
             </a>
           </li>
-
           <li class="nav-item has-treeview">
             <a href="calendario.php" class="nav-link">
               <i class="nav-icon fas fa-calendar"></i>
@@ -128,17 +113,18 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
                 Appuntamenti
               </p>
             </a>
-
           </li>
           <li class="nav-item has-treeview">
-            <a href="Pacchetti.html" class="nav-link">
+            <a href="gestionePacchettiProf.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Pacchetti
               </p>
             </a>
           </li>
-
+            <li class="nav-item has-treeview">
+                <button class="btn btn-danger">Logout</button>
+            </li>
         </ul>
       </nav> -->
       <!-- /.sidebar-menu -->
@@ -160,7 +146,7 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active"><?php echo $Professionista->getNome() ." ". $Professionista->getCognome(); ?> </li>
               <li class="breadcrumb-item active">Area personale</li>
             </ol>
           </div>

@@ -1,6 +1,10 @@
 <?php
+    include ("../../plugins/libArray/FunArray.php");
+    include ("../../storage/DatabaseInterface.php");
     include "../../storage/CartellaClinica.php";
     include "../../storage/Paziente.php";
+    include "../../storage/Professionista.php";
+    include "../../applicationLogic/AreaInformativaControl.php";
     session_start();
     if(!isset($_SESSION["codiceFiscale"]) || !isset($_SESSION["tipo"])){
       header("Location: ../Utente/login.php");
@@ -13,6 +17,9 @@
     if(isset($_SESSION["cartellaClinica"])){
       $cartellaClinica=$_SESSION["cartellaClinica"];
     }
+$cfProfessionista = $_SESSION["codiceFiscale"];
+$professionista = AreaInformativaControl::getProf($cfProfessionista);
+$img=base64_encode($professionista->getImmagineProfessionista());
 ?>
 <!DOCTYPE html>
 <html>
@@ -88,35 +95,36 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
         </ul>
+    </nav>
 <!-- MENU' A SINISTRA -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" >
-    <!-- Brand Logo -->
-    <a href="#" class="brand-link">
-      <img src="../../dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">PsyMeet</span>
-    </a>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" >
+        <!-- Brand Logo -->
+        <a href="#" class="brand-link">
+            <img src="../../dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+            <span class="brand-text font-weight-light">PsyMeet</span>
+        </a>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <?php if ($img != NULL) {
+                        echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
+                    }
+                    else {
+                        echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+                    }
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="areaPersonale.html" class="d-block">Alexander Pierce <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
-        </div>
-      </div>
+                    ?>
+                </div>
+                <div class="info">
+                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                </div>
+            </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -131,44 +139,44 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview menu-open">
-            <a href="Pazienti.html" class="nav-link">
+          <li class="nav-item has-treeview">
+            <a href="Pazienti.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pazienti
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview menu-open" style="padding-left:2%;">
-              <li class="nav-item has-treeview menu-open">
+          </li>
+            <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link">
-                  <i class="fas fa-user nav-icon"></i>
-                  <p>Nome Paziente
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
+                    <i class="fas fa-user nav-icon"></i>
+                    <p><?php echo $paziente->getNome()." ".$paziente->getCognome(); ?>
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
                 </a>
                 <ul class="nav nav-treeview" style="padding-left: 2%;">
                   <li class="nav-item has-treeview">
-                    <a href="gestioneTerapia.html" class="nav-link">
+                    <a href="gestioneTerapia.php" class="nav-link">
                       <i class="fas fa-clipboard nav-icon"></i>
                       <p>Terapia
                       </p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="cartellaClinica.html" class="nav-link active">
+                    <a href="cartellaClinica.php" class="nav-link active">
                       <i class="fas fa-notes-medical nav-icon"></i>
                       <p>Cartella clinica</p>
                     </a>
+                  </li>
                     <li class="nav-item">
-                      <a href="schedaPaziente.html" class="nav-link">
+                      <a href="schedaPaziente.php" class="nav-link">
                         <i class="fas fa-id-card-alt nav-icon"></i>
                         <p>Dati Paziente
                         </p>
                       </a>
                     </li>
                     <li class="nav-item has-treeview">
-                      <a href="gestioneTerapia.html" class="nav-link">
+                      <a href="#" class="nav-link">
                       <i class="fas fa-brain nav-icon"></i>
                       <p>Sedute
                         <i class="right fas fa-angle-left"></i>
@@ -176,78 +184,78 @@
                       </a>
                       <ul class="nav nav-treeview" style="padding-left: 1%;">
                         <li class="nav-item">
-                          <a href="schedaPrimoColloquio.html" class="nav-link">
+                          <a href="schedaPrimoColloquio.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Primo colloquio
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="schedaAssessmentGeneralizzato.html" class="nav-link">
+                          <a href="SchedaAssessmentGeneralizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment generalizzato
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="schedaAssessmentFocalizzato.html" class="nav-link">
+                          <a href="SchedaAssessmentFocalizzato.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Assessment focalizzato
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="schedaFollowUp.html" class="nav-link">
+                          <a href="SchedaFollowUp.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Follow-up
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="schedaModelloEziologico.html" class="nav-link">
+                          <a href="SchedaModelloEziologico.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Modello eziologico
                             </p>
                           </a>
                         </li>
+                          <li class="nav-item">
+                              <a href="gestioneCompiti.php" class="nav-link">
+                                  <i class="fas fa-sticky-note nav-icon"></i>
+                                  <p>Compiti
+                                  </p>
+                              </a>
+                          </li>
                       </ul>
-                    </li>
-                    <li class="nav-item">
-                      <a href="gestioneCompiti.html" class="nav-link">
-                        <i class="fas fa-sticky-note nav-icon"></i>
-                        <p>Compiti
-                        </p>
-                      </a>
                     </li>
                 </ul>
               </li>
-            </ul>
-          </li>
 
-          <li class="nav-item has-treeview">
-            <a href="calendario.php" class="nav-link">
-              <i class="nav-icon fas fa-calendar"></i>
-              <p>
-                Appuntamenti
-              </p>
-            </a>
 
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="Pacchetti.html" class="nav-link">
-              <i class="nav-icon fas fa-shopping-cart"></i>
-              <p>
-                Pacchetti
-              </p>
-            </a>
-          </li>
-
+            <li class="nav-item has-treeview">
+                <a href="calendario.php" class="nav-link">
+                    <i class="nav-icon fas fa-calendar"></i>
+                    <p>
+                        Appuntamenti
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="gestionePacchettiProf.php" class="nav-link">
+                    <i class="nav-icon fas fa-shopping-cart"></i>
+                    <p>
+                        Pacchetti
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item has-treeview">
+                <button class="btn btn-danger">Logout</button>
+            </li>
         </ul>
       </nav> -->
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
 <!-- FINE MENU' A SINISTRA -->
 </div>
 
@@ -341,7 +349,7 @@
 <!-- FINE DIV CHE SI TROVA TRA NAV E I BOX -->
 
 <?php
-  $_SESSION["datiPaziente"]=NULL;
+  //$_SESSION["datiPaziente"]=NULL;
   $_SESSION["cartellaClinica"]=NULL;
 ?>
 
@@ -349,20 +357,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.5
-    </div>
-  </footer>
-  <!-- FINE PIE DI PAGINA -->
-
-
-
-
-
-
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

@@ -28,20 +28,20 @@ if($tipoUtente != "professionista"){
 
 
 $cfProfessionista = $_SESSION["codiceFiscale"];
-//$cfPazienteTer = $_POST["codFiscalePaz"];
-$cfPazienteTer = isset($_POST["codFiscalePaz"]) ? $_POST['codFiscalePaz'] : "";
-if($cfPazienteTer != ""){
-   $_SESSION["cfPazTer"] = $cfPazienteTer;
-}
-else if ($cfPazienteTer == "") {
-  $cfPazienteTer = $_SESSION["cfPazTer"];
-}
 
+if(isset($_POST["codFiscalePaz"])){
+    $cfPazienteTer=$_POST['codFiscalePaz'];
+    $_SESSION["cfPazTer"] = $cfPazienteTer;
+    $pazienteTer = PazienteControl::getPaz($cfPazienteTer);
+}
+else if(isset($_SESSION["datiPaziente"])){
+    $pazienteTer = $_SESSION['datiPaziente'];
+    $_SESSION["cfPazTer"] = $pazienteTer->getCf();
+    $cfPazienteTer = $pazienteTer->getCf();
+}
 
 $professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($professionista->getImmagineProfessionista());
-
-$pazienteTer = PazienteControl::getPaz($cfPazienteTer);
 
 $terapia = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
 
