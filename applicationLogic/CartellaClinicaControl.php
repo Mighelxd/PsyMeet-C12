@@ -25,6 +25,9 @@ class CartellaClinicaControl
     }
     static function saveCartellaClinica($cartellaClinica){
         $result=DatabaseInterface::insertQuery($cartellaClinica->getArraySenzaId(), CartellaClinica::$tableName);
+        if(!$result){
+            throw new Exception("errore inserimento");
+        }
         return $result;
     }
 }
