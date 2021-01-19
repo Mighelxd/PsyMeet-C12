@@ -2,7 +2,7 @@
 
 
 use PHPUnit\Framework\TestCase;
-include "../storage/CartellaClinica.php";
+include "storage/CartellaClinica.php";
 class CartellaClinicaTest extends TestCase
 {
     public function testCartellaClinicaSuccesso(){
