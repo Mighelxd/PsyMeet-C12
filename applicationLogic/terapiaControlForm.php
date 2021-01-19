@@ -22,7 +22,7 @@ if($action == 'addTer'){
         $ok = DatabaseInterface::insertQuery($att->getArray(),Terapia::$tableName);
 
         if($ok){
-            header("Location: ../interface/Professionista/gestioneTerapia.php");
+            header("Location: ../interface/Professionista/Pazienti.php");
         }
         else{
             throw new Exception("Errore: Terapia non aggiunta!");
