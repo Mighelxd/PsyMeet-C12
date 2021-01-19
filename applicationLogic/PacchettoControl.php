@@ -98,12 +98,15 @@ class PacchettoControl{
 
     static function getFatturaByPazProf($cfPaz,$cfProf){
         $fattAtt=Null;
+        $fatts = NULL;
         $fatts=PacchettoControl::getFatture($cfPaz);
         $scelte=PacchettoControl::selectAllPacchettoProf($cfProf);
-        foreach ($fatts as $fatt){
-            foreach($scelte as $pacchetto){
-                if($fatt->getIdScelta()==$pacchetto->getIdPacchetto() && $fatt->getNSeduteRim()>0)
-                    $fattAtt=$fatt;
+        if ($fatts!= NULL) {
+            foreach ($fatts as $fatt) {
+                foreach ($scelte as $pacchetto) {
+                    if ($fatt->getIdScelta() == $pacchetto->getIdPacchetto() && $fatt->getNSeduteRim() > 0)
+                        $fattAtt = $fatt;
+                }
             }
         }
         return $fattAtt;
