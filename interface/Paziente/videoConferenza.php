@@ -79,7 +79,7 @@
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paziente->getNome() ." ". $paziente->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
