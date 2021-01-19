@@ -175,7 +175,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                         </p>
                       </a>
                     </li>
-                    <li class="nav-item has-treeview">
+               <!--     <li class="nav-item has-treeview">
                       <a href="#" class="nav-link">
                       <i class="fas fa-brain nav-icon"></i>
                       <p>Sedute
@@ -226,7 +226,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                               </a>
                           </li>
                       </ul>
-                    </li>
+                    </li>-->
                 </ul>
               </li>
 

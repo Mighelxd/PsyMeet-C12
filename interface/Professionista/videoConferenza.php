@@ -20,6 +20,7 @@
     }
     $paziente=$_SESSION["paziente"];
     $professionista=$_SESSION["professionista"];
+    $img=base64_encode($professionista->getImmagineProfessionista());
     $terapie=terapiaControl::getTerapie($paziente->getCf(),$professionista->getCfProf());
     $_SESSION["cfPazTer"]=$paziente->getCf();
     if(!isset($terapie[0])){
@@ -62,17 +63,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
         </ul>
-
-
-
-
     </nav>
     <!-- MENU' A SINISTRA -->
 
@@ -84,16 +75,22 @@
                  style="opacity: .8">
             <span class="brand-text font-weight-light">PsyMeet</span>
         </a>
-
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <?php if ($img != NULL) {
+                        echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
+                    }
+                    else {
+                        echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+                    }
+
+                    ?>
                 </div>
                 <div class="info">
-                    <a href="areaPersonaleProfessionista.php" class="d-block">Alexander Pierce <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -110,98 +107,45 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview menu-open">
-                        <a href="Pazienti.html" class="nav-link">
+                    <li class="nav-item has-treeview">
+                        <a href="Pazienti.php" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Pazienti
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-user nav-icon"></i>
+                            <p><?php echo $paziente->getNome()." ".$paziente->getCognome(); ?>
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview menu-open" style="padding-left:2%;">
-                            <li class="nav-item has-treeview menu-open">
-                                <a href="#" class="nav-link">
-                                    <i class="fas fa-user nav-icon"></i>
-                                    <p>Nome Paziente
-                                        <i class="right fas fa-angle-left"></i>
+                        <ul class="nav nav-treeview" style="padding-left: 2%;">
+                            <li class="nav-item has-treeview">
+                                <a href="gestioneTerapia.php" class="nav-link">
+                                    <i class="fas fa-clipboard nav-icon"></i>
+                                    <p>Terapia
                                     </p>
                                 </a>
-                                <ul class="nav nav-treeview" style="padding-left: 2%;">
-                                    <li class="nav-item has-treeview">
-                                        <a href="gestioneTerapia.html" class="nav-link">
-                                            <i class="fas fa-clipboard nav-icon"></i>
-                                            <p>Terapia
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="cartellaClinica.html" class="nav-link active">
-                                            <i class="fas fa-notes-medical nav-icon"></i>
-                                            <p>Cartella clinica</p>
-                                        </a>
-                                    <li class="nav-item">
-                                        <a href="schedaPaziente.php" class="nav-link">
-                                            <i class="fas fa-id-card-alt nav-icon"></i>
-                                            <p>Dati Paziente
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item has-treeview">
-                                        <a href="gestioneTerapia.html" class="nav-link">
-                                            <i class="fas fa-brain nav-icon"></i>
-                                            <p>Sedute
-                                                <i class="right fas fa-angle-left"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview" style="padding-left: 1%;">
-                                            <li class="nav-item">
-                                                <a href="schedaPrimoColloquio.html" class="nav-link">
-                                                    <i class="fas fa-clipboard nav-icon"></i>
-                                                    <p>Primo colloquio
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="schedaAssessmentGeneralizzato.html" class="nav-link">
-                                                    <i class="fas fa-clipboard nav-icon"></i>
-                                                    <p>Assessment generalizzato
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="schedaAssessmentFocalizzato.html" class="nav-link">
-                                                    <i class="fas fa-clipboard nav-icon"></i>
-                                                    <p>Assessment focalizzato
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="schedaFollowUp.html" class="nav-link">
-                                                    <i class="fas fa-clipboard nav-icon"></i>
-                                                    <p>Follow-up
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="schedaModelloEziologico.html" class="nav-link">
-                                                    <i class="fas fa-clipboard nav-icon"></i>
-                                                    <p>Modello eziologico
-                                                    </p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="gestioneCompiti.html" class="nav-link">
-                                            <i class="fas fa-sticky-note nav-icon"></i>
-                                            <p>Compiti
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="cartellaClinica.php" class="nav-link active">
+                                    <i class="fas fa-notes-medical nav-icon"></i>
+                                    <p>Cartella clinica</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="schedaPaziente.php" class="nav-link">
+                                    <i class="fas fa-id-card-alt nav-icon"></i>
+                                    <p>Dati Paziente
+                                    </p>
+                                </a>
                             </li>
                         </ul>
                     </li>
+
 
                     <li class="nav-item has-treeview">
                         <a href="calendario.php" class="nav-link">
@@ -210,17 +154,18 @@
                                 Appuntamenti
                             </p>
                         </a>
-
                     </li>
                     <li class="nav-item has-treeview">
-                        <a href="Pacchetti.html" class="nav-link">
+                        <a href="gestionePacchettiProf.php" class="nav-link">
                             <i class="nav-icon fas fa-shopping-cart"></i>
                             <p>
                                 Pacchetti
                             </p>
                         </a>
                     </li>
-
+                    <li class="nav-item has-treeview">
+                        <button class="btn btn-danger">Logout</button>
+                    </li>
                 </ul>
             </nav> -->
             <!-- /.sidebar-menu -->

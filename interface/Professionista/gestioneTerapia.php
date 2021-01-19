@@ -76,22 +76,14 @@ else
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-    </ul>
-
-
-  </nav>
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+        </ul>
+    </nav>
   <!-- /.navbar -->
 
   <!-- MENU' A SINISTRA -->
@@ -137,15 +129,14 @@ else
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="Pazienti.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Paziente
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview menu-open" style="padding-left:2%;">
+          </li>
               <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link">
                   <i class="fas fa-user nav-icon"></i>
@@ -173,7 +164,7 @@ else
                       <p>Cartella clinica</p>
                     </a>
                     <li class="nav-item">
-                      <a href="schedaPaziente.html" class="nav-link">
+                      <a href="schedaPaziente.php" class="nav-link">
                         <i class="fas fa-id-card-alt nav-icon"></i>
                         <p>Dati Paziente
                         </p>
@@ -209,14 +200,14 @@ else
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="schedaFollowUp.html" class="nav-link">
+                          <a href="SchedaFollowUp.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Follow-up
                             </p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="schedaModelloEziologico.html" class="nav-link">
+                          <a href="SchedaModelloEziologico.php" class="nav-link">
                             <i class="fas fa-clipboard nav-icon"></i>
                             <p>Modello eziologico
                             </p>
@@ -233,8 +224,6 @@ else
                     </li>
                 </ul><!--fine blocco terapie-->
               </li>
-            </ul>
-          </li>
 
           <li class="nav-item has-treeview">
             <a href="calendario.php" class="nav-link">
