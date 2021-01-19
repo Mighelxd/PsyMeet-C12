@@ -18,7 +18,7 @@ if(isset($_POST["azione"])){
             $_SESSION["datiPaziente"]=$paziente;
             $_SESSION["cartellaClinica"]=CartellaClinicaControl::getCartellaClinica($cfPaz,$cfProf);
             header("Location: ../interface/Professionista/CartellaClinica.php");
-            exit();
+            exit("true");
         }catch(Exception $e){
             $_SESSION['eccezione']= $e->getMessage();
             header("Location: ../interface/Professionista/CartellaClinica.php");
