@@ -255,7 +255,7 @@ $paziente = PazienteControl::getPaz($cfT);
                         </a>
                     </li>
                     <li class="nav-item has-treeview">
-                        <button class="btn btn-danger">Logout</button>
+                        <a class="btn btn-danger" href="../../applicationLogic/logout.php">Logout</a>
                     </li>
                 </ul>
             </nav> -->

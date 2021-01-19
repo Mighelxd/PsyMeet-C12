@@ -242,6 +242,9 @@ else
               </p>
             </a>
           </li>
+            <li class="nav-item has-treeview">
+                <a class="btn btn-danger" href="../../applicationLogic/logout.php">Logout</a>
+            </li>
 
         </ul>
       </nav>

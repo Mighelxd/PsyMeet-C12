@@ -139,58 +139,6 @@ else if(isset($_SESSION["datiPaziente"])){
                                         </p>
                                     </a>
                                 </li>
-                                <!--     <li class="nav-item has-treeview">
-                                       <a href="#" class="nav-link">
-                                       <i class="fas fa-brain nav-icon"></i>
-                                       <p>Sedute
-                                         <i class="right fas fa-angle-left"></i>
-                                       </p>
-                                       </a>
-                                       <ul class="nav nav-treeview" style="padding-left: 1%;">
-                                         <li class="nav-item">
-                                           <a href="schedaPrimoColloquio.php" class="nav-link">
-                                             <i class="fas fa-clipboard nav-icon"></i>
-                                             <p>Primo colloquio
-                                             </p>
-                                           </a>
-                                         </li>
-                                         <li class="nav-item">
-                                           <a href="SchedaAssessmentGeneralizzato.php" class="nav-link">
-                                             <i class="fas fa-clipboard nav-icon"></i>
-                                             <p>Assessment generalizzato
-                                             </p>
-                                           </a>
-                                         </li>
-                                         <li class="nav-item">
-                                           <a href="SchedaAssessmentFocalizzato.php" class="nav-link">
-                                             <i class="fas fa-clipboard nav-icon"></i>
-                                             <p>Assessment focalizzato
-                                             </p>
-                                           </a>
-                                         </li>
-                                         <li class="nav-item">
-                                           <a href="SchedaFollowUp.php" class="nav-link">
-                                             <i class="fas fa-clipboard nav-icon"></i>
-                                             <p>Follow-up
-                                             </p>
-                                           </a>
-                                         </li>
-                                         <li class="nav-item">
-                                           <a href="SchedaModelloEziologico.php" class="nav-link">
-                                             <i class="fas fa-clipboard nav-icon"></i>
-                                             <p>Modello eziologico
-                                             </p>
-                                           </a>
-                                         </li>
-                                           <li class="nav-item">
-                                               <a href="gestioneCompiti.php" class="nav-link">
-                                                   <i class="fas fa-sticky-note nav-icon"></i>
-                                                   <p>Compiti
-                                                   </p>
-                                               </a>
-                                           </li>
-                                       </ul>
-                                     </li>-->
                             </ul>
                         </li>
 
@@ -212,7 +160,7 @@ else if(isset($_SESSION["datiPaziente"])){
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
-                            <button class="btn btn-danger">Logout</button>
+                            <a class="btn btn-danger" href="../../applicationLogic/logout.php">Logout</a>
                         </li>
                     </ul>
                 </nav> -->
