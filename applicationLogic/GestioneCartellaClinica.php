@@ -18,7 +18,7 @@ if(isset($_POST["azione"])){
             $_SESSION["datiPaziente"]=$paziente;
             $_SESSION["cartellaClinica"]=CartellaClinicaControl::getCartellaClinica($cfPaz,$cfProf);
             header("Location: ../interface/Professionista/CartellaClinica.php");
-            exit("true");
+            echo var_dump($paziente);
         }catch(Exception $e){
             $_SESSION['eccezione']= $e->getMessage();
             header("Location: ../interface/Professionista/CartellaClinica.php");
@@ -28,7 +28,6 @@ if(isset($_POST["azione"])){
         try{
             $cfPaz=$_POST["codFiscalePaz"];
             $cartellaClinicOld=CartellaClinicaControl::getCartellaClinica($cfPaz,$cfProf);
-
             $date=date("Y-m-d");
             $cartellaClinica=new CartellaClinica($cartellaClinicOld->getId(),$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
             $result=CartellaClinicaControl::updateCartellaClinica($cartellaClinica);
@@ -38,8 +37,8 @@ if(isset($_POST["azione"])){
             }
             echo json_encode(array("esito"=>true));
         }catch(Exception $e){
+            echo $e->getMessage();
             $_SESSION['eccezione']= $e->getMessage();
-            header("Location: ../interface/Professionista/CartellaClinica.php");
         }
     }
     else{
