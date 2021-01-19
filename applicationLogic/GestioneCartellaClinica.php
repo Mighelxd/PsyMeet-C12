@@ -20,8 +20,8 @@ if(isset($_POST["azione"])){
             header("Location: ../interface/Professionista/CartellaClinica.php");
             echo var_dump($paziente);
         }catch(Exception $e){
+            echo $e->getMessage();
             $_SESSION['eccezione']= $e->getMessage();
-            header("Location: ../interface/Professionista/CartellaClinica.php");
         }
     }
     else if($_POST["azione"]=="modifica"){
