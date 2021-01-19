@@ -28,7 +28,8 @@ $paz = PazienteControl::getPaz($cfPaziente);
 
 $img=base64_encode($paz->getFotoProfiloPaz());
 
-$pacchettiPaz = PacchettoControl::selectAllPacchettoPaz($cfPaziente);
+//$pacchettiPaz = PacchettoControl::selectAllPacchettoPaz($cfPaziente);
+$pacchettiPaz = PacchettoControl::getFatture($cfPaziente);
 $professionistiByPaz = AreaInformativaControl::getProfessionistByPaz($cfPaziente);
 $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
 ?>
@@ -257,22 +258,22 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
 
                                 <?php  if($pacchettiPaz !=NULL){
                                     for($i=0;$i<count($pacchettiPaz);$i++){
-
-
+                                        $scelta = PacchettoControl::getSceltaById($pacchettiPaz[$i]->getIdScelta());
+                                        $pacchetto = PacchettoControl::recuperaPacchetto($scelta->getIdPacchetto());
                                         ?>
                                         <form method="post" action="../../applicationLogic/PacchettoControlForm.php">
                                             <input type="text" name="action" value="delPacchetto" hidden="true">
-                                            <input type="text" name="idPacchetto" value= <?php echo $pacchettiPaz[$i]->getIdPacchetto(); ?> hidden="true">
+                                            <input type="text" name="idPacchetto" value= <?php echo $scelta->getIdPacchetto(); ?> hidden="true">
                                             <tbody>
                                             <tr>
                                                 <td >
-                                                    <?php echo $pacchettiPaz[$i]->getTipologia(); ?>
+                                                    <?php echo $pacchetto->getTipologia(); ?>
                                                 </td>
                                                 <td >
-                                                    <?php echo $pacchettiPaz[$i]->getPrezzo(); ?>
+                                                    <?php echo $pacchetto->getPrezzo(); ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $pacchettiPaz[$i]->getNSedute(); ?>
+                                                    <?php echo $pacchettiPaz[$i]->getNSeduteRim(); ?>
                                                 </td>
                                             </tr>
                                             </tbody>

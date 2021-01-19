@@ -111,5 +111,15 @@ class PacchettoControl{
         }
         return $fattAtt;
     }
+
+
+    static function getSceltaById($idScelta){
+      $scheda = NULL;
+      $arr = array("id_scelta" => $idScelta);
+      $result = DatabaseInterface::selectQueryById($arr, "scelta");
+      $row = $result->fetch_array();
+      $scheda = new Scelta($row[0],$row[1],$row[2]);
+      return $scheda;
+    }
 }
  ?>
