@@ -1,10 +1,16 @@
 <?php
+session_start();
 include "../../storage/professionista.php";
 include ("../../storage/DatabaseInterface.php");
 include ("../../plugins/libArray/FunArray.php");
 include "../../applicationLogic/AreaInformativaControl.php";
+include "../../storage/Paziente.php";
+include "../../applicationLogic/PazienteControl.php";
 
+$cfPaziente = $_SESSION["codiceFiscale"];
 $listProf = AreaInformativaControl::recuperaProfessionisti();
+$paz = PazienteControl::getPaz($cfPaziente);
+$img=base64_encode($paz->getFotoProfiloPaz());
  ?>
 
 <!DOCTYPE html>
@@ -48,20 +54,82 @@ $listProf = AreaInformativaControl::recuperaProfessionisti();
             <span class="brand-text font-weight-light">PsyMeet</span>
         </a>
 
-   <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
 
+                </div>
+                <div class="info">
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item ">
+                        <a href="indexPaziente.php" class="nav-link">
+                            <i class="nav-icon fas fa-address-book"></i>
+                            <p>
+                                Area Informativa
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="listaProfessionisti.php" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Professionisti
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="TerapiePaz.php" class="nav-link">
+                            <i class="fas fa-clipboard nav-icon"></i>
+                            <p>
+                                Terapie
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="gestioneCompitiPaziente.php" class="nav-link">
+                            <i class="fas fa-sticky-note nav-icon"></i>
+                            <p>
+                                Compiti
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="calendario.php" class="nav-link">
+                            <i class="nav-icon fas fa-calendar"></i>
+                            <p>
+                                Appuntamenti
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="fatture.php" class="nav-link">
+                            <i class="far fa-credit-card"></i>
+                            <p>
+                                Fatture
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a class="btn btn-danger" href="../../applicationLogic/logout.php">Logout</a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
         </div>
-        <div class="info">
-          <a href="Homepage.php" class="d-block">Homepage<i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-
+        <!-- /.sidebar -->
+    </aside>
+    <!-- FINE MENU' A SINISTRA -->
         <!-- /.sidebar -->
   </aside>
 <!-- FINE MENU' A SINISTRA -->

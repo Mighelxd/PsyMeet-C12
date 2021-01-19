@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include "../../storage/Paziente.php";
 include "../../storage/Pacchetto.php";
 include "../../storage/Fattura.php";
@@ -15,7 +15,7 @@ include "../../applicationLogic/AreaInformativaControl.php";
 include "../../applicationLogic/terapiaControl.php";
 include "../../applicationLogic/CompitoControl.php";
 
-session_start();
+
 $tipoUtente = $_SESSION["tipo"];
 if($tipoUtente != "paziente"){
     header("Location: ../Utente/login.php");
@@ -69,22 +69,10 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
         </ul>
-
-
-
-
     </nav>
     <!-- /.navbar -->
-
     <!-- MENU' A SINISTRA -->
-
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4" >
         <!-- Brand Logo -->
@@ -99,18 +87,11 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php if ($img != NULL) {
-                        echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                    }
-                    else {
-                        echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                    }
-
-                    ?>
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?>  <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -120,7 +101,7 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item ">
-                        <a href="indexProfessionista.html" class="nav-link">
+                        <a href="indexPaziente.php" class="nav-link">
                             <i class="nav-icon fas fa-address-book"></i>
                             <p>
                                 Area Informativa
@@ -128,32 +109,48 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="Pazienti.html" class="nav-link">
+                        <a href="listaProfessionisti.php" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
-                                Pazienti
+                                Professionisti
                             </p>
                         </a>
                     </li>
-
                     <li class="nav-item has-treeview">
-                        <a href="calendario.html" class="nav-link">
+                        <a href="TerapiePaz.php" class="nav-link">
+                            <i class="fas fa-clipboard nav-icon"></i>
+                            <p>
+                                Terapie
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="gestioneCompitiPaziente.php" class="nav-link">
+                            <i class="fas fa-sticky-note nav-icon"></i>
+                            <p>
+                                Compiti
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="calendario.php" class="nav-link">
                             <i class="nav-icon fas fa-calendar"></i>
                             <p>
                                 Appuntamenti
                             </p>
                         </a>
-
                     </li>
-                    <li class="nav-item has-treeview">
-                        <a href="Pacchetti.html" class="nav-link">
-                            <i class="nav-icon fas fa-shopping-cart"></i>
+                    <li class="nav-item">
+                        <a href="fatture.php" class="nav-link">
+                            <i class="far fa-credit-card"></i>
                             <p>
-                                Pacchetti
+                                Fatture
                             </p>
                         </a>
                     </li>
-
+                    <li class="nav-item has-treeview">
+                        <a class="btn btn-danger" href="../../applicationLogic/logout.php">Logout</a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

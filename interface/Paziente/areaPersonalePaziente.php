@@ -20,16 +20,7 @@ if($tipoUtente != "paziente"){
 }
 $cfPaziente = $_SESSION["codiceFiscale"];
 
-
-
-
-
-
-
 $paz = PazienteControl::getPaz($cfPaziente);
-
-
-
 
 $img=base64_encode($paz->getFotoProfiloPaz());
 
@@ -62,37 +53,25 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
  </head>
  <body class="hold-transition sidebar-mini">
  <div class="wrapper">
-   <!-- Navbar -->
-   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-     <!-- Left navbar links -->
-     <ul class="navbar-nav">
-       <li class="nav-item">
-         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-       </li>
-       <li class="nav-item d-none d-sm-inline-block">
-         <a href="#" class="nav-link">Home</a>
-       </li>
-       <li class="nav-item d-none d-sm-inline-block">
-         <a href="#" class="nav-link">Contact</a>
-       </li>
-     </ul>
-
-
-
-
-   </nav>
-   <!-- /.navbar -->
-
- <!-- MENU' A SINISTRA -->
-
-   <!-- Main Sidebar Container -->
-   <aside class="main-sidebar sidebar-dark-primary elevation-4" >
-     <!-- Brand Logo -->
-     <a href="#" class="brand-link">
-       <img src="../../dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
-       <span class="brand-text font-weight-light">PsyMeet</span>
-     </a>
+     <!-- Navbar -->
+     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+         <!-- Left navbar links -->
+         <ul class="navbar-nav">
+             <li class="nav-item">
+                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+             </li>
+         </ul>
+     </nav>
+     <!-- /.navbar -->
+     <!-- MENU' A SINISTRA -->
+     <!-- Main Sidebar Container -->
+     <aside class="main-sidebar sidebar-dark-primary elevation-4" >
+         <!-- Brand Logo -->
+         <a href="#" class="brand-link">
+             <img src="../../dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                  style="opacity: .8">
+             <span class="brand-text font-weight-light">PsyMeet</span>
+         </a>
 
      <!-- Sidebar -->
      <div class="sidebar">
@@ -113,7 +92,7 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
            <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
            <li class="nav-item ">
-             <a href="indexProfessionista.html" class="nav-link">
+             <a href="indexPaziente.php" class="nav-link">
                <i class="nav-icon fas fa-address-book"></i>
                <p>
                  Area Informativa
@@ -121,32 +100,48 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
              </a>
            </li>
            <li class="nav-item">
-             <a href="Pazienti.html" class="nav-link">
+             <a href="listaProfessionisti.php" class="nav-link">
                <i class="nav-icon fas fa-users"></i>
                <p>
-                 Pazienti
+                 Professionisti
                </p>
              </a>
            </li>
-
+             <li class="nav-item has-treeview">
+                 <a href="TerapiePaz.php" class="nav-link">
+                     <i class="fas fa-clipboard nav-icon"></i>
+                     <p>
+                         Terapie
+                     </p>
+                 </a>
+             </li>
+             <li class="nav-item has-treeview">
+                 <a href="gestioneCompitiPaziente.php" class="nav-link">
+                     <i class="fas fa-sticky-note nav-icon"></i>
+                     <p>
+                         Compiti
+                     </p>
+                 </a>
+             </li>
            <li class="nav-item has-treeview">
-             <a href="calendario.html" class="nav-link">
+             <a href="calendario.php" class="nav-link">
                <i class="nav-icon fas fa-calendar"></i>
                <p>
                  Appuntamenti
                </p>
              </a>
-
            </li>
-           <li class="nav-item has-treeview">
-             <a href="Pacchetti.html" class="nav-link">
-               <i class="nav-icon fas fa-shopping-cart"></i>
-               <p>
-                 Pacchetti
-               </p>
-             </a>
-           </li>
-
+             <li class="nav-item">
+                 <a href="fatture.php" class="nav-link">
+                     <i class="far fa-credit-card"></i>
+                     <p>
+                         Fatture
+                     </p>
+                 </a>
+             </li>
+             <li class="nav-item has-treeview">
+                 <a class="btn btn-danger" href="../../applicationLogic/logout.php">Logout</a>
+             </li>
          </ul>
        </nav>
        <!-- /.sidebar-menu -->

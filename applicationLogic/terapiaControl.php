@@ -67,6 +67,39 @@ class terapiaControl{
         }
     }
 
+    public static function getTerapiePaz($cf){
+        try{
+            $_SESSION['eccezione']="";
+            $arrKey= array('cf' => $cf);
+            $arrayTerapie = array();
+            $listTerapie = DatabaseInterface::selectQueryByAtt($arrKey, "terapia");
+
+            while ($row = $listTerapie->fetch_array()) {
+                $terapia = new Terapia($row[0],$row[1],$row[2],$row[3],$row[4]);
+                $arrayTerapie[] = $terapia;
+            }
+            return $arrayTerapie;
+        }catch(Exception $e){
+            $_SESSION['eccezione'] =$e->getMessage();
+            return array();
+        }
+    }
+
+    public static function getEziologicoForPaz($idT){
+        try{
+            $arrKey= array('id_terapia' => $idT);
+            $mEz = null;
+            $recMEz=DatabaseInterface::selectQueryByAtt($arrKey, "schedamodelloeziologico");
+            $row = $recMEz->fetch_array();
+            $mEz=new SchedaModelloEziologico($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
+
+            return $mEz;
+        }catch(Exception $e){
+            $_SESSION['eccezione'] =$e->getMessage();
+            return null;
+        }
+    }
+
 }
 
 
