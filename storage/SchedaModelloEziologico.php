@@ -24,6 +24,42 @@ class SchedaModelloEziologico
         || $relazioneFinale == null || $idTerapia == null || $tipo == null){
             throw new Exception("Alcuni valori non validi!");
         }
+        else if(strlen($fattoriCausativi)>500){
+            throw new Exception("Il campo Fattori Causativi supera la lunghezza massima ");
+        }
+        else if(strlen($fattoriCausativi)<2){
+            throw new Exception("Il campo Fattori Causativi è inferiore alla lunghezza minima ");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $fattoriCausativi)){
+            throw new Exception("Formato del campo Fattori Causativi non corretto");
+        }
+        else if(strlen($fattoriPrecipitanti)>500){
+            throw new Exception("Il campo Fattori Precipitanti  supera la lunghezza massima ");
+        }
+        else if(strlen($fattoriPrecipitanti)<2){
+            throw new Exception("Il campo Fattori Precipitanti  è inferiore alla lunghezza minima ");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $fattoriPrecipitanti)){
+            throw new Exception("Formato del campo Fattori Precipitanti  non corretto");
+        }
+        else if(strlen($fattoriMantenimento)>500){
+            throw new Exception("Il campo Fattori Mantenimento  supera la lunghezza massima ");
+        }
+        else if(strlen($fattoriMantenimento)<2){
+            throw new Exception("Il campo Fattori Mantenimento  è inferiore alla lunghezza minima ");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $fattoriMantenimento)){
+            throw new Exception("Formato del campo Fattori Mantenimento  non corretto");
+        }
+        else if(strlen($relazioneFinale)>500){
+            throw new Exception("Il campo Relazione finale supera la lunghezza massima ");
+        }
+        else if(strlen($relazioneFinale)<2){
+            throw new Exception("Il campo Relazione finale  è inferiore alla lunghezza minima ");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $relazioneFinale)){
+            throw new Exception("Formato del campo Relazione finale  non corretto");
+        }
         else if($idTerapia<1){
             throw new Exception("Id terapia non valido!");
         }
@@ -93,12 +129,30 @@ class SchedaModelloEziologico
         if($fattoriCausativi == null){
             throw new Exception("Nuovo campo fattori causativi non valido!");
         }
+        else if(strlen($fattoriCausativi)>500){
+            throw new Exception("Il campo Fattori Causativi supera la lunghezza massima ");
+        }
+        else if(strlen($fattoriCausativi)<2){
+            throw new Exception("Il campo Fattori Causativi è inferiore alla lunghezza minima ");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $fattoriCausativi)){
+            throw new Exception("Formato del campo Fattori Causativi non corretto");
+        }
          $this -> fattoriCausativi = $fattoriCausativi;
     }
     public function setFattoriPrecipitanti($fattoriPrecipitanti)
     {
         if($fattoriPrecipitanti == null){
             throw new Exception("Nuovo campo fattori precipitanti non valido!");
+        }
+        else if(strlen($fattoriPrecipitanti)>500){
+            throw new Exception("Il campo Fattori Precipitanti  supera la lunghezza massima ");
+        }
+        else if(strlen($fattoriPrecipitanti)<2){
+            throw new Exception("Il campo Fattori Precipitanti  è inferiore alla lunghezza minima ");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $fattoriPrecipitanti)){
+            throw new Exception("Formato del campo Fattori Precipitanti  non corretto");
         }
          $this -> fattoriPrecipitanti = $fattoriPrecipitanti;
     }
@@ -107,12 +161,30 @@ class SchedaModelloEziologico
         if($fattoriMantenimento == null){
             throw new Exception("Nuovo campo fattori di mantenimento non valido!");
         }
+        else if(strlen($fattoriMantenimento)>500){
+            throw new Exception("Il campo Fattori Mantenimento  supera la lunghezza massima ");
+        }
+        else if(strlen($fattoriMantenimento)<2){
+            throw new Exception("Il campo Fattori Mantenimento  è inferiore alla lunghezza minima ");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $fattoriMantenimento)){
+            throw new Exception("Formato del campo Fattori Mantenimento  non corretto");
+        }
          $this -> fattoriMantenimento = $fattoriMantenimento;
     }
     public function setRelazioneFinale($relazioneFinale)
     {
         if($relazioneFinale == null){
             throw new Exception("Nuovo campo relazione finale non valido!");
+        }
+        else if(strlen($relazioneFinale)>500){
+            throw new Exception("Il campo Relazione finale supera la lunghezza massima ");
+        }
+        else if(strlen($relazioneFinale)<2){
+            throw new Exception("Il campo Relazione finale  è inferiore alla lunghezza minima ");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $relazioneFinale)){
+            throw new Exception("Formato del campo Relazione finale  non corretto");
         }
          $this -> relazioneFinale = $relazioneFinale;
     }
