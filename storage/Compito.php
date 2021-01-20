@@ -80,10 +80,29 @@ class Compito
 		$cfPaz
 	) {
         date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
+
         if($data == null || $effettuato == null || $titolo == null || $descrizione == null
             || $cfProf == null || $cfPaz == null){
             throw new Exception("Alcuni valori non validi!");
         }
+
+        else if($data != $currDate ){
+            throw new Exception("La data inserita non è quella corrente");
+        }
+
+        else if(strlen($titolo) > 25){
+            throw new Exception("La lunghezza del titolo supera i 25 caratteri");
+        }
+
+        else if(!preg_match('/[A-Za-z]$/', $titolo)){
+            throw new Exception("Formato del titolo non corretto");
+        }
+
+        else if(!preg_match('/[A-Za-z0-9]$/', $descrizione)){
+            throw new Exception("Formato della descrizione non corretto");
+        }
+
 		$this->id= $id;
 		$this->data = $data;
 		$this->effettuato= $effettuato;
