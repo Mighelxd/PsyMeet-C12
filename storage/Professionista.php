@@ -27,7 +27,7 @@
             || $nIsc == null || $pIva == null || $p == null || $polRc == null){
                 throw new Exception("Alcuni valori non definiti!");
             }
-            else if(strlen($cf)!=16){
+           else if(strlen($cf)!=16){
                 throw new Exception("Codice fiscale non valido!");
             }
             else if(strlen($tel)<10){
@@ -48,21 +48,24 @@
             else if(strlen($e) >50){
                 throw new Exception("Lunghezza Email superiore di quella prevista");
             }
-            else if(!preg_match("/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/",$e)){
+           else if(!preg_match('/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/',$e)){
                 throw new Exception("Formato di Email errato");
             }
-            else if(strlen($pass)<8){
+          else if(strlen($pass)<8){
                 throw new Exception("Lunghezza Password inferiore di quella prevista");
             }
-            else if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,25}$/", $pass)){
+       /*     else if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,25}$/", $pass)){
                 throw new Exception("Formato di Password errato");
-            }
-            else if(strlen($titSt) < 2){
-                throw new Exception("Lunghezza Titolo di studio minore di quella prevista");
-            }
-            else if(strlen($pub) <2) {
-                throw new Exception("Lunghezza Pubblicazioni minore di quella prevista");
-            }
+            }*/
+          else if(!preg_match('/^[a-f0-9]{32}$/i', $pass)){
+              throw new Exception("Formato di Password errato");
+          }
+          else if(strlen($titSt) < 2){
+              throw new Exception("Lunghezza Titolo di studio minore di quella prevista");
+          }
+          else if(strlen($pub) <2) {
+              throw new Exception("Lunghezza Pubblicazioni minore di quella prevista");
+          }
 
 
             $this->cfProf=$cf;

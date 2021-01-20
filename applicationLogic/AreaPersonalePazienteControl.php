@@ -17,34 +17,24 @@ if($_POST["action"] == "ModificaPaziente"){
         $passwordPaz = md5($_POST["password"]);
         $istruzionePaz = $_POST["istruzione"];
 
-
-        $arr = array("cf" => $cfPaziente,);
-        $result = DatabaseInterface::selectQueryById($arr,"paziente");
-        $arr = $result -> fetch_array();
-        $paziente = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $arr[11], $arr[12]);
-
-        if ($telefonoPaz != "") {
-            $paziente->setTelefono($telefonoPaz);
+        if(!isset($telefonoPaz)){
+            $telefonoPaz = "";
+        }
+        if(!isset($indirizzoPaz)){
+            $indirizzoPaz = "";
+        }
+        if(!isset($emailPaz)){
+            $emailPaz = "";
+        }
+        if(!isset($passwordPaz)){
+            $passwordPaz = "";
+        }
+        if(!isset($istruzionePaz)){
+            $istruzionePaz = "";
         }
 
-        if ($indirizzoPaz != "") {
-            $paziente->setIndirizzo($indirizzoPaz);
-        }
+        $result = PazienteControl::updateSchedaPaziente($cfPaziente, $telefonoPaz,$indirizzoPaz, $emailPaz, $passwordPaz, $istruzionePaz);
 
-        if ($emailPaz != "") {
-            $paziente->setEmail($emailPaz);
-        }
-
-        if ($passwordPaz != "") {
-            $paziente->setPassword($passwordPaz);
-        }
-
-        if ($istruzionePaz != "") {
-            $paziente->setIstruzione($istruzionePaz);
-        }
-
-
-        $result = DatabaseInterface::updateQueryById($paziente->getArrayNoFoto(), "paziente");
 
         if($result){
             header("Location: ../interface/Paziente/areaPersonalePaziente.php");
@@ -65,25 +55,16 @@ else if($_POST["action"] == "modificaFoto"){
         else
             $immagine=NULL;
 
-        if($immagine != NULL){
-            $arr = array("cf" => $cfPaziente,);
-            $result = DatabaseInterface::selectQueryById($arr,"paziente");
-            $arr = $result -> fetch_array();
-            $paziente = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $immagine, $arr[12]);
+        $res = PazienteControl::updateFotoProfilo($cfPaziente, $immagine);
 
 
-            $result = DatabaseInterface::updateQueryById($paziente->getArray(), "paziente");
-            //var_dump($result);
-            if($result){
+            if($res){
                 header("Location: ../interface/Paziente/areaPersonalePaziente.php");
             }
-            else{
-                throw new Exception("Errore: Modifiche non effettuate!");
-            }
-        }
-        else {
-            throw new Exception("Errore: Modifica foto non effettuata!");
-        }
+            else
+                throw new Exception("Errore: Modifica foto non effettuate!");
+
+
     }catch(Exception $e){
         $_SESSION['eccezione']=$e->getMessage();
         header("Location: ../interface/Paziente/areaPersonalePaziente.php");
