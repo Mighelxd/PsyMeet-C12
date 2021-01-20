@@ -20,6 +20,39 @@ class Episodio{
     else if($idScheda <=0){
       throw new Exception("Id scheda non valido!");
     }
+
+    else if(strlen($analisiFun)>500){
+      throw new Exception("Lunghezza Analisi funzionale maggiore di quella prevista");
+    }
+
+    else if (strlen($analisiFun)<2){
+      throw new Exception("Lunghezza Analisi funzionale minore di quella prevista");
+    }
+
+    else if (!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $analisiFun)){
+      throw new Exception("Analisi funzionale non rispetta il formato previsto");
+    }
+
+    else if (strlen($mA)<2){
+      throw new Exception("Lunghezza A minore di quella prevista");
+    }
+
+    else if (!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $mB)){
+      throw new Exception("B non rispetta il formato previsto");
+    }
+
+    else if (strlen($mC)<2){
+      throw new Exception("Lunghezza B minore di quella prevista");
+    }
+
+    else if (!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $$appunti)){
+      throw new Exception("Appunti Terapeuta non rispetta il formato previsto");
+    }
+
+    else if (!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $mB)){
+      throw new Exception("B non rispetta il formato previsto");
+    }
+
     $this->idEpisodio = $idEpisodio;
     $this->numero = $numero;
     $this->analisiFun= $analisiFun;
