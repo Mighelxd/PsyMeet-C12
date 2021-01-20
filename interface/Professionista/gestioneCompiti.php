@@ -35,7 +35,6 @@ else{
     header("Location: Pazienti.php");
 }
 
-
 $compito= CompitoControl::selectAllCompitiProf($cf);
 
 //$cfProfessionista = $_SESSION["codiceFiscale"];
@@ -344,7 +343,7 @@ $paziente = PazienteControl::getPaz($cfT);
 	   for ($i=0; $i<count($compito); $i++) {
 	   	?>
 
-      <form  nome"correz" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
+      <form name=correz" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
         <input type="text" name="action" value="correzione" hidden="true">
       <div class="row">
           <div class="col-md-12">
