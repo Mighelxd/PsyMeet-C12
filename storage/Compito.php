@@ -107,8 +107,8 @@ class Compito
             throw new Exception("Il campo correzione non rispetta il formato");
         }
 
-        else if($svolgimento==''){
-            throw new Exception("Il campo svolgimento è vuoto");
+        else if(!preg_match('/[A-Za-z0-9]$/', $svolgimento)){
+            throw new Exception("Il campo svolgimento non rispetta il formato");
         }
 
 		$this->id= $id;
@@ -251,8 +251,8 @@ class Compito
             throw new Exception("Nuovo svolgimento non valido!");
         }
 
-        else if($svolgimento==''){
-            throw new Exception("Il campo svolgimento è vuoto");
+        else if(!preg_match('/[A-Za-z0-9]$/', $svolgimento)){
+            throw new Exception("Il campo svolgimento non rispetta il formato");
         }
 
 		$this->svolgimento = $svolgimento;

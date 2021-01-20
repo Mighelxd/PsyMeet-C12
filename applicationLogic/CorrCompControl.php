@@ -69,20 +69,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $cfPaz = 'NSTFNC94M23H703G';
           $svolgimento='';
           $correzione='';
+          $effettuato=0;
 
-          $compitoComp = new Compito(null,$data,$titolo,$descrizione,$svolgimento,$correzione,$cfProf,$cfPaz);
+          echo $data;
+          echo $titolo;
+          echo "<br>";
+          echo $descrizione;
+          echo $cfPaz;
+
+
+          $compitoComp = new Compito(null ,$data,$titolo,$effettuato, $descrizione,$svolgimento,$correzione,$cfProf,$cfPaz);
 
           $compt = DatabaseInterface::insertQuery($compitoComp->getArray(), TABLE_NAME);
-          //var_dump($compt);
+          var_dump($compt);
 
           if ($compt) {
-              header('Location: ../interface/Professionista/gestioneCompiti.php');
+             // header('Location: ../interface/Professionista/gestioneCompiti.php');
           } else {
               throw new Exception("Errore: Compito non aggiunto!");
           }
       }catch(Exception $e){
           $_SESSION['eccezione']= $e->getMessage();
-          header('Location: ../interface/Professionista/gestioneCompiti.php');
+          echo $e->getMessage();
+          //header('Location: ../interface/Professionista/gestioneCompiti.php');
       }
 
 } elseif
