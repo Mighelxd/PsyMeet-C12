@@ -30,15 +30,41 @@
             else if(strlen($cf)!=16){
                 throw new Exception("Codice fiscale non valido!");
             }
-            else if(strlen($tel)<9){
-                throw new Exception("Numero telefono non valido!");
+            else if(strlen($tel)<10){
+                throw new Exception("Lunghezza Telefono minore di quella prevista");
             }
             else if(strlen($cell)<10){
-                throw new Exception("Numero cellulare non valido!");
+                throw new Exception("Lunghezza Cellulare minore di quella prevista");
             }
             else if(strlen($pIva)!=11){
                 throw new Exception("Partita Iva non valida!");
             }
+            else if(!preg_match("/^[0-9]{10}+$/", $cell)){
+                throw new Exception("Formato di Cellulare errato");
+            }
+            else if(!preg_match("/^[A-Za-z\s,àòèéùì]+$/",$indiSt)){
+                throw new Exception("Formato di Indirizzo studio errato");
+            }
+            else if(strlen($e) >50){
+                throw new Exception("Lunghezza Email superiore di quella prevista");
+            }
+            else if(!preg_match("/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/",$e)){
+                throw new Exception("Formato di Email errato");
+            }
+            else if(strlen($pass)<8){
+                throw new Exception("Lunghezza Password inferiore di quella prevista");
+            }
+            else if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,25}$/", $pass)){
+                throw new Exception("Formato di Password errato");
+            }
+            else if(strlen($titSt) < 2){
+                throw new Exception("Lunghezza Titolo di studio minore di quella prevista");
+            }
+            else if(strlen($pub) <2) {
+                throw new Exception("Lunghezza Pubblicazioni minore di quella prevista");
+            }
+
+
             $this->cfProf=$cf;
             $this->nome=$n;
             $this->cognome=$c;
@@ -59,7 +85,10 @@
             $this->immagineProfessionista=$img;
         }
         public function setCfProf($cf){
-            if($cf == null || strlen($cf)!=16){
+            if($cf == null ){
+                throw new Exception("Nuovo codice fiscale non valido!");
+            }
+            else if( strlen($cf)>16){
                 throw new Exception("Nuovo codice fiscale non valido!");
             }
             $this->cfProf=$cf;
