@@ -103,6 +103,14 @@ class Compito
             throw new Exception("Formato della descrizione non corretto");
         }
 
+        else if(!preg_match('/[A-Za-z0-9]$/', $correzione)){
+            throw new Exception("Il campo correzione non rispetta il formato");
+        }
+
+        else if($svolgimento==''){
+            throw new Exception("Il campo svolgimento è vuoto");
+        }
+
 		$this->id= $id;
 		$this->data = $data;
 		$this->effettuato= $effettuato;
@@ -155,13 +163,19 @@ class Compito
      * @param $data
      */
     public function setData($data)
-	{
-	    if($data == null){
-	        throw new Exception("Nuova Data non valida!");
-        }
-		$this->data = $data;
-	}
+    {
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
 
+        {
+            if ($data == null) {
+                throw new Exception("Nuova Data non valida!");
+            } else if ($data != $currDate) {
+                throw new Exception("La data inserita non è quella corrente");
+            }
+            $this->data = $data;
+        }
+    }
 
     /**
      * @return mixed
@@ -180,6 +194,15 @@ class Compito
 	    if($titolo == null){
 	        throw new Exception("Nuovo titolo non valido!");
         }
+
+        else if(strlen($titolo) > 25){
+            throw new Exception("La lunghezza del titolo supera i 25 caratteri");
+        }
+
+        else if(!preg_match('/[A-Za-z]$/', $titolo)){
+            throw new Exception("Formato del titolo non corretto");
+        }
+
 		$this->titolo = $titolo;
 	}
 
@@ -201,6 +224,11 @@ class Compito
         if($descrizione == null){
             throw new Exception("Nuova descrizione non valida!");
         }
+
+        else if(!preg_match('/[A-Za-z0-9]$/', $descrizione)){
+            throw new Exception("Formato della descrizione non corretto");
+        }
+
 		$this->descrizione = $descrizione;
 	}
 
@@ -222,6 +250,11 @@ class Compito
         if($svolgimento == null){
             throw new Exception("Nuovo svolgimento non valido!");
         }
+
+        else if($svolgimento==''){
+            throw new Exception("Il campo svolgimento è vuoto");
+        }
+
 		$this->svolgimento = $svolgimento;
 	}
 
@@ -243,6 +276,11 @@ class Compito
         if($correzione == null){
             throw new Exception("Nuova correzione non valida!");
         }
+
+        else if(!preg_match('/[A-Za-z0-9]$/', $correzione)){
+            throw new Exception("Il campo correzione non rispetta il formato");
+        }
+
 		$this->correzione = $correzione;
 	}
 

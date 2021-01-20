@@ -25,9 +25,11 @@ class CompitoTest extends TestCase
 
     public function testSetData()
     {
+        date_default_timezone_set("Europe/Rome");
+        $currDate = date("Y-m-d");
         $comp = new Compito(1,"2021-01-20",1,"titolo","desc","svlg","corr","AAA","AAA");
-        $comp -> setData("2021-01-21");
-        self::assertEquals("2021-01-21", $comp ->getData());
+        $comp -> setData($currDate);
+        self::assertEquals(date("Y-m-d"), $comp ->getData());
 
     }
 
@@ -81,8 +83,8 @@ class CompitoTest extends TestCase
     public function testSetTitolo()
     {
         $comp = new Compito(1,"2021-01-20",1,"titolo","desc","svlg","corr","AAA","AAA");
-        $comp -> setTitolo("titolo updated");
-        self::assertEquals("titolo updated", $comp ->getTitolo());
+        $comp -> setTitolo("TitoLo Updated");
+        self::assertEquals("TitoLo Updated", $comp ->getTitolo());
     }
 
     public function testGetEffettuato()
@@ -103,8 +105,8 @@ class CompitoTest extends TestCase
     public function testSetDescrizione()
     {
         $comp = new Compito(1,"2021-01-20",1,"titolo","desc","svlg","corr","AAA","AAA");
-        $comp -> setDescrizione("desc updated");
-        self::assertEquals("desc updated", $comp ->getDescrizione());
+        $comp -> setDescrizione("D3sc updated");
+        self::assertEquals("D3sc updated", $comp ->getDescrizione());
     }
 
     public function testSetEffettuato()
