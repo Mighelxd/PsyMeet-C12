@@ -18,7 +18,6 @@ if(isset($_POST["azione"])){
             $_SESSION["datiPaziente"]=$paziente;
             $_SESSION["cartellaClinica"]=CartellaClinicaControl::getCartellaClinica($cfPaz,$cfProf);
             header("Location: ../interface/Professionista/CartellaClinica.php");
-            echo var_dump($paziente);
         }catch(Exception $e){
             echo $e->getMessage();
             $_SESSION['eccezione']= $e->getMessage();
@@ -29,9 +28,8 @@ if(isset($_POST["azione"])){
             $cfPaz=$_POST["codFiscalePaz"];
             $cartellaClinicOld=CartellaClinicaControl::getCartellaClinica($cfPaz,$cfProf);
             $date=date("Y-m-d");
-            $cartellaClinica=new CartellaClinica($cartellaClinicOld->getId(),$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
-            $result=CartellaClinicaControl::updateCartellaClinica($cartellaClinica);
-            if(gettype($result) == "string"){
+            $result=CartellaClinicaControl::updateCartellaClinica($cartellaClinicOld,$cartellaClinicOld->getId(),$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
+            if(!$result == "string"){
                 echo json_encode(array("esito"=>false, "errore" => $result));
                 exit();
             }
@@ -45,24 +43,7 @@ if(isset($_POST["azione"])){
         try{
             $cfPaz=$_POST["codFiscalePaz"];
             $date=date("Y-m-d");
-            $cartellaClinica=new CartellaClinica(-1,$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
-            if(!isset($_POST["umo"])){
-                echo json_encode(array("esito"=>true, "errore"=>"Inserire qualita' umore"));
-                exit();
-            }
-            if(!isset($_POST["relaz"])){
-                echo json_encode(array("esito"=>true, "errore"=>"Inserire qualita' relazioni"));
-                exit();
-            }
-            if(!isset($_POST["patol"])){
-                echo json_encode(array("esito"=>true, "errore"=>"Inserire patologie pregresse"));
-                exit();
-            }
-            if(!isset($_POST["farma"])){
-                echo json_encode(array("esito"=>true, "errore"=>"Inserire farmaci"));
-                exit();
-            }
-            $result=CartellaClinicaControl::saveCartellaClinica($cartellaClinica);
+            $result=CartellaClinicaControl::saveCartellaClinica(-1,$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
             if($result){
                 echo json_encode(array("esito"=>true));
                 exit();
@@ -72,8 +53,8 @@ if(isset($_POST["azione"])){
                 exit();
             }
         }catch(Exception $e){
+            echo json_encode(array("esito"=>false,"errore"=>$e->getMessage()));
             $_SESSION['eccezione']= $e->getMessage();
-            header("Location: ../interface/Professionista/CartellaClinica.php");
         }
     }
 }
