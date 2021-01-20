@@ -14,10 +14,10 @@ class SchedaAssessmentGeneralizzato
     private $autoregNegativi;
     private $cognitivePositivi;
     private $cognitiveNegativi;
-    private $self_managementNegativi;
+    private $selfManagementNegativi;
     private $socialiPositivi;
     private $socialiNegativi;
-    private $self_managementPositivi;
+    private $selfManagementPositivi;
     private $idTerapia;
     private $tipo;
     public static $tableName="schedaassessmentgeneralizzato";
@@ -26,11 +26,46 @@ class SchedaAssessmentGeneralizzato
     {
         date_default_timezone_set("Europe/Rome");
         $currDate = date("Y-m-d");
-        if($data == null || $autoregNegativi == null || $autoregPositivi == null || $cognitivePositivi == null
+
+       if($data == null || $autoregNegativi == null || $autoregPositivi == null || $cognitivePositivi == null
         || $cognitiveNegativi == null || $selfManagementNegativi == null || $selfManagementPositivi == null
         || $socialiNegativi == null || $socialiPositivi == null || $idTerapia == null || $tipo == null){
             throw new Exception("Alcuni valori non validi!");
         }
+
+       else  if($autoregPositivi == ''){
+            throw new Exception("Il campo Autoregolazione-Aspetti Positivi è vuoto");
+        }
+
+        else if($autoregNegativi == ''){
+            throw new Exception("Il campo Autoregolazione-Aspetti Negativi è vuoto");
+        }
+
+        else if($cognitivePositivi == ''){
+            throw new Exception("Il campo Cognitive-Aspetti Positivi è vuoto");
+        }
+
+        else if($cognitiveNegativi == ''){
+            throw new Exception("Il campo Cognitive-Aspetti Negativi è vuoto");
+        }
+
+        else if($selfManagementPositivi == ''){
+            throw new Exception("Il campo Self Management-Aspetti Positivi è vuoto");
+        }
+
+        else if($selfManagementNegativi == ''){
+            throw new Exception("Il campo Self Management-Aspetti Negativi è vuoto");
+        }
+
+        else if($socialiPositivi == ''){
+            throw new Exception("Il campo Sociali-Aspetti Positivi è vuoto");
+        }
+
+        else if($socialiNegativi == ''){
+            throw new Exception("Il campo Sociali-Aspetti Negativi è vuoto");
+        }
+
+
         else if($idTerapia<1){
             throw new Exception("Id terapia non valida!");
         }
@@ -145,7 +180,7 @@ class SchedaAssessmentGeneralizzato
         if($selfManagementNegativi == null){
             throw new Exception("Nuovo campo self management negativo non valido!");
         }
-        $this -> self_managementNegativi = $selfManagementNegativi;
+        $this -> selfManagementNegativi = $selfManagementNegativi;
     }
     public function setSocialiPositivi($socialiPositivi)
     {
