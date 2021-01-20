@@ -20,7 +20,6 @@ class SchedaFollowUpTest extends TestCase
         {
             $schedafollowup = new SchedaFollowUp(1, "2021-01-20", "aaaa", "aaaa", "1", "Scheda Follow Up");
             self::assertEquals("aaaa",$schedafollowup->getRicadute());
-
         }
     }
 

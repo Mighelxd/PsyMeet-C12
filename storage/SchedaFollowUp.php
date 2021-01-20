@@ -18,8 +18,26 @@ class SchedaFollowUp
 
     public function __construct($idScheda, $data,$ricadute, $esitiPositivi, $idTerapia,$tipo)
     {
-        if($data == null || $ricadute == null || $esitiPositivi == null || $esitiPositivi == null || $idTerapia == null || $tipo == null){
+        if($data == null || $ricadute == null || $esitiPositivi == null || $idTerapia == null || $tipo == null){
             throw new Exception("Alcuni valori non definiti!");
+        }
+        else  if(strlen($ricadute > 500)){
+            throw new Exception("Lunghezza ricadute maggiore di quella prevista");
+        }
+        else  if(strlen($ricadute < 2)){
+            throw new Exception("Lunghezza ricadute minore di quella prevista");
+        }
+        else  if(strlen($esitiPositivi > 500)){
+            throw new Exception("Lunghezza Esiti positivi maggiore di quella prevista");
+        }
+        else  if(strlen($esitiPositivi < 2)){
+            throw new Exception("Lunghezza Esiti positivi minore di quella prevista");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $ricadute)){
+            throw new Exception("Formato di ricadute non corretto");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $esitiPositivi)){
+            throw new Exception("Formato di esiti positivi non corretto");
         }
         else if($idTerapia<1){
             throw new Exception("Id terapia non valida!");
