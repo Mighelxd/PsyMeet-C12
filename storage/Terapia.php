@@ -87,7 +87,7 @@ class Terapia
         if($cfProf == null || strlen($cfProf)!=16){
             throw new Exception("Nuovo codice fiscale professionista non valido!");
         }
-         $this -> cf_prof = $cfProf;
+         $this -> cfProf = $cfProf;
     }
     public function setCf($cf)
     {
