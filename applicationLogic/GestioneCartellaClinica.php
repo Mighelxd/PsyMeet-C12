@@ -29,7 +29,7 @@ if(isset($_POST["azione"])){
             $cartellaClinicOld=CartellaClinicaControl::getCartellaClinica($cfPaz,$cfProf);
             $date=date("Y-m-d");
             $result=CartellaClinicaControl::updateCartellaClinica($cartellaClinicOld,$cartellaClinicOld->getId(),$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
-            if(!$result == "string"){
+            if($result == "string"){
                 echo json_encode(array("esito"=>false, "errore" => $result));
                 exit();
             }
