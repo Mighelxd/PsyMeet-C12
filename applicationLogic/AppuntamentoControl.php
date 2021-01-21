@@ -10,6 +10,7 @@ session_start();
 include '../plugins/libArray/FunArray.php';
 include '../storage/DatabaseInterface.php';
 include '../storage/Appuntamento.php';
+include "AppuntamentoControlF.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $action = $_POST['action'];
@@ -93,13 +94,14 @@ else if($action == 'addApp'){
         $ora = $_POST['ora'];
         $descrizione = $_POST['descrizione'];
         $cf = $_POST['codF'];
-        $newApp = new Appuntamento(null,$data,$ora,$descrizione,$cfProf,$cf);
-        $ok = DatabaseInterface::insertQuery($newApp->getArray(),Appuntamento::$tableName);
-        if($ok){
+        $addOk = AppuntamentoControlF::addApp($data,$ora,$descrizione,$cfProf,$cf);
+       // $newApp = new Appuntamento(null,$data,$ora,$descrizione,$cfProf,$cf);
+       // $ok = DatabaseInterface::insertQuery($newApp->getArray(),Appuntamento::$tableName);
+        if($addOk){
             header('Location: ../interface/Professionista/calendario.php');
         }
         else{
-            throw new Exception("Errore: Appuntamento non aggiunto!");
+            throw new Exception($addOk);
         }
     }catch(Exception $e){
         $_SESSION['erroreApp'] = $e->getMessage();

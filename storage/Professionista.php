@@ -42,7 +42,7 @@
             else if(!preg_match("/^[0-9]{10}+$/", $cell)){
                 throw new Exception("Formato di Cellulare errato");
             }
-            else if(!preg_match("/^[A-Za-z\s,àòèéùì]+$/",$indiSt)){
+            else if(!preg_match("/^[A-Za-z0-9\s,àòèéùì]+$/",$indiSt)){
                 throw new Exception("Formato di Indirizzo studio errato");
             }
             else if(strlen($e) >50){
@@ -51,10 +51,10 @@
            else if(!preg_match('/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/',$e)){
                 throw new Exception("Formato di Email errato");
             }
-          else if(strlen($pass)<8){
+      /*    else if(strlen($pass)<8){
                 throw new Exception("Lunghezza Password inferiore di quella prevista");
             }
-       /*     else if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,25}$/", $pass)){
+            else if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,25}$/", $pass)){
                 throw new Exception("Formato di Password errato");
             }*/
           else if(!preg_match('/^[a-f0-9]{32}$/i', $pass)){
