@@ -14,6 +14,7 @@ include "../storage/scelta.php";
 include "../storage/Fattura.php";
 include "PacchettoControl.php";
 include "PazienteControl.php";
+include "SeduteControl.php";
 session_start();
 if(isset($_POST['action'])) {
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -28,21 +29,13 @@ if($action == "saveScheda"){
   try{
     $data = $_POST['data'];
     $idTerapia = $_POST['idTerapia'];
-    $numEp = '0';
-    $data = str_replace('/','-',$data);
-    $data=date_create($data);
-    $data = date_format($data,"Y/m/d");
-
-    $scheda = new SchedaAssessmentFocalizzato(null,$data,$numEp,$idTerapia,"Scheda Assessment Focalizzato");
-    $ok = DatabaseInterface::insertQuery($scheda->getArray(),"schedaassessmentfocalizzato");
-
-    $recIdScheda = DatabaseInterface::selectQueryByAtt($scheda->getArray(),"schedaassessmentfocalizzato");
-    while($row = $recIdScheda->fetch_array()){
-      $idSchedaCorr = $row[0];
+    $addOkFoc=SeduteControl::addSchedaFoc($data,$idTerapia);
+    if(!$addOkFoc){
+      throw new Exception($addOkFoc);
+    }else{
+      $ris = array("ok"=>$addOkFoc,"idScheda"=>$_SESSION['idSCorr']);
+      echo json_encode($ris);
     }
-    $_SESSION['idSCorr'] = $idSchedaCorr;
-    $ris = array("ok"=>$ok,"idScheda"=>$idSchedaCorr);
-    echo json_encode($ris);
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
