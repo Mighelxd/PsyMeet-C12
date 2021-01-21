@@ -66,7 +66,7 @@ class SchedaAssessmentFocalizzato
     }
     public function setData($data)
     {
-        if($data == null ){
+        if($data == null){
             throw new Exception("Nuova data non valida!");
         }
         $this->data = $data;
