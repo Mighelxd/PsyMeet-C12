@@ -33,6 +33,38 @@ class SchedaPrimoColloquio
         else if($tipo != "Scheda Primo Colloquio"){
             throw new Exception("Tipo scheda non compatibile!");
         }
+
+        else if(strlen($problema)<2){
+            throw new Exception("Lunghezza Definizione Problema minore di quella prevista" );
+        }
+        else if(strlen($problema)>500){
+            throw new Exception("Lunghezza Definizione Problema maggiore di quella prevista" );
+        }
+        else if(!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $problema)){
+            throw new Exception("Definizione Problema non rispetta il formato previsto");
+        }
+        else if(strlen($aspettative)<2){
+            throw new Exception("Lunghezza Aspettative minore di quella prevista" );
+        }
+        else if(!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $motivazione)){
+            throw new Exception("Motivazione non rispetta il formato previsto");
+        }
+        else if(strlen($obiettivi)>500){
+            throw new Exception("Lunghezza Obiettivi maggiore di quella prevista" );
+        }
+        else if(strlen($obiettivi)<2){
+            throw new Exception("Lunghezza Obiettivi minore di quella prevista" );
+        }
+        else if(strlen($cambiamento)<2){
+            throw new Exception("Lunghezza Definizione Cambiamento minore di quella prevista" );
+        }
+        else if(!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $cambiamento)){
+            throw new Exception("Definizione Cambiamento non rispetta il formato previsto");
+        }
+
+
+
+
         $this->idScheda = $idScheda;
         $this->data = $data;
         $this->problema = $problema;
