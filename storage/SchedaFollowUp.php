@@ -27,6 +27,27 @@ class SchedaFollowUp
         else if($tipo != "Scheda Follow Up"){
             throw new Exception("Tipo scheda non compatibile!");
         }
+
+        else if(strlen($ricadute)>500){
+            throw new Exception("Lunghezza ricadute maggiore di quella prevista");
+        }
+        else if(strlen($ricadute)<2){
+            throw new Exception("Lunghezza ricadute minore di quella prevista");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $ricadute)){
+            throw new Exception("Ricadute non rispetta il formato previsto");
+        }
+        else if(strlen($esitiPositivi)>500){
+            throw new Exception("Lunghezza Esiti positivi maggiore di quella prevista");
+        }
+        else if(strlen($esitiPositivi)<1){
+            throw new Exception("Lunghezza Esiti positivi minore di quella prevista");
+        }
+        else if(!preg_match('/[A-Za-z0-9]$/', $esitiPositivi)){
+            throw new Exception("Esiti positivi non rispetta il formato previsto");
+        }
+
+
         $this->idScheda = $idScheda;
         $this->data = $data;
         $this->ricadute= $ricadute;

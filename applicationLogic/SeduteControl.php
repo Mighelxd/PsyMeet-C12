@@ -1,10 +1,38 @@
 <?php
 
-include '../../storage/Terapia.php';
+//include '../../storage/Terapia.php';
 //session_start();
 
 class SeduteControl
 {
+    static function addSchedaFoc($data,$idTerapia){
+        try{
+            $numEp = '0';
+            $data = str_replace('/','-',$data);
+            $data=date_create($data);
+            $data = date_format($data,"Y-m-d");
+            $tipo = "Scheda Assessment Focalizzato";
+            $scheda = new SchedaAssessmentFocalizzato(null,$data,$numEp,$idTerapia,$tipo);
+            $scheda = $scheda->getArray();
+            $ok = DatabaseInterface::insertQuery($scheda,"schedaassessmentfocalizzato");
+            if($ok){
+                $scheda = array_diff($scheda,['']);
+                $recIdScheda = DatabaseInterface::selectQueryByAtt($scheda,"schedaassessmentfocalizzato");
+                if($recIdScheda->num_rows == 1){
+                    $row = $recIdScheda->fetch_array();
+                    $idSchedaCorr = $row[0];
+                    $_SESSION['idSCorr'] = $idSchedaCorr;
+                    return true;
+                }else{
+                    throw new Exception("Scheda non trovata!");
+                }
+            }else{
+                throw new Exception("Errore: scheda non aggiunta!");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
     static function recuperaEpisodi($allSchede)
     {
         try{

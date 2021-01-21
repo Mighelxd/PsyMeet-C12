@@ -26,6 +26,11 @@ class Terapia
         else if(strlen($cfPa)!=16){
             throw new Exception("Codice fiscale paziente non valido!");
         }
+
+        else if(strlen($descriz)==0){
+            throw new Exception("Il campo descrizione non può essere vuoto.");
+        }
+
         $this->idTerapia = $idTer;
         $this->data = $date;
         $this->descrizione= $descriz;
