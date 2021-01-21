@@ -87,9 +87,6 @@ class Compito
             throw new Exception("Alcuni valori non validi!");
         }
 
-        else if($data != $currDate ){
-            throw new Exception("La data inserita non è quella corrente");
-        }
 
         else if(strlen($titolo) > 25){
             throw new Exception("La lunghezza del titolo supera i 25 caratteri");

@@ -2,9 +2,9 @@
 
 
 use PHPUnit\Framework\TestCase;
-include "storage/Paziente.php";
-include "storage/CartellaClinica.php";
-include "applicationLogic/CartellaClinicaControl.php";
+include "../storage/Paziente.php";
+include "../storage/CartellaClinica.php";
+include "../applicationLogic/CartellaClinicaControl.php";
 class CartellaClinicaControlTest extends TestCase
 {
 

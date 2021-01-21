@@ -264,51 +264,51 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
 					     <div class="form-group row">
                         <label for="cellulare" class="col-sm-2 col-form-label">Cellulare</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="cellulare" placeholder="Cellulare" name="cellulare">
+                          <input type="text" class="form-control" id="cellulare" placeholder="Cellulare" name="cellulare" pattern="[0-9]{10}" title="10 Numeri">
                         </div>
                       </div>
 					   <div class="form-group row">
                         <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="telefono" placeholder="Telefono" name="telefono">
+                          <input type="text" class="form-control" id="telefono" placeholder="Telefono" name="telefono" pattern="[0-9]{10}" title="10 Numeri">
                         </div>
                       </div>
 					      <div class="form-group row">
                         <label for="indirizzoFisico" class="col-sm-2 col-form-label">Indirizzo studio</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="indirizzoFisico" placeholder="Indirizzo fisico" name="IndirizzoStudio">
+                          <input type="text" class="form-control" id="indirizzoFisico" placeholder="Indirizzo fisico" name="IndirizzoStudio" pattern="[A-Z a-z 0-9 ']{2,250}" title="Da 2 a 250 caratteri Alfanumerici(Apostrofi Consentiti)">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email">
+                          <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email" pattern="^[\w-.]+@([\w-]+.)+[\w-]{2,4}$" title="formato email errato (email@gmail.it)">
                         </div>
                       </div>
 					      <div class="form-group row">
                         <label for="pax" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" id="pax" placeholder="Password" name="Password">
+                          <input type="password" class="form-control" id="pax" placeholder="Password" name="Password" pattern=".{8,25}" title="da 8 a 25 caratteri (Quaslaisi carattere consentito)">
                         </div>
                       </div>
                 <div class="form-group row">
                         <label for="titoloStudio" class="col-sm-2 col-form-label">Titolo di studio</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control" id="titoloStudio" placeholder="Titolo di studio" name="TitoloDiStudio"></textarea>
+                          <textarea class="form-control" id="titoloStudio" placeholder="Titolo di studio" name="TitoloDiStudio" pattern="[A-Z a-z 0-9 ']{2,500}" title="Da 2 a 500 caratteri Alfanumerici(Apostrofi Consentiti)"></textarea>
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label for="pubblicazioni" class="col-sm-2 col-form-label">Pubblicazioni</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control" id="pubblicazioni" placeholder="Pubblicazioni" name="Pubblicazioni"></textarea>
+                          <textarea class="form-control" id="pubblicazioni" placeholder="Pubblicazioni" name="Pubblicazioni" pattern="[A-Z a-z 0-9 ']{2,500}" title="Da 2 a 500 caratteri Alfanumerici(Apostrofi Consentiti)"></textarea>
                         </div>
                       </div>
 
 					  <div class="form-group row">
                         <label for="esperienze" class="col-sm-2 col-form-label">Esperienze</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control" id="esperienze" placeholder="Esperienze" name="Esperienze"></textarea>
+                          <textarea class="form-control" id="esperienze" placeholder="Esperienze" name="Esperienze" pattern="[A-Z a-z 0-9 ']{2,500}" title="Da 2 a 500 caratteri Alfanumerici(Apostrofi Consentiti)"></textarea>
                         </div>
                       </div>
 

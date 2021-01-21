@@ -85,6 +85,67 @@ class PazienteControl {
       return null;
     }
   }
+
+
+  static function  updateSchedaPaziente($cf, $tell, $indirizzo, $email, $password, $istruzione){
+    try {
+      $arr = array("cf" => $cf,);
+      $result = DatabaseInterface::selectQueryById($arr,"paziente");
+      $arr = $result -> fetch_array();
+      $paziente = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $arr[11], $arr[12]);
+
+      if ($tell != "") {
+        $paziente->setTelefono($tell);
+      }
+
+      if ($indirizzo != "") {
+        $paziente->setIndirizzo($indirizzo);
+      }
+
+      if ($email != "") {
+        $paziente->setEmail($email);
+      }
+
+      if ($password != "") {
+        $paziente->setPassword($password);
+      }
+
+      if ($istruzione != "") {
+        $paziente->setIstruzione($istruzione);
+      }
+
+
+      $result = DatabaseInterface::updateQueryById($paziente->getArrayNoFoto(), "paziente");
+
+      if($result == false){
+        throw new Exception("errore update");
+      }
+      return true;
+
+    }catch (Exception $e){
+      return $e->getMessage();
+    }
+  }
+
+  static function updateFotoProfilo($cf, $img){
+    try {
+      if($img != NULL){
+            $arr = array("cf" => $cf,);
+            $result = DatabaseInterface::selectQueryById($arr,"paziente");
+            $arr = $result -> fetch_array();
+            $paziente = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $immagine, $arr[12]);
+
+            $result = DatabaseInterface::updateQueryById($paziente->getArray(), "paziente");
+
+            if ($result == false){
+              throw new Exception("errore update");
+            }
+            return true;
+      }
+    }catch (Exception $e){
+      return $e->getMessage();
+    }
+  }
 }
 
 

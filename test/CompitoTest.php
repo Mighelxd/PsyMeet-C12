@@ -3,7 +3,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-include 'storage/Compito.php';
+include '../storage/Compito.php';
 
 class CompitoTest extends TestCase
 {

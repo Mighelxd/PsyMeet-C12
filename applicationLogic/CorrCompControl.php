@@ -77,14 +77,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           var_dump($compt);
 
           if ($compt) {
-             // header('Location: ../interface/Professionista/gestioneCompiti.php');
+              header('Location: ../interface/Professionista/gestioneCompiti.php');
           } else {
               throw new Exception("Errore: Compito non aggiunto!");
           }
       }catch(Exception $e){
           $_SESSION['eccezione']= $e->getMessage();
           echo $e->getMessage();
-          //header('Location: ../interface/Professionista/gestioneCompiti.php');
+          header('Location: ../interface/Professionista/gestioneCompiti.php');
       }
 } elseif
  //questa action permette al paziente di svolgere un compito
