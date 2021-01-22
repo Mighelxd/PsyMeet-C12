@@ -87,26 +87,11 @@ else if($action == "addEpisodio"){
     else{
       $idScheda = $_SESSION['idSCorr'];
     }
-
-    $attEp = new Episodio(null,$numEp,$analisi,$mA,$mB,$mC,$appunti,$idScheda);
-    $insOk = DatabaseInterface::insertQuery($attEp->getArray(),'episodio');
-    if($insOk){
-      $key = array("id_scheda"=>$idScheda);
-      $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
-      while($row = $recScheda->fetch_array()){
-        $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
-      }
-      $newNumEp = $scheda->getNEpisodi() + 1;
-      $scheda->setNEpisodi($newNumEp);
-      $updateScheda = DatabaseInterface::updateQueryById($scheda->getArray(),'schedaassessmentfocalizzato');
-      if($updateScheda){
-        $_SESSION['idSCorr'] = $idScheda;
-        header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
-      }else{
-        throw new Exception("Errore: numero episodi in scheda non aggiornato!");
-      }
+    $addok = SeduteControl::addEpisodio($numEp,$analisi,$mA,$mB,$mC,$appunti,$idScheda);
+    if($addok){
+      header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
     }else{
-      throw new Exception("Errore: episodio non inserito!");
+      throw new Exception($addok);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
@@ -177,28 +162,17 @@ else if($action == 'modEpisodio'){
       $idSchedaCorr = $_SESSION['idSCorr'];
     }
 
-    $attRec=array("numero"=>$numEp,"id_scheda"=>$idSchedaCorr);
-    $recEp=DatabaseInterface::selectQueryByAtt($attRec,'episodio');
-    while($row=$recEp->fetch_array()){
-      $ep = new Episodio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
-    }
-    $ep->setAnalisiFun($analisi);
-    $ep->setMA($mA);
-    $ep->setMB($mB);
-    $ep->setMC($mC);
-    $ep->setAppunti($appunti);
+    $modok = SeduteControl::modEpisodio($numEp,$analisi,$mA,$mB,$mC,$appunti,$idSchedaCorr);
 
-    $upd = DatabaseInterface::updateQueryById($ep->getArray(),'episodio');
-    if($upd){
+    if($modok){
       header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
     }else{
-      throw new Exception("Errore: episodio non modificato!");
+      throw new Exception($modok);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
-
 }
 /////////////////////////////////////////////////////////////Generalizzato
 else if($action =='addSchGen'){
