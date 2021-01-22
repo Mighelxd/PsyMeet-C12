@@ -115,7 +115,170 @@ class SeduteControl
             return array();
         }
     }
-    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////Generalizzato
+
+    static function addSchGen($dataCorr,$aspPosAut,$aspNegAut,$aspPosCog,$aspNegCog,$aspPosSM,$aspNegSM,$aspPosSo,$aspNegSo,$idTerCorr,$tipo){
+        try{
+            $att = new SchedaAssessmentGeneralizzato(null,$dataCorr,$aspPosAut,$aspNegAut,$aspPosCog,$aspNegCog,$aspPosSM,$aspNegSM,$aspPosSo,$aspNegSo,$idTerCorr,$tipo);
+            $ok = DatabaseInterface::insertQuery($att->getArray(), SchedaAssessmentGeneralizzato::$tableName);
+            if($ok) {
+                return true;
+            }else{
+                throw new Exception("Errore: scheda non aggiunta!");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+    static function modSchGen($aspPosAut,$aspNegAut,$aspPosCog,$aspNegCog,$aspPosSM,$aspNegSM,$aspPosSo,$aspNegSo,$idTerCorr){
+        try{
+            $key = array("id_terapia"=>$idTerCorr);
+
+            $recSchGen = DatabaseInterface::selectQueryById($key,SchedaAssessmentGeneralizzato::$tableName);
+            if($recSchGen->num_rows == 1){
+                $row = $recSchGen->fetch_array();
+                $schGen = new SchedaAssessmentGeneralizzato($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11]);
+                $schGen->setAutoregPositivi($aspPosAut);
+                $schGen->setAutoregNegativi($aspNegAut);
+                $schGen->setCognitivePositivi($aspPosCog);
+                $schGen->setCognitiveNegativi($aspNegCog);
+                $schGen->setSelfManagementPositivi($aspPosSM);
+                $schGen->setSelfManagementNegativi($aspNegSM);
+                $schGen->setSocialiPositivi($aspPosSo);
+                $schGen->setSocialiNegativi($aspNegSo);
+
+                $upd=DatabaseInterface::updateQueryById($schGen->getArray(),SchedaAssessmentGeneralizzato::$tableName);
+
+                if($upd){
+                    return true;
+                }else{
+                    throw new Exception("Errore: scheda non modificata!");
+                }
+            }else{
+                throw new Exception("scheda non trovata");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+    /////////////////////////////////////////////////SPQ
+
+    static function addSPQ($data,$defP,$aspP,$mot,$obt,$defC,$idTerCorr,$tipo){
+        try{
+            $att = new SchedaPrimoColloquio(null,$data,$defP,$aspP,$mot,$obt,$defC,$idTerCorr,$tipo);
+            $ok = DatabaseInterface::insertQuery($att->getArray(),SchedaPrimoColloquio::$tableName);
+            if($ok){
+                return true;
+            }else{
+                throw new Exception("Errore: scheda non aggiunta!");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+    static function modSPQ($defP,$aspP,$mot,$obt,$defC,$idTerCorr){
+        try{
+            $key=array("id_terapia"=>$idTerCorr);
+            $rec=DatabaseInterface::selectQueryById($key,SchedaPrimoColloquio::$tableName);
+            if($rec->num_rows==1){
+                $row = $rec->fetch_array();
+                $sPq = new SchedaPrimoColloquio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
+                $sPq->setProblema($defP);
+                $sPq->setAspettative($aspP);
+                $sPq->setMotivazione($mot);
+                $sPq->setObiettivi($obt);
+                $sPq->setCambiamento($defC);
+                $upd = DatabaseInterface::updateQueryById($sPq->getArray(),SchedaPrimoColloquio::$tableName);
+                if($upd){
+                    return true;
+                }else{
+                    throw new Exception("Errore: scheda non modificata!");
+                }
+            }else{
+                throw new Exception("Scheda non trovata!");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+    /////////////////////////////////////////////////////follow up
+
+    static function addSFU($data,$ric,$esPos,$idTerCorr,$tipo){
+        try{
+            $att = new SchedaFollowUp(null,$data,$ric,$esPos,$idTerCorr,$tipo);
+
+            $ok = DatabaseInterface::insertQuery($att->getArray(),SchedaFollowUp::$tableName);
+            if($ok){
+                return true;
+            }else{
+                throw new Exception("Errore: scheda non aggiunta!");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+    static function modSFU($ric,$esPos,$idTerCorr){
+        try{
+            $key=array("id_terapia"=>$idTerCorr);
+            $rec=DatabaseInterface::selectQueryById($key,SchedaFollowUp::$tableName);
+            if($rec->num_rows==1){
+                $row = $rec->fetch_array();
+                $sFu = new SchedaFollowUp($row[0],$row[1],$row[2],$row[3],$row[4],$row[5]);
+                $sFu->setRicadute($ric);
+                $sFu->setEsitiPositivi($esPos);
+                $upd = DatabaseInterface::updateQueryById($sFu->getArray(),SchedaFollowUp::$tableName);
+                if($upd){
+                    return true;
+                }else{
+                    throw new Exception("Errore: scheda non modificata!");
+                }
+            }else{
+                throw new Exception("Scheda non trovata");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+    ///////////////////////////////eziologico
+    static function addSME($data,$fc,$fp,$fm,$rf,$idTerCorr,$tipo){
+        try{
+            $mEz = new SchedaModelloEziologico(null,$data,$fc,$fp,$fm,$rf,$idTerCorr,$tipo);
+
+            $ok = DatabaseInterface::insertQuery($mEz->getArray(),SchedaModelloEziologico::$tableName);
+            if($ok){
+                return true;
+            }else{
+                throw new Exception("Errore: scheda non aggiunta!");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+    static function modSME($fc,$fp,$fm,$rf,$idTerCorr){
+        try{
+            $key= array("id_terapia"=>$idTerCorr);
+            $rec = DatabaseInterface::selectQueryById($key,SchedaModelloEziologico::$tableName);
+            if($rec->num_rows==1){
+                $row = $rec->fetch_array();
+                $scME = new SchedaModelloEziologico($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
+                $scME->setFattoriCausativi($fc);
+                $scME->setFattoriMantenimento($fm);
+                $scME->setFattoriPrecipitanti($fp);
+                $scME->setRelazioneFinale($rf);
+
+                $upd = DatabaseInterface::updateQueryById($scME->getArray(),SchedaModelloEziologico::$tableName);
+                if($upd){
+                    return true;
+                }else{
+                    throw new Exception("Errore: scheda non modificata!");
+                }
+            }else{
+                throw new Exception("Scheda non trovato");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
     static function recAllModEzPaz($cfPaz)
     {
         try{

@@ -186,14 +186,13 @@ else if($action =='addSchGen'){
     $aspPosSo = $_POST['aspPosSo'];
     $aspNegSo = $_POST['aspNegSo'];
     $idTerCorr = $_SESSION['idTerCorr'];
-    $dataCorr = date("Y,m,d");
-    $dataCorr = str_replace(',','-',$dataCorr);
-    $att = new SchedaAssessmentGeneralizzato(null,$dataCorr,$aspPosAut,$aspNegAut,$aspPosCog,$aspNegCog,$aspPosSM,$aspNegSM,$aspPosSo,$aspNegSo,$idTerCorr,"Scheda Assessment Generalizzato");
-    $ok = DatabaseInterface::insertQuery($att->getArray(), SchedaAssessmentGeneralizzato::$tableName);
-    if($ok) {
+    $tipo = "Scheda Assessment Generalizzato";
+    $dataCorr = date("Y-m-d");
+    $addOkGen = SeduteControl::addSchGen($dataCorr,$aspPosAut,$aspNegAut,$aspPosCog,$aspNegCog,$aspPosSM,$aspNegSM,$aspPosSo,$aspNegSo,$idTerCorr,$tipo);
+    if($addOkGen){
       header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
     }else{
-      throw new Exception("Errore: scheda non aggiunta!");
+      throw new Exception($addOkGen);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
@@ -227,27 +226,12 @@ else if($action == 'modSchGen'){
     $aspNegSo = $_POST['aspNegSo'];
     $idTerCorr = $_SESSION['idTerCorr'];
 
-    $key = array("id_terapia"=>$idTerCorr);
+    $modGenOk=SeduteControl::modSchGen($aspPosAut,$aspNegAut,$aspPosCog,$aspNegCog,$aspPosSM,$aspNegSM,$aspPosSo,$aspNegSo,$idTerCorr);
 
-    $recSchGen = DatabaseInterface::selectQueryById($key,SchedaAssessmentGeneralizzato::$tableName);
-    while($row = $recSchGen->fetch_array()){
-      $schGen = new SchedaAssessmentGeneralizzato($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11]);
-    }
-    $schGen->setAutoregPositivi($aspPosAut);
-    $schGen->setAutoregNegativi($aspNegAut);
-    $schGen->setCognitivePositivi($aspPosCog);
-    $schGen->setCognitiveNegativi($aspNegCog);
-    $schGen->setSelfManagementPositivi($aspPosSM);
-    $schGen->setSelfManagementNegativi($aspNegSM);
-    $schGen->setSocialiPositivi($aspPosSo);
-    $schGen->setSocialiNegativi($aspNegSo);
-
-    $upd=DatabaseInterface::updateQueryById($schGen->getArray(),SchedaAssessmentGeneralizzato::$tableName);
-
-    if($upd){
+    if($modGenOk){
       header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
     }else{
-      throw new Exception("Errore: scheda non modificata!");
+      throw new Exception($modGenOk);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
@@ -266,12 +250,12 @@ else if($action == 'addSPQ'){
     $tipo= "Scheda Primo Colloquio";
     $idTerCorr = $_SESSION['idTerCorr'];
 
-    $att = new SchedaPrimoColloquio(null,$data,$defP,$aspP,$mot,$obt,$defC,$idTerCorr,$tipo);
-    $ok = DatabaseInterface::insertQuery($att->getArray(),SchedaPrimoColloquio::$tableName);
-    if($ok){
+    $addOkSpq=SeduteControl::addSPQ($data,$defP,$aspP,$mot,$obt,$defC,$idTerCorr,$tipo);
+
+    if($addOkSpq){
       header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
     }else{
-      throw new Exception("Errore: scheda non aggiunta!");
+      throw new Exception($addOkSpq);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
@@ -288,22 +272,12 @@ else if($action == 'modSPQ'){
     $tipo= "Scheda Primo Colloquio";
     $idTerCorr = $_SESSION['idTerCorr'];
 
-    $key=array("id_terapia"=>$idTerCorr);
-    $rec=DatabaseInterface::selectQueryById($key,SchedaPrimoColloquio::$tableName);
-    while($row = $rec->fetch_array()){
-      $sPq = new SchedaPrimoColloquio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]);
-    }
-    $sPq->setProblema($defP);
-    $sPq->setAspettative($aspP);
-    $sPq->setMotivazione($mot);
-    $sPq->setObiettivi($obt);
-    $sPq->setCambiamento($defC);
+    $modOkSpq= SeduteControl::modSPQ($defP,$aspP,$mot,$obt,$defC,$idTerCorr);
 
-    $upd = DatabaseInterface::updateQueryById($sPq->getArray(),SchedaPrimoColloquio::$tableName);
-    if($upd){
+    if($modOkSpq){
       header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
     }else{
-      throw new Exception("Errore: scheda non modificata!");
+      throw new Exception($modOkSpq);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
@@ -335,13 +309,11 @@ else if($action == 'addSFU'){
     $tipo= "Scheda Follow Up";
     $idTerCorr = $_SESSION['idTerCorr'];
 
-    $att = new SchedaFollowUp(null,$data,$ric,$esPos,$idTerCorr,$tipo);
-
-    $ok = DatabaseInterface::insertQuery($att->getArray(),SchedaFollowUp::$tableName);
-    if($ok){
+    $addSfuOk=SeduteControl::addSFU($data,$ric,$esPos,$idTerCorr,$tipo);
+    if($addSfuOk){
       header("Location: ../interface/Professionista/SchedaFollowUp.php");
     }else{
-      throw new Exception("Errore: scheda non aggiunta!");
+      throw new Exception($addSfuOk);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
@@ -354,19 +326,11 @@ else if($action == 'modSFU'){
     $esPos = $_POST['esPos'];
     $idTerCorr = $_SESSION['idTerCorr'];
 
-    $key=array("id_terapia"=>$idTerCorr);
-    $rec=DatabaseInterface::selectQueryById($key,SchedaFollowUp::$tableName);
-    while($row = $rec->fetch_array()){
-      $sFu = new SchedaFollowUp($row[0],$row[1],$row[2],$row[3],$row[4],$row[5]);
-    }
-    $sFu->setRicadute($ric);
-    $sFu->setEsitiPositivi($esPos);
-
-    $upd = DatabaseInterface::updateQueryById($sFu->getArray(),SchedaFollowUp::$tableName);
-    if($upd){
+    $okModFw=SeduteControl::modSFU($ric,$esPos,$idTerCorr);
+    if($okModFw){
       header("Location: ../interface/Professionista/SchedaFollowUp.php");
     }else{
-      throw new Exception("Errore: scheda non modificata!");
+      throw new Exception($okModFw);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
@@ -400,13 +364,12 @@ else if($action == 'addSME'){
     $fp = $_POST['fp'];
     $rf = $_POST['rf'];
 
-    $mEz = new SchedaModelloEziologico(null,$data,$fc,$fp,$fm,$rf,$idTerCorr,$tipo);
+    $addOkSme=SeduteControl::addSME($data,$fc,$fp,$fm,$rf,$idTerCorr,$tipo);
 
-    $ok = DatabaseInterface::insertQuery($mEz->getArray(),SchedaModelloEziologico::$tableName);
-    if($ok){
+    if($addOkSme){
       header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
     }else{
-      throw new Exception("Errore: scheda non aggiunta!");
+      throw new Exception($addOkSme);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
@@ -421,21 +384,13 @@ else if($action == 'modSME'){
     $fp = $_POST['fp'];
     $rf = $_POST['rf'];
 
-    $key= array("id_terapia"=>$idTerCorr);
-    $rec = DatabaseInterface::selectQueryById($key,SchedaModelloEziologico::$tableName);
-    while($row = $rec->fetch_array()){
-      $scME = new SchedaModelloEziologico($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
-    }
-    $scME->setFattoriCausativi($fc);
-    $scME->setFattoriMantenimento($fm);
-    $scME->getFattoriPrecipitanti($fp);
-    $scME->setRelazioneFinale($rf);
+    echo $fp;
 
-    $upd = DatabaseInterface::updateQueryById($scME->getArray(),SchedaModelloEziologico::$tableName);
-    if($upd){
+    $modSmeOk=SeduteControl::modSME($fc,$fp,$fm,$rf,$idTerCorr);
+    if($modSmeOk){
       header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
     }else{
-      throw new Exception("Errore: scheda non modificata!");
+      throw new Exception($modSmeOk);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();

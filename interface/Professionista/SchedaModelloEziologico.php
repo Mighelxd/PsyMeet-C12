@@ -275,15 +275,15 @@ $paziente = PazienteControl::getPaz($cf);
               </div>
               <div class="form-group">
                 <label for="inputDescription">Fattori Precipitanti</label>
-                <textarea id="inputDescription" name="fp" class="form-control" rows="4"><?php echo $schModEz[0]->getFattoriPrecipitanti(); ?></textarea>
+                <textarea id="inputDescription2" name="fp" class="form-control" rows="4"><?php echo $schModEz[0]->getFattoriPrecipitanti(); ?></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Fattori Mantenimento</label>
-                <textarea id="inputDescription" name="fm" class="form-control" rows="4"><?php echo $schModEz[0]->getFattoriMantenimento(); ?></textarea>
+                <textarea id="inputDescription3" name="fm" class="form-control" rows="4"><?php echo $schModEz[0]->getFattoriMantenimento(); ?></textarea>
                 </div>
               <div class="form-group">
                 <label for="inputDescription">Relazione Finale</label>
-                <textarea id="inputDescription" name="rf" class="form-control" rows="4"><?php echo $schModEz[0]->getRelazioneFinale(); ?></textarea>
+                <textarea id="inputDescription4" name="rf" class="form-control" rows="4"><?php echo $schModEz[0]->getRelazioneFinale(); ?></textarea>
               </div>
 
             </div>
@@ -325,19 +325,19 @@ $paziente = PazienteControl::getPaz($cf);
                 <div class="card-body">
                   <div class="form-group">
                     <label for="inputDescription">Fattori Causativi</label>
-                    <textarea id="inputDescription" name="fc" class="form-control" rows="4"></textarea>
+                    <textarea id="inputDescription5" name="fc" class="form-control" rows="4"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="inputDescription">Fattori Precipitanti</label>
-                    <textarea id="inputDescription" name="fp" class="form-control" rows="4"></textarea>
+                    <textarea id="inputDescription6" name="fp" class="form-control" rows="4"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="inputDescription">Fattori Mantenimento</label>
-                    <textarea id="inputDescription" name="fm" class="form-control" rows="4"></textarea>
+                    <textarea id="inputDescription7" name="fm" class="form-control" rows="4"></textarea>
                     </div>
                   <div class="form-group">
                     <label for="inputDescription">Relazione Finale</label>
-                    <textarea id="inputDescription" name="rf" class="form-control" rows="4"></textarea>
+                    <textarea id="inputDescription8" name="rf" class="form-control" rows="4"></textarea>
                   </div>
 
                 </div>
