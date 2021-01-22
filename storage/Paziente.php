@@ -41,7 +41,7 @@ class Paziente
             throw new Exception("Difficol. cura non valida!");
         }
 
-        else if(strlen($nome)==0){
+        else if(strlen($nome)<2 || strlen($nome)>50){
             throw new Exception("Lunghezza Nome minore di quella prevista");
         }
         else if(!preg_match('/[A-Za-z]$/', $nome)){
