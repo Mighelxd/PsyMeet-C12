@@ -26,7 +26,7 @@ class Paziente
     public static $tableName="paziente";
 
     public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura, $fotoProfiloPaz, $video)
-    {
+    {/*
         if($cf == null || $nome == null || $cognome == null || $dataNascita == null || $email == null || $telefono == null
         || $password == null || $indirizzo == null || $istruzione == null || $lavoro == null || $difficolCura == null){
             throw new Exception("Alcuni valori non definiti!");
@@ -70,7 +70,7 @@ class Paziente
         }
         else if (!preg_match('/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/', $email)) {
             throw new Exception("email errata, formato non rispettato”.");
-        }
+        }*/
 
 
 

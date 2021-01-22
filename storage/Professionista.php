@@ -43,18 +43,18 @@
             {
                 throw new Exception("Cognome non rispetta il formato previsto");
             }
-            else if($date[2] != "/" || $date[5]!="/")
+            else if($date[4] != "-" || $date[7]!="-")
             {
                 throw new Exception("Data di nascita non rispetta il formato previsto");
             }
-            else if($date<"12/12/1930" || $date>"12/12/1998")
+            else if($date<"1930-12-12" || $date>"1998-12-12")
             {
                 throw new Exception("Il campo data di nascita non valido");
             }
             else if(strlen($cf)!=16){
-                throw new Exception("Codice fiscale non valido!");
+               throw new Exception("Codice fiscale non valido!");
             }
-            else if(!preg_match('/^[A-Z]{6}\d{2}[A-Z]\d{3}[A-Z]$/', $cf))
+            else if(!preg_match('/^[A-Z0-9]+$/', $cf))
             {
                 throw new Exception("Codice Fiscale non rispetta il formato previsto");
             }
@@ -73,45 +73,45 @@
             else if(strlen($pIva)!=11){
                 throw new Exception("Partita Iva non rispetta la lunghezza prevista!");
             }
-            else if(!preg_match("/^[0-9]{11}+$/", $pIva)){
+            else if(!preg_match("/^[A-Za-z0-9]{11}+$/", $pIva)){
                 throw new Exception("Partita iva non rispetta il formatoprevisto");
             }
-            else if(!preg_match("/^[A-Za-z0-9\s,àòèéùì]+$/",$indiSt)){
+           else if(!preg_match("/^[A-Za-z0-9\s,àòèéùì]+$/",$indiSt)){
                 throw new Exception("Formato di Indirizzo studio errato");
             }
             else if(strlen($e)<2 || strlen($e)>250){
                 throw new Exception("Email non rispetta la lunghezza prevista");
             }
-           else if(!preg_match('/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/',$e)){
+            else if(!preg_match('/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/',$e)){
                 throw new Exception("Email non rispetta il formato previsto");
             }
-      /*    else if(strlen($pass)<8){
+           /* else if(strlen($pass)<8){
                 throw new Exception("Lunghezza Password inferiore di quella prevista");
             }
             else if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,25}$/", $pass)){
                 throw new Exception("Formato di Password errato");
             }*/
-          else if(!preg_match('/^[a-f0-9]{32}$/i', $pass)){
-              throw new Exception("Formato di Password errato");
-          }
-          else if(strlen($titSt) < 2 || strlen($titSt)>500){
-              throw new Exception("Titolo di studio non rispetta la lunghezza prevista");
-          }
-          else if(strlen($pub) <2 || strlen($pub)>500) {
-              throw new Exception("Pubblicazioni scientifiche/partecipazioni non rispetta la lunghezza prevista");
-          }
-          else if(strlen($esp) <2 || strlen($esp)>500){
-              throw new Exception("Esperienze professionali non rispetta la lunghezza prevista");
-          }
-          else if(strlen($nIsc)<2 || strlen($nIsc)>20){
-              throw new Exception("Numero iscrizione albo non rispetta la lunghezza prevista");
-          }
-          else if(!preg_match('/^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/', $nIsc)){
-              throw new Exception("Numero iscrizione albo non rispetta il formato previsto");
-          }
-          else if(!preg_match("/^[A-Za-z0-9\s]+$/",$polRc)){
-              throw new Exception("Polizza RC non rispetta il formato previsto");
-          }
+           else if(!preg_match('/^[a-f0-9]{32}$/i', $pass)){
+               throw new Exception("Formato di Password errato");
+           }
+           else if(strlen($titSt) < 2 || strlen($titSt)>500){
+               throw new Exception("Titolo di studio non rispetta la lunghezza prevista");
+           }
+           else if(strlen($pub) <2 || strlen($pub)>500) {
+               throw new Exception("Pubblicazioni scientifiche/partecipazioni non rispetta la lunghezza prevista");
+           }
+           else if(strlen($esp) <2 || strlen($esp)>500){
+               throw new Exception("Esperienze professionali non rispetta la lunghezza prevista");
+           }
+           else if(strlen($nIsc)<2 || strlen($nIsc)>20){
+               throw new Exception("Numero iscrizione albo non rispetta la lunghezza prevista");
+           }
+           else if(!preg_match('/^[A-Za-z0-9]+$/', $nIsc)){
+               throw new Exception("Numero iscrizione albo non rispetta il formato previsto");
+           }
+           else if(!preg_match("/^[A-Za-z0-9\s]+$/",$polRc)){
+               throw new Exception("Polizza RC non rispetta il formato previsto");
+           }
 
 
             $this->cfProf=$cf;
