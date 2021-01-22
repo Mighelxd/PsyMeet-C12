@@ -19,11 +19,17 @@ public static $tableName="appuntamento";
     if($date == null || $hour == null || $des == null || $cfPr == null || $cfPa == null){
       throw new Exception("Alcuni valori non definiti!");
     }
-    else if(strlen($cfPr)!=16){
+    else if(strlen($cfPr)!=16)
+    {
       throw new Exception("Codice fiscale professionista non valido!");
     }
-    else if(strlen($cfPa)!=16){
-      throw new Exception("Codice fiscale paziente non valido!");
+    else if(strlen($cfPa)!=16)
+    {
+      throw new Exception("Codice fiscale paziente errato, lunghezza non rispettata");
+    }
+    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $des))
+    {
+      throw new Exception("Il campo descrizione non rispetta il formato");
     }
     $this->idAppuntamento = $id;
     $this->data = $date;
