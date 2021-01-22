@@ -3,7 +3,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-include '../storage/SchedaPrimoColloquio.php';
+include 'storage/SchedaPrimoColloquio.php';
 
 class SchedaPrimoColloquioTest extends TestCase
 {
