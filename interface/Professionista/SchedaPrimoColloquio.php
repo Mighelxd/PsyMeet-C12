@@ -277,7 +277,7 @@ $paziente = PazienteControl::getPaz($cf);
           </div>
         </div>
       </div><!-- /.container-fluid -->
-        <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+        <span style="color:red"><?php if(isset($_SESSION['eccspq'])){echo $_SESSION['eccspq'];} ?></span>
     </section>
 
     <!-- Main content -->
