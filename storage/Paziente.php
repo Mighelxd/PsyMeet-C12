@@ -26,7 +26,7 @@ class Paziente
     public static $tableName="paziente";
 
     public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura, $fotoProfiloPaz, $video)
-    {/*
+    {
         if($cf == null || $nome == null || $cognome == null || $dataNascita == null || $email == null || $telefono == null
         || $password == null || $indirizzo == null || $istruzione == null || $lavoro == null || $difficolCura == null){
             throw new Exception("Alcuni valori non definiti!");
@@ -34,43 +34,58 @@ class Paziente
         else if(strlen($cf)!=16){
             throw new Exception("Codice Fiscale non valido!");
         }
-        else if(strlen($telefono)<9){
-            throw new Exception("Numero non valido!");
+        else if(strlen($nome) == 0){
+            throw new Exception("Il campo nome è vuoto");
         }
-        else if($difficolCura<1 || $difficolCura>5){
-            throw new Exception("Difficol. cura non valida!");
-        }
-
         else if(strlen($nome)<2 || strlen($nome)>50){
-            throw new Exception("Lunghezza Nome minore di quella prevista");
+            throw new Exception("Il campo campo nome non rispetta la lunghezza");
         }
         else if(!preg_match('/[A-Za-z]$/', $nome)){
-            throw new Exception("Formato nome non rispettato");
+            throw new Exception("Il campo nome non rispetta il formato");
         }
         else if(strlen($cognome)==0){
-            throw new Exception("Lunghezza minima cognome non rispettato");
+            throw new Exception("Il campo cognome è vuoto");
+        }
+        else if(strlen($cognome)<2 || strlen($cognome)>50){
+            throw new Exception("Il campo campo cognome non rispetta la lunghezza");
         }
         else if(!preg_match('/[A-Za-z]$/', $cognome)){
-            throw new Exception("Formato cognome non rispettato");
+            throw new Exception("Il campo cognome non rispetta il formato");
         }
-        else if(!preg_match('/[A-Za-z]$/', $cognome)){
-            throw new Exception("Formato cognome non rispettato");
+        else if($dataNascita[4] != "-" || $dataNascita[7]!="-"){
+            throw new Exception("Il campo data di nascita non rispetta il formato");
         }
-        else if(!preg_match('', $dataNascita)){
-            throw new Exception("Formato data non rispettato");
+        else if($dataNascita<"1930-12-12" || $dataNascita>"2005-12-12")
+        {
+            throw new Exception("Il campo data di nascita non rispetta il formato");
         }
-        else if(strlen($cf)!=16){
-            throw new Exception("Codice fiscale errato, lunghezza non rispettata");
+        else if(strlen($email)<3 || strlen($email)>50){
+            throw new Exception("Il campo email non rispetta la lunghezza");
         }
-        else if (!preg_match('/^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/', $cf)) {
-            throw new Exception("Codice fiscale errato, formato non rispettato");
+        else if(!preg_match('/^\w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/', $email)){
+            throw new Exception("Il campo email non rispetta il formato");
         }
-        else if(strlen($email)<3){
-            throw new Exception("email errata, lunghezza minima non rispettata");
+        else if(strlen($telefono)<10 || strlen($telefono)>10){
+            throw new Exception("Il campo telefono non rispetta la lunghezza");
         }
-        else if (!preg_match('/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/', $email)) {
-            throw new Exception("email errata, formato non rispettato”.");
-        }*/
+        else if(!preg_match('/^[0-9]{10}+$/',$telefono)){
+            throw new Exception("Il campo telefono non rispetta il formato");
+        }
+        else if(!preg_match('/^[A-Za-z0-9\s,àòèéùì]+$/',$indirizzo)){
+            throw new Exception("Il campo indirizzo non rispetta il formato");
+        }
+        else if(strlen($istruzione) <2 || strlen($istruzione) >500){
+            throw new Exception("Il campo istruzione non rispetta la lunghezza");
+        }
+        else if(strlen($lavoro) <2 || strlen($lavoro) >500){
+            throw new Exception("Il campo lavoro non rispetta la lunghezza");
+        }
+        else if($difficolCura<1 || $difficolCura>5){
+            throw new Exception("Il campo difficoltà cura non rispetta il formato");
+        }
+        else if(strlen($difficolCura) != 1){
+            throw new Exception("Il campo difficoltà cura non rispetta la lunghezza");
+        }
 
 
 
@@ -159,7 +174,16 @@ class Paziente
     public function setNome($nome)
     {
         if($nome == null){
-            throw new Exception("Nuovo nome non valido!");
+            throw new Exception("Il campo nome non è definito");
+        }
+        else if(strlen($nome) == 0){
+            throw new Exception("Il campo nome è vuoto");
+        }
+        else if(strlen($nome)<2 || strlen($nome)>50){
+            throw new Exception("Il campo campo nome non rispetta la lunghezza");
+        }
+        else if(!preg_match('/[A-Za-z]$/', $nome)){
+            throw new Exception("Il campo nome non rispetta il formato");
         }
         $this->nome = $nome;
     }
@@ -167,7 +191,16 @@ class Paziente
     public function setCognome($cognome)
     {
         if($cognome == null){
-            throw new Exception("Nuovo cognome non valido!");
+            throw new Exception("Il campo cognome non è definito");
+        }
+        else if(strlen($cognome)==0){
+            throw new Exception("Il campo cognome è vuoto");
+        }
+        else if(strlen($cognome)<2 || strlen($cognome)>50){
+            throw new Exception("Il campo campo cognome non rispetta la lunghezza");
+        }
+        else if(!preg_match('/[A-Za-z]$/', $cognome)){
+            throw new Exception("Il campo cognome non rispetta il formato");
         }
         $this->cognome = $cognome;
     }
@@ -175,7 +208,14 @@ class Paziente
     public function setDataNascita($dataNascita)
     {
         if($dataNascita == null){
-            throw new Exception("Nuovo data di nascita non valido!");
+            throw new Exception("Il campo data di nascita non è definito");
+        }
+        else if($dataNascita[4] != "-" || $dataNascita[7]!="-"){
+            throw new Exception("Il campo data di nascita non rispetta il formato");
+        }
+        else if($dataNascita<"1930-12-12" || $dataNascita>"2005-12-12")
+        {
+            throw new Exception("Il campo data di nascita non rispetta il formato");
         }
         $this->dataNascita = $dataNascita;
     }
@@ -183,7 +223,13 @@ class Paziente
     public function setEmail($email)
     {
         if($email == null){
-            throw new Exception("Nuova email non valida!");
+            throw new Exception("Il campo email non è definito");
+        }
+        else if(strlen($email)<3 || strlen($email)>50){
+            throw new Exception("Il campo email non rispetta la lunghezza");
+        }
+        else if(!preg_match('/^\w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/', $email)){
+            throw new Exception("Il campo email non rispetta il formato");
         }
         $this->email = $email;
     }
@@ -191,7 +237,13 @@ class Paziente
     public function setTelefono($telefono)
     {
         if($telefono == null || strlen($telefono)<9){
-            throw new Exception("Nuovo numero di telefono non valido!");
+            throw new Exception("Il campo telefono non è definito");
+        }
+        else if(strlen($telefono)<10 || strlen($telefono)>10){
+            throw new Exception("Il campo telefono non rispetta la lunghezza");
+        }
+        else if(!preg_match('/^[0-9]{10}+$/',$telefono)){
+            throw new Exception("Il campo telefono non rispetta il formato");
         }
         $this->telefono = $telefono;
     }
@@ -207,7 +259,10 @@ class Paziente
     public function setIndirizzo($indirizzo)
     {
         if($indirizzo == null){
-            throw new Exception("Nuovo indirizzo non valido!");
+            throw new Exception("Il campo indirizzo non è definito");
+        }
+        else if(!preg_match('/^[A-Za-z0-9\s,àòèéùì]+$/',$indirizzo)){
+            throw new Exception("Il campo indirizzo non rispetta il formato");
         }
         $this->indirizzo = $indirizzo;
     }
@@ -215,7 +270,10 @@ class Paziente
     public function setIstruzione($istruzione)
     {
         if($istruzione == null){
-            throw new Exception("Nuovo campo istruzione non valido!");
+            throw new Exception("Il campo istruzione non è definito");
+        }
+        else if(strlen($istruzione) <2 || strlen($istruzione) >500){
+            throw new Exception("Il campo istruzione non rispetta la lunghezza");
         }
         $this->istruzione = $istruzione;
     }
@@ -223,7 +281,10 @@ class Paziente
     public function setLavoro($lavoro)
     {
         if($lavoro == null){
-            throw new Exception("Nuovo campo lavoro non valido!");
+            throw new Exception("Il campo lavoro non è definito");
+        }
+        else if(strlen($lavoro) <2 || strlen($lavoro) >500){
+            throw new Exception("Il campo lavoro non rispetta la lunghezza");
         }
         $this->lavoro = $lavoro;
     }
@@ -231,8 +292,14 @@ class Paziente
     public function setDifficolCura($difficolCura)
     {
         if($difficolCura == null || $difficolCura<1 || $difficolCura>5){
-            throw new Exception("Nuovo valore difficolt. cura non valido!");
-    }
+            throw new Exception("Il campo difficoltà cura non è definito");
+        }
+        else if($difficolCura<1 || $difficolCura>5){
+            throw new Exception("Il campo difficoltà cura non rispetta il formato");
+        }
+        else if(strlen($difficolCura) != 1){
+            throw new Exception("Il campo difficoltà cura non rispetta la lunghezza");
+        }
         $this->difficolCura = $difficolCura;
     }
 
