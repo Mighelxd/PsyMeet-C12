@@ -21,12 +21,21 @@ class CartellaClinica {
         if($fa == null){
             throw new Exception("Nuovo campo farmaci non valido!");
         }
+        else if(strlen($fa)<1 || strlen($fa)>500){
+            throw new Exception("Il campo Farmaci/Psicofarmaci non rispetta la lunghezza");
+        }
         $this->farmaci = $fa;
     }
 
     public function setQualitaUmore($qum){
-        if($qum<1 || $qum>5 || $qum == null){
-            throw new Exception("Nuovo valore qualit. umore non valido!");
+        if($qum == null){
+            throw new Exception("Il campo qualita umore e' vuoto!");
+        }
+        else if(!preg_match('/[0-9]$/', $qum)){
+            throw new Exception("Il campo qualita umore non rispetta il formato");
+        }
+        else if($qum<1 || $qum>5){
+            throw new Exception("Il campo qualita umore ha un valore fuori range");
         }
         $this->QualitaUmore = $qum;
     } 
@@ -35,12 +44,21 @@ class CartellaClinica {
         if($pat == null){
             throw new Exception("Nuovo campo patologie pregresse non valido!");
         }
+        else if(strlen($pat)<1 || strlen($pat)>500){
+            throw new Exception("Il campo non rispetta la lunghezza");
+        }
         $this->patologiePregresse = $pat;
     }
 
     public function setQualitaRelazioni($qur){
-        if($qur<1 || $qur>5 || $qur == null){
-            throw new Exception("Nuovo valore qualit. relazioni non valido!");
+        if($qur == null){
+            throw new Exception("Il campo qualita relazioni e' vuoto");
+        }
+        else if(!preg_match('/[0-9]$/', $qur)){
+            throw new Exception("Il campo qualita relazioni non rispetta il formato");
+        }
+        else if($qur<1 || $qur>5){
+            throw new Exception("Il campo qualita relazioni ha un valore fuori range");
         }
         $this->qualitaRelazioni = $qur;
     }
@@ -60,7 +78,7 @@ class CartellaClinica {
     }
     public function setData($d){
         if($d == null){
-            throw new Exception("Nuova data non valida!");
+            throw new Exception("Il campo data e' vuoto!");
         }
         $this->dataCreazione = $d;
     }
@@ -109,19 +127,32 @@ class CartellaClinica {
 
     public function __construct($i, $d, $qum, $qur, $pat, $fa, $cfPro, $cfPa){
         if($d == null || $qum == null || $qur == null || $pat == null || $fa == null || $cfPro == null || $cfPa == null){
-            throw new Exception("Alcuni valori non definiti!");
-        }
-        else if($qum<1 || $qum>5){
-            throw new Exception("Valore qualit. umore non corretto!");
-        }
-        else if($qur<1 || $qur>5){
-            throw new Exception("Valore qualit. relazione non corretto!");
+            throw new Exception("Alcuni valori sono vuoti!");
         }
         else if(strlen($cfPro)!=16){
             throw new Exception("Codice fiscale professionista non valido!");
         }
         else if(strlen($cfPa)!=16){
             throw new Exception("Codice fiscale paziente non valido!");
+        }
+
+        else if(strlen($fa)<=1 || strlen($fa)>500){
+            throw new Exception("Il campo farmaci non rispetta la lunghezza");
+        }
+        else if(strlen($pat)<=1 || strlen($pat)>500){
+            throw new Exception("Il campo patologie non rispetta la lunghezza");
+        }
+        else if(!preg_match('/[0-9]$/', $qum)){
+            throw new Exception("Il campo qualita umore non rispetta il formato");
+        }
+        else if(!preg_match('/[0-9]$/', $qur)){
+            throw new Exception("Il campo qualita relazioni non rispetta il formato");
+        }
+        else if($qum<1 || $qum>5){
+            throw new Exception("Il campo qualita umore ha un valore fuori range");
+        }
+        else if($qur<1 || $qur>5){
+            throw new Exception("Valore qualit. relazione non corretto!");
         }
         $this->id = $i;
         $this->dataCreazione=$d;

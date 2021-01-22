@@ -21,36 +21,44 @@ class Episodio{
       throw new Exception("Id scheda non valido!");
     }
 
-    else if(strlen($analisiFun)>500){
-      throw new Exception("Lunghezza Analisi funzionale maggiore di quella prevista");
+    else if(strlen($analisiFun)==0){
+      throw new Exception("Il campo analisi funzionale è vuoto");
     }
 
-    else if (strlen($analisiFun)<2){
-      throw new Exception("Lunghezza Analisi funzionale minore di quella prevista");
+    else if (!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $analisiFun)){
+      throw new Exception("Il campo analisi funzionale non rispetta il formato");
     }
 
-    else if (!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $analisiFun)){
-      throw new Exception("Analisi funzionale non rispetta il formato previsto");
+    else if (strlen($mA)==0){
+      throw new Exception("Il campo A è vuoto");
     }
 
-    else if (strlen($mA)<2){
-      throw new Exception("Lunghezza A minore di quella prevista");
+    else if (!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $mA)){
+      throw new Exception("Il campo A non rispetta il formato");
     }
 
-    else if (!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $mB)){
-      throw new Exception("B non rispetta il formato previsto");
+    else if (strlen($mB)==0){
+      throw new Exception("Il campo B è vuoto");
     }
 
-    else if (strlen($mC)<2){
-      throw new Exception("Lunghezza B minore di quella prevista");
+    else if (!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $mB)){
+      throw new Exception("Il campo B non rispetta il formato");
     }
 
-    else if (!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $$appunti)){
-      throw new Exception("Appunti Terapeuta non rispetta il formato previsto");
+    else if (strlen($mC)==0){
+      throw new Exception("Il campo C è vuoto");
     }
 
-    else if (!preg_match('/^[A-Za-z0-9_-]{2,500}$/', $mB)){
-      throw new Exception("B non rispetta il formato previsto");
+    else if (!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $mC)){
+      throw new Exception("Il campo C non rispetta il formato");
+    }
+
+    else if (strlen($appunti)==0){
+      throw new Exception("Il campo appunti terapeuta è vuoto");
+    }
+
+    else if (!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $appunti)){
+      throw new Exception("Il campo appunti terapeuta non rispetta il formato");
     }
 
     $this->idEpisodio = $idEpisodio;
@@ -99,36 +107,81 @@ class Episodio{
   }
   public function setAnalisiFun($analisiFun)
   {
-    if($analisiFun == null){
-      throw new Exception("Nuovo campo analisi funzionale non valido!");
+    if($analisiFun == null)
+    {
+      throw new Exception("Nuovo campo analisi funzionale non definito!");
+    }
+    else if(strlen($analisiFun)==0)
+    {
+      throw new Exception("Il campo analisi funzionale è vuoto");
+    }
+    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $analisiFun))
+    {
+      throw new Exception("Il campo analisi funzionale non rispetta il formato");
     }
       $this->analisiFun = $analisiFun;
   }
   public function setMA($mA)
   {
-    if($mA == null){
-      throw new Exception("Nuovo campo A modello ABC non valido!");
+    if($mA == null)
+    {
+      throw new Exception("Nuovo campo A modello ABC non definito!");
+    }
+    else if(strlen($mA)==0)
+    {
+      throw new Exception("Il campo A è vuoto");
+    }
+    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $mA))
+    {
+      throw new Exception("Il campo A non rispetta il formato");
     }
       $this->mA = $mA;
   }
   public function setMB($mB)
   {
-    if($mB == null){
-      throw new Exception("Nuovo campo B modello ABC non valido!");
+    if($mB == null)
+    {
+      throw new Exception("Nuovo campo B modello ABC non definito!");
+    }
+    else if(strlen($mB)==0)
+    {
+      throw new Exception("Il campo B è vuoto");
+    }
+    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $mB))
+    {
+      throw new Exception("Il campo B non rispetta il formato");
     }
       $this->mB = $mB;
   }
   public function setMC($mC)
   {
-    if($mC == null){
-      throw new Exception("Nuovo campo C modello ABC non valido!");
+    if($mC == null)
+    {
+      throw new Exception("Nuovo campo C modello ABC non definito!");
+    }
+    else if(strlen($mC)==0)
+    {
+      throw new Exception("Il campo C è vuoto");
+    }
+    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $mC))
+    {
+      throw new Exception("Il campo C non rispetta il formato");
     }
       $this->mC = $mC;
   }
   public function setAppunti($appunti)
   {
-    if($appunti == null){
-      throw new Exception("Nuovo campo appunti non valido!");
+    if($appunti == null)
+    {
+      throw new Exception("Nuovo campo appunti non definito!");
+    }
+    else if(strlen($appunti)==0)
+    {
+      throw new Exception("Il campo appunti terapeuta è vuoto");
+    }
+    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $appunti))
+    {
+      throw new Exception("Il campo appunti terapeuta non rispetta il formato");
     }
       $this->appunti = $appunti;
   }

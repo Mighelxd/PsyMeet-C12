@@ -17,29 +17,23 @@ class Terapia
 
     public function __construct($idTer, $date,$descriz, $cfProfessionista, $cfPa)
     {
-        if($date == null || $descriz == null || $cfProfessionista == null || $cfPa == null){
+        if ($date == null || $descriz == null || $cfProfessionista == null || $cfPa == null) {
             throw new Exception("Alcuni valori non validi!");
-        }
-        else if(strlen($cfProfessionista)!=16){
+        } else if (strlen($cfProfessionista) != 16) {
             throw new Exception("Codice fiscale professionista non valido!");
-        }
-        else if(strlen($cfPa)!=16){
+        } else if (strlen($cfPa) != 16) {
             throw new Exception("Codice fiscale paziente non valido!");
+        } else if (strlen($descriz) == 0) {
+            throw new Exception("Il campo descrizione non può essere vuoto.");
         }
+
         $this->idTerapia = $idTer;
         $this->data = $date;
-        $this->descrizione= $descriz;
+        $this->descrizione = $descriz;
         $this->cfProf = $cfProfessionista;
         $this->cf = $cfPa;
-
     }
-   /* public function __constructD(){
-        $this->id_terapia = -1;
-        $this->data ="" ;
-        $this->descrizione = "";
-        $this->cf_prof = "";
-        $this->cf = "";
-     }*/
+
     public function getIdTerapia()
     {
         return $this -> idTerapia;
@@ -75,6 +69,9 @@ class Terapia
         if($descrizione == null){
             throw new Exception("Nuovo campo descrizione non valido!");
         }
+        else if(strlen($descrizione)==0){
+            throw new Exception("Il campo descrizione non può essere vuoto.");
+        }
          $this -> descrizione = $descrizione;
     }
     public function setCf_Prof($cfProf)
@@ -82,7 +79,7 @@ class Terapia
         if($cfProf == null || strlen($cfProf)!=16){
             throw new Exception("Nuovo codice fiscale professionista non valido!");
         }
-         $this -> cf_prof = $cfProf;
+         $this -> cfProf = $cfProf;
     }
     public function setCf($cf)
     {

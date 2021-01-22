@@ -26,7 +26,7 @@ class Paziente
     public static $tableName="paziente";
 
     public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura, $fotoProfiloPaz, $video)
-    {
+    {/*
         if($cf == null || $nome == null || $cognome == null || $dataNascita == null || $email == null || $telefono == null
         || $password == null || $indirizzo == null || $istruzione == null || $lavoro == null || $difficolCura == null){
             throw new Exception("Alcuni valori non definiti!");
@@ -40,6 +40,40 @@ class Paziente
         else if($difficolCura<1 || $difficolCura>5){
             throw new Exception("Difficol. cura non valida!");
         }
+
+        else if(strlen($nome)<2 || strlen($nome)>50){
+            throw new Exception("Lunghezza Nome minore di quella prevista");
+        }
+        else if(!preg_match('/[A-Za-z]$/', $nome)){
+            throw new Exception("Formato nome non rispettato");
+        }
+        else if(strlen($cognome)==0){
+            throw new Exception("Lunghezza minima cognome non rispettato");
+        }
+        else if(!preg_match('/[A-Za-z]$/', $cognome)){
+            throw new Exception("Formato cognome non rispettato");
+        }
+        else if(!preg_match('/[A-Za-z]$/', $cognome)){
+            throw new Exception("Formato cognome non rispettato");
+        }
+        else if(!preg_match('', $dataNascita)){
+            throw new Exception("Formato data non rispettato");
+        }
+        else if(strlen($cf)!=16){
+            throw new Exception("Codice fiscale errato, lunghezza non rispettata");
+        }
+        else if (!preg_match('/^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/', $cf)) {
+            throw new Exception("Codice fiscale errato, formato non rispettato");
+        }
+        else if(strlen($email)<3){
+            throw new Exception("email errata, lunghezza minima non rispettata");
+        }
+        else if (!preg_match('/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/', $email)) {
+            throw new Exception("email errata, formato non rispettato”.");
+        }*/
+
+
+
         $this->cf = $cf;
         $this->nome = $nome;
         $this->cognome = $cognome;

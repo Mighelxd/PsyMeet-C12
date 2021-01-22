@@ -10,6 +10,7 @@ session_start();
 include '../plugins/libArray/FunArray.php';
 include '../storage/DatabaseInterface.php';
 include '../storage/Appuntamento.php';
+include "AppuntamentoControlF.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $action = $_POST['action'];
@@ -93,13 +94,12 @@ else if($action == 'addApp'){
         $ora = $_POST['ora'];
         $descrizione = $_POST['descrizione'];
         $cf = $_POST['codF'];
-        $newApp = new Appuntamento(null,$data,$ora,$descrizione,$cfProf,$cf);
-        $ok = DatabaseInterface::insertQuery($newApp->getArray(),Appuntamento::$tableName);
-        if($ok){
+        $addOk = AppuntamentoControlF::addApp($data,$ora,$descrizione,$cfProf,$cf);
+        if($addOk){
             header('Location: ../interface/Professionista/calendario.php');
         }
         else{
-            throw new Exception("Errore: Appuntamento non aggiunto!");
+            throw new Exception($addOk);
         }
     }catch(Exception $e){
         $_SESSION['erroreApp'] = $e->getMessage();
@@ -141,18 +141,12 @@ else if($action == 'modApp'){
     $descrizione = $_POST['descrizione'];
     $cf = $_POST['codF'];
     try{
-        $oldApp = new Appuntamento($id,$oldData,$oldOra,$oldDescrizione,$cfProf,$oldCf);
-        $oldApp->setData($data);
-        $oldApp->setOra($ora);
-        $oldApp->setDesc($descrizione);
-        $oldApp->setCfPaz($cf);
-
-        $isUpdate = DatabaseInterface::updateQueryById($oldApp->getArray(),Appuntamento::$tableName);
-        if($isUpdate){
+        $modOk=AppuntamentoControlF::modApp($id,$data,$ora,$descrizione,$cfProf,$cf,$oldData,$oldOra,$oldDescrizione,$oldCf);
+        if($modOk){
             header('Location: ../interface/Professionista/calendario.php');
         }
         else{
-            throw new Exception("Errore: Appuntamento non modificato!");
+            throw new Exception($modOk);
         }
     }catch(Exception $e){
         $_SESSION['erroreApp'] = $e->getMessage();

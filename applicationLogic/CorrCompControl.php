@@ -19,6 +19,7 @@ define('TABLE_NAME', 'compito');
 
 session_start();
 $cfProf=$_SESSION['codiceFiscale'];
+$cfPaz=$_SESSION["cfPazTer"];
 $_SESSION['eccezione']="";
 
 
@@ -66,34 +67,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $data = $_POST['data'];
           $titolo = $_POST['titolo'];
           $descrizione = $_POST['descrizione'];
-          $cfPaz = 'NSTFNC94M23H703G';
           $svolgimento='';
           $correzione='';
-          $effettuato=0;
-
-          echo $data;
-          echo $titolo;
-          echo "<br>";
-          echo $descrizione;
-          echo $cfPaz;
 
 
-          $compitoComp = new Compito(null ,$data,$titolo,$effettuato, $descrizione,$svolgimento,$correzione,$cfProf,$cfPaz);
+          $compitoComp = new Compito(null ,$data,0,$titolo,$descrizione,$svolgimento,$correzione,$cfProf,$cfPaz);
 
           $compt = DatabaseInterface::insertQuery($compitoComp->getArray(), TABLE_NAME);
           var_dump($compt);
 
           if ($compt) {
-             // header('Location: ../interface/Professionista/gestioneCompiti.php');
+              header('Location: ../interface/Professionista/gestioneCompiti.php');
           } else {
               throw new Exception("Errore: Compito non aggiunto!");
           }
       }catch(Exception $e){
           $_SESSION['eccezione']= $e->getMessage();
           echo $e->getMessage();
-          //header('Location: ../interface/Professionista/gestioneCompiti.php');
+          header('Location: ../interface/Professionista/gestioneCompiti.php');
       }
-
 } elseif
  //questa action permette al paziente di svolgere un compito
 	($action=='doComp') {

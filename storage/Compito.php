@@ -82,14 +82,11 @@ class Compito
         date_default_timezone_set("Europe/Rome");
         $currDate = date("Y-m-d");
 
-        if($data == null || $effettuato == null || $titolo == null || $descrizione == null
+        if($data == null || $titolo == null || $descrizione == null
             || $cfProf == null || $cfPaz == null){
             throw new Exception("Alcuni valori non validi!");
         }
 
-        else if($data != $currDate ){
-            throw new Exception("La data inserita non è quella corrente");
-        }
 
         else if(strlen($titolo) > 25){
             throw new Exception("La lunghezza del titolo supera i 25 caratteri");
@@ -103,13 +100,13 @@ class Compito
             throw new Exception("Formato della descrizione non corretto");
         }
 
-        else if(!preg_match('/[A-Za-z0-9]$/', $correzione)){
+        /*else if(!preg_match('/[A-Za-z0-9]$/', $correzione)){
             throw new Exception("Il campo correzione non rispetta il formato");
         }
 
         else if(!preg_match('/[A-Za-z0-9]$/', $svolgimento)){
             throw new Exception("Il campo svolgimento non rispetta il formato");
-        }
+        }*/
 
 		$this->id= $id;
 		$this->data = $data;

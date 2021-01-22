@@ -45,6 +45,23 @@ class SchedaFollowUp
         else if($tipo != "Scheda Follow Up"){
             throw new Exception("Tipo scheda non compatibile!");
         }
+
+        else if(strlen($ricadute)==0){
+            throw new Exception("Ricadute non rispetta la lunghezza prevista");
+        }
+
+        else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $ricadute)){
+            throw new Exception("Ricadute non rispetta il formato previsto");
+        }
+        else if(strlen($esitiPositivi)==0){
+            throw new Exception("Esiti positivi non rispetta la lunghezza prevista");
+        }
+
+        else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $esitiPositivi)){
+            throw new Exception("Esiti positivi non rispetta il formato previsto");
+        }
+
+
         $this->idScheda = $idScheda;
         $this->data = $data;
         $this->ricadute= $ricadute;
@@ -94,15 +111,35 @@ class SchedaFollowUp
     }
     public function setRicadute($ricadute)
     {
-        if($ricadute == null){
+        if($ricadute == null)
+        {
             throw new Exception("Nuovo campo ricadute non valido!");
+        }
+        else if(strlen($ricadute)==0)
+        {
+            throw new Exception("Ricadute non rispetta la lunghezza prevista");
+        }
+
+        else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $ricadute))
+        {
+            throw new Exception("Ricadute non rispetta il formato previsto");
         }
          $this -> ricadute = $ricadute;
     }
     public function setEsitiPositivi($esitiPositivi)
     {
-        if($esitiPositivi == null){
+        if($esitiPositivi == null)
+        {
             throw new Exception("Nuovo campo esiti positivi non valido!");
+        }
+        else if(strlen($esitiPositivi)==0)
+        {
+            throw new Exception("Esiti positivi non rispetta la lunghezza prevista");
+        }
+
+        else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $esitiPositivi))
+        {
+            throw new Exception("Esiti positivi non rispetta il formato previsto");
         }
          $this -> esitiPositivi = $esitiPositivi;
     }

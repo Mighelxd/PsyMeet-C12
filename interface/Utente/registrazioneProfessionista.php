@@ -115,7 +115,7 @@
           </div>
         </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Telefono" id="telefono" name="telefono" pattern="[0-9]{9}" title="9 Numeri" required>
+          <input type="text" class="form-control" placeholder="Telefono" id="telefono" name="telefono" pattern="[0-9]{10}" title="10 Numeri" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>

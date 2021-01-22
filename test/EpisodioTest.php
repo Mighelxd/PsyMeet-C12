@@ -2,7 +2,7 @@
 
 
 use PHPUnit\Framework\TestCase;
-include 'storage/Episodio.php';
+include '../storage/Episodio.php';
 
 class EpisodioTest extends TestCase
 {

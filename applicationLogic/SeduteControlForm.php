@@ -14,6 +14,7 @@ include "../storage/scelta.php";
 include "../storage/Fattura.php";
 include "PacchettoControl.php";
 include "PazienteControl.php";
+include "SeduteControl.php";
 session_start();
 if(isset($_POST['action'])) {
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -28,21 +29,13 @@ if($action == "saveScheda"){
   try{
     $data = $_POST['data'];
     $idTerapia = $_POST['idTerapia'];
-    $numEp = '0';
-    $data = str_replace('/','-',$data);
-    $data=date_create($data);
-    $data = date_format($data,"Y/m/d");
-
-    $scheda = new SchedaAssessmentFocalizzato(null,$data,$numEp,$idTerapia,"Scheda Assessment Focalizzato");
-    $ok = DatabaseInterface::insertQuery($scheda->getArray(),"schedaassessmentfocalizzato");
-
-    $recIdScheda = DatabaseInterface::selectQueryByAtt($scheda->getArray(),"schedaassessmentfocalizzato");
-    while($row = $recIdScheda->fetch_array()){
-      $idSchedaCorr = $row[0];
+    $addOkFoc=SeduteControl::addSchedaFoc($data,$idTerapia);
+    if(!$addOkFoc){
+      throw new Exception($addOkFoc);
+    }else{
+      $ris = array("ok"=>$addOkFoc,"idScheda"=>$_SESSION['idSCorr']);
+      echo json_encode($ris);
     }
-    $_SESSION['idSCorr'] = $idSchedaCorr;
-    $ris = array("ok"=>$ok,"idScheda"=>$idSchedaCorr);
-    echo json_encode($ris);
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
@@ -94,26 +87,11 @@ else if($action == "addEpisodio"){
     else{
       $idScheda = $_SESSION['idSCorr'];
     }
-
-    $attEp = new Episodio(null,$numEp,$analisi,$mA,$mB,$mC,$appunti,$idScheda);
-    $insOk = DatabaseInterface::insertQuery($attEp->getArray(),'episodio');
-    if($insOk){
-      $key = array("id_scheda"=>$idScheda);
-      $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
-      while($row = $recScheda->fetch_array()){
-        $scheda = new SchedaAssessmentFocalizzato($row[0],$row[1],$row[2],$row[3],$row[4]);
-      }
-      $newNumEp = $scheda->getNEpisodi() + 1;
-      $scheda->setNEpisodi($newNumEp);
-      $updateScheda = DatabaseInterface::updateQueryById($scheda->getArray(),'schedaassessmentfocalizzato');
-      if($updateScheda){
-        $_SESSION['idSCorr'] = $idScheda;
-        header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
-      }else{
-        throw new Exception("Errore: numero episodi in scheda non aggiornato!");
-      }
+    $addok = SeduteControl::addEpisodio($numEp,$analisi,$mA,$mB,$mC,$appunti,$idScheda);
+    if($addok){
+      header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
     }else{
-      throw new Exception("Errore: episodio non inserito!");
+      throw new Exception($addok);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
@@ -184,28 +162,17 @@ else if($action == 'modEpisodio'){
       $idSchedaCorr = $_SESSION['idSCorr'];
     }
 
-    $attRec=array("numero"=>$numEp,"id_scheda"=>$idSchedaCorr);
-    $recEp=DatabaseInterface::selectQueryByAtt($attRec,'episodio');
-    while($row=$recEp->fetch_array()){
-      $ep = new Episodio($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]);
-    }
-    $ep->setAnalisiFun($analisi);
-    $ep->setMA($mA);
-    $ep->setMB($mB);
-    $ep->setMC($mC);
-    $ep->setAppunti($appunti);
+    $modok = SeduteControl::modEpisodio($numEp,$analisi,$mA,$mB,$mC,$appunti,$idSchedaCorr);
 
-    $upd = DatabaseInterface::updateQueryById($ep->getArray(),'episodio');
-    if($upd){
+    if($modok){
       header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
     }else{
-      throw new Exception("Errore: episodio non modificato!");
+      throw new Exception($modok);
     }
   }catch(Exception $e){
     $_SESSION['eccezioni']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
-
 }
 /////////////////////////////////////////////////////////////Generalizzato
 else if($action =='addSchGen'){
