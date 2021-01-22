@@ -74,4 +74,73 @@ class AreaInformativaControl
             return null;
         }
     }
+
+
+    public static  function updateSchedaProfessionista($cf, $telefono, $cellulare, $email, $pass, $titoloDiStudio, $pubblicazioni, $esperienze, $indirizzoStudio){
+        try {
+            $professionista = AreaInformativaControl::getProf($cf);
+
+            if ($telefono != "") {
+                $professionista->setTelefono($telefono);
+            }
+
+            if ($cellulare != "") {
+                $professionista->setCellulare($cellulare);
+            }
+
+            if ($email != "") {
+                $professionista->setEmail($email);
+            }
+
+            if ($pass != "") {
+                $professionista->setPassword($pass);
+            }
+
+            if ($titoloDiStudio != "") {
+                $professionista->setTitoloStudio($titoloDiStudio);
+            }
+
+            if ($pubblicazioni != "") {
+                $professionista->setPubblicazione($pubblicazioni);
+            }
+
+            if ($esperienze != "") {
+                $professionista->setEsperienze($esperienze);
+            }
+
+            if ($indirizzoStudio != "") {
+                $professionista->setIndirizzoStudio($indirizzoStudio);
+            }
+
+            $result = DatabaseInterface::updateQueryById($professionista->getArrayNoVideo(), Professionista::$tableName);
+
+            if($result == false){
+                throw new Exception("errore update");
+            }
+
+            return true;
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public static function updateFotoProfessionista($cf, $img){
+        try {
+            if ($img != NULL) {
+                $arr = array("cf_prof" => $cf,);
+                $result = DatabaseInterface::selectQueryById($arr, "professionista");
+                $arr = $result->fetch_array();
+                $professionista = new Professionista($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6], $arr[7], $arr[8], $arr[9], $arr[10], $arr[11], $arr[12], $arr[13], $arr[14], $arr[15], $arr[16], $img);
+
+                $result = DatabaseInterface::updateQueryById($professionista->getArray(), Professionista::$tableName);
+
+                if ($result == false) {
+                    throw new Exception("errore update");
+                }
+                return true;
+            }
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
 }
