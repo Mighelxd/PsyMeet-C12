@@ -17,21 +17,6 @@ if($_POST["action"] == "ModificaPaziente"){
         $passwordPaz = md5($_POST["password"]);
         $istruzionePaz = $_POST["istruzione"];
 
-        if(!isset($telefonoPaz)){
-            $telefonoPaz = "";
-        }
-        if(!isset($indirizzoPaz)){
-            $indirizzoPaz = "";
-        }
-        if(!isset($emailPaz)){
-            $emailPaz = "";
-        }
-        if(!isset($passwordPaz)){
-            $passwordPaz = "";
-        }
-        if(!isset($istruzionePaz)){
-            $istruzionePaz = "";
-        }
 
         $result = PazienteControl::updateSchedaPaziente($cfPaziente, $telefonoPaz,$indirizzoPaz, $emailPaz, $passwordPaz, $istruzionePaz);
 
@@ -61,9 +46,9 @@ else if($_POST["action"] == "modificaFoto"){
             if($res){
                 header("Location: ../interface/Paziente/areaPersonalePaziente.php");
             }
-            else
+            else {
                 throw new Exception("Errore: Modifica foto non effettuate!");
-
+            }
 
     }catch(Exception $e){
         $_SESSION['eccezione']=$e->getMessage();

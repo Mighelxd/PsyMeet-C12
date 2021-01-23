@@ -59,7 +59,7 @@ else if ($action == "compraPacchetto"){
         $cfPaz=$_POST["cfPaz"];
         $idScelta =$_POST["idScelta"];
 
-        $result = PacchettoControl::buyPacchetto($data,$cfProf,$cfPaz,$idScelta);
+        $result = PacchettoControl::buyPacchetto($data,$cfPaz,$idScelta);
 
         if (gettype($result) == "boolean"){
             header('Location: ../interface/Paziente/pacchetti.php');

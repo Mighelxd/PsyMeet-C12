@@ -153,7 +153,9 @@ class PacchettoControl{
     static function delPacchetto($idProf, $pacchetto){
         try {
             $key = new Scelta(null,$idProf,$pacchetto);
-            $del=DatabaseInterface::deleteQuery($key->getArray(),scelta::$tableName);
+            $arrPac = $key->getArray();
+            $arrPac = array_diff($arrPac,[""]);
+            $del=DatabaseInterface::deleteQuery($arrPac,scelta::$tableName);
 
             if(!$del){
                 throw new Exception("Errore: pacchetto non eliminato!");
@@ -166,7 +168,7 @@ class PacchettoControl{
     }
 
 
-    static function buyPacchetto($data, $cfProf, $cfPaz, $idScelta){
+    static function buyPacchetto($data,  $cfPaz, $idScelta){
       try{
 
           $arr = array("id_scelta" =>$idScelta,);
