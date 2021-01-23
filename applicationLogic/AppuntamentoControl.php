@@ -95,7 +95,7 @@ else if($action == 'addApp'){
         $descrizione = $_POST['descrizione'];
         $cf = $_POST['codF'];
         $addOk = AppuntamentoControlF::addApp($data,$ora,$descrizione,$cfProf,$cf);
-        if($addOk){
+        if(gettype($addOk)=='boolean'){
             header('Location: ../interface/Professionista/calendario.php');
         }
         else{
@@ -142,7 +142,7 @@ else if($action == 'modApp'){
     $cf = $_POST['codF'];
     try{
         $modOk=AppuntamentoControlF::modApp($id,$data,$ora,$descrizione,$cfProf,$cf,$oldData,$oldOra,$oldDescrizione,$oldCf);
-        if($modOk){
+        if(gettype($modOk)=='boolean'){
             header('Location: ../interface/Professionista/calendario.php');
         }
         else{

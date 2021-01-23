@@ -165,7 +165,7 @@ $_SESSION["cfPazTer"] = "";
               </div><!-- /.col -->
             </div><!-- /.row -->
           </div><!-- /.container-fluid -->
-            <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+            <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
         </div>
         <!-- /.content-header -->
 

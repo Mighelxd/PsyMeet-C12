@@ -15,7 +15,7 @@
         exit;
     }
     else{
-        $_SESSION['eccezione']="";
+        $_SESSION['eccregpaz']="";
         try {
             $nome = $_POST["nome"];
             $cognome = $_POST["cognome"];
@@ -51,7 +51,7 @@
                 exit();
             }
         }catch(Exception $e){
-            $_SESSION['eccezione'] = $e->getMessage();
+            $_SESSION['eccregpaz'] = $e->getMessage();
             header("Location: ../interface/paziente/registrazionepaziente.php");
         }
     }

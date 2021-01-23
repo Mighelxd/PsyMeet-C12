@@ -13,9 +13,8 @@
 
  session_start();
  $cf_prof = $_SESSION["codiceFiscale"];
- $_SESSION['noUpdate']="";
- $_SESSION['noUpdatePhoto']="";
- //$_SESSION['eccezione']="";
+
+ $_SESSION['eccmodprof']="";
 
  if($_POST["action"] == "aggiornaDati"){
      try {
@@ -30,13 +29,13 @@
 
          $result = AreaInformativaControl::updateSchedaProfessionista($cf_prof, $telefono, $cellulare, $email, $password, $titolo_studio, $pubblicazioni, $esperienze, $indirizzo_studio);
 
-         if (gettype($result) != "string" ) {
+         if (gettype($result) == "boolean" ) {
            header("Location: ../interface/Professionista/areaPersonaleProfessionista.php");
          } else{
              throw new Exception($result);
          }
      }catch(Exception $e){
-          $_SESSION['eccezione'] = $e->getMessage();
+          $_SESSION['eccmodprof'] = $e->getMessage();
 
          header("Location: ../interface/Professionista/areaPersonaleProfessionista.php");
       }
@@ -50,14 +49,13 @@
 
           $result = AreaInformativaControl::updateFotoProfessionista($cf_prof, $immagine);
 
-          if ($result){
+          if (gettype($result)=='boolean'){
               header("Location: ../interface/Professionista/areaPersonaleProfessionista.php");
           } else {
-              $_SESSION['noUpdatePhoto'] = "Foto non aggiornata";
-              header("Location: ../interface/Professionista/areaPersonaleProfessionista.php");
+              throw new Exception($result);
           }
       }catch(Exception $e){
-          $_SESSION['eccezione'] = $e->getMessage();
+          $_SESSION['eccmodprof'] = $e->getMessage();
           header("Location: ../interface/Professionista/areaPersonaleProfessionista.php");
       }
   }

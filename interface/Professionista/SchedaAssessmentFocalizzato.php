@@ -269,6 +269,7 @@ if(count($schAssFoc)>0){
         </div>
       </div><!-- /.container-fluid -->
         <span style="color:red"><?php if(isset($_SESSION['eccep'])){echo $_SESSION['eccep'];} ?></span>
+        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
     </section>
 
     <!-- Main content -->

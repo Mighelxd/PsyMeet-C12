@@ -328,6 +328,7 @@ $paziente = PazienteControl::getPaz($cf);
         </div>
       </div><!-- /.container-fluid -->
         <span style="color:red"><?php if(isset($_SESSION['eccFU'])){echo $_SESSION['eccFU'];} ?></span>
+        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
     </section>
 
     <!-- Main content -->

@@ -15,7 +15,7 @@
         exit;
     }
     else{
-        $_SESSION['eccezione']="";
+        $_SESSION['eccregprof']="";
         try {
             $nome = $_POST["nome"];
             $cognome = $_POST["cognome"];
@@ -55,7 +55,7 @@
                 exit();
             }
         }catch(Exception $e){
-            $_SESSION['eccezione']= $e->getMessage();
+            $_SESSION['eccregprof']= $e->getMessage();
             header("Location: ../interface/Professionista/registrazioneProfessionista.php");
         }
     }

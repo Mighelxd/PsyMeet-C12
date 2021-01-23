@@ -82,6 +82,10 @@ public static $tableName="appuntamento";
     if($newDesc == null){
       throw new Exception('Nuova descrizione appuntamento non valido!');
     }
+    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $newDesc))
+    {
+      throw new Exception("Il campo descrizione non rispetta il formato");
+    }
     $this->desc = $newDesc;
   }
   function setCfProf($newCfProf){

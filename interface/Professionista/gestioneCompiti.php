@@ -281,7 +281,7 @@ $paziente = PazienteControl::getPaz($cfT);
           </div>
         </div>
       </div><!-- /.container-fluid -->
-        <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
     </section>
 
     <!-- Main content -->
@@ -419,7 +419,6 @@ $paziente = PazienteControl::getPaz($cfT);
   <?php
 	   }
       } ?>
-    <span style="color:red"><?php echo $_SESSION['eccezione'] ?></span>
   </div>
     </section>
 

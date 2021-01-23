@@ -275,7 +275,7 @@ else
 
     <!-- Main content -->
     <section class="content">
-        <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>>
       <?php if(count($terapia)>0){ ?>
       <!-- Default box -->
       <div class="card">

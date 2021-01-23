@@ -25,7 +25,7 @@ class AreaInformativaControl
     }
     static function recuperaProfessionisti(){
         try{
-            $_SESSION['eccezione'] = "";
+            $_SESSION['eccareaprof'] = "";
             $allProf = DatabaseInterface::selectAllQuery('professionista');
             $arrProf = null;
 
@@ -35,13 +35,13 @@ class AreaInformativaControl
             }
             return $arrProf;
         }catch(Exception $e){
-            $_SESSION['eccezione'] = $e->getMessage();
+            $_SESSION['eccareaprof'] = $e->getMessage();
             return null;
         }
     }
     public static function getProf($cfProf){
         try{
-            $_SESSION['eccezione'] = "";
+            $_SESSION['eccareaprof'] = "";
             $arr = array("cf_prof" => $cfProf,);
             $result = DatabaseInterface::selectQueryById($arr,"professionista");
             $arr = $result -> fetch_array();
@@ -49,14 +49,14 @@ class AreaInformativaControl
 
             return $prof;
         }catch(Exception $e){
-            $_SESSION['eccezione'] = $e->getMessage();
+            $_SESSION['eccareaprof'] = $e->getMessage();
             return null;
         }
 
     }
     public static function getProfessionistByPaz($cfPaziente){
         try{
-            $_SESSION['eccezione'] = "";
+            $_SESSION['eccareaprof'] = "";
             $professionisti = NULL;
 
             $arr = array("cf" => $cfPaziente);
@@ -70,7 +70,7 @@ class AreaInformativaControl
 
             return $professionisti;
         }catch(Exception $e){
-            $_SESSION['eccezione'] = $e->getMessage();
+            $_SESSION['eccareaprof'] = $e->getMessage();
             return null;
         }
     }
@@ -135,7 +135,7 @@ class AreaInformativaControl
                 $result = DatabaseInterface::updateQueryById($professionista->getArray(), Professionista::$tableName);
 
                 if ($result == false) {
-                    throw new Exception("errore update");
+                    throw new Exception("errore foto non aggiornata");
                 }
                 return true;
             }

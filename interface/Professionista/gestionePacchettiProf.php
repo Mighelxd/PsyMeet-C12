@@ -267,7 +267,7 @@ to get the desired effect
                     <button name='action' type="submit" value="addPacchetto" class="btn btn-primary" style="float: right">Aggiungi</button>
                   </div>
                 </form>
-                  <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+                  <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
               </div>
 
             </div>
