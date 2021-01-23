@@ -25,7 +25,7 @@ public static $tableName="appuntamento";
     }
     else if(strlen($cfPa)!=16)
     {
-      throw new Exception("Codice fiscale paziente errato, lunghezza non rispettata");
+      throw new Exception("Il campo Codice fiscale paziente non rispetta la lunghezza");
     }
     else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $des))
     {
