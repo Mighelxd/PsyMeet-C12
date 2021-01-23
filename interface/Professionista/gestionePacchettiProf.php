@@ -268,6 +268,7 @@ to get the desired effect
                   </div>
                 </form>
                   <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
+                  <span style="color:red"><?php if (isset($_SESSION['eccpac'])){echo $_SESSION['eccpac'];} ?></span>
               </div>
 
             </div>

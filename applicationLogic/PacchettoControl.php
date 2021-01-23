@@ -6,7 +6,6 @@ class PacchettoControl{
   static function selectAllPacchetto(){
     //Questa action cerca di recuperare tutti i pacchetti che vi sono nel DB
       try{
-          $_SESSION['eccezione']="";
           $allPac = DatabaseInterface::selectAllQuery(Pacchetto::$tableName);
           $arr = null;
           while ($row=$allPac->fetch_array()) {
@@ -15,7 +14,7 @@ class PacchettoControl{
           }
           return $arr;
       }catch(Exception $e){
-          $_SESSION['eccezione']=$e->getMessage();
+          $_SESSION['eccpac']=$e->getMessage();
           return null;
       }
   }
@@ -35,7 +34,7 @@ class PacchettoControl{
           //var_dump($arrs);
           return $arrs;
       }catch(Exception $e){
-          $_SESSION['eccezione']=$e->getMessage();
+          $_SESSION['eccpac']=$e->getMessage();
           return null;
       }
  }
@@ -50,7 +49,7 @@ class PacchettoControl{
 
           return $pacrec;
       }catch(Exception $e){
-          $_SESSION['eccezione']=$e->getMessage();
+          $_SESSION['eccpac']=$e->getMessage();
           return null;
       }
  }
@@ -76,7 +75,7 @@ class PacchettoControl{
           //var_dump($arrs);
           return $arrs;
       }catch(Exception $e){
-          $_SESSION['eccezione']=$e->getMessage();
+          $_SESSION['eccpac']=$e->getMessage();
           return null;
       }
     }

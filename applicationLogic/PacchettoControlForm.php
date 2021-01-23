@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 else {
   $action=$_GET['action'];
 }
-$_SESSION['eccezione']="";
+$_SESSION['eccpac']="";
 if($action=='addPacchetto'){
     try{
         $id=0;
@@ -46,7 +46,7 @@ if($action=='addPacchetto'){
             }
         }
     }catch(Exception $e){
-        $_SESSION['eccezione']=$e->getMessage();
+        $_SESSION['eccpac']=$e->getMessage();
         header('Location: ../interface/Professionista/gestionePacchettiProf.php');
     }
 }
@@ -63,7 +63,7 @@ else if($action=='delPacchetto'){
             throw new Exception("Errore: pacchetto non eliminato!");
         }
     }catch(Exception $e){
-        $_SESSION['eccezione']=$e->getMessage();
+        $_SESSION['eccpac']=$e->getMessage();
         header('Location: ../interface/Professionista/gestionePacchettiProf.php');
     }
 }

@@ -23,9 +23,9 @@ class Fattura
       if($data == null || $cfPaz == null || $idScelta == null || $nSeduteRim == null){
           throw new Exception("Alcuni valori non definiti!");
       }
-      else if($data>$currDate){
+     /* else if($data>$currDate){
           throw new Exception("Data non disponibile!");
-      }
+      }*/
       else if($idScelta<1){
           throw new Exception("Id scelta pacchetto non valido!");
       }
