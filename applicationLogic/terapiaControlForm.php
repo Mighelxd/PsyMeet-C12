@@ -2,6 +2,7 @@
 session_start();
 include '..\plugins\libArray\FunArray.php';
 include '../storage/DatabaseInterface.php';
+include 'terapiaControl.php';
 include '../storage/Terapia.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -10,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 else{
     $action = $_GET['action'];
 }
-$_SESSION['eccezione']="";
+$_SESSION['eccTer']="";
 if($action == 'addTer'){
     try{
         $cfPaz = $_SESSION["cfPazTer"];
@@ -18,17 +19,14 @@ if($action == 'addTer'){
         $data = date("Y-m-d");
         $desc = $_POST['descTer'];
 
-        $att = new Terapia(null,$data,$desc,$cfProf,$cfPaz);
-        $ok = DatabaseInterface::insertQuery($att->getArray(),Terapia::$tableName);
-
-        if($ok){
+        $okAddTer=terapiaControl::addTer($data,$desc,$cfProf,$cfPaz);
+        if(gettype($okAddTer)=='boolean'){
             header("Location: ../interface/Professionista/Pazienti.php");
-        }
-        else{
-            throw new Exception("Errore: Terapia non aggiunta!");
+        }else{
+            throw new Exception($okAddTer);
         }
     }catch(Exception $e){
-        $_SESSION['eccezione']=$e->getMessage();
+        $_SESSION['eccTer']=$e->getMessage();
         header("Location: ../interface/Professionista/gestioneTerapia.php");
     }
 }
@@ -37,20 +35,15 @@ else if($action == 'modTer'){
         $idTer = $_SESSION['idTerCorr'];
         $desc = $_POST['descTer'];
 
-        $key = array("id_terapia"=>$idTer);
-        $recTer = DatabaseInterface::selectQueryById($key,Terapia::$tableName);
-        while($row = $recTer->fetch_array()){
-            $terapia = new Terapia($row[0],$row[1],$row[2],$row[3],$row[4]);
-        }
-        $terapia->setDescrizione($desc);
-        $upd=DatabaseInterface::updateQueryById($terapia->getArray(),Terapia::$tableName);
-        if($upd){
+        $okModTer=terapiaControl::modTerr($idTer,$desc);
+        if(gettype($okModTer)=='boolean'){
             header("Location: ../interface/Professionista/gestioneTerapia.php");
         }else{
-            throw new Exception("Errore: Terapia non modificata!");
+            throw new Exception($okModTer);
         }
+
     }catch(Exception $e){
-        $_SESSION['eccezione']=$e->getMessage();
+        $_SESSION['eccTer']=$e->getMessage();
         header("Location: ../interface/Professionista/gestioneTerapia.php");
     }
 }
@@ -66,7 +59,7 @@ else if($action == 'delTer'){
             throw new Exception("Errore: Terapia non eliminata!");
         }
     }catch(Exception $e){
-        $_SESSION['eccezione']=$e->getMessage();
+        $_SESSION['eccTer']=$e->getMessage();
         header("Location: ../interface/Professionista/gestioneTerapia.php");
     }
 }

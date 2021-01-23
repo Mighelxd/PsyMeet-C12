@@ -8,10 +8,41 @@
 */
 class terapiaControl{
 
+    static function addTer($data,$desc,$cfProf,$cfPaz){
+        try{
+            $att = new Terapia(null,$data,$desc,$cfProf,$cfPaz);
+            $ok = DatabaseInterface::insertQuery($att->getArray(),Terapia::$tableName);
 
+            if($ok){
+                return true;
+            }
+            else{
+                throw new Exception("Errore: Terapia non aggiunta!");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+    static function modTerr($idTer,$desc){
+        try{
+            $key = array("id_terapia"=>$idTer);
+            $recTer = DatabaseInterface::selectQueryById($key,Terapia::$tableName);
+            while($row = $recTer->fetch_array()){
+                $terapia = new Terapia($row[0],$row[1],$row[2],$row[3],$row[4]);
+            }
+            $terapia->setDescrizione($desc);
+            $upd=DatabaseInterface::updateQueryById($terapia->getArray(),Terapia::$tableName);
+            if($upd){
+                return true;
+            }else{
+                throw new Exception("Errore: Terapia non modificata!");
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
     static function recuperaSchede($idTerapia){
         try{
-            $_SESSION['eccezione']="";
             $att = array("id_terapia"=>$idTerapia);
             $col = array("*");
             $schPrimoColl = DatabaseInterface:: selectDinamicQuery($col, $att, "schedaprimocolloquio");
@@ -44,14 +75,13 @@ class terapiaControl{
 
             return $allSchede;
         }catch(Exception $e){
-            $_SESSION['eccezione'] =$e->getMessage();
+            $_SESSION['eccTer'] =$e->getMessage();
             return array();
         }
     }
 
     public static function getTerapie($cfPaz, $cfProf){
         try{
-            $_SESSION['eccezione']="";
             $arrKey= array('cf' => $cfPaz, 'cf_prof' => $cfProf);
             $arrayTerapie = array();
             $listTerapie = DatabaseInterface::selectQueryByAtt($arrKey, "terapia");
@@ -62,14 +92,13 @@ class terapiaControl{
             }
             return $arrayTerapie;
         }catch(Exception $e){
-            $_SESSION['eccezione'] =$e->getMessage();
+            $_SESSION['eccTer'] =$e->getMessage();
             return array();
         }
     }
 
     public static function getTerapiePaz($cf){
         try{
-            $_SESSION['eccezione']="";
             $arrKey= array('cf' => $cf);
             $arrayTerapie = array();
             $listTerapie = DatabaseInterface::selectQueryByAtt($arrKey, "terapia");
@@ -80,7 +109,7 @@ class terapiaControl{
             }
             return $arrayTerapie;
         }catch(Exception $e){
-            $_SESSION['eccezione'] =$e->getMessage();
+            $_SESSION['eccTer'] =$e->getMessage();
             return array();
         }
     }
@@ -95,43 +124,10 @@ class terapiaControl{
 
             return $mEz;
         }catch(Exception $e){
-            $_SESSION['eccezione'] =$e->getMessage();
+            $_SESSION['eccTer'] =$e->getMessage();
             return null;
         }
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
