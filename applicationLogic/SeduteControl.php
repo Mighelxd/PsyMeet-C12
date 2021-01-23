@@ -93,7 +93,6 @@ class SeduteControl
     static function recuperaEpisodi($allSchede)
     {
         try{
-            $_SESSION['eccezioni']="";
             $schedaConEpisodi = array();
 
             for ($i = 0; $i < count($allSchede); $i++) {
@@ -111,7 +110,7 @@ class SeduteControl
             }
             return $schedaConEpisodi;
         }catch(Exception $e){
-            $_SESSION['eccezioni']=$e->getMessage();
+            $_SESSION['eccep']=$e->getMessage();
             return array();
         }
     }
@@ -282,7 +281,6 @@ class SeduteControl
     static function recAllModEzPaz($cfPaz)
     {
         try{
-            $_SESSION['eccezioni']="";
             $arr=null;
             $arrKey = ['cf' => $cfPaz];
             $terPz = DatabaseInterface::selectQueryByAtt($arrKey, Terapia::$tableName);

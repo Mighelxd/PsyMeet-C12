@@ -25,7 +25,6 @@ class AreaInformativaControl
     }
     static function recuperaProfessionisti(){
         try{
-            $_SESSION['eccareaprof'] = "";
             $allProf = DatabaseInterface::selectAllQuery('professionista');
             $arrProf = null;
 
@@ -41,7 +40,6 @@ class AreaInformativaControl
     }
     public static function getProf($cfProf){
         try{
-            $_SESSION['eccareaprof'] = "";
             $arr = array("cf_prof" => $cfProf,);
             $result = DatabaseInterface::selectQueryById($arr,"professionista");
             $arr = $result -> fetch_array();
@@ -56,7 +54,6 @@ class AreaInformativaControl
     }
     public static function getProfessionistByPaz($cfPaziente){
         try{
-            $_SESSION['eccareaprof'] = "";
             $professionisti = NULL;
 
             $arr = array("cf" => $cfPaziente);

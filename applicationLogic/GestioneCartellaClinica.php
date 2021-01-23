@@ -7,7 +7,7 @@
   include "../plugins/libArray/FunArray.php";
 session_start();
 $cfProf=$_SESSION["codiceFiscale"];
-$_SESSION['eccezione']="";
+$_SESSION['eccCaClPr']="";
 if(isset($_POST["azione"])){
     if($_POST["azione"]=="visualizza"){
         try{
@@ -20,7 +20,7 @@ if(isset($_POST["azione"])){
             header("Location: ../interface/Professionista/CartellaClinica.php");
         }catch(Exception $e){
             echo $e->getMessage();
-            $_SESSION['eccezione']= $e->getMessage();
+            $_SESSION['eccCaClPr']= $e->getMessage();
         }
     }
     else if($_POST["azione"]=="modifica"){
@@ -36,7 +36,7 @@ if(isset($_POST["azione"])){
             echo json_encode(array("esito"=>true));
         }catch(Exception $e){
             echo $e->getMessage();
-            $_SESSION['eccezione']= $e->getMessage();
+            $_SESSION['eccCaClPr']= $e->getMessage();
         }
     }
     else{
@@ -54,7 +54,7 @@ if(isset($_POST["azione"])){
             }
         }catch(Exception $e){
             echo json_encode(array("esito"=>false,"errore"=>$e->getMessage()));
-            $_SESSION['eccezione']= $e->getMessage();
+            $_SESSION['eccCaClPr']= $e->getMessage();
         }
     }
 }

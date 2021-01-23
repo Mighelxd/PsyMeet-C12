@@ -16,7 +16,6 @@
 class PazienteControl {
   public static function getPaz($cfPaziente){
     try{
-      $_SESSION['eccezione']="";
       $arr = array("cf" => $cfPaziente,);
       $result = DatabaseInterface::selectQueryById($arr,"paziente");
       $arr = $result -> fetch_array();
@@ -31,7 +30,6 @@ class PazienteControl {
 
   public static function getListPaz(){
     try{
-      $_SESSION['eccezione']="";
       $allPaz = DatabaseInterface::selectAllQuery("paziente");
       $arrayPazienti = null;
 
@@ -49,7 +47,6 @@ class PazienteControl {
   //questo metodo prende in input un array relazionare che mette a relazione la chiave più il valore (esempio ("cf" => "afaopmemffeaf"), ("nome" => "Francesco"))
   public static function searchPaz($arrSearchKey){
     try{
-      $_SESSION['eccezione']="";
       $arrayPazienti=null;
       $listPaz = DatabaseInterface::selectQueryByAtt($arrSearchKey, "paziente");
 
@@ -67,7 +64,6 @@ class PazienteControl {
 
   static function getPazientiByProf($cfProf){
     try{
-      $_SESSION['eccezione']="";
       $arrKey = array('cf_prof' =>  $cfProf, );
       $listTerapie = DatabaseInterface::selectQueryByAtt($arrKey,"terapia");
       $arrayPazienti = NULL;

@@ -30,7 +30,7 @@ class CompitoControl
     public static function selectAllCompitiProf($cfProf)
 	{
 	    try{
-            $_SESSION['eccezione']="";
+           // if(isset($_SESSION['eccComp']) && $_SESSION['eccComp']!=""){$_SESSION['eccComp']="";}
             $arrKey = ['cf_prof'=>$cfProf];
             $arr = null;
             $allCompProf = DatabaseInterface::selectQueryByAtt($arrKey, 'compito');
@@ -41,7 +41,7 @@ class CompitoControl
 
             return $arr;
         }catch (Exception $e){
-	        $_SESSION['eccezione'] = $e->getMessage();
+	        $_SESSION['eccComp'] = $e->getMessage();
 	        return null;
         }
 	}
@@ -56,7 +56,7 @@ class CompitoControl
     public static function selectAllCompitiPaz($cfPaz)
 	{
 	    try{
-            $_SESSION['eccezione']="";
+          //  if(isset($_SESSION['eccComp']) && $_SESSION['eccComp']!=""){$_SESSION['eccComp']="";}
             $arrKey = ['cf'=>$cfPaz];
             $arr=null;
             $allCompPaz = DatabaseInterface::selectQueryByAtt($arrKey, 'compito');
@@ -67,7 +67,7 @@ class CompitoControl
 
             return $arr;
         }catch (Exception $e){
-            $_SESSION['eccezione'] = $e->getMessage();
+            $_SESSION['eccComp'] = $e->getMessage();
             return null;
         }
 	}

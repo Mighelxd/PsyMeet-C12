@@ -20,7 +20,7 @@ define('TABLE_NAME', 'compito');
 session_start();
 $cfProf=$_SESSION['codiceFiscale'];
 $cfPaz=$_SESSION["cfPazTer"];
-$_SESSION['eccezione']="";
+$_SESSION['eccComp']="";
 
 
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               throw new Exception("Errore: Compito non corretto!");
           }
       }catch(Exception $e){
-          $_SESSION['eccezione']= $e->getMessage();
+          $_SESSION['eccComp']= $e->getMessage();
           header('Location: ../interface/Professionista/gestioneCompiti.php');
       }
   } elseif
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $compitoComp = new Compito(null ,$data,0,$titolo,$descrizione,$svolgimento,$correzione,$cfProf,$cfPaz);
 
           $compt = DatabaseInterface::insertQuery($compitoComp->getArray(), TABLE_NAME);
-          var_dump($compt);
+          //var_dump($compt);
 
           if ($compt) {
               header('Location: ../interface/Professionista/gestioneCompiti.php');
@@ -82,8 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               throw new Exception("Errore: Compito non aggiunto!");
           }
       }catch(Exception $e){
-          $_SESSION['eccezione']= $e->getMessage();
-          echo $e->getMessage();
+          $_SESSION['eccComp']= $e->getMessage();
+          //echo $e->getMessage();
           header('Location: ../interface/Professionista/gestioneCompiti.php');
       }
 } elseif
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               throw new Exception("Errore: non aggiunto svolgimento!");
           }
       }catch(Exception $e){
-          $_SESSION['eccezione']= $e->getMessage();
+          $_SESSION['eccComp']= $e->getMessage();
           header('Location: ../interface/Professionista/gestioneCompiti.php');
       }
 }
