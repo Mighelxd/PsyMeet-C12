@@ -17,14 +17,14 @@ class Terapia
 
     public function __construct($idTer, $date,$descriz, $cfProfessionista, $cfPa)
     {
-        if ($date == null || $descriz == null || $cfProfessionista == null || $cfPa == null) {
+        if ($date == null || $cfProfessionista == null || $cfPa == null) {
             throw new Exception("Alcuni valori non validi!");
         } else if (strlen($cfProfessionista) != 16) {
             throw new Exception("Codice fiscale professionista non valido!");
         } else if (strlen($cfPa) != 16) {
             throw new Exception("Codice fiscale paziente non valido!");
-        } else if (strlen($descriz) == 0) {
-            throw new Exception("Il campo descrizione non può essere vuoto.");
+        } else if (strlen($descriz) == 0 || $descriz == NULL) {
+            throw new Exception("Il campo descrizione è vuoto.");
         }
 
         $this->idTerapia = $idTer;
@@ -67,7 +67,7 @@ class Terapia
     public function setDescrizione($descrizione)
     {
         if($descrizione == null){
-            throw new Exception("Nuovo campo descrizione non valido!");
+            throw new Exception("Il campo descrizione è vuoto.");
         }
         else if(strlen($descrizione)==0){
             throw new Exception("Il campo descrizione non può essere vuoto.");
