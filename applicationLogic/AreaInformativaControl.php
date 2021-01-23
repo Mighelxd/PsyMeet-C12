@@ -1,16 +1,28 @@
 <?php
 class AreaInformativaControl
 {
-    static function checkProf($professionista){
-        $select = DatabaseInterface::selectQueryById($professionista->getArray(),Professionista::$tableName);
-        if(mysqli_num_rows($select)!=0) return "Codice fiscale gia' presente.";
-        $select = DatabaseInterface::selectQueryByAtt(array("email" => $professionista->getEmail()),Professionista::$tableName);
-        if(mysqli_num_rows($select)!=0) return "Email gia' presente.";
-        return null;
+    static function checkProf($codice_fiscale, $nome, $cognome, $data_nascita, $email, $telefono, $cellulare, $password, $indirizzo_studio, $esperienze, $pubblicazioni, $titolo_studio, $n_iscrizione_albo, $p_iva, $pec, $specializzazione, $polizza_rc, $immagine){
+        try{
+            $professionista=new Professionista($codice_fiscale, $nome, $cognome, $data_nascita, $email, $telefono, $cellulare, $password, $indirizzo_studio, $esperienze, $pubblicazioni, $titolo_studio, $n_iscrizione_albo, $p_iva, $pec, $specializzazione, $polizza_rc, $immagine);
+            $select = DatabaseInterface::selectQueryById($professionista->getArray(),Professionista::$tableName);
+            if(mysqli_num_rows($select)!=0) return "Codice fiscale gia' presente.";
+                $select = DatabaseInterface::selectQueryByAtt(array("email" => $professionista->getEmail()),Professionista::$tableName);
+            if(mysqli_num_rows($select)!=0) return "Email gia' presente.";
+                return null;
+        }
+        catch(Exception $e){
+            return $e->getMessage();
+        }
     }
-    static function saveProf($professionista){
-        $result = DatabaseInterface::insertQuery($professionista->getArray(),Professionista::$tableName);
-        return $result;
+    static function saveProf($codice_fiscale, $nome, $cognome, $data_nascita, $email, $telefono, $cellulare, $password, $indirizzo_studio, $esperienze, $pubblicazioni, $titolo_studio, $n_iscrizione_albo, $p_iva, $pec, $specializzazione, $polizza_rc, $immagine){
+        try{
+            $professionista=new Professionista($codice_fiscale, $nome, $cognome, $data_nascita, $email, $telefono, $cellulare, $password, $indirizzo_studio, $esperienze, $pubblicazioni, $titolo_studio, $n_iscrizione_albo, $p_iva, $pec, $specializzazione, $polizza_rc, $immagine);
+            $result = DatabaseInterface::insertQuery($professionista->getArray(),Professionista::$tableName);
+            return $result;
+        }
+        catch (Exception $e){
+            return $e->getMessage();
+        }
     }
     static function checkPaz($paziente){
         $select = DatabaseInterface::selectQueryById($paziente->getArray(),Paziente::$tableName);

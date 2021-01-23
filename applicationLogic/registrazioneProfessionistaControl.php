@@ -39,14 +39,12 @@
                 $immagine = addslashes(file_get_contents($_FILES["immagine"]["tmp_name"]));
             else
                 $immagine = NULL;
-            $professionista = new Professionista($codice_fiscale, $nome, $cognome, $data_nascita, $email, $telefono, $cellulare, $password, $indirizzo_studio, $esperienze, $pubblicazioni, $titolo_studio, $n_iscrizione_albo, $p_iva, $pec, $specializzazione, $polizza_rc, $immagine);
-
-            $result = AreaInformativaControl::checkProf($professionista);
+            $result = AreaInformativaControl::checkProf($codice_fiscale, $nome, $cognome, $data_nascita, $email, $telefono, $cellulare, $password, $indirizzo_studio, $esperienze, $pubblicazioni, $titolo_studio, $n_iscrizione_albo, $p_iva, $pec, $specializzazione, $polizza_rc, $immagine);
             if (isset($result)) {
                 $esito = array("esito" => false, "errore" => $result);
                 echo json_encode($esito);
                 exit();
-            } elseif (AreaInformativaControl::saveProf($professionista)) {
+            } elseif (AreaInformativaControl::saveProf($codice_fiscale, $nome, $cognome, $data_nascita, $email, $telefono, $cellulare, $password, $indirizzo_studio, $esperienze, $pubblicazioni, $titolo_studio, $n_iscrizione_albo, $p_iva, $pec, $specializzazione, $polizza_rc, $immagine)) {
                 session_start();
                 $_SESSION["codiceFiscale"] = $codice_fiscale;
                 $_SESSION["tipo"] = "professionista";

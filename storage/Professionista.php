@@ -29,7 +29,7 @@
             }
             else if(strlen($n)<2 || strlen($n)>50)
             {
-                throw new Exception("Nome non rispetta la lunghezza prevista");
+                throw new Exception("Il campo Nome non rispetta la lunghezza");
             }
             else if(!preg_match('/^[A-Za-z]+$/', $n))
             {
