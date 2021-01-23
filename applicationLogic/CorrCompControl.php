@@ -12,7 +12,7 @@ declare(strict_types=1);
 include '../storage/Compito.php';
 include '../storage/DatabaseInterface.php';
 include '../plugins/libArray/FunArray.php';
-
+include 'CompitoControl.php';
 
 
 define('TABLE_NAME', 'compito');
@@ -31,33 +31,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // questa action permette di correggere un compito
-  if ($action=='correzione') {
-      try{
-          $idComp = $_POST['id'];
-          $arrKey = ['id_compito'=>$idComp];
-          $comp = DatabaseInterface::selectQueryByAtt($arrKey, TABLE_NAME);
-          $temp=$comp->fetch_array();
-          $compitoComp= new Compito($temp[0], $temp[1], $temp[2], $temp[3], $temp[4], $temp[5], $temp[6], $temp[7], $temp[8]);
+if ($action=='correzione') {
 
-          if (!isset($_POST['effettuato'])) {
-              $effettuato=0;
-          } else {
-              $effettuato=1;
-          }
-          $correzione = $_POST['correzione'];
-          $compitoComp->setCorrezione($correzione);
-          $compitoComp->setEffettuato($effettuato);
-          $isUpdate = DatabaseInterface::updateQueryById($compitoComp->getArray(), TABLE_NAME);
+    try{
+        $idComp = $_POST['id'];
 
-          if ($isUpdate) {
-              header('Location: ../interface/Professionista/gestioneCompiti.php');
-          } else {
-              throw new Exception("Errore: Compito non corretto!");
-          }
-      }catch(Exception $e){
-          $_SESSION['eccComp']= $e->getMessage();
-          header('Location: ../interface/Professionista/gestioneCompiti.php');
-      }
+        if (!isset($_POST['effettuato'])) {
+            $effettuato=0;
+        } else {
+            $effettuato=1;
+        }
+        $correzione = $_POST['correzione'];
+
+        $corrComp = CompitoControl::corrComp($idComp, $effettuato, $correzione);
+
+
+        if (gettype($corrComp) =='boolean') {
+            header('Location: ../interface/Professionista/gestioneCompiti.php');
+        } else {
+            throw new Exception($corrComp);
+        }
+
+    }catch(Exception $e){
+        $_SESSION['eccComp']= $e->getMessage();
+        header('Location: ../interface/Professionista/gestioneCompiti.php');
+
+
+    }
   } elseif
 
   //questa action permette di aggiungere un nuovo compito
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $compt = DatabaseInterface::insertQuery($compitoComp->getArray(), TABLE_NAME);
           //var_dump($compt);
 
-          if ($compt) {
+          if (gettype($compt)=='boolean') {
               header('Location: ../interface/Professionista/gestioneCompiti.php');
           } else {
               throw new Exception("Errore: Compito non aggiunto!");
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
           $isUpdate = DatabaseInterface::updateQueryById($compitoComp->getArray(), TABLE_NAME);
 
-          if ($isUpdate) {
+          if (gettype($isUpdate)=='boolean') {
               header('Location: ../interface/Paziente/gestioneCompitiPaziente.php');
           } else {
               throw new Exception("Errore: non aggiunto svolgimento!");
