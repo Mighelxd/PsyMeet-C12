@@ -77,7 +77,7 @@
                 throw new Exception("Partita iva non rispetta il formatoprevisto");
             }
            else if(!preg_match("/^[A-Za-z0-9\s,àòèéùì]+$/",$indiSt)){
-                throw new Exception("Formato di Indirizzo studio errato");
+                throw new Exception("Il campo indirizzo studio non rispetta il formato");
             }
             else if(strlen($e)<2 || strlen($e)>250){
                 throw new Exception("Email non rispetta la lunghezza prevista");
@@ -178,11 +178,11 @@
             if($tel == null){
                 throw new Exception("Nuovo numero telefono non valido!");
             }
-            else if(strlen($tel)!=10){
-                throw new Exception("Telefono non rispetta la lunghezza prevista");
-            }
-            else if(!preg_match("/^[0-9]{10}+$/", $tel)){
+            else if(!preg_match("/^[0-9]+$/", $tel)){
                 throw new Exception("Telefono non rispetta il formato previsto");
+            }
+            else if(strlen($tel)!=10){
+                throw new Exception("Il campo telefono non rispetta la lunghezza");
             }
             $this->telefono=$tel;
         }
@@ -191,11 +191,11 @@
             if($cell == null){
                 throw new Exception("Nuovo numero cellulare non valido!");
             }
+            else if(!preg_match("/^[0-9]+$/", $cell)){
+                throw new Exception("Il campo Cellulare non rispetta il formato");
+            }
             else if(strlen($cell)!=10){
                 throw new Exception("Cellulare non rispetta la lunghezza prevista");
-            }
-            else if(!preg_match("/^[0-9]{10}+$/", $cell)){
-                throw new Exception("Cellulare non rispetta il formato previsto");
             }
             $this->cellulare=$cell;
         }
@@ -211,12 +211,18 @@
             if($indiSt == null){
                 throw new Exception("Nuovo indirizzo studio non valido!");
             }
+            else if(!preg_match("/^[A-Za-z0-9\s,àòèéùì]+$/",$indiSt)){
+                throw new Exception("Il campo indirizzo studio non rispetta il formato");
+            }
             $this->indirizzoStudio=$indiSt;
         }
 
         public function setEmail($e){
             if($e == null){
                 throw new Exception("Nuova email non valida!");
+            }
+            else if(!preg_match('/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/',$e)){
+                throw new Exception("Email non rispetta il formato previsto");
             }
             $this->email=$e;
         }
