@@ -135,24 +135,29 @@ class CartellaClinica {
         else if(strlen($cfPa)!=16){
             throw new Exception("Codice fiscale paziente non valido!");
         }
-
+        else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/ ',$fa)){
+            throw new Exception("Il campo Farmaci/Psicofarmaci non rispetta il formato");
+        }
+        else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/ ',$pat)){
+            throw new Exception("Il campo Patologie pregresse non rispetta il formato");
+        }
         else if(strlen($fa)<=1 || strlen($fa)>500){
             throw new Exception("Il campo farmaci non rispetta la lunghezza");
         }
         else if(strlen($pat)<=1 || strlen($pat)>500){
             throw new Exception("Il campo patologie non rispetta la lunghezza");
         }
-        else if(!preg_match('/[0-9]$/', $qum)){
-            throw new Exception("Il campo qualita umore non rispetta il formato");
+        else if($qum>9){
+            throw new Exception("Il campo Qualità Umore non rispetta la lunghezza");
         }
-        else if(!preg_match('/[0-9]$/', $qur)){
-            throw new Exception("Il campo qualita relazioni non rispetta il formato");
+        else if($qur>9){
+            throw new Exception("Il campo Qualità relazioni affettive non rispetta la lunghezza");
         }
         else if($qum<1 || $qum>5){
-            throw new Exception("Il campo qualita umore ha un valore fuori range");
+            throw new Exception("Il campo Qualità Umore non rispetta il formato");
         }
         else if($qur<1 || $qur>5){
-            throw new Exception("Valore qualit. relazione non corretto!");
+            throw new Exception("Il campo Qualità relazioni affettive non rispetta il formato");
         }
         $this->id = $i;
         $this->dataCreazione=$d;
