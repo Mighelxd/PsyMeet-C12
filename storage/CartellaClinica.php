@@ -24,6 +24,9 @@ class CartellaClinica {
         else if(strlen($fa)<1 || strlen($fa)>500){
             throw new Exception("Il campo Farmaci/Psicofarmaci non rispetta la lunghezza");
         }
+        else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/ ',$fa)){
+            throw new Exception("Il campo Farmaci/Psicofarmaci non rispetta il formato");
+        }
         $this->farmaci = $fa;
     }
 
@@ -31,13 +34,13 @@ class CartellaClinica {
         if($qum == null){
             throw new Exception("Il campo qualita umore e' vuoto!");
         }
-        else if(!preg_match('/[0-9]$/', $qum)){
-            throw new Exception("Il campo qualita umore non rispetta il formato");
+        else if($qum>9){
+            throw new Exception("Il campo Qualità Umore non rispetta la lunghezza");
         }
         else if($qum<1 || $qum>5){
-            throw new Exception("Il campo qualita umore ha un valore fuori range");
+            throw new Exception("Il campo Qualità Umore non rispetta il formato");
         }
-        $this->QualitaUmore = $qum;
+        $this->qualitaUmore = $qum;
     } 
 
     public function setPatologiePregresse($pat){
@@ -47,6 +50,9 @@ class CartellaClinica {
         else if(strlen($pat)<1 || strlen($pat)>500){
             throw new Exception("Il campo non rispetta la lunghezza");
         }
+        else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/ ',$pat)){
+            throw new Exception("Il campo Patologie pregresse non rispetta il formato");
+        }
         $this->patologiePregresse = $pat;
     }
 
@@ -54,11 +60,11 @@ class CartellaClinica {
         if($qur == null){
             throw new Exception("Il campo qualita relazioni e' vuoto");
         }
-        else if(!preg_match('/[0-9]$/', $qur)){
-            throw new Exception("Il campo qualita relazioni non rispetta il formato");
+        else if($qur>9){
+            throw new Exception("Il campo Qualità relazioni affettive non rispetta la lunghezza");
         }
         else if($qur<1 || $qur>5){
-            throw new Exception("Il campo qualita relazioni ha un valore fuori range");
+            throw new Exception("Il campo Qualità relazioni affettive non rispetta il formato");
         }
         $this->qualitaRelazioni = $qur;
     }
