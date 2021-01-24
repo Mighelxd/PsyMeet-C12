@@ -24,15 +24,27 @@ class AreaInformativaControl
             return $e->getMessage();
         }
     }
-    static function checkPaz($paziente){
-        $select = DatabaseInterface::selectQueryById($paziente->getArray(),Paziente::$tableName);
-        if($select->num_rows!=0) return "Codice fiscale gia' presente.";
-        $select = DatabaseInterface::selectQueryByAtt(array("email" => $paziente->getEmail()),Paziente::$tableName);
-        if($select->num_rows!=0) return "Email gia' presente.";
-
+    static function checkPaz($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine){
+        try{
+        $paziente= new Paziente($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine, 0);
+                $select = DatabaseInterface::selectQueryById($paziente->getArray(),Paziente::$tableName);
+            if($select->num_rows!=0) return "Codice fiscale gia' presente.";
+                $select = DatabaseInterface::selectQueryByAtt(array("email" => $paziente->getEmail()),Paziente::$tableName);
+            if($select->num_rows!=0) return "Email gia' presente.";
+        }
+        catch(Exception $e){
+            $e->getMessage();
+            return false;
+        }
     }
-    static function savePaz($paziente){
-        $result = DatabaseInterface::insertQuery($paziente->getArray(),Paziente::$tableName);
+    static function savePaz($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine){
+        try{
+            $paziente= new Paziente($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine, 0);
+            $result = DatabaseInterface::insertQuery($paziente->getArray(),Paziente::$tableName);
+        }
+        catch(Exception $e){
+            return $e->getMessage();
+        }
         return $result;
     }
     static function recuperaProfessionisti(){

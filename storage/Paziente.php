@@ -27,12 +27,12 @@ class Paziente
 
     public function __construct($cf, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $difficolCura, $fotoProfiloPaz, $video)
     {
-        if($cf == null || $nome == null || $cognome == null || $dataNascita == null || $email == null || $telefono == null
-        || $password == null || $indirizzo == null || $istruzione == null || $lavoro == null || $difficolCura == null){
+        if($cf == null || $nome == null || $dataNascita == null || $email == null || $telefono == null
+        || $password == null || $indirizzo == null || $istruzione == null || $lavoro == null){
             throw new Exception("Alcuni valori non definiti!");
         }
         else if(strlen($cf)!=16){
-            throw new Exception("Codice Fiscale non valido!");
+            throw new Exception("Il campo codice fiscale non rispetta la lunghezza");
         }
         else if(strlen($nome) == 0){
             throw new Exception("Il campo nome è vuoto");
@@ -40,11 +40,11 @@ class Paziente
         else if(strlen($nome)<2 || strlen($nome)>50){
             throw new Exception("Il campo campo nome non rispetta la lunghezza");
         }
+        else if(strlen($cognome)==0 || $cognome == null ){
+            throw new Exception("Il campo cognome è vuoto");
+        }
         else if(!preg_match('/[A-Za-z]$/', $nome)){
             throw new Exception("Il campo nome non rispetta il formato");
-        }
-        else if(strlen($cognome)==0){
-            throw new Exception("Il campo cognome è vuoto");
         }
         else if(strlen($cognome)<2 || strlen($cognome)>50){
             throw new Exception("Il campo campo cognome non rispetta la lunghezza");
@@ -79,6 +79,9 @@ class Paziente
         }
         else if(strlen($lavoro) <2 || strlen($lavoro) >500){
             throw new Exception("Il campo lavoro non rispetta la lunghezza");
+        }
+        else if( $difficolCura == null){
+            throw new Exception("Il campo difficoltà cura è vuoto");
         }
         else if($difficolCura<1 || $difficolCura>5){
             throw new Exception("Il campo difficoltà cura non rispetta il formato");

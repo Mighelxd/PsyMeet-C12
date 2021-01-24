@@ -33,19 +33,17 @@
                 $immagine = addslashes(file_get_contents($_FILES["immagine"]["tmp_name"]));
             else
                 $immagine = NULL;
-            $paziente = new Paziente($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine, 0);
-            $result = AreaInformativaControl::checkPaz($paziente);
+            $result = AreaInformativaControl::checkPaz($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine);
             if (isset($result)) {
                 $esito = array("esito" => false, "errore" => $result);
                 echo json_encode($esito);
                 exit();
             }
-            $result = AreaInformativaControl::savePaz($paziente);
+            $result = AreaInformativaControl::savePaz($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine);
             if ($result == true) {
                 session_start();
                 $_SESSION["codiceFiscale"] = $codiceFiscale;
                 $_SESSION["tipo"] = "paziente";
-
                 $esito = array("esito" => true, "errore" => "nessuno");
                 echo json_encode($esito);
                 exit();
