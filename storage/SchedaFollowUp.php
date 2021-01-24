@@ -95,16 +95,16 @@ class SchedaFollowUp
     {
         if($ricadute == null)
         {
-            throw new Exception("Nuovo campo ricadute non valido!");
+            throw new Exception("Il campo Ricadute è vuoto");
         }
         else if(strlen($ricadute)==0)
         {
-            throw new Exception("Ricadute non rispetta la lunghezza prevista");
+            throw new Exception("Il campo Ricadute è vuoto");
         }
 
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $ricadute))
         {
-            throw new Exception("Ricadute non rispetta il formato previsto");
+            throw new Exception("Il campo Ricadute non rispetta il formato");
         }
          $this -> ricadute = $ricadute;
     }
@@ -112,16 +112,16 @@ class SchedaFollowUp
     {
         if($esitiPositivi == null)
         {
-            throw new Exception("Nuovo campo esiti positivi non valido!");
+            throw new Exception("Il campo Esiti positivi è vuoto");
         }
         else if(strlen($esitiPositivi)==0)
         {
-            throw new Exception("Esiti positivi non rispetta la lunghezza prevista");
+            throw new Exception("Il campo Esiti positivi è vuoto");
         }
 
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $esitiPositivi))
         {
-            throw new Exception("Esiti positivi non rispetta il formato previsto");
+            throw new Exception("Il campo Esiti positivi non rispetta il formato");
         }
          $this -> esitiPositivi = $esitiPositivi;
     }
