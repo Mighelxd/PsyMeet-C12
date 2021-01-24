@@ -21,8 +21,7 @@ class SchedaPrimoColloquio
 
     public function __construct($idScheda, $data, $problema, $aspettative, $motivazione, $obiettivi, $cambiamento, $idTerapia,$tipo)
     {
-        if($data == null || $problema == null || $aspettative == null || $motivazione == null || $obiettivi == null
-        || $cambiamento == null || $idTerapia == null || $tipo ==null){
+        if($data == null || $idTerapia == null || $tipo ==null){
             throw new Exception("Alcuni valori non validi!");
         }
         else if($idTerapia<1){
@@ -32,35 +31,35 @@ class SchedaPrimoColloquio
             throw new Exception("Tipo scheda non compatibile!");
         }
 
-        else if(strlen($problema)==0){
-            throw new Exception("Il campo problema è vuoto");
+        else if(strlen($problema)==0 || $problema == null){
+            throw new Exception("Il campo Definizione Problema è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $problema)){
-            throw new Exception("Il campo problema non rispetta il formato");
+            throw new Exception("Il campo Definizione Problema non rispetta il formato");
         }
-        else if(strlen($aspettative)==0){
-            throw new Exception("Il campo aspettative è vuoto" );
+        else if(strlen($aspettative)==0 || $aspettative == null){
+            throw new Exception("Il campo Aspettative Paziente è vuoto" );
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $aspettative)){
-            throw new Exception("Il campo aspettative non rispetta il formato");
+            throw new Exception("Il campo Aspettative Paziente non rispetta il formato");
         }
-        else if(strlen($motivazione)==0){
-            throw new Exception("Il campo motivazione è vuoto" );
+        else if(strlen($motivazione)==0 || $motivazione == null){
+            throw new Exception("Il campo Motivazione è vuoto" );
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $motivazione)){
-            throw new Exception("Il campo motivazione non rispetta il formato");
+            throw new Exception("Il campo Motivazione non rispetta il formato");
         }
-        else if(strlen($obiettivi)==0){
-            throw new Exception("Il campo obiettivi è vuoto");
+        else if(strlen($obiettivi)==0 || $obiettivi == null){
+            throw new Exception("Il campo Obiettivi è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $obiettivi)){
-            throw new Exception("Il campo obiettivi non rispetta il formato");
+            throw new Exception("Il campo Obiettivi non rispetta il formato");
         }
-        else if(strlen($cambiamento)==0){
-            throw new Exception("Il campo cambiamento è vuoto");
+        else if(strlen($cambiamento)==0 || $cambiamento == null){
+            throw new Exception("Il campo Definizione Cambiamento è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $cambiamento)){
-            throw new Exception("Il campo cambiamento non rispetta il formato");
+            throw new Exception("Il campo Definizione Cambiamento non rispetta il formato");
         }
 
 
@@ -128,66 +127,51 @@ class SchedaPrimoColloquio
     }
     public function setProblema($problema)
     {
-        if($problema == null){
-            throw new Exception("Nuovo campo problema non valido!");
-        }
-        else if(strlen($problema)==0){
-            throw new Exception("Il campo problema è vuoto");
+        if(strlen($problema)==0 || $problema == null){
+            throw new Exception("Il campo Definizione Problema è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $problema)){
-            throw new Exception("Il campo problema non rispetta il formato");
+            throw new Exception("Il campo Definizione Problema non rispetta il formato");
         }
          $this -> problema= $problema;
     }
     public function setAspettative($aspettative)
     {
-        if($aspettative == null){
-            throw new Exception("Nuovo campo aspettative non valido!");
-        }
-        else if(strlen($aspettative)==0){
-            throw new Exception("Il campo aspettative è vuoto" );
+        if(strlen($aspettative)==0 || $aspettative == null){
+            throw new Exception("Il campo Aspettative Paziente è vuoto" );
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $aspettative)){
-            throw new Exception("Il campo aspettative non rispetta il formato");
+            throw new Exception("Il campo Aspettative Paziente non rispetta il formato");
         }
          $this -> aspettative = $aspettative;
     }
     public function setMotivazione($motivazione)
     {
-        if($motivazione == null){
-            throw new Exception("Nuovo campo motivazione non valido!");
-        }
-        else if(strlen($motivazione)==0){
-            throw new Exception("Il campo motivazione è vuoto" );
+        if(strlen($motivazione)==0 || $motivazione == null){
+            throw new Exception("Il campo Motivazione è vuoto" );
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $motivazione)){
-            throw new Exception("Il campo motivazione non rispetta il formato");
+            throw new Exception("Il campo Motivazione non rispetta il formato");
         }
          $this -> motivazione= $motivazione;
     }
     public function setObiettivi($obiettivi)
     {
-        if($obiettivi == null){
-            throw new Exception("Nuovo campo obiettivi non valido!");
-        }
-        else if(strlen($obiettivi)==0){
-            throw new Exception("Il campo obiettivi è vuoto");
+        if(strlen($obiettivi)==0 || $obiettivi == null){
+            throw new Exception("Il campo Obiettivi è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $obiettivi)){
-            throw new Exception("Il campo obiettivi non rispetta il formato");
+            throw new Exception("Il campo Obiettivi non rispetta il formato");
         }
          $this -> obiettivi = $obiettivi;
     }
     public function setCambiamento($cambiamento)
     {
-        if($cambiamento == null){
-            throw new Exception("Nuovo campo cambiamento non valido!");
-        }
-        else if(strlen($cambiamento)==0){
-            throw new Exception("Il campo cambiamento è vuoto");
+        if(strlen($cambiamento)==0 || $cambiamento == null){
+            throw new Exception("Il campo Definizione Cambiamento è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $cambiamento)){
-            throw new Exception("Il campo cambiamento non rispetta il formato");
+            throw new Exception("Il campo Definizione Cambiamento non rispetta il formato");
         }
          $this -> cambiamento= $cambiamento;
     }

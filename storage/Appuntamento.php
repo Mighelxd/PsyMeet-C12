@@ -27,9 +27,15 @@ public static $tableName="appuntamento";
     {
       throw new Exception("Il campo Codice fiscale paziente non rispetta la lunghezza");
     }
+    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $cfPa)){
+      throw new Exception("Il campo Codice fiscale paziente non rispetta il formato");
+    }
+    else if($hour[2] != ':' || $hour[5] != ':'){
+      throw new Exception("Il campo Orario non rispetta il formato");
+    }
     else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $des))
     {
-      throw new Exception("Il campo descrizione non rispetta il formato");
+      throw new Exception("Il campo Descrizione non rispetta il formato");
     }
     $this->idAppuntamento = $id;
     $this->data = $date;
@@ -76,6 +82,9 @@ public static $tableName="appuntamento";
     if($newOra == null){
       throw new Exception('Nuova ora appuntamento non valido!');
     }
+    else if($newOra[2] != ':' || $newOra[5] != ':'){
+      throw new Exception("Il campo Orario non rispetta il formato");
+    }
     $this->ora = $newOra;
   }
   function setDesc($newDesc){
@@ -84,7 +93,7 @@ public static $tableName="appuntamento";
     }
     else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $newDesc))
     {
-      throw new Exception("Il campo descrizione non rispetta il formato");
+      throw new Exception("Il campo Descrizione non rispetta il formato");
     }
     $this->desc = $newDesc;
   }
@@ -96,7 +105,10 @@ public static $tableName="appuntamento";
   }
   function setCfPaz($newCfPaz){
     if($newCfPaz==null || strlen($newCfPaz)!=16){
-      throw new Exception('Nuovo CF Paziente in appuntamento non valido!');
+      throw new Exception('Il campo Codice fiscale paziente non rispetta la lunghezza');
+    }
+    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $newCfPaz)){
+      throw new Exception("Il campo Codice fiscale paziente non rispetta il formato");
     }
     $this->cfPaz = $newCfPaz;
   }

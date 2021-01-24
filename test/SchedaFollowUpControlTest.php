@@ -3,7 +3,7 @@
 include "../applicationLogic/SeduteControl.php";
 include "../storage/SchedaFollowUp.php";
 include "../storage/DatabaseInterface.php";
-
+include "../plugins/libArray/FunArray.php";
 use PHPUnit\Framework\TestCase;
 
 class SchedaFollowUpControlTest extends TestCase
@@ -77,8 +77,52 @@ class SchedaFollowUpControlTest extends TestCase
         $result = SeduteControl::modSFU
         (
             "",
+            "AAA",
+            "1"
+        );
+        self::assertEquals("Il campo Ricadute è vuoto", $result);
+    }
+
+    public function testModSFURicNotForm()
+    {
+        $result = SeduteControl::modSFU
+        (
+            "AAAAAAAAAAA@",
+            "AAA",
+            "1"
+        );
+        self::assertEquals("Il campo Ricadute non rispetta il formato", $result);
+    }
+
+    public function testModSFUEpNotCor()
+    {
+        $result = SeduteControl::modSFU
+        (
+            "AAAAAAAAAAAA",
             "",
-            ""
+            "1"
+        );
+        self::assertEquals("Il campo Esiti positivi è vuoto", $result);
+    }
+
+    public function testModSFUEpNotForm()
+    {
+        $result = SeduteControl::modSFU
+        (
+            "AAAAAAAAAAAA",
+            "AAAAAAA@",
+            "1"
+        );
+        self::assertEquals("Il campo Esiti positivi non rispetta il formato", $result);
+    }
+
+    public function testModSFUSucc()
+    {
+        $result = SeduteControl::modSFU
+        (
+            "AAAAAAAAAAAA",
+            "AAAAAAAAAAA",
+            "1"
         );
         self::assertEquals(true, $result);
     }
