@@ -11,17 +11,14 @@ class Episodio{
   public static $tableName="episodio";
 
   public function __construct($idEpisodio, $numero, $analisiFun, $mA, $mB,$mC, $appunti, $idScheda){
-    if($numero == null || $analisiFun == null || $mA == null || $mB == null || $mC == null || $appunti == null || $idScheda == null){
-      throw new Exception("Alcuni valori non definiti!");
-    }
-    else if($numero<=0){
+    if($numero == null || $numero<=0){
       throw new Exception("Numero episodio non valido!");
     }
-    else if($idScheda <=0){
+    else if($idScheda == null || $idScheda <=0){
       throw new Exception("Id scheda non valido!");
     }
 
-    else if(strlen($analisiFun)==0){
+    else if($analisiFun == null || strlen($analisiFun)==0){
       throw new Exception("Il campo analisi funzionale è vuoto");
     }
 
@@ -29,7 +26,7 @@ class Episodio{
       throw new Exception("Il campo analisi funzionale non rispetta il formato");
     }
 
-    else if (strlen($mA)==0){
+    else if ($mA==null || strlen($mA)==0){
       throw new Exception("Il campo A è vuoto");
     }
 
@@ -37,7 +34,7 @@ class Episodio{
       throw new Exception("Il campo A non rispetta il formato");
     }
 
-    else if (strlen($mB)==0){
+    else if ($mB==null || strlen($mB)==0){
       throw new Exception("Il campo B è vuoto");
     }
 
@@ -45,7 +42,7 @@ class Episodio{
       throw new Exception("Il campo B non rispetta il formato");
     }
 
-    else if (strlen($mC)==0){
+    else if ($mC==null || strlen($mC)==0){
       throw new Exception("Il campo C è vuoto");
     }
 
@@ -53,7 +50,7 @@ class Episodio{
       throw new Exception("Il campo C non rispetta il formato");
     }
 
-    else if (strlen($appunti)==0){
+    else if ($appunti==null || strlen($appunti)==0){
       throw new Exception("Il campo appunti terapeuta è vuoto");
     }
 
@@ -107,11 +104,7 @@ class Episodio{
   }
   public function setAnalisiFun($analisiFun)
   {
-    if($analisiFun == null)
-    {
-      throw new Exception("Nuovo campo analisi funzionale non definito!");
-    }
-    else if(strlen($analisiFun)==0)
+    if(strlen($analisiFun)==0 || $analisiFun==null)
     {
       throw new Exception("Il campo analisi funzionale è vuoto");
     }
@@ -123,11 +116,7 @@ class Episodio{
   }
   public function setMA($mA)
   {
-    if($mA == null)
-    {
-      throw new Exception("Nuovo campo A modello ABC non definito!");
-    }
-    else if(strlen($mA)==0)
+    if(strlen($mA)==0 || $mA == null)
     {
       throw new Exception("Il campo A è vuoto");
     }
@@ -139,11 +128,7 @@ class Episodio{
   }
   public function setMB($mB)
   {
-    if($mB == null)
-    {
-      throw new Exception("Nuovo campo B modello ABC non definito!");
-    }
-    else if(strlen($mB)==0)
+    if(strlen($mB)==0 || $mB==null)
     {
       throw new Exception("Il campo B è vuoto");
     }
@@ -155,11 +140,7 @@ class Episodio{
   }
   public function setMC($mC)
   {
-    if($mC == null)
-    {
-      throw new Exception("Nuovo campo C modello ABC non definito!");
-    }
-    else if(strlen($mC)==0)
+    if(strlen($mC)==0 || $mC==null)
     {
       throw new Exception("Il campo C è vuoto");
     }
@@ -171,11 +152,7 @@ class Episodio{
   }
   public function setAppunti($appunti)
   {
-    if($appunti == null)
-    {
-      throw new Exception("Nuovo campo appunti non definito!");
-    }
-    else if(strlen($appunti)==0)
+    if(strlen($appunti)==0 || $appunti==null)
     {
       throw new Exception("Il campo appunti terapeuta è vuoto");
     }

@@ -35,12 +35,13 @@ if ($action=='correzione') {
 
     try{
         $idComp = $_POST['id'];
+        $effettuato = $_POST['effettuato'];
 
-        if (!isset($_POST['effettuato'])) {
+       /* if (!isset($_POST['effettuato'])) {
             $effettuato=0;
         } else {
             $effettuato=1;
-        }
+        } */
         $correzione = $_POST['correzione'];
 
         $corrComp = CompitoControl::corrComp($idComp, $effettuato, $correzione);
@@ -93,7 +94,7 @@ if ($action=='correzione') {
           $idComp = $_POST['id'];
           //echo $idComp;
           $arrKey = ['id_compito'=>$idComp];
-          $comp = DatabaseInterface::selectQueryByAtt($arrKey, TABLE_NAME);
+          $comp = DatabaseInterface::selectQueryByAtt($arrKey, Compito::$tableName);
           $temp=$comp->fetch_array();
           $compitoComp= new Compito($temp[0], $temp[1], $temp[2], $temp[3], $temp[4], $temp[5], $temp[6], $temp[7], $temp[8]);
 
@@ -101,7 +102,7 @@ if ($action=='correzione') {
 
           $compitoComp->setSvolgimento($svolgimento);
 
-          $isUpdate = DatabaseInterface::updateQueryById($compitoComp->getArray(), TABLE_NAME);
+          $isUpdate = DatabaseInterface::updateQueryById($compitoComp->getArray(), Compito::$tableName);
 
           if (gettype($isUpdate)=='boolean') {
               header('Location: ../interface/Paziente/gestioneCompitiPaziente.php');
