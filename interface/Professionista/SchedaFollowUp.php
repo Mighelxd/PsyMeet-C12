@@ -40,6 +40,7 @@ $professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($professionista->getImmagineProfessionista());
 $cf = $_SESSION["cfPazTer"];
 $paziente = PazienteControl::getPaz($cf);
+
   ?>
 <!DOCTYPE html>
 <html>
@@ -326,7 +327,8 @@ $paziente = PazienteControl::getPaz($cf);
           </div>
         </div>
       </div><!-- /.container-fluid -->
-        <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+        <span style="color:red"><?php if(isset($_SESSION['eccFU'])){echo $_SESSION['eccFU'];} ?></span>
+        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
     </section>
 
     <!-- Main content -->

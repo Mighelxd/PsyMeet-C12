@@ -30,7 +30,7 @@ class CompitoControl
     public static function selectAllCompitiProf($cfProf)
 	{
 	    try{
-            $_SESSION['eccezione']="";
+           // if(isset($_SESSION['eccComp']) && $_SESSION['eccComp']!=""){$_SESSION['eccComp']="";}
             $arrKey = ['cf_prof'=>$cfProf];
             $arr = null;
             $allCompProf = DatabaseInterface::selectQueryByAtt($arrKey, 'compito');
@@ -41,7 +41,7 @@ class CompitoControl
 
             return $arr;
         }catch (Exception $e){
-	        $_SESSION['eccezione'] = $e->getMessage();
+	        $_SESSION['eccComp'] = $e->getMessage();
 	        return null;
         }
 	}
@@ -56,7 +56,7 @@ class CompitoControl
     public static function selectAllCompitiPaz($cfPaz)
 	{
 	    try{
-            $_SESSION['eccezione']="";
+          //  if(isset($_SESSION['eccComp']) && $_SESSION['eccComp']!=""){$_SESSION['eccComp']="";}
             $arrKey = ['cf'=>$cfPaz];
             $arr=null;
             $allCompPaz = DatabaseInterface::selectQueryByAtt($arrKey, 'compito');
@@ -67,8 +67,80 @@ class CompitoControl
 
             return $arr;
         }catch (Exception $e){
-            $_SESSION['eccezione'] = $e->getMessage();
+            $_SESSION['eccComp'] = $e->getMessage();
             return null;
         }
 	}
+
+    public static function addComp($data, $titolo, $descrizione, $svolgimento, $correzione, $cfProf, $cfPaz){
+        try{
+
+            $compitoComp = new Compito(null ,$data,0,$titolo,$descrizione,$svolgimento,$correzione,$cfProf,$cfPaz);
+
+
+
+            $compt = DatabaseInterface::insertQuery($compitoComp->getArray(), Compito::$tableName);
+            //var_dump($compt);
+
+            if ($compt) {
+                return true;
+            } else {
+               // throw new Exception("Errore: Compito non aggiunto!");
+                exit();
+            }
+
+        }catch(Exception $e){
+
+            return $e->getMessage();
+
+        }
+    }
+
+    public static function doComp($idCp, $svolg){
+
+        try{
+            $arrKey = ['id_compito'=>$idCp];
+            $comp = DatabaseInterface::selectQueryByAtt($arrKey, Compito::$tableName);
+            $temp=$comp->fetch_array();
+
+            $compitoComp= new Compito($temp[0], $temp[1], $temp[2], $temp[3], $temp[4], $temp[5], $temp[6], $temp[7], $temp[8]);
+            $compitoComp->setSvolgimento($svolg);
+
+            $isSvolg = DatabaseInterface::updateQueryById($compitoComp->getArray(), Compito::$tableName);
+
+            if($isSvolg) {
+                return true;
+            } else throw new Exception("Errore: compito non svolto!");
+        }
+        catch(Exception $e){
+
+            return $e->getMessage();
+        }
+    }
+
+    public static function corrComp($id, $effettuatoNew, $correzioneNew){
+        try{
+
+
+            $arrKey = ['id_compito'=>$id];
+            $comp = DatabaseInterface::selectQueryByAtt($arrKey, Compito::$tableName);
+            $temp=$comp->fetch_array();
+            $compitoComp= new Compito($temp[0], $temp[1], $temp[2], $temp[3], $temp[4], $temp[5], $temp[6], $temp[7], $temp[8]);
+
+
+            $compitoComp->setCorrezione($correzioneNew);
+            $compitoComp->setEffettuato($effettuatoNew);
+            $isUpdate = DatabaseInterface::updateQueryById($compitoComp->getArray(), Compito::$tableName);
+
+            if ($isUpdate) {
+                return true;
+            } else {
+                throw new Exception("Errore: Compito non corretto!");
+            }
+        }catch(Exception $e){
+
+            return $e->getMessage();
+        }
+    }
+
 }

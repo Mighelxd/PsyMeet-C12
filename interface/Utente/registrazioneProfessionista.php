@@ -203,7 +203,7 @@
           </div>
         </div>
       </form>
-        <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
+        <?php if(isset($_SESSION['eccregprof'])){echo $_SESSION['eccregprof'];} ?>
 
       <a href="login.html" class="text-center">Sei già registrato? Effettua il Login</a>
     </div>

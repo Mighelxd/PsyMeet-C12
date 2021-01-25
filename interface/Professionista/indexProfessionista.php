@@ -220,7 +220,7 @@ $professionista = AreaInformativaControl::getProf($cf);
                 <div class="row">
                     <!-- Left col -->
                     <section class="col-lg-7 connectedSortable">
-                        <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+                        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
                         <!-- Custom tabs (Charts with tabs)-->
                         <div class="card card-widget widget-user">
                             <!-- Add the bg color to the header using any of the bg-* classes -->

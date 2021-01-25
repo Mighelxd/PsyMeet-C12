@@ -29,17 +29,17 @@
             }
             else if(strlen($n)<2 || strlen($n)>50)
             {
-                throw new Exception("Nome non rispetta la lunghezza prevista");
+                throw new Exception("Il campo Nome non rispetta la lunghezza");
             }
-            else if(!preg_match('/^[A-Za-z]+$/', $n))
+            else if(!preg_match('/^[A-Z a-z]+$/', $n))
             {
                 throw new Exception("Nome non rispetta il formato previsto");
             }
             else if(strlen($c)<2 || strlen($c)>50)
             {
-                throw new Exception("Cognome non rispetta la lunghezza prevista");
+                throw new Exception("Il campo Cognome non rispetta la lunghezza");
             }
-            else if(!preg_match('/^[A-Za-z]+$/', $c))
+            else if(!preg_match('/^[A-Z a-z]+$/', $c))
             {
                 throw new Exception("Cognome non rispetta il formato previsto");
             }
@@ -47,7 +47,7 @@
             {
                 throw new Exception("Data di nascita non rispetta il formato previsto");
             }
-            else if($date<"1930-12-12" || $date>"1998-12-12")
+            else if($date<"1930-12-12" || $date>"2000-12-12")
             {
                 throw new Exception("Il campo data di nascita non valido");
             }
@@ -56,7 +56,7 @@
             }
             else if(!preg_match('/^[A-Z0-9]+$/', $cf))
             {
-                throw new Exception("Codice Fiscale non rispetta il formato previsto");
+                throw new Exception("Il campo Codice Fiscale non rispetta il formato");
             }
             else if(strlen($tel)!=10){
                 throw new Exception("Telefono non rispetta la lunghezza prevista");
@@ -76,10 +76,10 @@
             else if(!preg_match("/^[A-Za-z0-9]{11}+$/", $pIva)){
                 throw new Exception("Partita iva non rispetta il formatoprevisto");
             }
-           else if(!preg_match("/^[A-Za-z0-9\s,àòèéùì]+$/",$indiSt)){
-                throw new Exception("Formato di Indirizzo studio errato");
+           else if(!preg_match("/^[A-Z a-z 0-9 \s , àòèéùì]+$/",$indiSt)){
+                throw new Exception("Il campo indirizzo studio non rispetta il formato");
             }
-            else if(strlen($e)<2 || strlen($e)>250){
+            else if(strlen($e)<3 || strlen($e)>50){
                 throw new Exception("Email non rispetta la lunghezza prevista");
             }
             else if(!preg_match('/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/',$e)){
@@ -91,14 +91,14 @@
             else if(!preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,25}$/", $pass)){
                 throw new Exception("Formato di Password errato");
             }*/
-           else if(!preg_match('/^[a-f0-9]{32}$/i', $pass)){
+           /*else if(!preg_match('/^[a-f0-9]{32}$/i', $pass)){
                throw new Exception("Formato di Password errato");
-           }
+           }*/
            else if(strlen($titSt) < 2 || strlen($titSt)>500){
-               throw new Exception("Titolo di studio non rispetta la lunghezza prevista");
+               throw new Exception("Il campo Titolo di studio non rispetta la lunghezza");
            }
            else if(strlen($pub) <2 || strlen($pub)>500) {
-               throw new Exception("Pubblicazioni scientifiche/partecipazioni non rispetta la lunghezza prevista");
+               throw new Exception("Il campo Pubblicazioni Scientifiche/Partecipazioni non rispetta la lunghezza");
            }
            else if(strlen($esp) <2 || strlen($esp)>500){
                throw new Exception("Esperienze professionali non rispetta la lunghezza prevista");
@@ -106,14 +106,18 @@
            else if(strlen($nIsc)<2 || strlen($nIsc)>20){
                throw new Exception("Numero iscrizione albo non rispetta la lunghezza prevista");
            }
-           else if(!preg_match('/^[A-Za-z0-9]+$/', $nIsc)){
-               throw new Exception("Numero iscrizione albo non rispetta il formato previsto");
+           else if(strlen($spec)<2 || strlen($spec)>500){
+               throw new Exception("Il campo Specializzazione non rispetta la lunghezza");
+           }
+           else if(!preg_match('`^[A-Za-z0-9/]+$`', $nIsc)){
+               throw new Exception("Il campo Numero Iscrizione Albo non rispetta il formato");
            }
            else if(!preg_match("/^[A-Za-z0-9\s]+$/",$polRc)){
                throw new Exception("Polizza RC non rispetta il formato previsto");
            }
-
-
+           else if(!preg_match("/^[A-Z a-z , .]+$/",$esp)){
+                throw new Exception("Il campo Esperienze Professionali non rispetta il formato");
+           }
             $this->cfProf=$cf;
             $this->nome=$n;
             $this->cognome=$c;
@@ -178,11 +182,11 @@
             if($tel == null){
                 throw new Exception("Nuovo numero telefono non valido!");
             }
-            else if(strlen($tel)!=10){
-                throw new Exception("Telefono non rispetta la lunghezza prevista");
-            }
-            else if(!preg_match("/^[0-9]{10}+$/", $tel)){
+            else if(!preg_match("/^[0-9]+$/", $tel)){
                 throw new Exception("Telefono non rispetta il formato previsto");
+            }
+            else if(strlen($tel)!=10){
+                throw new Exception("Il campo telefono non rispetta la lunghezza");
             }
             $this->telefono=$tel;
         }
@@ -191,11 +195,11 @@
             if($cell == null){
                 throw new Exception("Nuovo numero cellulare non valido!");
             }
+            else if(!preg_match("/^[0-9]+$/", $cell)){
+                throw new Exception("Il campo Cellulare non rispetta il formato");
+            }
             else if(strlen($cell)!=10){
                 throw new Exception("Cellulare non rispetta la lunghezza prevista");
-            }
-            else if(!preg_match("/^[0-9]{10}+$/", $cell)){
-                throw new Exception("Cellulare non rispetta il formato previsto");
             }
             $this->cellulare=$cell;
         }
@@ -211,12 +215,21 @@
             if($indiSt == null){
                 throw new Exception("Nuovo indirizzo studio non valido!");
             }
+            else if(!preg_match("/^[A-Za-z0-9\s,àòèéùì]+$/",$indiSt)){
+                throw new Exception("Il campo indirizzo studio non rispetta il formato");
+            }
             $this->indirizzoStudio=$indiSt;
         }
 
         public function setEmail($e){
             if($e == null){
                 throw new Exception("Nuova email non valida!");
+            }
+            else if(strlen($e)<3 || strlen($e)>64){
+                throw new Exception("Il campo email non rispetta la lunghezza");
+            }
+            else if(!preg_match('/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/',$e)){
+                throw new Exception("Il campo email non rispetta il formato");
             }
             $this->email=$e;
         }
@@ -226,7 +239,7 @@
                 throw new Exception("Nuovo campo pubblicazione non valido!");
             }
             else if(strlen($pub) <2 || strlen($pub)>500) {
-                throw new Exception("Pubblicazioni scientifiche/partecipazioni non rispetta la lunghezza prevista");
+                throw new Exception("Il campo pubblicazioni non rispetta la lunghezza");
             }
             $this->pubblicazione=$pub;
         }

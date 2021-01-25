@@ -155,7 +155,7 @@
           </div>
         </div>
       </form>
-        <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
+        <?php if(isset($_SESSION['eccregpaz'])){echo $_SESSION['eccregpaz'];} ?>
 
       <a href="login.html" class="text-center">Sei già registrato? Effettua il Login</a>
     </div>

@@ -73,7 +73,8 @@ class SchedaAssessmentFocalizzato
     }
     public function setNEpisodi($nEpisodi)
     {
-        if($nEpisodi == null || $nEpisodi<0){
+        if($nEpisodi<0){
+            echo "<br>sto qui è minore";
             throw new Exception("Nuovo numero episodi non valido!");
         }
         $this->nEpisodi = $nEpisodi;

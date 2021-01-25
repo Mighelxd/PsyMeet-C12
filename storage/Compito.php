@@ -79,7 +79,7 @@ class Compito
 		$cfProf,
 		$cfPaz
 	) {
-        date_default_timezone_set("Europe/Rome");
+
         $currDate = date("Y-m-d");
 
         if($data == null || $titolo == null || $descrizione == null
@@ -89,15 +89,15 @@ class Compito
 
 
         else if(strlen($titolo) > 25){
-            throw new Exception("La lunghezza del titolo supera i 25 caratteri");
+            throw new Exception("Il campo titolo non rispetta la lunghezza");
         }
 
         else if(!preg_match('/[A-Za-z]$/', $titolo)){
-            throw new Exception("Formato del titolo non corretto");
+            throw new Exception("Il campo titolo non rispetta il formato");
         }
 
         else if(!preg_match('/[A-Za-z0-9]$/', $descrizione)){
-            throw new Exception("Formato della descrizione non corretto");
+            throw new Exception("Il campo descrizione non rispetta il formato");
         }
 
         /*else if(!preg_match('/[A-Za-z0-9]$/', $correzione)){
@@ -161,7 +161,6 @@ class Compito
      */
     public function setData($data)
     {
-        date_default_timezone_set("Europe/Rome");
         $currDate = date("Y-m-d");
 
         {
@@ -197,7 +196,7 @@ class Compito
         }
 
         else if(!preg_match('/[A-Za-z]$/', $titolo)){
-            throw new Exception("Formato del titolo non corretto");
+            throw new Exception("Il campo titolo non rispetta il formato");
         }
 
 		$this->titolo = $titolo;
@@ -223,7 +222,7 @@ class Compito
         }
 
         else if(!preg_match('/[A-Za-z0-9]$/', $descrizione)){
-            throw new Exception("Formato della descrizione non corretto");
+            throw new Exception("Il campo descrizione non rispetta il formato");
         }
 
 		$this->descrizione = $descrizione;
@@ -295,10 +294,10 @@ class Compito
      * @param $effettuato
      */
     public function setEffettuato($effettuato)
-	{
+	{    /*
         if($effettuato == null){
             throw new Exception("Nuovo effettuato non valido!");
-        }
+        } */
 		$this->effettuato = $effettuato;
 	}
 

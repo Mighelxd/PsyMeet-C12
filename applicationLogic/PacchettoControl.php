@@ -6,7 +6,6 @@ class PacchettoControl{
   static function selectAllPacchetto(){
     //Questa action cerca di recuperare tutti i pacchetti che vi sono nel DB
       try{
-          $_SESSION['eccezione']="";
           $allPac = DatabaseInterface::selectAllQuery(Pacchetto::$tableName);
           $arr = null;
           while ($row=$allPac->fetch_array()) {
@@ -15,7 +14,7 @@ class PacchettoControl{
           }
           return $arr;
       }catch(Exception $e){
-          $_SESSION['eccezione']=$e->getMessage();
+          $_SESSION['eccpac']=$e->getMessage();
           return null;
       }
   }
@@ -35,7 +34,7 @@ class PacchettoControl{
           //var_dump($arrs);
           return $arrs;
       }catch(Exception $e){
-          $_SESSION['eccezione']=$e->getMessage();
+          $_SESSION['eccpac']=$e->getMessage();
           return null;
       }
  }
@@ -50,7 +49,7 @@ class PacchettoControl{
 
           return $pacrec;
       }catch(Exception $e){
-          $_SESSION['eccezione']=$e->getMessage();
+          $_SESSION['eccpac']=$e->getMessage();
           return null;
       }
  }
@@ -76,7 +75,7 @@ class PacchettoControl{
           //var_dump($arrs);
           return $arrs;
       }catch(Exception $e){
-          $_SESSION['eccezione']=$e->getMessage();
+          $_SESSION['eccpac']=$e->getMessage();
           return null;
       }
     }
@@ -120,6 +119,74 @@ class PacchettoControl{
       $row = $result->fetch_array();
       $scheda = new Scelta($row[0],$row[1],$row[2]);
       return $scheda;
+    }
+
+    static function addPacchetto($pacchetto){
+        try {
+            $id =0;
+            $att=array('tipologia'=>$pacchetto);
+            $coll=array('*');
+            $recuperapacc =DatabaseInterface::selectDinamicQuery($coll,$att,Pacchetto::$tableName);
+            $row = $recuperapacc->fetch_array();
+            $id=$row[0];
+
+            $arrycheck=array('id_pacchetto'=>$id);
+            $check = DatabaseInterface::selectDinamicQuery($coll,$arrycheck,scelta::$tableName);
+            if($check->num_rows>0){
+               throw new Exception('Pacchetto gia esistente, seleziona un pacchetto che non appartiene al Professionista corrente');
+            }else {
+                $_SESSION['Errore']='';
+                $arryid = new Scelta(null,$_SESSION['codiceFiscale'],$id);
+                $ok=DatabaseInterface::insertQuery($arryid->getArray(),scelta::$tableName);
+                if(!$ok){
+                    throw new Exception("Errore: Pacchetto non inserito!");
+                }
+                else{
+                    return true;
+                }
+            }
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    static function delPacchetto($idProf, $pacchetto){
+        try {
+            $key = new Scelta(null,$idProf,$pacchetto);
+            $arrPac = $key->getArray();
+            $arrPac = array_diff($arrPac,[""]);
+            $del=DatabaseInterface::deleteQuery($arrPac,scelta::$tableName);
+
+            if(!$del){
+                throw new Exception("Errore: pacchetto non eliminato!");
+            }else{
+                return true;
+            }
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+
+    static function buyPacchetto($data,  $cfPaz, $idScelta){
+      try{
+
+          $arr = array("id_scelta" =>$idScelta,);
+          $rowScelta = DatabaseInterface::selectQueryById($arr, "scelta");
+          $row = $rowScelta->fetch_array();
+          $scelta = new Scelta($row[0],$row[1],$row[2]);
+          $pacchetto = PacchettoControl::recuperaPacchetto($scelta->getIdPacchetto());
+
+          $fattura = new Fattura(null,$data,$cfPaz,$idScelta,$pacchetto->getNSedute());
+          $result = DatabaseInterface::insertQuery($fattura->getArray(),"fattura");
+          if (!$result){
+              throw new Exception("Errore: acquisto fallito!");
+          }else{
+              return true;
+          }
+      }catch (Exception $e){
+          return $e->getMessage();
+      }
     }
 }
  ?>

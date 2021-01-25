@@ -24,7 +24,11 @@ if(isset($_POST['action'])) {
   }
 }
 
-$_SESSION['eccezioni']="";
+$_SESSION['eccep']="";
+$_SESSION['eccsme']="";
+$_SESSION['eccspq']="";
+$_SESSION['eccgen']="";
+$_SESSION['eccFU']="";
 if($action == "saveScheda"){
   try{
     $data = $_POST['data'];
@@ -37,7 +41,7 @@ if($action == "saveScheda"){
       echo json_encode($ris);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccep']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
 }
@@ -53,7 +57,7 @@ else if($action == 'delScheda'){
       throw new Exception("Errore: scheda non eliminata!");
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccep']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
 }
@@ -68,7 +72,7 @@ else if($action == "recoveryScheda"){
     }
     echo json_encode($scheda->getArray());
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccep']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
 
@@ -88,13 +92,13 @@ else if($action == "addEpisodio"){
       $idScheda = $_SESSION['idSCorr'];
     }
     $addok = SeduteControl::addEpisodio($numEp,$analisi,$mA,$mB,$mC,$appunti,$idScheda);
-    if($addok){
+    if(gettype($addok)=='boolean'){
       header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
     }else{
       throw new Exception($addok);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccep']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
 }
@@ -110,8 +114,10 @@ else if($action == 'delEpisodio'){
       $idSchedaCorr = $_SESSION['idSCorr'];
     }
 
-    $attEp = new Episodio(null,$numEp,$analisi,$mA,$mB,$mC,$appunti,$idScheda);
-    $ok = DatabaseInterface::deleteQuery($attEp->getArray(),'episodio');
+    $attEp = new Episodio(null,$numEp,$analisi,$mA,$mB,$mC,$appunti,$idSchedaCorr);
+    $attEp = $attEp->getArray();
+    $attEp = array_diff($attEp,['']);
+    $ok = DatabaseInterface::deleteQuery($attEp,'episodio');
     if($ok){
       $key = array("id_scheda"=>$idSchedaCorr);
       $recScheda = DatabaseInterface::selectQueryById($key,'schedaassessmentfocalizzato');
@@ -146,7 +152,7 @@ else if($action == 'delEpisodio'){
       throw new Exception("Errore: episodio non eliminato!");
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccep']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
 }
@@ -164,13 +170,13 @@ else if($action == 'modEpisodio'){
 
     $modok = SeduteControl::modEpisodio($numEp,$analisi,$mA,$mB,$mC,$appunti,$idSchedaCorr);
 
-    if($modok){
+    if(gettype($modok)=='boolean'){
       header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
     }else{
       throw new Exception($modok);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccep']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentFocalizzato.php");
   }
 }
@@ -189,13 +195,13 @@ else if($action =='addSchGen'){
     $tipo = "Scheda Assessment Generalizzato";
     $dataCorr = date("Y-m-d");
     $addOkGen = SeduteControl::addSchGen($dataCorr,$aspPosAut,$aspNegAut,$aspPosCog,$aspNegCog,$aspPosSM,$aspNegSM,$aspPosSo,$aspNegSo,$idTerCorr,$tipo);
-    if($addOkGen){
+    if(gettype($addOkGen)=='boolean'){
       header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
     }else{
       throw new Exception($addOkGen);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccgen']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
   }
 }
@@ -210,7 +216,7 @@ else if($action =='delSchGen'){
       throw new Exception("Errore: scheda non eliminata!");
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccgen']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
   }
 }
@@ -228,13 +234,13 @@ else if($action == 'modSchGen'){
 
     $modGenOk=SeduteControl::modSchGen($aspPosAut,$aspNegAut,$aspPosCog,$aspNegCog,$aspPosSM,$aspNegSM,$aspPosSo,$aspNegSo,$idTerCorr);
 
-    if($modGenOk){
+    if(gettype($modGenOk)=='boolean'){
       header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
     }else{
       throw new Exception($modGenOk);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccgen']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaAssessmentGeneralizzato.php");
   }
 }
@@ -252,13 +258,13 @@ else if($action == 'addSPQ'){
 
     $addOkSpq=SeduteControl::addSPQ($data,$defP,$aspP,$mot,$obt,$defC,$idTerCorr,$tipo);
 
-    if($addOkSpq){
+    if(gettype($addOkSpq)=='boolean'){
       header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
     }else{
       throw new Exception($addOkSpq);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccspq']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
   }
 }
@@ -274,13 +280,13 @@ else if($action == 'modSPQ'){
 
     $modOkSpq= SeduteControl::modSPQ($defP,$aspP,$mot,$obt,$defC,$idTerCorr);
 
-    if($modOkSpq){
+    if(gettype($modOkSpq)=='boolean'){
       header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
     }else{
       throw new Exception($modOkSpq);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccspq']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
   }
 }
@@ -296,7 +302,7 @@ else if($action == 'delSPQ'){
       throw new Exception("Errore: scheda non eliminata!");
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccspq']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaPrimoColloquio.php");
   }
 }
@@ -310,13 +316,13 @@ else if($action == 'addSFU'){
     $idTerCorr = $_SESSION['idTerCorr'];
 
     $addSfuOk=SeduteControl::addSFU($data,$ric,$esPos,$idTerCorr,$tipo);
-    if($addSfuOk){
+    if(gettype($addSfuOk)=='boolean'){
       header("Location: ../interface/Professionista/SchedaFollowUp.php");
     }else{
       throw new Exception($addSfuOk);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccFU']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaFollowUp.php");
   }
 }
@@ -327,13 +333,13 @@ else if($action == 'modSFU'){
     $idTerCorr = $_SESSION['idTerCorr'];
 
     $okModFw=SeduteControl::modSFU($ric,$esPos,$idTerCorr);
-    if($okModFw){
+    if(gettype($okModFw) == 'boolean'){
       header("Location: ../interface/Professionista/SchedaFollowUp.php");
     }else{
       throw new Exception($okModFw);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccFU']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaFollowUp.php");
   }
 }
@@ -349,7 +355,7 @@ else if($action == 'delSFU'){
       throw new Exception("Errore: scheda non eliminata!");
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccFU']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaFollowUp.php");
   }
 }
@@ -366,13 +372,13 @@ else if($action == 'addSME'){
 
     $addOkSme=SeduteControl::addSME($data,$fc,$fp,$fm,$rf,$idTerCorr,$tipo);
 
-    if($addOkSme){
+    if(gettype($addOkSme)=='boolean'){
       header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
     }else{
       throw new Exception($addOkSme);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccsme']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
   }
 }
@@ -387,13 +393,13 @@ else if($action == 'modSME'){
     echo $fp;
 
     $modSmeOk=SeduteControl::modSME($fc,$fp,$fm,$rf,$idTerCorr);
-    if($modSmeOk){
+    if(gettype($modSmeOk)=='boolean'){
       header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
     }else{
       throw new Exception($modSmeOk);
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccsme']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
   }
 }
@@ -408,7 +414,7 @@ else if($action == 'delSME'){
       throw new Exception("Errore: scheda non eliminata!");
     }
   }catch(Exception $e){
-    $_SESSION['eccezioni']=$e->getMessage();
+    $_SESSION['eccsme']=$e->getMessage();
     header("Location: ../interface/Professionista/SchedaModelloEziologico.php");
   }
 }

@@ -162,7 +162,6 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
 
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
-                <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
               <div class="card-body box-profile">
                 <div class="text-center">
                   <?php if ($img != NULL){
@@ -317,7 +316,7 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
 
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" name="action" value="aggiornaDati"class="btn btn-danger">Conferma</button><span style="color:red"><?php if(isset($_SESSION['noUpdate'])){ echo $_SESSION['noUpdate'];} ?></span>
+                          <button type="submit" name="action" value="aggiornaDati"class="btn btn-danger">Conferma</button><span style="color:red">
                         </div>
                       </div>
                     </form>
@@ -338,12 +337,13 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
                      <div class="form-group row">
                        <div class="offset-sm-2 col-sm-10">
                      <input type="text" name="action" value="modificaFoto" hidden = "true">
-                     <input type="submit" class="btn btn-danger" name="modificaFoto" value="modifica foto"><span style="color:red"><?php if (isset($_SESSION['noUpdatePhoto'])){echo $_SESSION['noUpdatePhoto'];} ?></span>
+                     <input type="submit" class="btn btn-danger" name="modificaFoto" value="modifica foto"><span style="color:red">
                     </div>
                     </div>
                     </form>
-                      <span style="color:red"><?php if (isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+                      <span style="color:red"><?php if (isset($_SESSION['eccmodprof'])){echo $_SESSION['eccmodprof'];} ?></span>
                   </div>
+                    <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
                   <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->

@@ -20,29 +20,28 @@ class SchedaModelloEziologico
 
     public function __construct($idScheda, $data, $fattoriCausativi, $fattoriPrecipitanti, $fattoriMantenimento,$relazioneFinale, $idTerapia, $tipo)
     {
-        if($data == null || $fattoriCausativi == null || $fattoriPrecipitanti == null || $fattoriMantenimento == null
-        || $relazioneFinale == null || $idTerapia == null || $tipo == null){
+        if($data == null || $idTerapia == null || $tipo == null){
             throw new Exception("Alcuni valori non validi!");
         }
-        else if(strlen($fattoriCausativi)==0){
+        else if(strlen($fattoriCausativi)==0 || $fattoriCausativi == null){
             throw new Exception("Il campo Fattori Causativi è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $fattoriCausativi)){
             throw new Exception("Il campo Fattori Causativi non rispetta il formato");
         }
-        else if(strlen($fattoriPrecipitanti)==0){
+        else if(strlen($fattoriPrecipitanti)==0 || $fattoriPrecipitanti == null){
             throw new Exception("Il campo Fattori Precipitanti è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $fattoriPrecipitanti)){
             throw new Exception("Il campo Fattori Precipitanti non rispetta il formato");
         }
-        else if(strlen($fattoriMantenimento)==0){
+        else if(strlen($fattoriMantenimento)==0 || $fattoriMantenimento == null){
             throw new Exception("Il campo Fattori Mantenimento è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $fattoriMantenimento)){
             throw new Exception("Il campo Fattori Mantenimento non rispetta il formato");
         }
-        else if(strlen($relazioneFinale)==0){
+        else if(strlen($relazioneFinale)==0 || $relazioneFinale == null){
             throw new Exception("Il campo Relazione finale è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $relazioneFinale)){
@@ -114,10 +113,7 @@ class SchedaModelloEziologico
     }
     public function setFattoriCausativi($fattoriCausativi)
     {
-        if($fattoriCausativi == null){
-            throw new Exception("Nuovo campo fattori causativi non valido!");
-        }
-        else if(strlen($fattoriCausativi)==0){
+        if(strlen($fattoriCausativi)==0 || $fattoriCausativi == null){
             throw new Exception("Il campo Fattori Causativi è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $fattoriCausativi)){
@@ -127,10 +123,7 @@ class SchedaModelloEziologico
     }
     public function setFattoriPrecipitanti($fattoriPrecipitanti)
     {
-        if($fattoriPrecipitanti == null){
-            throw new Exception("Nuovo campo fattori precipitanti non valido!");
-        }
-        else if(strlen($fattoriPrecipitanti)==0){
+        if(strlen($fattoriPrecipitanti)==0 || $fattoriPrecipitanti == null){
             throw new Exception("Il campo Fattori Precipitanti è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $fattoriPrecipitanti)){
@@ -140,10 +133,7 @@ class SchedaModelloEziologico
     }
     public function setFattoriMantenimento($fattoriMantenimento)
     {
-        if($fattoriMantenimento == null){
-            throw new Exception("Nuovo campo fattori di mantenimento non valido!");
-        }
-        else if(strlen($fattoriMantenimento)==0){
+        if(strlen($fattoriMantenimento)==0 || $fattoriMantenimento == null){
             throw new Exception("Il campo Fattori Mantenimento è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $fattoriMantenimento)){
@@ -153,10 +143,7 @@ class SchedaModelloEziologico
     }
     public function setRelazioneFinale($relazioneFinale)
     {
-        if($relazioneFinale == null){
-            throw new Exception("Nuovo campo relazione finale non valido!");
-        }
-        else if(strlen($relazioneFinale)==0){
+        if(strlen($relazioneFinale)==0 || $relazioneFinale == null){
             throw new Exception("Il campo Relazione finale è vuoto");
         }
         else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $relazioneFinale)){
