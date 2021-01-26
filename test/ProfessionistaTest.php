@@ -150,7 +150,7 @@ class ProfessionistaTest extends TestCase
     public function testSetPolizzaRc()
     {
         $prof = new Professionista("RSSSDR80A01F839S","mary","cerullo","1997-10-02","mceru@live.it","0825553647","3336748663","px43Ma","via studio 56","exp","prima pub","titolo studio","A345","PartitaIVA9","PEC","specializzazione","tipo polizza",".png");
-        $prof -> setPolizzaRc("new exp");
+        $prof -> setPolizzaRc("new polizza");
         self::assertEquals("new polizza", $prof->getPolizzaRc());
     }
 
