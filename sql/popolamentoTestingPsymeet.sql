@@ -7,9 +7,7 @@ insert into paziente(cf,nome,cognome,data_nascita,email,telefono,passwor,indiriz
 
 insert into terapia(data,descrizione,cf_prof,cf) value('2021-01-02','cognitivo comportamentale','RSSMRC80R12H703U','NSTFNC94M23H703G');
 
-insert into schedaAssessmentFocalizzato(data,n_episodi,id_terapia,tipo) value('2020-01-02','1','1','Scheda Assessment Focalizzato');
-
-insert into episodio(numero,analisi_fun,m_a,m_b,m_c,appunti,id_scheda) value('1','NA','NA','NA','NA','NA','1');
+insert into schedaAssessmentFocalizzato(data,n_episodi,id_terapia,tipo) value('2020-01-02','0','1','Scheda Assessment Focalizzato');
 
 insert into appuntamento(data,ora,descrizione,cf_prof,cf) value('2021-10-01','19:00:00','Seduta primo colloquio','RSSMRC80R12H703U','NSTFNC94M23H703G');
 
