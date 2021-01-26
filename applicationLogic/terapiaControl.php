@@ -41,6 +41,7 @@ class terapiaControl{
             return $e->getMessage();
         }
     }
+    //@codeCoverageIgnoreStart
     static function recuperaSchede($idTerapia){
         try{
             $att = array("id_terapia"=>$idTerapia);
@@ -126,8 +127,8 @@ class terapiaControl{
         }catch(Exception $e){
             $_SESSION['eccTer'] =$e->getMessage();
             return null;
-        }
-    }
+        }//@codeCoverageIgnoreEnd
 
+    }
 }
 ?>
