@@ -278,32 +278,6 @@ class SeduteControl
             return $e->getMessage();
         }
     }
-    static function recAllModEzPaz($cfPaz)
-    {
-        try{
-            $arr=null;
-            $arrKey = ['cf' => $cfPaz];
-            $terPz = DatabaseInterface::selectQueryByAtt($arrKey, Terapia::$tableName);
-            while($row = $terPz->fetch_array()) {
-                $ter[] = new Terapia($row[0], $row[1], $row[2], $row[3], $row[4]);
-            }
-            for($i=0;$i<count($ter); $i++){
-                $idTp = $ter[$i]->getIdTerapia();
-                $idTpPz = array('id_terapia' => $idTp);
-                $modEzPz = DatabaseInterface::selectQueryByAtt($idTpPz, SchedaModelloEziologico::$tableName);
-                while ($row = $modEzPz->fetch_array()) {
-                    $mdEzPaziente = new SchedaModelloEziologico($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7]);
-                    $arr[] = $mdEzPaziente;
-                }
-            }
-
-
-            return $arr;
-        }catch(Exception $e){
-            $_SESSION['eccezioni']=$e->getMessage();
-            return null;
-        }
-    }
 }
 
  ?>
