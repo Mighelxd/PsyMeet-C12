@@ -76,17 +76,17 @@ class CompitoControl
         try{
 
             $compitoComp = new Compito(null ,$data,0,$titolo,$descrizione,$svolgimento,$correzione,$cfProf,$cfPaz);
+            $compitoComp = $compitoComp->getArray();
+            $compitoComp = array_diff($compitoComp,['']);
 
 
-
-            $compt = DatabaseInterface::insertQuery($compitoComp->getArray(), Compito::$tableName);
+            $compt = DatabaseInterface::insertQuery($compitoComp, Compito::$tableName);
             //var_dump($compt);
 
             if ($compt) {
                 return true;
             } else {
-               // throw new Exception("Errore: Compito non aggiunto!");
-                exit();
+               throw new Exception("Errore: Compito non aggiunto!");
             }
 
         }catch(Exception $e){
