@@ -1,6 +1,5 @@
 <?php
 
-include 'storage/Pacchetto.php';
 
 use PHPUnit\Framework\TestCase;
 

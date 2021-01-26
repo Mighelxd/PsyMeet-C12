@@ -1,6 +1,6 @@
 <?php
 
-include 'storage/scelta.php';
+
 
 use PHPUnit\Framework\TestCase;
 

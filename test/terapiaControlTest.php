@@ -1,9 +1,6 @@
 <?php
 
-include "../storage/Terapia.php";
-include "../applicationLogic/terapiaControl.php";
-include "../storage/DatabaseInterface.php";
-include "../plugins/libArray/FunArray.php";
+
 
 use PHPUnit\Framework\TestCase;
 

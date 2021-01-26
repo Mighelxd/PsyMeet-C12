@@ -3,9 +3,29 @@
 
 use PHPUnit\Framework\TestCase;
 include "../plugins/libArray/FunArray.php";
-include "../storage/DatabaseInterface.php";
 include "../storage/Appuntamento.php";
 include "../applicationLogic/AppuntamentoControlF.php";
+include "../applicationLogic/AreaInformativaControl.php";
+include "../storage/Professionista.php";
+include "../storage/Paziente.php";
+include "../storage/CartellaClinica.php";
+include "../applicationLogic/CartellaClinicaControl.php";
+include '../applicationLogic/CompitoControl.php';
+include '../storage/DatabaseInterface.php';
+include "../applicationLogic/SeduteControl.php";
+include '../storage/SchedaAssessmentFocalizzato.php';
+include '../storage/Episodio.php';
+include '../storage/Fattura.php';
+include '../storage/Pacchetto.php';
+include '../storage/scelta.php';
+include '../storage/SchedaAssessmentGeneralizzato.php';
+include "../storage/SchedaFollowUp.php";
+include '../storage/SchedaModelloEziologico.php';
+include '../storage/SchedaPrimoColloquio.php';
+include "../storage/Terapia.php";
+include "../applicationLogic/terapiaControl.php";
+
+
 class AppuntamentoControlFTest extends TestCase
 {
     public function testAddAppCfFailureLengthMax()

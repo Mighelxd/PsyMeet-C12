@@ -3,7 +3,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-include 'storage/Terapia.php';
+
 
 class TerapiaTest extends TestCase
 {

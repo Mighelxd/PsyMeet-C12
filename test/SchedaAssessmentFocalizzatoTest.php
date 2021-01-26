@@ -1,6 +1,5 @@
 <?php
 
-include 'storage/SchedaAssessmentFocalizzato.php';
 
 use PHPUnit\Framework\TestCase;
 

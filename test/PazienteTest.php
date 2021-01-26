@@ -1,6 +1,6 @@
 <?php
 
-include 'storage/Paziente.php';
+
 
 use PHPUnit\Framework\TestCase;
 

@@ -1,6 +1,5 @@
 <?php
 
-include 'storage/Fattura.php';
 
 use PHPUnit\Framework\TestCase;
 

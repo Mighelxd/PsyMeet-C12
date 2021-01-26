@@ -1,9 +1,6 @@
 <?php
 
-include "../applicationLogic/SeduteControl.php";
-include "../storage/SchedaFollowUp.php";
-include "../storage/DatabaseInterface.php";
-include "../plugins/libArray/FunArray.php";
+
 use PHPUnit\Framework\TestCase;
 
 class SchedaFollowUpControlTest extends TestCase

@@ -1,6 +1,6 @@
 <?php
 
-include 'storage/Professionista.php';
+
 
 use PHPUnit\Framework\TestCase;
 

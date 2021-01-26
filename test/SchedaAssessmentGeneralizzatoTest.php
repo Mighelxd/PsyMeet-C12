@@ -3,7 +3,6 @@
 
 use PHPUnit\Framework\TestCase;
 
-include '../storage/SchedaAssessmentGeneralizzato.php';
 
 class SchedaAssessmentGeneralizzatoTest extends TestCase
 {

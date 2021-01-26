@@ -2,10 +2,7 @@
 
 
 use PHPUnit\Framework\TestCase;
-include "../plugins/libArray/FunArray.php";
-include "../storage/DatabaseInterface.php";
-include "../applicationLogic/SeduteControl.php";
-include '../storage/SchedaPrimoColloquio.php';
+
 class SchedaPrimoColloquioControlTest extends TestCase
 {
     public function testAddSPQdefProbEmpty()
