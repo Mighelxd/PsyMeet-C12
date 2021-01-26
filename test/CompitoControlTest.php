@@ -87,6 +87,17 @@ class CompitoControlTest extends TestCase
 
             self::assertEquals("Il campo correzione non rispetta il formato", $result);
            }
+            public function testCorrCompOk()
+            {
+                $result = CompitoControl::corrComp
+                (
+                    1,
+                    1,
+                    "Correzione3"
+                );
+
+                self::assertEquals(true, $result);
+            }
 
            public function testDoCompFSvolgNotOk()
            {
