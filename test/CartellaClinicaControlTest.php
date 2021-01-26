@@ -2,11 +2,7 @@
 
 
 use PHPUnit\Framework\TestCase;
-include "../storage/Paziente.php";
-include "../storage/CartellaClinica.php";
-include "../applicationLogic/CartellaClinicaControl.php";
-include "../storage/DatabaseInterface.php";
-include "../plugins/libArray/FunArray.php";
+
 class CartellaClinicaControlTest extends TestCase
 {
 
@@ -84,7 +80,8 @@ class CartellaClinicaControlTest extends TestCase
     public function testUpdateCartellaClinicaOk(){
         $cartellaClinicaOld= new CartellaClinica(1,'2020-01-21','3','3','NA','NA','RSSMRC80R12H703U','NSTFNC94M23H703G');
         $date=date("Y-m-d");
-        $result=CartellaClinicaControl::updateCartellaClinica($cartellaClinicaOld,-1,$date,"2","3","Patologia","Farmaco","RSSMRC80R12H703U","NSTFNC94M23H703G");
-        self::assertEquals(true,$result);
+        CartellaClinicaControl::updateCartellaClinica($cartellaClinicaOld,-1,$date,"2","3","Patologia","Farmaco","RSSMRC80R12H703U","NSTFNC94M23H703G");
+        $result2=CartellaClinicaControl::getCartellaClinica("NSTFNC94M23H703G","RSSMRC80R12H703U");
+        self::assertEquals(2,$result2->getQualitaUmore());
     }
 }

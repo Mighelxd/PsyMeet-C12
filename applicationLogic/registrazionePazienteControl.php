@@ -33,13 +33,12 @@
                 $immagine = addslashes(file_get_contents($_FILES["immagine"]["tmp_name"]));
             else
                 $immagine = NULL;
-            $result = AreaInformativaControl::checkPaz($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine);
-            if (isset($result)) {
+            $result = AreaInformativaControl::savePaz($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine);
+            if (gettype($result)=="string") {
                 $esito = array("esito" => false, "errore" => $result);
                 echo json_encode($esito);
                 exit();
             }
-            $result = AreaInformativaControl::savePaz($codiceFiscale, $nome, $cognome, $dataNascita, $email, $telefono, $password, $indirizzo, $istruzione, $lavoro, $diffCura, $immagine);
             if ($result == true) {
                 session_start();
                 $_SESSION["codiceFiscale"] = $codiceFiscale;

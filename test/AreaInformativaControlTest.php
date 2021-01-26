@@ -2,11 +2,7 @@
 
 
 use PHPUnit\Framework\TestCase;
-include "../applicationLogic/AreaInformativaControl.php";
-include "../storage/Professionista.php";
-include "../storage/DatabaseInterface.php";
-include "../plugins/libArray/FunArray.php";
-include "../storage/Paziente.php";
+
 class AreaInformativaControlTest extends TestCase
 {
     public function testRegistrazioneProfessionistaLNomeNotOk(){

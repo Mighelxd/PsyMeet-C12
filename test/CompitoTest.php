@@ -3,9 +3,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-include '../storage/Compito.php';
-
-class CompitoTest extends TestCase
+include '../storage/Compito.php';class CompitoTest extends TestCase
 {
 
     public function testGetCfProf()

@@ -2,7 +2,7 @@
 
 
 use PHPUnit\Framework\TestCase;
-include '../storage/SchedaModelloEziologico.php';
+
 
 class SchedaModelloEziologicoTest extends TestCase
 {
