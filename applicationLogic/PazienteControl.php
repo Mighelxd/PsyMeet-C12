@@ -44,24 +44,6 @@ class PazienteControl {
     }
   }
 
-  //questo metodo prende in input un array relazionare che mette a relazione la chiave più il valore (esempio ("cf" => "afaopmemffeaf"), ("nome" => "Francesco"))
-  public static function searchPaz($arrSearchKey){
-    try{
-      $arrayPazienti=null;
-      $listPaz = DatabaseInterface::selectQueryByAtt($arrSearchKey, "paziente");
-
-      while ($row = $listPaz->fetch_array()) {
-        $pazienti = new Paziente($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], $row[11],$row[12]);
-        $arrayPazienti[] = $pazienti;
-      }
-      return $arrayPazienti;
-    }catch(Exception $e){
-      $_SESSION['eccezione']=$e->getMessage();
-      return null;
-    }
-  }
-
-
   static function getPazientiByProf($cfProf){
     try{
       $arrKey = array('cf_prof' =>  $cfProf, );
