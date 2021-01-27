@@ -8,7 +8,7 @@ function validationAppForm() {
 	if(emptyNome(nome)) {
 		if (cf_validation(cf)) {
 			if (data_validation(data)) {
-				if (ora_validation(data, ora, appuntamenti)) {
+				if (ora_validation(data, ora)) {
 					return;
 				}
 			}
@@ -65,7 +65,7 @@ function data_validation(data){
 	}
 }
 
-function ora_validation(data,ora,appuntamenti){
+function ora_validation(data,ora){
 	var currentDate = new Date();
 	var currDate = currentDate.toISOString();
 	currDate = currDate.substr(0,10);
@@ -74,24 +74,25 @@ function ora_validation(data,ora,appuntamenti){
 
 	if(dA == currDate){
 		var currHour = null;
-		if(currentDate.getHours()>=0 || currentDate.getHours()<=9){
+		if(currentDate.getHours()>=0 && currentDate.getHours()<=9){
 			currHour = "0"+currentDate.getHours();
 		}else{
 			currHour = currentDate.getHours();
 		}
-		if(currentDate.getMinutes()>=0 || currentDate.getMinutes()<=9){
+		if(currentDate.getMinutes()>=0 && currentDate.getMinutes()<=9){
 			currHour += ":0"+currentDate.getMinutes();
 		}else{
 			currHour += ":"+currentDate.getMinutes();
 		}
-		if(currentDate.getSeconds()>=0 || currentDate.getSeconds()<=9){
+		if(currentDate.getSeconds()>=0 && currentDate.getSeconds()<=9){
 			currHour += ":0"+currentDate.getSeconds();
 		}else{
 			currHour += ":"+currentDate.getSeconds();
 		}
-		
+		console.log("currH: "+currHour);
+		console.log("h: "+hour);
 		if(hour<=currHour){
-			$("#oraSpan").text("Orario non disponibile! Inserisci un ora dopo le "+currentHour);
+			$("#oraSpan").text("Orario non disponibile! Inserisci un ora dopo le "+currHour);
 			$("#oraSpan").css("color", "red");
 			$("#inputOra").css("background-color", "red");
 			return false;
