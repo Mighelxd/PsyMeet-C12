@@ -21,8 +21,8 @@ class CompitoControlTest extends TestCase
                                                 "desc",
                                                 "",
                                                 "",
-                                                "BNCSDR80A01F839Y",
-                                                "PPPFNC89A01H703E"
+                                                "RSSMRC80R12H703U",
+                                                "NSTFNC94M23H703G"
             );
 
             self::assertEquals("Il campo titolo non rispetta la lunghezza", $result);
@@ -38,8 +38,8 @@ class CompitoControlTest extends TestCase
                                                 "desc",
                                                 "",
                                                 "",
-                                                "BNCSDR80A01F839Y",
-                                                "PPPFNC89A01H703E"
+                                                "RSSMRC80R12H703U",
+                                                "NSTFNC94M23H703G"
             );
 
             self::assertEquals("Il campo titolo non rispetta il formato", $result);
@@ -54,14 +54,14 @@ class CompitoControlTest extends TestCase
                                                 "Descrizion$",
                                                 "",
                                                 "",
-                                                "BNCSDR80A01F839Y",
-                                                "PPPFNC89A01H703E"
+                                                "RSSMRC80R12H703U",
+                                                "NSTFNC94M23H703G"
             );
 
             self::assertEquals("Il campo descrizione non rispetta il formato", $result);
            }
 
-           /*public function testAddCompOk()
+           public function testAddCompOk()
            {
                 $result = CompitoControl::addComp
             (
@@ -70,13 +70,12 @@ class CompitoControlTest extends TestCase
                                                 "Descrizione1",
                                                 "",
                                                 "",
-                                                "BNCSDR80A01F839Y",
-                                                "PPPFNC89A01H703E"
+                                                "RSSMRC80R12H703U",
+                                                "NSTFNC94M23H703G"
             );
 
             self::assertEquals(true, $result);
            }
-*/
            public function testCorrCompFNotOk()
            {
                 $result = CompitoControl::corrComp
@@ -88,6 +87,17 @@ class CompitoControlTest extends TestCase
 
             self::assertEquals("Il campo correzione non rispetta il formato", $result);
            }
+            public function testCorrCompOk()
+            {
+                $result = CompitoControl::corrComp
+                (
+                    1,
+                    1,
+                    "Correzione3"
+                );
+
+                self::assertEquals(true, $result);
+            }
 
            public function testDoCompFSvolgNotOk()
            {

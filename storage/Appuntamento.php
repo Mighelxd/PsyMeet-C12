@@ -27,7 +27,7 @@ public static $tableName="appuntamento";
     {
       throw new Exception("Il campo Codice fiscale paziente non rispetta la lunghezza");
     }
-    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $cfPa)){
+    else if(!preg_match('/^[A-Za-z0-9]+$/', $cfPa)){
       throw new Exception("Il campo Codice fiscale paziente non rispetta il formato");
     }
     else if($hour[2] != ':' || $hour[5] != ':'){
@@ -107,7 +107,7 @@ public static $tableName="appuntamento";
     if($newCfPaz==null || strlen($newCfPaz)!=16){
       throw new Exception('Il campo Codice fiscale paziente non rispetta la lunghezza');
     }
-    else if(!preg_match('/^[A-Za-z0-9\s.,èòàù]+$/', $newCfPaz)){
+    else if(!preg_match('/^[A-Za-z0-9]+$/', $newCfPaz)){
       throw new Exception("Il campo Codice fiscale paziente non rispetta il formato");
     }
     $this->cfPaz = $newCfPaz;

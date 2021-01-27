@@ -11,7 +11,6 @@ include ("../../plugins/libArray/FunArray.php");
 include "../../applicationLogic/PazienteControl.php";
 include "../../storage/Paziente.php";
 include "../../storage/Terapia.php";
-include '../../applicationLogic/AuntenticazioneControl.php';
 include "../../storage/Professionista.php";
 include "../../applicationLogic/AreaInformativaControl.php";
 

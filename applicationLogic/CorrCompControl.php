@@ -92,25 +92,17 @@ if ($action=='correzione') {
 	($action=='doComp') {
       try{
           $idComp = $_POST['id'];
-          //echo $idComp;
-          $arrKey = ['id_compito'=>$idComp];
-          $comp = DatabaseInterface::selectQueryByAtt($arrKey, Compito::$tableName);
-          $temp=$comp->fetch_array();
-          $compitoComp= new Compito($temp[0], $temp[1], $temp[2], $temp[3], $temp[4], $temp[5], $temp[6], $temp[7], $temp[8]);
-
           $svolgimento = $_POST['svolgimento'];
 
-          $compitoComp->setSvolgimento($svolgimento);
+          $doCompOk = CompitoControl::doComp($idComp,$svolgimento);
 
-          $isUpdate = DatabaseInterface::updateQueryById($compitoComp->getArray(), Compito::$tableName);
-
-          if (gettype($isUpdate)=='boolean') {
+          if (gettype($doCompOk)=='boolean') {
               header('Location: ../interface/Paziente/gestioneCompitiPaziente.php');
           } else {
-              throw new Exception("Errore: non aggiunto svolgimento!");
+              throw new Exception($doCompOk);
           }
       }catch(Exception $e){
           $_SESSION['eccComp']= $e->getMessage();
-          header('Location: ../interface/Professionista/gestioneCompiti.php');
+          header('Location: ../interface/Paziente/gestioneCompitiPaziente.php');
       }
 }

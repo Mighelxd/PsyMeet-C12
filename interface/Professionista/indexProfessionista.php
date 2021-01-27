@@ -9,7 +9,6 @@
     include "../../storage/scelta.php";
     include "../../applicationLogic/PacchettoControl.php";
     include "../../applicationLogic/AreaInformativaControl.php";
-    include '../../applicationLogic/AuntenticazioneControl.php';
     include "../../storage/Fattura.php";
     session_start();
     if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {

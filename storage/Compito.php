@@ -243,7 +243,7 @@ class Compito
      */
     public function setSvolgimento($svolgimento)
 	{
-        if($svolgimento == null){
+        if($svolgimento == null || strlen($svolgimento)==0){
             throw new Exception("Nuovo svolgimento non valido!");
         }
 

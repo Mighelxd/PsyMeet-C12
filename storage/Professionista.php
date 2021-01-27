@@ -241,7 +241,7 @@
             else if(strlen($pub) <2 || strlen($pub)>500) {
                 throw new Exception("Il campo pubblicazioni non rispetta la lunghezza");
             }
-            $this->pubblicazione=$pub;
+            $this->pubblicazioni=$pub;
         }
 
         public function setTitoloStudio($titSt){
@@ -276,7 +276,10 @@
         }
 
         public function setSpecializzazione($spec){
-            $this->spec;
+            if ($spec == null || strlen($spec) == 0){
+                throw new Exception("Il campo Specializzazione è vuoto");
+            }
+            $this->specializzazione = $spec;
         }
 
         public function setPolizzaRc($polRc){

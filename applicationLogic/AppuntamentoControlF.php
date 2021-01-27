@@ -3,6 +3,7 @@
 class AppuntamentoControlF{
     static function addApp($data,$ora,$desc,$cfProf,$cf){
         try{
+            $ora = $ora.":00";
             $newApp = new Appuntamento(null,$data,$ora,$desc,$cfProf,$cf);
             $ok = DatabaseInterface::insertQuery($newApp->getArray(),Appuntamento::$tableName);
             if($ok){
@@ -17,6 +18,8 @@ class AppuntamentoControlF{
     }
     static function modApp($id,$data,$ora,$desc,$cfProf,$cf,$oldD,$oldO,$oldDe,$oldCfPaz){
         try{
+            $ora = $ora.":00";
+            $oldO = $oldO.":00";
             $oldApp = new Appuntamento($id,$oldD,$oldO,$oldDe,$cfProf,$oldCfPaz);
             $oldApp->setData($data);
             $oldApp->setOra($ora);

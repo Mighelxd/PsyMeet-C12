@@ -35,6 +35,9 @@ class CartellaClinicaControl
     {
         try {
             $cartellaClinica = new CartellaClinica($id, $date, $umo, $relaz, $patol, $farma, $cfProf, $cfPaz);
+            $result=self::getCartellaClinica($cfPaz,$cfProf);
+            if(isset($result))
+                throw new Exception("Cartella clinica gia` esistente.");
             $result = DatabaseInterface::insertQuery($cartellaClinica->getArraySenzaId(), CartellaClinica::$tableName);
             if (!$result) {
                 throw new Exception("errore inserimento");
