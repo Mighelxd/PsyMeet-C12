@@ -29,12 +29,11 @@ if(isset($_POST["azione"])){
             $cartellaClinicOld=CartellaClinicaControl::getCartellaClinica($cfPaz,$cfProf);
             $date=date("Y-m-d");
             $cartellaClinica=new CartellaClinica ($cartellaClinicOld->getId(),$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
-            $result=CartellaClinicaControl::updateCartellaClinica($cartellaClinicOld);
-            if($result == "string"){
+            $result=CartellaClinicaControl::updateCartellaClinica($cartellaClinicOld->getId(),$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
+            if($result!=1){
                 echo json_encode(array("esito"=>false, "errore" => $result));
-                exit();
             }
-            echo json_encode(array("esito"=>true));
+            echo json_encode(array("esito"=>true, "messaggio" => "Cartella Clinica modificata con successo."));
         }catch(Exception $e){
             echo json_encode(array("esito"=>false, "errore" => $e->getMessage()));
         }
@@ -44,13 +43,11 @@ if(isset($_POST["azione"])){
             $cfPaz=$_POST["codFiscalePaz"];
             $date=date("Y-m-d");
             $result=CartellaClinicaControl::saveCartellaClinica(-1,$date,$_POST["umo"],$_POST["relaz"],$_POST["patol"],$_POST["farma"],$cfProf,$cfPaz);
-            if($result==true){
-                echo json_encode(array("esito"=>true));
-                exit();
+            if($result==1){
+                echo json_encode(array("esito"=>true,"messaggio"=>"Cartella Clinica aggiunta con successo."));
             }
             else{
                 echo json_encode(array("esito"=>false,"errore"=>$result));
-                exit();
             }
         }catch(Exception $e){
             echo json_encode(array("esito"=>false,"errore"=>$e->getMessage()));

@@ -326,13 +326,13 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                   <?php if(!isset($cartellaClinica)){ ?>
                       <div class="card-footer" style="background-color: white">
                           <input type="text" name="azione" value="aggiungi" hidden ="true">
-                          <div class="alert alert-success" style="display:none;">Cartella Clinica aggiunta con successo.</div>
+                          <div class="alert alert-success" style="display:none;"></div>
                           <button type="submit" id="sottometti" class="btn btn-primary" style="float:right">Aggiungi</button>
                       </div>
                   <?php } else { ?>
                   <div class="card-footer" style="background-color: white">
                     <input type="text" name="azione" value="modifica" hidden ="true">
-                    <div class="alert alert-success" style="display:none;">Cartella Clinica modificata con successo.</div>
+                    <div class="alert alert-success" style="display:none;"></div>
                     <button type="submit" id="sottometti" class="btn btn-primary" style="float:right">Modifica</button>
                   </div>
                   <?php } ?>
@@ -383,7 +383,10 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                 console.log(response)
               if(response.esito==true){
                  $(".alert-success").show();
-                 $("#sottometti").addClass("disabled");
+                  $(".alert").removeClass("alert-danger");
+                  $(".alert").addClass("alert-success");
+                  $(".alert")[0].innerHTML=response.messaggio;
+                  $("#sottometti").remove();
               }
               else{
                 $(".alert").removeClass("alert-success");
