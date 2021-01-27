@@ -217,7 +217,7 @@ function name_validation(nome) { //allLetter
 		return true;
 	}
 	else {
-		$("#nomeSpan").text("Formato errato!. Inserisci solo lettere e spazi.");
+		$("#nomeSpan").text("Il campo Paziente non rispetta il formato");
 		$("#nomeSpan").css("color", "red");
 		$("#inputNome").css("background-color", "red");
 		return false;
@@ -272,7 +272,7 @@ function createForm(action){
 		inNome.id = "inputNome";
 		inNome.type = "text";
 		inNome.placeholder = "Nome Cognome paziente";
-		inNome.required = true;
+		//inNome.required = true;
 		inNome.onkeyup = function(){
 			if(this.value == ""){
 				return;
@@ -281,6 +281,10 @@ function createForm(action){
 				showCf(this.value);
 			}
 			else return;
+		}
+		inNome.onclick = function(){
+			$("#nomeSpan").text("");
+			$("#inputNome").css("background-color", "white");
 		}
 		var labNome = document.createElement('label');
 		labNome.for = inNome.name;
@@ -292,7 +296,7 @@ function createForm(action){
 		select.className = "form-control";
 		select.name = "codF";
 		select.id = "codF";
-		select.required = true;
+		//select.required = true;
 		var labSelect = document.createElement('label');
 		labSelect.for = select.name;
 		labSelect.innerHTML = "Codice fiscale:"
@@ -420,7 +424,7 @@ function createForm(action){
 		inNome.id = "inputNome";
 		inNome.type = "text";
 		inNome.placeholder = "Nome Cognome paziente";
-		inNome.required = true;
+		//inNome.required = true;
 		inNome.onkeyup = function(){
 			if(this.value == ""){
 				return;
@@ -429,6 +433,10 @@ function createForm(action){
 				showCf(this.value);
 			}
 			else return;
+		}
+		inNome.onclick = function(){
+			$("#nomeSpan").text("");
+			$("#inputNome").css("background-color", "white");
 		}
 		var labNome = document.createElement('label');
 		labNome.for = inNome.name;
@@ -440,7 +448,7 @@ function createForm(action){
 		select.className = "form-control";
 		select.name = "codF";
 		select.id = "codF";
-		select.required = true;
+		//select.required = true;
 		var labSelect = document.createElement('label');
 		labSelect.for = select.name;
 		labSelect.innerHTML = "Codice fiscale:"
