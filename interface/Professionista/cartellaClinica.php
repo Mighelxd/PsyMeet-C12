@@ -378,7 +378,9 @@ $img=base64_encode($professionista->getImmagineProfessionista());
             data: $("#formCartella").serialize(),
             type: 'post',
             success:function(data){
+
               var response=JSON.parse(data);
+                console.log(response)
               if(response.esito==true){
                  $(".alert-success").show();
                  $("#sottometti").addClass("disabled");
@@ -386,7 +388,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
               else{
                 $(".alert").removeClass("alert-success");
                 $(".alert").addClass("alert-danger");
-                $(".alert")[0].innerHTML=esito.errore;
+                $(".alert")[0].innerHTML=response.errore;
                 $(".alert").show();
               }
             },
