@@ -38,14 +38,14 @@
 
       <form enctype="multipart/form-data" method="post" id="registrazionePaz" >
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Nome" name="nome" pattern="[A-Z a-z ']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" placeholder="Nome" name="nome" pattern="[A-Za-z\s']{2,50}" title="Il campo nome non rispetta la lunghezza" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		    <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cognome" name="cognome" pattern="[A-Z a-z ']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" placeholder="Cognome" name="cognome" pattern="[A-Z a-z ']{2,50}" title="Il campo cognome non rispetta la lunghezza" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -59,7 +59,7 @@
           </div>
         </div>
 		        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf" pattern="[A-Z a-z 0-9]{16}" title="16 Caratteri alfanumerici" required>
+          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf" pattern="[A-Z a-z 0-9]{16}" title="Il campo codice fiscale non rispetta il formato" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -81,7 +81,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Indirizzo" name="indirizzo" pattern="[A-Z a-z 0-9']{2,250}" title="Da 2 a 250 lettere(Apostrofi Consentiti)" required>
+          <input type="text" class="form-control" placeholder="Indirizzo" name="indirizzo" pattern="^[A-Za-z\s,àòèéùì]+$" title="Il campo indirizzo non rispetta il formato" required>
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>

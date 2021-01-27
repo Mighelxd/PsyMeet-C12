@@ -108,7 +108,7 @@
               </div>
           </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Indirizzo studio" id="indirizzoStudio" name="indirizzoStudio" pattern="[A-Z a-z 0-9 ']" title="Il campo indirizzo studio non rispetta il formato" required>
+          <input type="text" class="form-control" placeholder="Indirizzo studio" id="indirizzoStudio" name="indirizzoStudio" pattern="[A-Za-z0-9\s.,òàùè']" title="Il campo indirizzo studio non rispetta il formato" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
