@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /*
  * Gestione Scelta
  * Questa classe contiene le informazioni relative all'oggetto scelta

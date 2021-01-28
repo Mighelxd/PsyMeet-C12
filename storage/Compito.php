@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /*
  * Gestione compiti
  * Questa classe contiene le informazioni relative all'oggetto compito

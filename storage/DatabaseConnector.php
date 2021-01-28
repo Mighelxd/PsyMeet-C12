@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /*
 	 * DatabaseConnector
 	 * Questa classe contiene i metodi per la connessione al Database MySQL
