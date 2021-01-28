@@ -368,7 +368,7 @@ else
             </div>
           </div><br>
           <label for="descTer">Descrizione</label>
-          <input type="text" name="descTer" class="form-control" required/>
+          <input type="text" name="descTer" class="form-control" />
           <br>
           <button type="submit" id="modBtnTer" name="action" value="modTer" class="btn btn-primary float-right">Conferma Modifica</button>
           <button type="submit" id="addBtnTer" name="action" value="addTer" class="btn btn-primary float-right">Aggiungi Terapia</button>

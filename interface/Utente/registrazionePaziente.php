@@ -29,23 +29,23 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="../../index2.html"><b>Psy</b>Meet</a>  			<!-- dopo la <a ci va il link alla homepage -->
+    <a href="Homepage.php"><b>Psy</b>Meet</a>  			<!-- dopo la <a ci va il link alla homepage -->
   </div>
 
   <div class="card">
     <div class="card-body register-card-body">
       <p class="login-box-msg">Effettua la registrazione come paziente</p>
 
-      <form enctype="multipart/form-data" method="post" id="registrazionePaz" >
+      <form enctype="multipart/form-data" method="post" id="registrazionePaz">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Nome" name="nome" pattern="[A-Z a-z ']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" placeholder="Nome" name="nome" pattern="[A-Za-z\s']{2,50}" title="Il campo nome non rispetta la lunghezza" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
 		    <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Cognome" name="cognome" pattern="[A-Z a-z ']{2,50}" title="da 2 a 50 Lettere(Apostrofi consentiti)" required>
+          <input type="text" class="form-control" placeholder="Cognome" name="cognome" pattern="[A-Z a-z ']{2,50}" title="Il campo cognome non rispetta la lunghezza" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -59,7 +59,7 @@
           </div>
         </div>
 		        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf" pattern="[A-Z a-z 0-9]{16}" title="16 Caratteri alfanumerici" required>
+          <input type="text" class="form-control" placeholder="Codice Fiscale" name="cf" pattern="[A-Za-z0-9]{16}" title="Il campo codice fiscale non rispetta il formato" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -81,7 +81,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Indirizzo" name="indirizzo" pattern="[A-Z a-z 0-9']{2,250}" title="Da 2 a 250 lettere(Apostrofi Consentiti)" required>
+          <input type="text" class="form-control" placeholder="Indirizzo" name="indirizzo" pattern="^[A-Za-z\s,àòèéùì]+$" title="Il campo indirizzo non rispetta il formato" required>
           <div class="input-group-append">
             <div class="input-group-text">              
             </div>
@@ -157,7 +157,7 @@
       </form>
         <?php if(isset($_SESSION['eccregpaz'])){echo $_SESSION['eccregpaz'];} ?>
 
-      <a href="login.html" class="text-center">Sei già registrato? Effettua il Login</a>
+      <a href="login.php" class="text-center">Sei già registrato? Effettua il Login</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

@@ -43,7 +43,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="../Utente/Homepage.php"><b>Psy</b>Meet</a>  			<!-- ci va il link alla homepage -->
+    <a href="Homepage.php"><b>Psy</b>Meet</a>  			<!-- ci va il link alla homepage -->
   </div>
 
   <div class="card">
@@ -108,7 +108,7 @@
               </div>
           </div>
 		<div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Indirizzo studio" id="indirizzoStudio" name="indirizzoStudio" pattern="[A-Z a-z 0-9 ']" title="Il campo indirizzo studio non rispetta il formato" required>
+          <input type="text" class="form-control" placeholder="Indirizzo studio" id="indirizzoStudio" name="indirizzoStudio" pattern="[A-Za-z0-9\s.,òàùè']" title="Il campo indirizzo studio non rispetta il formato" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -205,7 +205,7 @@
       </form>
         <?php if(isset($_SESSION['eccregprof'])){echo $_SESSION['eccregprof'];} ?>
 
-      <a href="login.html" class="text-center">Sei già registrato? Effettua il Login</a>
+      <a href="login.php" class="text-center">Sei già registrato? Effettua il Login</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

@@ -61,7 +61,7 @@ class EpisodioControlTest extends TestCase
         self::assertEquals("Il campo analisi funzionale è vuoto",$res);
     }
     public function testModEpAnFunFormatoNonCorretto(){
-        $res = SeduteControl::modEpisodio('1','aaaaaa@','Bbb','Bbb','Bbb','Bbb','1');
+        $res = SeduteControl::modEpisodio('1','B@','Bbb','Bbb','Bbb','Bbb','1');
         self::assertEquals("Il campo analisi funzionale non rispetta il formato",$res);
     }
 
@@ -71,36 +71,36 @@ class EpisodioControlTest extends TestCase
     }
 
     public function testModEpMaFormatoNonCorretto(){
-        $res = SeduteControl::modEpisodio('1','Bbb','Aaaaaaa@','Bbb','Bbb','Bbb','1');
+        $res = SeduteControl::modEpisodio('1','bbb','b@','bbb','bbb','bbb','1');
         self::assertEquals("Il campo A non rispetta il formato",$res);
     }
 
     public function testModEpMbEmpty(){
-        $res = SeduteControl::modEpisodio('1','Bbb','bbb','','Bbb','Bbb','1');
+        $res = SeduteControl::modEpisodio('1','bbb','bbb','','bbb','bbb','1');
         self::assertEquals("Il campo B è vuoto",$res);
     }
 
     public function testModEpMbFormatoNonCorretto(){
-        $res = SeduteControl::modEpisodio('1','Bbb','Bbb','aaaaa@','Bbb','Bbb','1');
+        $res = SeduteControl::modEpisodio('1','bbb','bbb','b@','bbb','bbb','1');
         self::assertEquals("Il campo B non rispetta il formato",$res);
     }
 
     public function testModEpMcEmpty(){
-        $res = SeduteControl::modEpisodio('1','Bbb','Bbb','Bbb','','Bbb','1');
+        $res = SeduteControl::modEpisodio('1','bbb','bbb','bbb','','bbb','1');
         self::assertEquals("Il campo C è vuoto",$res);
     }
 
     public function testModEpMcFormatoNonCorretto(){
-        $res = SeduteControl::modEpisodio('1','Bbb','Bbb','Bbb','aaaa@','Bbb','1');
+        $res = SeduteControl::modEpisodio('1','bbb','bbb','bbb','b@','bbb','1');
         self::assertEquals("Il campo C non rispetta il formato",$res);
     }
 
     public function testModEpAppEmpty(){
-        $res = SeduteControl::modEpisodio('1','Bbb','Bbb','Bbb','Bbb','','1');
+        $res = SeduteControl::modEpisodio('1','bbb','bbb','bbb','bbb','','1');
         self::assertEquals("Il campo appunti terapeuta è vuoto",$res);
     }
     public function testModEpSuccess(){
-        $res = SeduteControl::modEpisodio('1','Bbb','Bbb','Bbb','Bbb','Bbb','1');
+        $res = SeduteControl::modEpisodio('1','bbb','bbb','bbb','bbb','bbb','1');
         self::assertEquals(true,$res);
     }
 }

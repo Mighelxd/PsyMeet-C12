@@ -17,7 +17,7 @@ class CartellaClinicaControl
 
     }
 
-    static function updateCartellaClinica($cartellaClinicOld, $id, $date, $umo, $relaz, $patol, $farma, $cfProf, $cfPaz)
+    static function updateCartellaClinica($id, $date, $umo, $relaz, $patol, $farma, $cfProf, $cfPaz)
     {
         try {
             $cartellaClinica = new CartellaClinica($id, $date, $umo, $relaz, $patol, $farma, $cfProf, $cfPaz);
@@ -26,7 +26,6 @@ class CartellaClinicaControl
                 throw new Exception("errore update");
             return true;
         } catch (Exception $e) {
-
             return $e->getMessage();;
         }
     }

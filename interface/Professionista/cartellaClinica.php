@@ -308,7 +308,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                       </div>
                       <div class="form-group">
                           <label for="umore">Qualità dell'umore</label>
-  	    				<input type="text" id="umore" pattern="[0-5]{1}" title="Un numero da 0 a 5" name="umo" value="<?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaUmore() ?>" <?php if(!isset($cartellaClinica)){ ?>placeholder="scrivi...." <?php } ?> required>
+  	    				<input type="text" id="umore" pattern="[1-5]{1}" title="Il campo qualità dell'umore non rispetta il formato" name="umo" value="<?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaUmore() ?>" <?php if(!isset($cartellaClinica)){ ?>placeholder="scrivi...." <?php } ?> required>
                       </div>
                       <div class="form-group">
                           <label for="patologia">Patologie pregresse psichiche/fisiche</label>
@@ -326,13 +326,13 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                   <?php if(!isset($cartellaClinica)){ ?>
                       <div class="card-footer" style="background-color: white">
                           <input type="text" name="azione" value="aggiungi" hidden ="true">
-                          <div class="alert alert-success" style="display:none;">Cartella Clinica aggiunta con successo.</div>
+                          <div class="alert alert-success" style="display:none;"></div>
                           <button type="submit" id="sottometti" class="btn btn-primary" style="float:right">Aggiungi</button>
                       </div>
                   <?php } else { ?>
                   <div class="card-footer" style="background-color: white">
                     <input type="text" name="azione" value="modifica" hidden ="true">
-                    <div class="alert alert-success" style="display:none;">Cartella Clinica modificata con successo.</div>
+                    <div class="alert alert-success" style="display:none;"></div>
                     <button type="submit" id="sottometti" class="btn btn-primary" style="float:right">Modifica</button>
                   </div>
                   <?php } ?>
@@ -378,15 +378,20 @@ $img=base64_encode($professionista->getImmagineProfessionista());
             data: $("#formCartella").serialize(),
             type: 'post',
             success:function(data){
+                $(".alert").hide();
               var response=JSON.parse(data);
+                console.log(response)
               if(response.esito==true){
-                 $(".alert-success").show();
-                 $("#sottometti").addClass("disabled");
+                 $(".alert").show();
+                  $(".alert").removeClass("alert-danger");
+                  $(".alert").addClass("alert-success");
+                  $(".alert")[0].innerHTML=response.messaggio;
+                  $("#sottometti").remove();
               }
               else{
                 $(".alert").removeClass("alert-success");
                 $(".alert").addClass("alert-danger");
-                $(".alert")[0].innerHTML=esito.errore;
+                $(".alert")[0].innerHTML=response.errore;
                 $(".alert").show();
               }
             },
