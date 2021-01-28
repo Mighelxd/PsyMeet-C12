@@ -43,7 +43,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="../Utente/Homepage.php"><b>Psy</b>Meet</a>  			<!-- ci va il link alla homepage -->
+    <a href="Homepage.php"><b>Psy</b>Meet</a>  			<!-- ci va il link alla homepage -->
   </div>
 
   <div class="card">
@@ -205,7 +205,7 @@
       </form>
         <?php if(isset($_SESSION['eccregprof'])){echo $_SESSION['eccregprof'];} ?>
 
-      <a href="login.html" class="text-center">Sei già registrato? Effettua il Login</a>
+      <a href="login.php" class="text-center">Sei già registrato? Effettua il Login</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

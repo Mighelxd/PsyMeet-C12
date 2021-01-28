@@ -287,7 +287,7 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
 					      <div class="form-group row">
                         <label for="pax" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" id="pax" placeholder="Password" name="Password" pattern=".{8,25}" title="da 8 a 25 caratteri (Quaslaisi carattere consentito)">
+                          <input type="password" class="form-control" id="pax" placeholder="Password" name="Password" pattern="(?=.*\d)(?=.*[a-zA-Z])(?=.*[$@#*&]).{8,25}" title="Il campo password non rispetta il formato">
                         </div>
                       </div>
                 <div class="form-group row">

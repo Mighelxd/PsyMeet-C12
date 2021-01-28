@@ -62,7 +62,7 @@ else if ($action == "compraPacchetto"){
         $result = PacchettoControl::buyPacchetto($data,$cfPaz,$idScelta);
 
         if (gettype($result) == "boolean"){
-            header('Location: ../interface/Paziente/pacchetti.php');
+            header('Location: ../interface/Paziente/fatture.php');
         }else{
             throw new Exception($result);
         }
