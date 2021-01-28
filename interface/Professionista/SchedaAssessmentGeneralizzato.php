@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 session_start();
 include '../../plugins/libArray/FunArray.php';
 include '../../storage/DatabaseInterface.php';
