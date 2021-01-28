@@ -1,25 +1,25 @@
 
 <?php
 /*
-    * areaPersonaleProfessionista.php
-    * Pagina area personale professionista
-    * Autore: Martino D'Auria
-    * Versione: 0.1
-    * 2020 Copyright by PsyMeet - University of Salerno
+	* areaPersonaleProfessionista.php
+	* Pagina area personale professionista
+	* Autore: Martino D'Auria
+	* Versione: 0.1
+	* 2020 Copyright by PsyMeet - University of Salerno
 */
-include ("../../plugins/libArray/FunArray.php");
-include "../../storage/DatabaseInterface.php";
-include "../../storage/Professionista.php";
-include "../../applicationLogic/AreaInformativaControl.php";
+include '../../plugins/libArray/FunArray.php';
+include '../../storage/DatabaseInterface.php';
+include '../../storage/Professionista.php';
+include '../../applicationLogic/AreaInformativaControl.php';
 //include "../../applicationLogic/modificaProfessionistaControl.php";
 
 
 session_start();
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "professionista"){
-  header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'professionista') {
+	header('Location: ../Utente/login.php');
 }
-$cfProfessionista = $_SESSION["codiceFiscale"];
+$cfProfessionista = $_SESSION['codiceFiscale'];
 
 $Professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($Professionista->getImmagineProfessionista());
@@ -72,17 +72,16 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <?php if ($img != NULL) {
-            echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-          }
-          else {
-              echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-          }
+          <?php if ($img != null) {
+	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+} else {
+	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+}
 
-          ?>
+		  ?>
         </div>
         <div class="info">
-          <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $Professionista->getNome() ." ". $Professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+          <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $Professionista->getNome() . ' ' . $Professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -146,7 +145,7 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active"><?php echo $Professionista->getNome() ." ". $Professionista->getCognome(); ?> </li>
+              <li class="breadcrumb-item active"><?php echo $Professionista->getNome() . ' ' . $Professionista->getCognome(); ?> </li>
               <li class="breadcrumb-item active">Area personale</li>
             </ol>
           </div>
@@ -164,44 +163,43 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <?php if ($img != NULL){
-                     echo '<img class="profile-user-img img-fluid img-circle" src="data:image/jpeg;base64,'.$img.'"/>';
-                  }
-                  else {
-                    echo '<img class="profile-user-img img-fluid img-circle"
+                  <?php if ($img != null) {
+		  	echo '<img class="profile-user-img img-fluid img-circle" src="data:image/jpeg;base64,' . $img . '"/>';
+		  } else {
+		  	echo '<img class="profile-user-img img-fluid img-circle"
                          src="../../dist/img/user4-128x128.jpg"
                          alt="User profile picture">';
-                  }?>
+		  }?>
 
 
                 </div>
 
-                <p class="text-muted text-center"><?php echo $Professionista->getNome() ." ". $Professionista->getCognome(); ?></p>
+                <p class="text-muted text-center"><?php echo $Professionista->getNome() . ' ' . $Professionista->getCognome(); ?></p>
 
                 <ul class="list-group list-group-unbordered mb-3">
 				  <li class="list-group-item">
-                    <b>Data di Nascita:</b> <td> <?php echo $Professionista->getDataNascita();?></td>
+                    <b>Data di Nascita:</b> <td> <?php echo $Professionista->getDataNascita(); ?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>N iscrizione albo</b>       <td> <?php echo $Professionista->getNIscrizioneAlbo();?></td>
+                    <b>N iscrizione albo</b>       <td> <?php echo $Professionista->getNIscrizioneAlbo(); ?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>Email</b> <td> <?php echo $Professionista->getEmail();?></td>
+                    <b>Email</b> <td> <?php echo $Professionista->getEmail(); ?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>Telefono</b> <td> <?php echo $Professionista->getTelefono();?></td>
+                    <b>Telefono</b> <td> <?php echo $Professionista->getTelefono(); ?></td>
                   </li>
 				  <li class="list-group-item">
-                    <b>Cellulare</b> <td> <?php echo $Professionista->getCellulare();?></td>
+                    <b>Cellulare</b> <td> <?php echo $Professionista->getCellulare(); ?></td>
                   </li>
 				  	  <li class="list-group-item">
-                    <b>P.IVA</b> <td> <?php echo $Professionista->getPartitaIva();?></td>
+                    <b>P.IVA</b> <td> <?php echo $Professionista->getPartitaIva(); ?></td>
                   </li>
 				  	  <li class="list-group-item">
-                    <b>Polizza RC</b> <td> <?php echo $Professionista->getPolizzaRc();?></td>
+                    <b>Polizza RC</b> <td> <?php echo $Professionista->getPolizzaRc(); ?></td>
                   </li>
 				  	  <li class="list-group-item">
-                    <b>PEC</b> <td> <?php echo $Professionista->getPec();?></td>
+                    <b>PEC</b> <td> <?php echo $Professionista->getPec(); ?></td>
                   </li>
                 </ul>
               </div>
@@ -221,22 +219,22 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
 
 			  <strong><i class="fas fa-graduation-cap"></i> Titolo di studio</strong>
           <td>
-            <?php echo $Professionista->getTitoloStudio();?>
+            <?php echo $Professionista->getTitoloStudio(); ?>
           </td>
                 <hr>
         <strong><i class="fas fa-book mr-1"></i> Pubblicazioni</strong>
           <td>
-            <?php echo $Professionista->getPubblicazioni();?>
+            <?php echo $Professionista->getPubblicazioni(); ?>
           </td>
                 <hr>
           <strong><i class="fas fa-map-marker-alt mr-1"></i> Indirizzo studio fisico</strong>
           <td>
-            <?php echo $Professionista->getIndirizzoStudio();?>
+            <?php echo $Professionista->getIndirizzoStudio(); ?>
           </td>
                 <hr>
           <strong><i class="fas fa-handshake"></i> Esperienze</strong>
           <td>
-            <?php echo $Professionista->getEsperienze();?>
+            <?php echo $Professionista->getEsperienze(); ?>
           </td>
               <hr>
               </div>
@@ -341,9 +339,13 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
                     </div>
                     </div>
                     </form>
-                      <span style="color:red"><?php if (isset($_SESSION['eccmodprof'])){echo $_SESSION['eccmodprof'];} ?></span>
+                      <span style="color:red"><?php if (isset($_SESSION['eccmodprof'])) {
+		  	echo $_SESSION['eccmodprof'];
+		  } ?></span>
                   </div>
-                    <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
+                    <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
+		  	echo $_SESSION['eccareaprof'];
+		  } ?></span>
                   <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->

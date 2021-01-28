@@ -1,32 +1,31 @@
 <?php
 
-include ("../../storage/DatabaseInterface.php");
-include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/PazienteControl.php";
-include "../../storage/Paziente.php";
-include "../../storage/Professionista.php";
-include "../../applicationLogic/AreaInformativaControl.php";
+include '../../storage/DatabaseInterface.php';
+include '../../plugins/libArray/FunArray.php';
+include '../../applicationLogic/PazienteControl.php';
+include '../../storage/Paziente.php';
+include '../../storage/Professionista.php';
+include '../../applicationLogic/AreaInformativaControl.php';
 
 session_start();
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "professionista"){
-  header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'professionista') {
+	header('Location: ../Utente/login.php');
 }
 
 
-$cfProfessionista = $_SESSION["codiceFiscale"];
+$cfProfessionista = $_SESSION['codiceFiscale'];
 $professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($professionista->getImmagineProfessionista());
 
-if(isset($_POST["codFiscalePaz"])){
-    $cfPazienteTer=$_POST['codFiscalePaz'];
-    $_SESSION["cfPazTer"] = $cfPazienteTer;
-    $paziente = PazienteControl::getPaz($cfPazienteTer);
-}
-else if(isset($_SESSION["datiPaziente"])){
-    $paziente = $_SESSION['datiPaziente'];
-    $_SESSION["cfPazTer"] = $paziente->getCf();
-    $cfPazienteTer = $paziente->getCf();
+if (isset($_POST['codFiscalePaz'])) {
+	$cfPazienteTer=$_POST['codFiscalePaz'];
+	$_SESSION['cfPazTer'] = $cfPazienteTer;
+	$paziente = PazienteControl::getPaz($cfPazienteTer);
+} elseif (isset($_SESSION['datiPaziente'])) {
+	$paziente = $_SESSION['datiPaziente'];
+	$_SESSION['cfPazTer'] = $paziente->getCf();
+	$cfPazienteTer = $paziente->getCf();
 }
 
 ?>
@@ -76,17 +75,16 @@ else if(isset($_SESSION["datiPaziente"])){
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <?php if ($img != NULL) {
-                            echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                        }
-                        else {
-                            echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                        }
+                        <?php if ($img != null) {
+	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+} else {
+	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+}
 
-                        ?>
+						?>
                     </div>
                     <div class="info">
-                        <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                        <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                     </div>
                 </div>
 
@@ -114,7 +112,7 @@ else if(isset($_SESSION["datiPaziente"])){
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user nav-icon"></i>
-                                <p><?php echo $paziente->getNome()." ".$paziente->getCognome(); ?>
+                                <p><?php echo $paziente->getNome() . ' ' . $paziente->getCognome(); ?>
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -252,7 +250,9 @@ else if(isset($_SESSION["datiPaziente"])){
       <!-- /.card -->
 
 
-          <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
+          <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
+							echo $_SESSION['eccareaprof'];
+						} ?></span>
     </section>
     <!-- /.content -->
 

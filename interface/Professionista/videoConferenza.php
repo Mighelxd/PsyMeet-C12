@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
 <?php
-    include "../../storage/DatabaseInterface.php";
-    include "../../storage/Professionista.php";
-    include "../../storage/Terapia.php";
-    include  "../../storage/Paziente.php";
-    include "../../plugins/libArray/FunArray.php";
-    include "../../applicationLogic/PazienteControl.php";
-    include "../../applicationLogic/terapiaControl.php";
-    session_start();
-    if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
-    header("Location: ../Utente/login.php");
-    exit();
-    }
-    $cf=$_SESSION["codiceFiscale"];
-    if(!isset($_SESSION["paziente"]) || !isset($_SESSION["professionista"])){
-        header("Location: indexProfessionista.php");
-        exit();
-    }
-    $paziente=$_SESSION["paziente"];
-    $professionista=$_SESSION["professionista"];
-    $img=base64_encode($professionista->getImmagineProfessionista());
-    $terapie=terapiaControl::getTerapie($paziente->getCf(),$professionista->getCfProf());
-    $_SESSION["cfPazTer"]=$paziente->getCf();
-    if(!isset($terapie[0])){
-        header("Location: indexProfessionista.php");
-    }
-    $_SESSION["idTerCorr"]=$terapie[0]->getIdTerapia();
+	include '../../storage/DatabaseInterface.php';
+	include '../../storage/Professionista.php';
+	include '../../storage/Terapia.php';
+	include '../../storage/Paziente.php';
+	include '../../plugins/libArray/FunArray.php';
+	include '../../applicationLogic/PazienteControl.php';
+	include '../../applicationLogic/terapiaControl.php';
+	session_start();
+	if (!isset($_SESSION['codiceFiscale']) || $_SESSION['tipo']!='professionista') {
+		header('Location: ../Utente/login.php');
+		exit();
+	}
+	$cf=$_SESSION['codiceFiscale'];
+	if (!isset($_SESSION['paziente']) || !isset($_SESSION['professionista'])) {
+		header('Location: indexProfessionista.php');
+		exit();
+	}
+	$paziente=$_SESSION['paziente'];
+	$professionista=$_SESSION['professionista'];
+	$img=base64_encode($professionista->getImmagineProfessionista());
+	$terapie=terapiaControl::getTerapie($paziente->getCf(), $professionista->getCfProf());
+	$_SESSION['cfPazTer']=$paziente->getCf();
+	if (!isset($terapie[0])) {
+		header('Location: indexProfessionista.php');
+	}
+	$_SESSION['idTerCorr']=$terapie[0]->getIdTerapia();
 ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Videochiamata con <?php echo $paziente->getNome()." ".$paziente->getCognome();  ?> </title>
+    <title>Videochiamata con <?php echo $paziente->getNome() . ' ' . $paziente->getCognome(); ?> </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -80,17 +80,16 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php if ($img != NULL) {
-                        echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                    }
-                    else {
-                        echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                    }
+                    <?php if ($img != null) {
+	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+} else {
+	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+}
 
-                    ?>
+					?>
                 </div>
                 <div class="info">
-                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -118,7 +117,7 @@
                     <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link">
                             <i class="fas fa-user nav-icon"></i>
-                            <p><?php echo $paziente->getNome()." ".$paziente->getCognome(); ?>
+                            <p><?php echo $paziente->getNome() . ' ' . $paziente->getCognome(); ?>
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -194,9 +193,11 @@
             <!-- Default box -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Videochiamata con <?php echo $paziente->getNome()." ".$paziente->getCognome();  ?></h3>
+                    <h3 class="card-title">Videochiamata con <?php echo $paziente->getNome() . ' ' . $paziente->getCognome(); ?></h3>
                 </div>
-                <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+                <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
+						echo $_SESSION['eccezione'];
+					} ?></span>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6" id="videochiamata">
@@ -257,7 +258,7 @@
                     $(".card-body").show();
                     $("#messaggioChiamata")[0].innerHTML="Per terminare la chiamata usare il tasto termina chiamata a sinistra.";
                     $("#messaggioChiamata").show()
-                    var api=iniziaChiamata("<?php echo md5($paziente->getCognome().$paziente->getNome()); ?>");
+                    var api=iniziaChiamata("<?php echo md5($paziente->getCognome() . $paziente->getNome()); ?>");
                     $(".nav-link active").removeClass("active");
                     $(".nav-link").addClass("disabled")
                 }
