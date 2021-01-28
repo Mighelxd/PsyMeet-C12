@@ -27,7 +27,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Psy</b>Meet</a>         <!-- dopo la <a ci va il link alla homepage -->
+    <a href="Homepage.php"><b>Psy</b>Meet</a>         <!-- dopo la <a ci va il link alla homepage -->
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -67,7 +67,7 @@
         <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
       <!-- /.social-auth-links -->
       <p class="mb-0">
-        <a href="registrazioneProfessionista.html" class="text-center">Non sei ancora registrato?</a> 			<!-- link alla pagina di registrazione -->
+        <a href="Homepage.php" class="text-center">Non sei ancora registrato?</a> 			<!-- link alla pagina di registrazione -->
       </p>
     </div>
     <!-- /.login-card-body -->
