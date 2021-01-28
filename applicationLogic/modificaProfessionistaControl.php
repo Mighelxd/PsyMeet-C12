@@ -1,5 +1,4 @@
 <?php
-
 /*
 	* modificaProfessionistacontrol.php
 	* Control che permette le modifiche relative al professionista
@@ -41,22 +40,22 @@
  		header('Location: ../interface/Professionista/areaPersonaleProfessionista.php');
  	}
  } elseif ($_POST['action'] == 'modificaFoto') {
-  	try {
-  		if (isset($_FILES['fotoProfiloProf'])) {
-  			$immagine = addslashes(file_get_contents($_FILES['fotoProfiloProf']['tmp_name']));
-  		} else {
-  			$immagine = null;
-  		}
+ 	try {
+ 		if (isset($_FILES['fotoProfiloProf'])) {
+ 			$immagine = addslashes(file_get_contents($_FILES['fotoProfiloProf']['tmp_name']));
+ 		} else {
+ 			$immagine = null;
+ 		}
 
-  		$result = AreaInformativaControl::updateFotoProfessionista($cf_prof, $immagine);
+ 		$result = AreaInformativaControl::updateFotoProfessionista($cf_prof, $immagine);
 
-  		if (gettype($result)=='boolean') {
-  			header('Location: ../interface/Professionista/areaPersonaleProfessionista.php');
-  		} else {
-  			throw new Exception($result);
-  		}
-  	} catch (Exception $e) {
-  		$_SESSION['eccmodprof'] = $e->getMessage();
-  		header('Location: ../interface/Professionista/areaPersonaleProfessionista.php');
-  	}
-  }
+ 		if (gettype($result)=='boolean') {
+ 			header('Location: ../interface/Professionista/areaPersonaleProfessionista.php');
+ 		} else {
+ 			throw new Exception($result);
+ 		}
+ 	} catch (Exception $e) {
+ 		$_SESSION['eccmodprof'] = $e->getMessage();
+ 		header('Location: ../interface/Professionista/areaPersonaleProfessionista.php');
+ 	}
+ }

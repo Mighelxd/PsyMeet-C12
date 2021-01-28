@@ -1,5 +1,4 @@
 <?php
-
 /*
 * PazienteControl
 * Questa Control fornisce tutti i metodi relativi al paziente
@@ -12,7 +11,7 @@
 //include ("../plugins/libArray/FunArray.php");
 
 
-class PazienteControl
+class pazienteControl
 {
 	public static function getPaz($cfPaziente)
 	{
@@ -107,7 +106,7 @@ class PazienteControl
 			return true;
 
 		} catch (Exception $e) {
-		    $_SESSION['eccezione']=$e->getMessage();
+			$_SESSION['eccezione']=$e->getMessage();
 			return $e->getMessage();
 		}
 	}

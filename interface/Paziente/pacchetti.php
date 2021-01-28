@@ -250,7 +250,7 @@ to get the desired effect
                                             <?php
 	}
 } else {
-										echo '<tbody>
+	echo '<tbody>
                   <tr>
                     <td >
                         vuota
@@ -262,7 +262,7 @@ to get the desired effect
                   </tr>
 
                   </tbody>';
-									} ?>
+} ?>
                                 </table>
                             </div>
                         </div>

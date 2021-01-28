@@ -200,8 +200,8 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                             <?php if ($img != null) {
 	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
 } else {
-								echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-							}
+	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+}
 
 							?>
                         </div>
@@ -281,7 +281,7 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                                         <?php
 								}
 							} else {
-									echo '<tbody>
+								echo '<tbody>
                   <tr>
                     <td >
                         vuota
@@ -293,7 +293,7 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                   </tr>
 
                   </tbody>';
-								} ?>
+							} ?>
                             </table>
                         </div>
                     </div>
@@ -398,7 +398,7 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                                             <?php
 									}
 								} else {
-										echo '<tbody>
+									echo '<tbody>
                   <tr>
                     <td >
                         vuota
@@ -410,7 +410,7 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                   </tr>
 
                   </tbody>';
-									} ?>
+								} ?>
                                 </table>
                             </div>
                         </div>
