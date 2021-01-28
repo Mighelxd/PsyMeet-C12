@@ -107,6 +107,7 @@ class PazienteControl
 			return true;
 
 		} catch (Exception $e) {
+		    $_SESSION['eccezione']=$e->getMessage();
 			return $e->getMessage();
 		}
 	}
