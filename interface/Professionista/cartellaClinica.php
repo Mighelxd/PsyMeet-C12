@@ -382,7 +382,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
               var response=JSON.parse(data);
                 console.log(response)
               if(response.esito==true){
-                 $(".alert-success").show();
+                 $(".alert").show();
                   $(".alert").removeClass("alert-danger");
                   $(".alert").addClass("alert-success");
                   $(".alert")[0].innerHTML=response.messaggio;
