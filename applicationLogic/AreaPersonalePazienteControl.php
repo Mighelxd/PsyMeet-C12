@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 include '../storage/Paziente.php';
 include '../storage/DatabaseInterface.php';
 include 'PazienteControl.php';

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 include '../storage/DatabaseInterface.php ';
 	 include '../storage/professionista.php';
 	 include '../storage/paziente.php';

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /*
 	* AppuntamentoControl
 	* Questo control fornisce tutte le operazioni che si possono fare per Appuntamento'

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /*
 	* registrazioneProfessionistaControl.php
 	* Questo file fornisce le funzioni di control per la registrazione del professionista.

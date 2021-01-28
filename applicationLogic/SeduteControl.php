@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 
 //include '../../storage/Terapia.php';
 //session_start();

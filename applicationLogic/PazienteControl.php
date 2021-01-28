@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /*
 * PazienteControl
 * Questa Control fornisce tutti i metodi relativi al paziente

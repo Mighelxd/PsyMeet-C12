@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /*
 * SchedaPrimoColloquioControl
 * Questa Control fornisce tutti i metodi relativi alla scheda relativa al primo colloquio

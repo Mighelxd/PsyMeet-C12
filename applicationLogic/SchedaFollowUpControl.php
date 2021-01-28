@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /*
 * SchedaFollowUpControl
 * Questa Control fornisce tutti i metodi relativi alla scheda follow up

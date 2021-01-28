@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 
 include '..\plugins\libArray\FunArray.php';
 include '../storage/DatabaseInterface.php';

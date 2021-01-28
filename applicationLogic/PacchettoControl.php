@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 define('TABLE_NAME', 'pacchetto');
 
 class PacchettoControl

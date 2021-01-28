@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 class CartellaClinicaControl
 {
 	public static function getCartellaClinica($cfPaz, $cfProf)
