@@ -1,4 +1,5 @@
 <?php
+
 include '../../storage/DatabaseInterface.php';
 include '../../storage/Professionista.php';
 include '../../applicationLogic/AreaInformativaControl.php';
@@ -94,15 +95,17 @@ $professionisti = AreaInformativaControl::recuperaProfessionisti();
         <!-- /.row -->
         <div class="row">
           <!-- scheda professionista in row -->
-            <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
+            <?php if (isset($_SESSION['eccezione'])) {
+ 	echo $_SESSION['eccezione'];
+ } ?>
           <?php
-          if($professionisti != null){
-          for($i=0;$i<count($professionisti);$i++){ ?>
+		  if ($professionisti != null) {
+		  	for ($i=0; $i<count($professionisti); $i++) { ?>
           <div class="card card-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-info">
-              <h3 class="widget-user-username"><?php echo $professionisti[$i]->getNome()." ".$professionisti[$i]->getCognome(); ?></h3>
-              <h5 class="widget-user-desc"><?php echo $professionisti[$i]->getSpecializzazione();?></h5>
+              <h3 class="widget-user-username"><?php echo $professionisti[$i]->getNome() . ' ' . $professionisti[$i]->getCognome(); ?></h3>
+              <h5 class="widget-user-desc"><?php echo $professionisti[$i]->getSpecializzazione(); ?></h5>
             </div>
             <div class="widget-user-image">
               <img id="imageprof" class="img-circle elevation-2" src="../../dist/img/user2-160x160.jpg" alt="User Avatar" style="max-width: 90; max-height: 90px;">
@@ -111,7 +114,7 @@ $professionisti = AreaInformativaControl::recuperaProfessionisti();
               <div class="row">
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header"><?php echo $professionisti[$i]->getPec();?></h5>
+                    <h5 class="description-header"><?php echo $professionisti[$i]->getPec(); ?></h5>
                     <span class="description-text">PEC</span>
                   </div>
                   <!-- /.description-block -->
@@ -119,7 +122,7 @@ $professionisti = AreaInformativaControl::recuperaProfessionisti();
                 <!-- /.col -->
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header"><?php echo $professionisti[$i]->getTelefono();?></h5>
+                    <h5 class="description-header"><?php echo $professionisti[$i]->getTelefono(); ?></h5>
                     <span class="description-text">TELEFONO STUDIO</span>
                   </div>
                   <!-- /.description-block -->
@@ -127,7 +130,7 @@ $professionisti = AreaInformativaControl::recuperaProfessionisti();
                 <!-- /.col -->
                 <div class="col-sm-4">
                   <div class="description-block">
-                    <h5 class="description-header"><?php echo $professionisti[$i]->getIndirizzoStudio();?></h5>
+                    <h5 class="description-header"><?php echo $professionisti[$i]->getIndirizzoStudio(); ?></h5>
                     <span class="description-text">Indirizzo Studio</span>
                   </div>
                   <!-- /.description-block -->
@@ -139,7 +142,7 @@ $professionisti = AreaInformativaControl::recuperaProfessionisti();
             <!-- /.card-footer-->
           </div>
         <?php }
-          } ?>
+		  } ?>
   </section>
 
   <!-- Control Sidebar -->

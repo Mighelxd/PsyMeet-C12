@@ -1,23 +1,23 @@
 <?php
-    include ("../../plugins/libArray/FunArray.php");
-    include ("../../storage/DatabaseInterface.php");
-    include "../../storage/CartellaClinica.php";
-    include "../../storage/Paziente.php";
-    include "../../storage/Professionista.php";
-    include "../../applicationLogic/AreaInformativaControl.php";
-    session_start();
-    if(!isset($_SESSION["codiceFiscale"]) || !isset($_SESSION["tipo"])){
-      header("Location: ../Utente/login.php");
-      exit();
-    }
-    if(!isset($_SESSION["datiPaziente"])){
-      header("Location: pazienti.php");
-    }
-    $paziente=$_SESSION["datiPaziente"];
-    if(isset($_SESSION["cartellaClinica"])){
-      $cartellaClinica=$_SESSION["cartellaClinica"];
-    }
-$cfProfessionista = $_SESSION["codiceFiscale"];
+include '../../plugins/libArray/FunArray.php';
+	include '../../storage/DatabaseInterface.php';
+	include '../../storage/CartellaClinica.php';
+	include '../../storage/Paziente.php';
+	include '../../storage/Professionista.php';
+	include '../../applicationLogic/AreaInformativaControl.php';
+	session_start();
+	if (!isset($_SESSION['codiceFiscale']) || !isset($_SESSION['tipo'])) {
+		header('Location: ../Utente/login.php');
+		exit();
+	}
+	if (!isset($_SESSION['datiPaziente'])) {
+		header('Location: pazienti.php');
+	}
+	$paziente=$_SESSION['datiPaziente'];
+	if (isset($_SESSION['cartellaClinica'])) {
+		$cartellaClinica=$_SESSION['cartellaClinica'];
+	}
+$cfProfessionista = $_SESSION['codiceFiscale'];
 $professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($professionista->getImmagineProfessionista());
 ?>
@@ -112,17 +112,16 @@ $img=base64_encode($professionista->getImmagineProfessionista());
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php if ($img != NULL) {
-                        echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                    }
-                    else {
-                        echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                    }
+                    <?php if ($img != null) {
+	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+} else {
+	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+}
 
-                    ?>
+					?>
                 </div>
                 <div class="info">
-                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -150,7 +149,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
             <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link">
                     <i class="fas fa-user nav-icon"></i>
-                    <p><?php echo $paziente->getNome()." ".$paziente->getCognome(); ?>
+                    <p><?php echo $paziente->getNome() . ' ' . $paziente->getCognome(); ?>
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -290,7 +289,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                     </div>
                     <div class="form-group">
                        <label for="data">Data</label>
-		    		   <input type="date" id="data" name="data" <?php if(!isset($cartellaClinica)){ ?><?php echo "value=\"".date("Y-m-d")."\"";}?> <?php if(isset($cartellaClinica)){ ?><?php echo "value=\"".$cartellaClinica->getData()."\"";}?>  readonly>
+		    		   <input type="date" id="data" name="data" <?php if (!isset($cartellaClinica)) { ?><?php echo 'value="' . date('Y-m-d') . '"'; }?> <?php if (isset($cartellaClinica)) { ?><?php echo 'value="' . $cartellaClinica->getData() . '"'; }?>  readonly>
                     </div>
                     <div class="form-group">
                        <label for="professione">Professione</label>
@@ -304,26 +303,34 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                     <div class="panel">
                       <div class="form-group">
                           <label for="farmaci">Farmaci/Psicofarmaci</label>
-  	    				<textarea id="farmaci" name="farma" <?php if(!isset($cartellaClinica)){ ?>placeholder="scrivi...." <?php } ?>style="height:200px" required><?php if(isset($cartellaClinica)) echo $cartellaClinica->getFarmaci() ?></textarea>
+  	    				<textarea id="farmaci" name="farma" <?php if (!isset($cartellaClinica)) { ?>placeholder="scrivi...." <?php } ?>style="height:200px" required><?php if (isset($cartellaClinica)) {
+						echo $cartellaClinica->getFarmaci();
+					} ?></textarea>
                       </div>
                       <div class="form-group">
                           <label for="umore">Qualità dell'umore</label>
-  	    				<input type="text" id="umore" pattern="[1-5]{1}" title="Il campo qualità dell'umore non rispetta il formato" name="umo" value="<?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaUmore() ?>" <?php if(!isset($cartellaClinica)){ ?>placeholder="scrivi...." <?php } ?> required>
+  	    				<input type="text" id="umore" name="umo" value="<?php if (isset($cartellaClinica)) {
+						echo $cartellaClinica->getQualitaUmore();
+					} ?>" <?php if (!isset($cartellaClinica)) { ?>placeholder="scrivi...." <?php } ?> required>
                       </div>
                       <div class="form-group">
                           <label for="patologia">Patologie pregresse psichiche/fisiche</label>
-  	    				<textarea id="patologia" name="patol" placeholder="scrivi..." style="height:200px" required><?php if(isset($cartellaClinica)) echo $cartellaClinica->getPatologiePregresse() ?></textarea>
+  	    				<textarea id="patologia" name="patol" placeholder="scrivi..." style="height:200px" required><?php if (isset($cartellaClinica)) {
+						echo $cartellaClinica->getPatologiePregresse();
+					} ?></textarea>
                       </div>
                       <div class="form-group">
                           <label for="relazioni">Qualità relazioni affettive</label>
-  	    				<input type="text" id="relazioni" name="relaz" value="<?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaRealazioni() ?>" placeholder="Un numero da 0 a 5" pattern="[0-5]{1}" title="Un numero da 0 a 5"required>
+  	    				<input type="text" id="relazioni" name="relaz" value="<?php if (isset($cartellaClinica)) {
+						echo $cartellaClinica->getQualitaRealazioni();
+					} ?>" placeholder="Un numero da 0 a 5" required>
                     </div>
                     </div>
                   </div>
                   <!-- /.card-body -->
                   <input type="text" name="codFiscalePaz" value="<?php echo $paziente->getCf() ?>" hidden="true">
                   
-                  <?php if(!isset($cartellaClinica)){ ?>
+                  <?php if (!isset($cartellaClinica)) { ?>
                       <div class="card-footer" style="background-color: white">
                           <input type="text" name="azione" value="aggiungi" hidden ="true">
                           <div class="alert alert-success" style="display:none;"></div>
@@ -337,8 +344,12 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                   </div>
                   <?php } ?>
                 </form>
-                  <span style="color:red"><?php if(isset($_SESSION['eccCaClPr'])){echo $_SESSION['eccCaClPr'];} ?></span>
-                  <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
+                  <span style="color:red"><?php if (isset($_SESSION['eccCaClPr'])) {
+						echo $_SESSION['eccCaClPr'];
+					} ?></span>
+                  <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
+						echo $_SESSION['eccareaprof'];
+					} ?></span>
               </div>
 
             </div>
@@ -351,7 +362,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
 
 <?php
   //$_SESSION["datiPaziente"]=NULL;
-  $_SESSION["cartellaClinica"]=NULL;
+  $_SESSION['cartellaClinica']=null;
 ?>
 
  <!-- INIZIO PIE DI PAGINA -->

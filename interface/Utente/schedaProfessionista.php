@@ -1,11 +1,12 @@
 <?php
 
-include "../../storage/professionista.php";
-include ("../../storage/DatabaseInterface.php");
-include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/AreaInformativaControl.php";
 
-$cfProf = $_POST["codFiscaleProf"];
+include '../../storage/professionista.php';
+include '../../storage/DatabaseInterface.php';
+include '../../plugins/libArray/FunArray.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+
+$cfProf = $_POST['codFiscaleProf'];
 
 $prof = AreaInformativaControl::getProf($cfProf);
  ?>
@@ -291,7 +292,7 @@ $prof = AreaInformativaControl::getProf($cfProf);
              </div>
 
                <form method="post" action="../Paziente/pacchetti.php">
-                   <input type="text" name="cfProfessionista" value="<?php echo $prof->getCfProf();  ?>" hidden ="true">
+                   <input type="text" name="cfProfessionista" value="<?php echo $prof->getCfProf(); ?>" hidden ="true">
                    <button type="submit" class="btn btn-success float-left" name="button" >View Pacchetti</button>
                </form>
 
@@ -299,7 +300,9 @@ $prof = AreaInformativaControl::getProf($cfProf);
            <!-- /.card-body -->
 
 
-           <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
+           <?php if (isset($_SESSION['eccezione'])) {
+ 	echo $_SESSION['eccezione'];
+ } ?>
        </div>
 
      </div>

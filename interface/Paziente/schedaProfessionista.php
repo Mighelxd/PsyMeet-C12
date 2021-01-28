@@ -1,15 +1,15 @@
 <?php
 session_start();
-include "../../storage/professionista.php";
-include ("../../storage/DatabaseInterface.php");
-include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/AreaInformativaControl.php";
-include "../../storage/Paziente.php";
-include "../../applicationLogic/PazienteControl.php";
+include '../../storage/professionista.php';
+include '../../storage/DatabaseInterface.php';
+include '../../plugins/libArray/FunArray.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+include '../../storage/Paziente.php';
+include '../../applicationLogic/PazienteControl.php';
 
-$cfProf = $_POST["codFiscaleProf"];
+$cfProf = $_POST['codFiscaleProf'];
 $prof = AreaInformativaControl::getProf($cfProf);
-$cfPaziente = $_SESSION["codiceFiscale"];
+$cfPaziente = $_SESSION['codiceFiscale'];
 $paz = PazienteControl::getPaz($cfPaziente);
 $img=base64_encode($paz->getFotoProfiloPaz());
  ?>
@@ -60,11 +60,11 @@ $img=base64_encode($paz->getFotoProfiloPaz());
                  <!-- Sidebar user panel (optional) -->
                  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                      <div class="image">
-                         <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                         <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                      </div>
                      <div class="info">
-                         <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                         <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                      </div>
                  </div>
 
@@ -209,7 +209,7 @@ $img=base64_encode($paz->getFotoProfiloPaz());
              </div>
 
                <form method="post" action="pacchetti.php">
-                   <input type="text" name="cfProfessionista" value="<?php echo $prof->getCfProf();  ?>" hidden ="true">
+                   <input type="text" name="cfProfessionista" value="<?php echo $prof->getCfProf(); ?>" hidden ="true">
                    <button type="submit" class="btn btn-success float-left" name="button" >View Pacchetti</button>
                </form>
 
@@ -217,7 +217,9 @@ $img=base64_encode($paz->getFotoProfiloPaz());
            <!-- /.card-body -->
 
 
-           <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
+           <?php if (isset($_SESSION['eccezione'])) {
+ 	echo $_SESSION['eccezione'];
+ } ?>
        </div>
 
      </div>

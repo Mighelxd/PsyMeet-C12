@@ -1,13 +1,14 @@
 <?php
-  session_start();
-  if(isset($_SESSION["errore"])){
-    $errore=$_SESSION["errore"];
-  echo "
+
+session_start();
+  if (isset($_SESSION['errore'])) {
+  	$errore=$_SESSION['errore'];
+  	echo "
   <script>
       alert('$errore')
   </script>";
-  unset($_SESSION["errore"]);
-}
+  	unset($_SESSION['errore']);
+  }
 
 
 ?>
@@ -203,7 +204,9 @@
           </div>
         </div>
       </form>
-        <?php if(isset($_SESSION['eccregprof'])){echo $_SESSION['eccregprof'];} ?>
+        <?php if (isset($_SESSION['eccregprof'])) {
+	echo $_SESSION['eccregprof'];
+} ?>
 
       <a href="login.php" class="text-center">Sei già registrato? Effettua il Login</a>
     </div>

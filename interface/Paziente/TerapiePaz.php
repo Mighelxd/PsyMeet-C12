@@ -1,31 +1,31 @@
 <?php
 session_start();
-include ("../../plugins/libArray/FunArray.php");
-include "../../storage/DatabaseInterface.php";
-include "../../storage/Terapia.php";
-include "../../applicationLogic/terapiaControl.php";
-include "../../applicationLogic/PazienteControl.php";
-include "../../applicationLogic/AreaInformativaControl.php";
-include "../../storage/Paziente.php";
-include "../../storage/Professionista.php";
-include "../../storage/SchedaModelloEziologico.php";
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "paziente"){
-    header("Location: ../Utente/login.php");
+include '../../plugins/libArray/FunArray.php';
+include '../../storage/DatabaseInterface.php';
+include '../../storage/Terapia.php';
+include '../../applicationLogic/terapiaControl.php';
+include '../../applicationLogic/PazienteControl.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+include '../../storage/Paziente.php';
+include '../../storage/Professionista.php';
+include '../../storage/SchedaModelloEziologico.php';
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'paziente') {
+	header('Location: ../Utente/login.php');
 }
 
 /*if(isset($_POST["codFiscalePaz"])){
-    $cfPazienteTer=$_POST['codFiscalePaz'];
-    $_SESSION["cfPazTer"] = $cfPazienteTer;
-    $pazienteTer = PazienteControl::getPaz($cfPazienteTer);
+	$cfPazienteTer=$_POST['codFiscalePaz'];
+	$_SESSION["cfPazTer"] = $cfPazienteTer;
+	$pazienteTer = PazienteControl::getPaz($cfPazienteTer);
 }
 else if(isset($_SESSION["datiPaziente"])){
-    $pazienteTer = $_SESSION['datiPaziente'];
-    $_SESSION["cfPazTer"] = $pazienteTer->getCf();
-    $cfPazienteTer = $pazienteTer->getCf();
+	$pazienteTer = $_SESSION['datiPaziente'];
+	$_SESSION["cfPazTer"] = $pazienteTer->getCf();
+	$cfPazienteTer = $pazienteTer->getCf();
 }*/
 
-$cf= $_SESSION["codiceFiscale"];
+$cf= $_SESSION['codiceFiscale'];
 $paz = PazienteControl::getPaz($cf);
 
 $img=base64_encode($paz->getFotoProfiloPaz());
@@ -79,11 +79,11 @@ $terapie = terapiaControl::getTerapiePaz($cf);
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -172,15 +172,17 @@ $terapie = terapiaControl::getTerapiePaz($cf);
 
         <!-- Main content -->
         <section class="content">
-            <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
-            <?php if(count($terapie)>0){
-                for($i=0;$i<count($terapie);$i++){
-                    $modEz = terapiaControl::getEziologicoForPaz($terapie[$i]->getIdTerapia());
-                ?>
+            <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
+	echo $_SESSION['eccezione'];
+} ?></span>
+            <?php if (count($terapie)>0) {
+	for ($i=0; $i<count($terapie); $i++) {
+		$modEz = terapiaControl::getEziologicoForPaz($terapie[$i]->getIdTerapia()); ?>
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header" style="background-color : #007bff;">
-                        <h3 class="card-title" style="color : #ffffff;">Terapia <?php echo $terapie[$i]->getDescrizione(); ?> | Data inizio: <?php $d=$terapie[$i]->getData(); echo substr($d,8)."/".substr($d,5,2)."/".substr($d,0,4) ?></h3>
+                        <h3 class="card-title" style="color : #ffffff;">Terapia <?php echo $terapie[$i]->getDescrizione(); ?> | Data inizio: <?php $d=$terapie[$i]->getData();
+		echo substr($d, 8) . '/' . substr($d, 5, 2) . '/' . substr($d, 0, 4) ?></h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -210,35 +212,30 @@ $terapie = terapiaControl::getTerapiePaz($cf);
                                 <tr> <!--INIZIO -->
                                     <td>
                                         <?php
-                                        echo $modEz->getIdScheda();
-                                        ?>
+										echo $modEz->getIdScheda(); ?>
                                     </td>
                                     <td>
                                         <a>
                                             <?php
-                                            echo $modEz->getTipo();
-                                            ?>
+											echo $modEz->getTipo(); ?>
                                         </a>
                                         <br/>
 
                                     </td>
                                     <td>
                                         <?php
-                                        echo $modEz->getData();
-                                        ?>
+										echo $modEz->getData(); ?>
                                     </td>
                                     <td>
                                         <?php $prof=AreaInformativaControl::getProf($terapie[$i]->getCfProf());
-                                        echo "Dott. ".$prof->getNome()." ".$prof->getCognome();
-                                        ?>
+		echo 'Dott. ' . $prof->getNome() . ' ' . $prof->getCognome(); ?>
                                     </td>
                                     <td class="project-actions text-right">
                                         <?php
-                                        $_SESSION['fc'] = $modEz->getFattoriCausativi();
-                                        $_SESSION['fp'] = $modEz->getFattoriPrecipitanti();
-                                        $_SESSION['fm'] = $modEz->getFattoriMantenimento();
-                                        $_SESSION['rf'] = $modEz->getRelazioneFinale();
-                                        ?>
+										$_SESSION['fc'] = $modEz->getFattoriCausativi();
+		$_SESSION['fp'] = $modEz->getFattoriPrecipitanti();
+		$_SESSION['fm'] = $modEz->getFattoriMantenimento();
+		$_SESSION['rf'] = $modEz->getRelazioneFinale(); ?>
                                         <a class="btn btn-primary btn-sm" href='modelloEziologicoPaz.php'>
                                             <i class="fas fa-folder">
                                             </i>
@@ -249,11 +246,13 @@ $terapie = terapiaControl::getTerapiePaz($cf);
                             </tbody>
                         </table>
                     </div>
-                    <?php } ?>
+                    <?php
+	} ?>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
-            <?php } ?>
+            <?php
+} ?>
         </section>
         <!-- /.content -->
     </div>

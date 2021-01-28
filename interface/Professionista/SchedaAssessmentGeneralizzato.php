@@ -1,44 +1,43 @@
-<?php
+<?php declare(strict_types=1);
 session_start();
 include '../../plugins/libArray/FunArray.php';
 include '../../storage/DatabaseInterface.php';
 include '../../storage/SchedaAssessmentFocalizzato.php';
 include '../../storage/Episodio.php';
 include '../../applicationLogic/SeduteControl.php';
-include "../../storage/SchedaPrimoColloquio.php";
-include "../../storage/SchedaModelloEziologico.php";
-include "../../storage/SchedaFollowUp.php";
-include "../../storage/SchedaAssessmentGeneralizzato.php";
-include "../../applicationLogic/terapiaControl.php";
-include "../../applicationLogic/AreaInformativaControl.php";
-include "../../applicationLogic/PazienteControl.php";
-include "../../storage/Paziente.php";
-include "../../storage/Professionista.php";
+include '../../storage/SchedaPrimoColloquio.php';
+include '../../storage/SchedaModelloEziologico.php';
+include '../../storage/SchedaFollowUp.php';
+include '../../storage/SchedaAssessmentGeneralizzato.php';
+include '../../applicationLogic/terapiaControl.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+include '../../applicationLogic/PazienteControl.php';
+include '../../storage/Paziente.php';
+include '../../storage/Professionista.php';
 
 
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "professionista" || $tipoUtente == null){
-  header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'professionista' || $tipoUtente == null) {
+	header('Location: ../Utente/login.php');
 }
 $exist = false;
-if(isset($_SESSION['idTerCorr'])){
-    $idTerCorr = $_SESSION['idTerCorr'];
-    $allSc = terapiaControl::recuperaSchede($idTerCorr);
-    for($i=0;$i<count($allSc);$i++){
-      if($allSc[$i]->getTipo() == 'Scheda Assessment Generalizzato'){
-        $schAssGen = $allSc[$i];
-        $exist = true;
-      }
-    }
-}
-else{
-  header("Location: Pazienti.php");
+if (isset($_SESSION['idTerCorr'])) {
+	$idTerCorr = $_SESSION['idTerCorr'];
+	$allSc = terapiaControl::recuperaSchede($idTerCorr);
+	for ($i=0; $i<count($allSc); $i++) {
+		if ($allSc[$i]->getTipo() == 'Scheda Assessment Generalizzato') {
+			$schAssGen = $allSc[$i];
+			$exist = true;
+		}
+	}
+} else {
+	header('Location: Pazienti.php');
 }
 
-$cfProfessionista = $_SESSION["codiceFiscale"];
+$cfProfessionista = $_SESSION['codiceFiscale'];
 $professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($professionista->getImmagineProfessionista());
-$cf = $_SESSION["cfPazTer"];
+$cf = $_SESSION['cfPazTer'];
 $paziente = PazienteControl::getPaz($cf);
 ?>
 <!DOCTYPE html>
@@ -114,17 +113,16 @@ $paziente = PazienteControl::getPaz($cf);
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php if ($img != NULL) {
-                        echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                    }
-                    else {
-                        echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                    }
+                    <?php if ($img != null) {
+	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+} else {
+	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+}
 
-                    ?>
+					?>
                 </div>
                 <div class="info">
-                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -152,7 +150,7 @@ $paziente = PazienteControl::getPaz($cf);
                     <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link">
                             <i class="fas fa-user nav-icon"></i>
-                            <p><?php echo $paziente->getNome()." ".$paziente->getCognome(); ?>
+                            <p><?php echo $paziente->getNome() . ' ' . $paziente->getCognome(); ?>
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -276,20 +274,24 @@ $paziente = PazienteControl::getPaz($cf);
           </div>
         </div>
       </div><!-- /.container-fluid -->
-        <span style="color:red"><?php if(isset($_SESSION['eccgen'])){echo $_SESSION['eccgen'];} ?></span>
-        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
+        <span style="color:red"><?php if (isset($_SESSION['eccgen'])) {
+						echo $_SESSION['eccgen'];
+					} ?></span>
+        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
+						echo $_SESSION['eccareaprof'];
+					} ?></span>
     </section>
     <!-- Main content -->
     <?php
-      if(!$exist){
-        echo("<div class=\"row\">");
-          echo("<div class=\"col-12\">");
-              echo("<button type=\"button\" id=\"creaSch\" class=\"btn btn-success\" onclick=\"mostraForm()\">Crea Scheda</button>");
-          echo("</div>");
-        echo("</div>");
-      }?>
+	  if (!$exist) {
+	  	echo '<div class="row">';
+	  	echo '<div class="col-12">';
+	  	echo '<button type="button" id="creaSch" class="btn btn-success" onclick="mostraForm()">Crea Scheda</button>';
+	  	echo '</div>';
+	  	echo '</div>';
+	  }?>
       <?php
-        if($exist){?>
+		if ($exist) {?>
           <section class="content">
             <form method="POST" action="../../applicationLogic/SeduteControlForm.php">
             <div class="row">
@@ -305,11 +307,11 @@ $paziente = PazienteControl::getPaz($cf);
                   <div class="card-body">
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Positivi</label>
-                      <textarea id="inputDescription" name='aspPosAut' class="form-control" rows="4" readonly><?php echo $schAssGen -> getAutoregPositivi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspPosAut' class="form-control" rows="4" readonly><?php echo $schAssGen->getAutoregPositivi(); ?></textarea>
                     </div>
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Negativi</label>
-                      <textarea id="inputDescription" name='aspNegAut' class="form-control" rows="4" readonly><?php echo $schAssGen -> getAutoregNegativi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspNegAut' class="form-control" rows="4" readonly><?php echo $schAssGen->getAutoregNegativi(); ?></textarea>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -328,11 +330,11 @@ $paziente = PazienteControl::getPaz($cf);
                   <div class="card-body">
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Positivi</label>
-                      <textarea id="inputDescription" name='aspPosCog' class="form-control" rows="4" readonly><?php echo $schAssGen -> getCognitivePositivi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspPosCog' class="form-control" rows="4" readonly><?php echo $schAssGen->getCognitivePositivi(); ?></textarea>
                     </div>
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Negativi</label>
-                      <textarea id="inputDescription" name='aspNegCog' class="form-control" rows="4" readonly><?php echo $schAssGen -> getCognitiveNegativi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspNegCog' class="form-control" rows="4" readonly><?php echo $schAssGen->getCognitiveNegativi(); ?></textarea>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -351,11 +353,11 @@ $paziente = PazienteControl::getPaz($cf);
                   <div class="card-body">
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Positivi</label>
-                      <textarea id="inputDescription" name='aspPosSM' class="form-control" rows="4" readonly><?php echo $schAssGen -> getSelfManagementPositivi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspPosSM' class="form-control" rows="4" readonly><?php echo $schAssGen->getSelfManagementPositivi(); ?></textarea>
                     </div>
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Negativi</label>
-                      <textarea id="inputDescription" name='aspNegSM' class="form-control" rows="4" readonly><?php echo $schAssGen -> getSelfManagementNegativi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspNegSM' class="form-control" rows="4" readonly><?php echo $schAssGen->getSelfManagementNegativi(); ?></textarea>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -374,11 +376,11 @@ $paziente = PazienteControl::getPaz($cf);
                   <div class="card-body">
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Positivi</label>
-                      <textarea id="inputDescription" name='aspPosSo' class="form-control" rows="4" readonly><?php echo $schAssGen -> getSocialiPositivi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspPosSo' class="form-control" rows="4" readonly><?php echo $schAssGen->getSocialiPositivi(); ?></textarea>
                     </div>
                     <div class="form-group">
                       <label for="inputDescription">Aspetti Negativi</label>
-                      <textarea id="inputDescription" name='aspNegSo' class="form-control" rows="4" readonly><?php echo $schAssGen -> getSocialiNegativi(); ?></textarea>
+                      <textarea id="inputDescription" name='aspNegSo' class="form-control" rows="4" readonly><?php echo $schAssGen->getSocialiNegativi(); ?></textarea>
                     </div>
                   </div>
                   <!-- /.card-body -->

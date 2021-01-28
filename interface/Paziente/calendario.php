@@ -1,17 +1,17 @@
 <?php
 session_start();
-include ("../../storage/DatabaseInterface.php");
-include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/AreaInformativaControl.php";
-include "../../storage/Paziente.php";
-include "../../applicationLogic/PazienteControl.php";
+include '../../storage/DatabaseInterface.php';
+include '../../plugins/libArray/FunArray.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+include '../../storage/Paziente.php';
+include '../../applicationLogic/PazienteControl.php';
 
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "paziente" || $tipoUtente == null){
-    header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'paziente' || $tipoUtente == null) {
+	header('Location: ../Utente/login.php');
 }
 
-$cfPaziente = $_SESSION["codiceFiscale"];
+$cfPaziente = $_SESSION['codiceFiscale'];
 $paz = PazienteControl::getPaz($cfPaziente);
 $img=base64_encode($paz->getFotoProfiloPaz());
 ?>
@@ -66,11 +66,11 @@ $img=base64_encode($paz->getFotoProfiloPaz());
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -158,7 +158,9 @@ $img=base64_encode($paz->getFotoProfiloPaz());
 
     <!-- Main content (calendario)-->
     <section class="content">
-        <span style="color:red;"><?php if(isset($_SESSION['erroreApp'])){ echo $_SESSION['erroreApp'];} ?></span>
+        <span style="color:red;"><?php if (isset($_SESSION['erroreApp'])) {
+	echo $_SESSION['erroreApp'];
+} ?></span>
         <div class="container-fluid">
             <div class="row">
                 <!-- Appuntamenti -->

@@ -5,53 +5,52 @@ include '../../storage/DatabaseInterface.php';
 include '../../storage/SchedaAssessmentFocalizzato.php';
 include '../../storage/Episodio.php';
 include '../../applicationLogic/SeduteControl.php';
-include "../../storage/SchedaPrimoColloquio.php";
-include "../../storage/SchedaModelloEziologico.php";
-include "../../storage/SchedaFollowUp.php";
-include "../../storage/SchedaAssessmentGeneralizzato.php";
-include "../../applicationLogic/terapiaControl.php";
-include "../../storage/Professionista.php";
-include "../../applicationLogic/AreaInformativaControl.php";
-include "../../applicationLogic/PazienteControl.php";
-include "../../storage/Paziente.php";
+include '../../storage/SchedaPrimoColloquio.php';
+include '../../storage/SchedaModelloEziologico.php';
+include '../../storage/SchedaFollowUp.php';
+include '../../storage/SchedaAssessmentGeneralizzato.php';
+include '../../applicationLogic/terapiaControl.php';
+include '../../storage/Professionista.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+include '../../applicationLogic/PazienteControl.php';
+include '../../storage/Paziente.php';
 
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "professionista" || $tipoUtente == null){
-  header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'professionista' || $tipoUtente == null) {
+	header('Location: ../Utente/login.php');
 }
 
-$dataCorr = date("Y-m-d");
+$dataCorr = date('Y-m-d');
 
 
-if(isset($_SESSION['idTerCorr'])){
-    $idTerCorr = $_SESSION['idTerCorr'];
-    $allSc = terapiaControl::recuperaSchede($idTerCorr);
-    $schAssFoc = array();
-    $exists = false;
-    if(count($allSc)>0){
-      for($i=0;$i<count($allSc);$i++){
-        if($allSc[$i]->getTipo() == 'Scheda Assessment Focalizzato'){
-          $schAssFoc[] = $allSc[$i];
-          if($allSc[$i]->getData() == $dataCorr){
-            $_SESSION['idSCorr'] = $allSc[$i]->getIdScheda();
-            $exists = true;
-          }
-        }
-      }
-    }
+if (isset($_SESSION['idTerCorr'])) {
+	$idTerCorr = $_SESSION['idTerCorr'];
+	$allSc = terapiaControl::recuperaSchede($idTerCorr);
+	$schAssFoc = [];
+	$exists = false;
+	if (count($allSc)>0) {
+		for ($i=0; $i<count($allSc); $i++) {
+			if ($allSc[$i]->getTipo() == 'Scheda Assessment Focalizzato') {
+				$schAssFoc[] = $allSc[$i];
+				if ($allSc[$i]->getData() == $dataCorr) {
+					$_SESSION['idSCorr'] = $allSc[$i]->getIdScheda();
+					$exists = true;
+				}
+			}
+		}
+	}
+} else {
+	header('Location: Pazienti.php');
 }
-else{
-  header("Location: Pazienti.php");
-}
 
-$cfProfessionista = $_SESSION["codiceFiscale"];
+$cfProfessionista = $_SESSION['codiceFiscale'];
 $professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($professionista->getImmagineProfessionista());
-$cf = $_SESSION["cfPazTer"];
+$cf = $_SESSION['cfPazTer'];
 $paziente = PazienteControl::getPaz($cf);
 
-if(count($schAssFoc)>0){
-  $schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
+if (count($schAssFoc)>0) {
+	$schedeConEp = SeduteControl::recuperaEpisodi($schAssFoc);
 }
 
  ?>
@@ -105,17 +104,16 @@ if(count($schAssFoc)>0){
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php if ($img != NULL) {
-                        echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                    }
-                    else {
-                        echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                    }
+                    <?php if ($img != null) {
+ 	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+ } else {
+ 	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+ }
 
-                    ?>
+					?>
                 </div>
                 <div class="info">
-                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -143,7 +141,7 @@ if(count($schAssFoc)>0){
                     <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link">
                             <i class="fas fa-user nav-icon"></i>
-                            <p><?php echo $paziente->getNome()." ".$paziente->getCognome(); ?>
+                            <p><?php echo $paziente->getNome() . ' ' . $paziente->getCognome(); ?>
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -268,8 +266,12 @@ if(count($schAssFoc)>0){
           </div>
         </div>
       </div><!-- /.container-fluid -->
-        <span style="color:red"><?php if(isset($_SESSION['eccep'])){echo $_SESSION['eccep'];} ?></span>
-        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
+        <span style="color:red"><?php if (isset($_SESSION['eccep'])) {
+						echo $_SESSION['eccep'];
+					} ?></span>
+        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
+						echo $_SESSION['eccareaprof'];
+					} ?></span>
     </section>
 
     <!-- Main content -->
@@ -277,31 +279,32 @@ if(count($schAssFoc)>0){
       <div class="row">
         <div class="col-md-12">
           <?php
-          if(count($schAssFoc)>0){
-          for($i=0;$i<count($schAssFoc);$i++){
-            if($schAssFoc[$i]->getData() == $dataCorr){
-                echo("<div class=\"card card-primary\">");////////////////////////////////
-            }else{?>
+		  if (count($schAssFoc)>0) {
+		  	for ($i=0; $i<count($schAssFoc); $i++) {
+		  		if ($schAssFoc[$i]->getData() == $dataCorr) {
+		  			echo '<div class="card card-primary">'; ////////////////////////////////
+			} else {?>
           <div class="card card-primary collapsed-card"><!--//////////////////////-->
           <?php } ?>
             <div class="card-header">
               <?php
-              //if($schAssFoc[$i]->getData() == $dataCorr){$exists = true;}
-              $date=date_create($schAssFoc[$i]->getData()); $dS = date_format($date,"d/m/Y"); ?>
+			  //if($schAssFoc[$i]->getData() == $dataCorr){$exists = true;}
+			  $date=date_create($schAssFoc[$i]->getData());
+		  		$dS = date_format($date, 'd/m/Y'); ?>
               <h3 class="card-title">Assessment Focalizzato <?php echo $dS; ?> </h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <?php if($schAssFoc[$i]->getData() == $dataCorr){
-                    echo("<i class=\"fas fa-minus\"></i></button>");/////////////////
-                  }else{ ?>
+                  <?php if ($schAssFoc[$i]->getData() == $dataCorr) {
+		  			echo '<i class="fas fa-minus"></i></button>'; /////////////////
+				  } else { ?>
                   <i class="fas fa-plus"></i></button><!-- /////////////////////////////-->
                 <?php } ?>
               </div>
             </div>
-            <?php if($schAssFoc[$i]->getData() == $dataCorr){
-              echo("<div class=\"card-body\" style=\"display:block;\">");//////////
-            }else{?>
+            <?php if ($schAssFoc[$i]->getData() == $dataCorr) {
+				  	echo '<div class="card-body" style="display:block;">'; //////////
+			} else {?>
             <div class="card-body" style="display:none;"><!--////////////////////// aaaaaaaa-->
             <?php } ?>
 
@@ -317,13 +320,12 @@ if(count($schAssFoc)>0){
 
 
               <?php
-              if($schAssFoc[$i]->getData() == $dataCorr){
-                echo("<button type='button' id='btnAddAnEp' class='btn btn-block btn-primary' onclick='anEp(".$schAssFoc[$i]->getIdScheda().")' style='width:100px'>+ episodio</button>");
-              }
-                ?>
-              <?php for($j=0;$j<count($schedeConEp[$i][1]);$j++){ ?>
+			  if ($schAssFoc[$i]->getData() == $dataCorr) {
+			  	echo "<button type='button' id='btnAddAnEp' class='btn btn-block btn-primary' onclick='anEp(" . $schAssFoc[$i]->getIdScheda() . ")' style='width:100px'>+ episodio</button>";
+			  } ?>
+              <?php for ($j=0; $j<count($schedeConEp[$i][1]); $j++) { ?>
             <div class="card-bodyEp"><!--inizio episodio-->
-              <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
+              <?php if ($schedeConEp[$i][0]->getData() == $dataCorr) { ?>
               <form method="post" class="anEpisodio" action="../../applicationLogic/SeduteControlForm.php">
               <?php } ?>
               <p>Episodio<input type="text" class="nEp" name ="numero" value='<?php echo $schedeConEp[$i][1][$j]->getNum(); ?>' readonly/></p>
@@ -357,25 +359,26 @@ if(count($schAssFoc)>0){
               </div>
             </div>
             <!-- /.card-body -->
-            <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
+            <?php if ($schedeConEp[$i][0]->getData() == $dataCorr) { ?>
             <div class="col-12">
               <button type="submit" name="action" value="delEpisodio" class="btn btn-secondary" style=" float: right">Cancella episodio</button>
               <button type="submit" name="action" value="modEpisodio" class="btn btn-success" style=" float: right">Modifica episodio</button>
             </div>
           <?php } ?>
-          <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
+          <?php if ($schedeConEp[$i][0]->getData() == $dataCorr) { ?>
         </form>
       <?php } ?>
           </div>
           <?php } ?>
           <!-- /.card fine episodi-->
-          <?php if($schedeConEp[$i][0]->getData() == $dataCorr){ ?>
+          <?php if ($schedeConEp[$i][0]->getData() == $dataCorr) { ?>
           <form method="post" action="../../applicationLogic/SeduteControlForm.php"><button type"submit" name="action" value="delScheda" class="btn btn-danger">Elimina Scheda</button></form>
           <?php } ?>
         </div>
       </div>
-    <?php }
-  } ?>
+    <?php
+		  	}
+		  } ?>
 
     <!-- Scheda nascosta che si vuole creare -->
     <div class="card card-primary" id="newScheda">
@@ -391,15 +394,15 @@ if(count($schAssFoc)>0){
         <div class="form-group">
           <label>Date:</label>
           <div class="input-group date" id="reservationdate" data-target-input="nearest">
-              <input type="text" id="da" name="dateScheda" value="<?php echo date("d/m/Y"); ?>" class="form-control datetimepicker-input" data-target="#reservationdate" readonly/>
+              <input type="text" id="da" name="dateScheda" value="<?php echo date('d/m/Y'); ?>" class="form-control datetimepicker-input" data-target="#reservationdate" readonly/>
               <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
               </div>
           </div><br>
           <div>
           <?php
-          echo("<button type='button' class='btn btn-success' id='btnAddScheda' onclick=\"saveScheda(document.getElementById('da').value,".$idTerCorr.")\" style='float: right'>Aggiungi Scheda</button>");
-           ?>
+		  echo "<button type='button' class='btn btn-success' id='btnAddScheda' onclick=\"saveScheda(document.getElementById('da').value," . $idTerCorr . ")\" style='float: right'>Aggiungi Scheda</button>";
+		   ?>
            <button type='button' class="btn btn-secondary" id="annCreateScheda" onclick="annulla()">Annulla</button>
          </div>
         </div>
@@ -414,7 +417,7 @@ if(count($schAssFoc)>0){
     </section>
     <div class="col-12">
       <?php
-      if(!$exists){?>
+	  if (!$exists) {?>
       <button class="btn btn-success" id="btnNew" onclick="viewScheda();" style=" float: right">Nuova Scheda</button>
     <?php } ?>
     </div>

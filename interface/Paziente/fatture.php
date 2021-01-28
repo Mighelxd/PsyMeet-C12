@@ -2,26 +2,26 @@
 
 
 
-include ('../../storage/Compito.php');
-include ('../../storage/DatabaseInterface.php');
+include '../../storage/Compito.php';
+include '../../storage/DatabaseInterface.php';
 include '../../plugins/libArray/FunArray.php';
 include '../../applicationLogic/CompitoControl.php';
-include "../../applicationLogic/PacchettoControl.php";
-include "../../storage/Fattura.php";
-include "../../storage/scelta.php";
-include "../../storage/Pacchetto.php";
-include "../../applicationLogic/PazienteControl.php";
-include "../../applicationLogic/AreaInformativaControl.php";
-include "../../storage/Paziente.php";
+include '../../applicationLogic/PacchettoControl.php';
+include '../../storage/Fattura.php';
+include '../../storage/scelta.php';
+include '../../storage/Pacchetto.php';
+include '../../applicationLogic/PazienteControl.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+include '../../storage/Paziente.php';
 
 session_start();
-$tipoUtente = $_SESSION["tipo"];
+$tipoUtente = $_SESSION['tipo'];
 
-if($tipoUtente != "paziente"){
-  header("Location: ../Utente/login.php");
+if ($tipoUtente != 'paziente') {
+	header('Location: ../Utente/login.php');
 }
 
-$cf= $_SESSION["codiceFiscale"];
+$cf= $_SESSION['codiceFiscale'];
 $paz = PazienteControl::getPaz($cf);
 
 $img=base64_encode($paz->getFotoProfiloPaz());
@@ -104,11 +104,11 @@ $pacchetti = PacchettoControl::selectAllPacchettoPaz($cf);
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -199,14 +199,16 @@ $pacchetti = PacchettoControl::selectAllPacchettoPaz($cf);
 
 
     <section class="content">
-        <?php if($fatture != null){
-            for($i=0;$i<count($fatture);$i++){
-        ?>
+        <?php if ($fatture != null) {
+	for ($i=0; $i<count($fatture); $i++) {
+		?>
       <div class="row">
           <div class="col-md-12">
             <div class="card card-primary">
               <div class="card-header">
-                  <?php $dataF=$fatture[$i]->getData(); $data=date_create($dataF); $data = date_format($data,"d/m/Y"); ?>
+                  <?php $dataF=$fatture[$i]->getData();
+		$data=date_create($dataF);
+		$data = date_format($data, 'd/m/Y'); ?>
                 <h3 name="id"  class="card-title">Fattura n°<?php echo $fatture[$i]->getIdFattura(); ?> del <?php echo $data; ?>  </h3>
                 <input type="text" name="id"  hidden="true">
                 <div class="card-tools">
@@ -236,9 +238,12 @@ $pacchetti = PacchettoControl::selectAllPacchettoPaz($cf);
           </div>
 
   </div>
-        <?php }
-        } ?>
-        <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+        <?php
+	}
+} ?>
+        <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
+	echo $_SESSION['eccezione'];
+} ?></span>
     </section>
 
 

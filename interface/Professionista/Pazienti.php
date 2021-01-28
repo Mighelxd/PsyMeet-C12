@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
 * Pazienti
 * Questa View fornisce tutti gli elementi grafici della home page relativa alla lista di pazienti
@@ -6,37 +6,37 @@
 * Versione: 0.1
 * 2020 Copyright by PsyMeet - University of Salerno
 */
-include ("../../storage/DatabaseInterface.php");
-include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/PazienteControl.php";
-include "../../storage/Paziente.php";
-include "../../storage/Terapia.php";
-include "../../storage/Professionista.php";
-include "../../applicationLogic/AreaInformativaControl.php";
+include '../../storage/DatabaseInterface.php';
+include '../../plugins/libArray/FunArray.php';
+include '../../applicationLogic/PazienteControl.php';
+include '../../storage/Paziente.php';
+include '../../storage/Terapia.php';
+include '../../storage/Professionista.php';
+include '../../applicationLogic/AreaInformativaControl.php';
 
 session_start();
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "professionista" || $tipoUtente == null){
-  header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'professionista' || $tipoUtente == null) {
+	header('Location: ../Utente/login.php');
 }
 
-$cfProfessionista = $_SESSION["codiceFiscale"];
+$cfProfessionista = $_SESSION['codiceFiscale'];
 $professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($professionista->getImmagineProfessionista());
 $listPaz = PazienteControl::getPazientiByProf($cfProfessionista);
 $listPazNonCur = PazienteControl::getListPaz();
-if($listPazNonCur != null && $listPaz !=null){
-    for($j=0;$j<count($listPaz);$j++){
-        for($i=0;$i<count($listPazNonCur);$i++){
-            if($listPazNonCur[$i]->getCf() == $listPaz[$j]->getCf()){
-                unset($listPazNonCur[$i]);
-                $listPazNonCur = array_values($listPazNonCur);
-                break;
-            }
-        }
-    }
+if ($listPazNonCur != null && $listPaz !=null) {
+	for ($j=0; $j<count($listPaz); $j++) {
+		for ($i=0; $i<count($listPazNonCur); $i++) {
+			if ($listPazNonCur[$i]->getCf() == $listPaz[$j]->getCf()) {
+				unset($listPazNonCur[$i]);
+				$listPazNonCur = array_values($listPazNonCur);
+				break;
+			}
+		}
+	}
 }
-$_SESSION["cfPazTer"] = "";
+$_SESSION['cfPazTer'] = '';
 
 
 
@@ -86,17 +86,16 @@ $_SESSION["cfPazTer"] = "";
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <?php if ($img != NULL) {
-                            echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                        }
-                        else {
-                            echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                        }
+                        <?php if ($img != null) {
+ 	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+ } else {
+ 	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+ }
 
-                        ?>
+						?>
                     </div>
                     <div class="info">
-                        <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                        <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
@@ -158,13 +157,15 @@ $_SESSION["cfPazTer"] = "";
               </div><!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item active"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?></li>
+                  <li class="breadcrumb-item active"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?></li>
                   <li class="breadcrumb-item active">Pazienti</li>
                 </ol>
               </div><!-- /.col -->
             </div><!-- /.row -->
           </div><!-- /.container-fluid -->
-            <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
+            <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
+							echo $_SESSION['eccareaprof'];
+						} ?></span>
         </div>
         <!-- /.content-header -->
 
@@ -194,36 +195,33 @@ $_SESSION["cfPazTer"] = "";
                               </th>
                           </tr>
                       </thead>
-                      <?php if($listPaz != null){ ?>
+                      <?php if ($listPaz != null) { ?>
                       <tbody>
 
-                        <?php for($i=0 ; $i < count($listPaz) ; $i++){
-                          $img=base64_encode($listPaz[$i]->getFotoProfiloPaz()); ?>
+                        <?php for ($i=0; $i < count($listPaz); $i++) {
+							$img=base64_encode($listPaz[$i]->getFotoProfiloPaz()); ?>
                           <tr>
 
                               <td>
                                   <a>
-                                      <?php echo $listPaz[$i]->getNome() ." ". $listPaz[$i]->getCognome();?>
+                                      <?php echo $listPaz[$i]->getNome() . ' ' . $listPaz[$i]->getCognome(); ?>
                                   </a>
                                   <br/>
 
                               </td>
                               <td>
-                                    <?php if($img != NULL){
-                                       echo '<img class="table-avatar" src="data:image/jpeg;base64,'.$img.'"/>';
-                                    }
-
-                                    else {
-                                      echo '<img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">';
-                                    }
-                                    ?>
+                                    <?php if ($img != null) {
+								echo '<img class="table-avatar" src="data:image/jpeg;base64,' . $img . '"/>';
+							} else {
+								echo '<img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">';
+							} ?>
 
 
                               </td>
                               <td style=" padding-left: 35px;">
 
                                 <form class="" action="SchedaPaziente.php" method="post">
-                                  <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
+                                  <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf(); ?>" hidden ="true">
                                     <button type="submit" class="btn btn-primary btn-sm" name="button" >
 
                                       <i class="fas fa-search" ></i>
@@ -238,7 +236,7 @@ $_SESSION["cfPazTer"] = "";
                               </td>
                               <td class="project-actions text-right">
                               <form class="" action="../../applicationLogic/GestioneCartellaClinica.php" method="post">
-                                <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
+                                <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf(); ?>" hidden ="true">
                                 <input type="text" name="azione" value="visualizza" hidden ="true">
                                   <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff; margin-bottom:1%;">
                                       <i class="nav-icon fas fa-table">
@@ -248,7 +246,7 @@ $_SESSION["cfPazTer"] = "";
 
                               <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
                               <form class="" action="gestioneTerapia.php" method="post">
-                                <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf();  ?>" hidden ="true">
+                                <input type="text" name="codFiscalePaz" value="<?php echo $listPaz[$i]->getCf(); ?>" hidden ="true">
                                   <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;width:38.2%;">
                                       <i class="nav-icon fas fa-table">
                                         Terapia
@@ -259,14 +257,15 @@ $_SESSION["cfPazTer"] = "";
                                   </form>
                               </td>
                           </tr>
-                        <?php } ?>
+                        <?php
+						} ?>
                       </tbody>
                       <?php } ?>
                   </table>
                 </div>
               </div>
             </div>
-        <?php echo $_SESSION["cfPazTer"]; ?>
+        <?php echo $_SESSION['cfPazTer']; ?>
 
 
                 <!-- /.card-body -->
@@ -302,36 +301,33 @@ $_SESSION["cfPazTer"] = "";
                                           </th>
                                       </tr>
                                       </thead>
-                                      <?php if($listPazNonCur != null){ ?>
+                                      <?php if ($listPazNonCur != null) { ?>
                                           <tbody>
 
-                                          <?php for($i=0 ; $i < count($listPazNonCur) ; $i++){
-                                              $img=base64_encode($listPazNonCur[$i]->getFotoProfiloPaz()); ?>
+                                          <?php for ($i=0; $i < count($listPazNonCur); $i++) {
+							$img=base64_encode($listPazNonCur[$i]->getFotoProfiloPaz()); ?>
                                               <tr>
 
                                                   <td>
                                                       <a>
-                                                          <?php echo $listPazNonCur[$i]->getNome() ." ". $listPazNonCur[$i]->getCognome();?>
+                                                          <?php echo $listPazNonCur[$i]->getNome() . ' ' . $listPazNonCur[$i]->getCognome(); ?>
                                                       </a>
                                                       <br/>
 
                                                   </td>
                                                   <td>
-                                                      <?php if($img != NULL){
-                                                          echo '<img class="table-avatar" src="data:image/jpeg;base64,'.$img.'"/>';
-                                                      }
-
-                                                      else {
-                                                          echo '<img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">';
-                                                      }
-                                                      ?>
+                                                      <?php if ($img != null) {
+								echo '<img class="table-avatar" src="data:image/jpeg;base64,' . $img . '"/>';
+							} else {
+								echo '<img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">';
+							} ?>
 
 
                                                   </td>
                                                   <td style=" padding-left: 35px;">
 
                                                       <form class="" action="SchedaPaziente.php" method="post">
-                                                          <input type="text" name="codFiscalePaz" value="<?php echo $listPazNonCur[$i]->getCf();  ?>" hidden ="true">
+                                                          <input type="text" name="codFiscalePaz" value="<?php echo $listPazNonCur[$i]->getCf(); ?>" hidden ="true">
                                                           <button type="submit" class="btn btn-primary btn-sm" name="button" >
 
                                                               <i class="fas fa-search" ></i>
@@ -347,7 +343,7 @@ $_SESSION["cfPazTer"] = "";
                                                   <td class="project-actions text-right">
                                                       <!--   <a class="btn btn-primary btn-sm" style="background-color: #9966ff; border-color: #9966ff;"href="gestioneTerapia.php"></a> -->
                                                       <form class="" action="gestioneTerapia.php" method="post">
-                                                          <input type="text" name="codFiscalePaz" value="<?php echo $listPazNonCur[$i]->getCf();  ?>" hidden ="true">
+                                                          <input type="text" name="codFiscalePaz" value="<?php echo $listPazNonCur[$i]->getCf(); ?>" hidden ="true">
                                                           <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #9966ff; border-color: #9966ff;">
                                                               <i class="nav-icon fas fa-table">
                                                                   Inizia una terapia
@@ -358,7 +354,8 @@ $_SESSION["cfPazTer"] = "";
                                                       </form>
                                                   </td>
                                               </tr>
-                                          <?php } ?>
+                                          <?php
+						} ?>
                                           </tbody>
                                       <?php } ?>
                                   </table>

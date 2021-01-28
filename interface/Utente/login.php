@@ -64,7 +64,9 @@
           </div>
       </form>
 
-        <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
+        <?php if (isset($_SESSION['eccezione'])) {
+	echo $_SESSION['eccezione'];
+} ?>
       <!-- /.social-auth-links -->
       <p class="mb-0">
         <a href="Homepage.php" class="text-center">Non sei ancora registrato?</a> 			<!-- link alla pagina di registrazione -->

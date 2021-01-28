@@ -1,26 +1,26 @@
 <?php
 session_start();
-include "../../storage/Paziente.php";
-include "../../storage/Pacchetto.php";
-include "../../storage/Fattura.php";
-include "../../storage/scelta.php";
-include "../../storage/Professionista.php";
-include "../../storage/Terapia.php";
-include "../../storage/Compito.php";
-include ("../../storage/DatabaseInterface.php");
-include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/PazienteControl.php";
-include "../../applicationLogic/PacchettoControl.php";
-include "../../applicationLogic/AreaInformativaControl.php";
-include "../../applicationLogic/terapiaControl.php";
-include "../../applicationLogic/CompitoControl.php";
+include '../../storage/Paziente.php';
+include '../../storage/Pacchetto.php';
+include '../../storage/Fattura.php';
+include '../../storage/scelta.php';
+include '../../storage/Professionista.php';
+include '../../storage/Terapia.php';
+include '../../storage/Compito.php';
+include '../../storage/DatabaseInterface.php';
+include '../../plugins/libArray/FunArray.php';
+include '../../applicationLogic/PazienteControl.php';
+include '../../applicationLogic/PacchettoControl.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+include '../../applicationLogic/terapiaControl.php';
+include '../../applicationLogic/CompitoControl.php';
 
 
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "paziente"){
-    header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'paziente') {
+	header('Location: ../Utente/login.php');
 }
-$cfPaziente = $_SESSION["codiceFiscale"];
+$cfPaziente = $_SESSION['codiceFiscale'];
 
 
 
@@ -88,11 +88,11 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -186,23 +186,24 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+                    <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
+	echo $_SESSION['eccezione'];
+} ?></span>
                     <div class="col-md-6">
                     <div class="card card-widget widget-user">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
                         <div class="widget-user-header bg-info">
-                            <h3 class="widget-user-username"><?php echo $paz->getNome()." ".$paz->getCognome() ?></h3>
+                            <h3 class="widget-user-username"><?php echo $paz->getNome() . ' ' . $paz->getCognome() ?></h3>
 
                         </div>
                         <div class="widget-user-image">
-                            <?php if ($img != NULL) {
-                                echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                            }
-                            else {
-                                echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                            }
+                            <?php if ($img != null) {
+	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+} else {
+								echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+							}
 
-                            ?>
+							?>
                         </div>
                         <div class="card-footer">
                             <div class="row">
@@ -256,11 +257,10 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                                 </tr>
                                 </thead>
 
-                                <?php  if($pacchettiPaz !=NULL){
-                                    for($i=0;$i<count($pacchettiPaz);$i++){
-                                        $scelta = PacchettoControl::getSceltaById($pacchettiPaz[$i]->getIdScelta());
-                                        $pacchetto = PacchettoControl::recuperaPacchetto($scelta->getIdPacchetto());
-                                        ?>
+                                <?php  if ($pacchettiPaz !=null) {
+								for ($i=0; $i<count($pacchettiPaz); $i++) {
+									$scelta = PacchettoControl::getSceltaById($pacchettiPaz[$i]->getIdScelta());
+									$pacchetto = PacchettoControl::recuperaPacchetto($scelta->getIdPacchetto()); ?>
                                         <form method="post" action="../../applicationLogic/PacchettoControlForm.php">
                                             <input type="text" name="action" value="delPacchetto" hidden="true">
                                             <input type="text" name="idPacchetto" value= <?php echo $scelta->getIdPacchetto(); ?> hidden="true">
@@ -279,10 +279,9 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                                             </tbody>
                                         </form>
                                         <?php
-                                    }
-                                }
-                                else{
-                                    echo "<tbody>
+								}
+							} else {
+									echo '<tbody>
                   <tr>
                     <td >
                         vuota
@@ -293,8 +292,8 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                     <td></td>
                   </tr>
 
-                  </tbody>";
-                                } ?>
+                  </tbody>';
+								} ?>
                             </table>
                         </div>
                     </div>
@@ -319,14 +318,13 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                                 </thead>
                                 <tbody>
                                 <?php
-                                if($professionistiByPaz != NULL){
-
-                                    for($i=0;$i<count($professionistiByPaz);$i++){ ?>
+								if ($professionistiByPaz != null) {
+									for ($i=0; $i<count($professionistiByPaz); $i++) { ?>
                                         <tr>
                                             <td><?php echo $professionistiByPaz[$i]->getNome(); ?></td>
                                             <td><?php echo $professionistiByPaz[$i]->getCognome(); ?></td>
                                             <td><form class="" action="../Utente/schedaProfessionista.php" method="post">
-                                                    <input type="text" name="codFiscaleProf" value="<?php echo $professionistiByPaz[$i]->getCfProf();  ?>" hidden ="true">
+                                                    <input type="text" name="codFiscaleProf" value="<?php echo $professionistiByPaz[$i]->getCfProf(); ?>" hidden ="true">
                                                     <button type="submit" class="btn btn-primary btn-sm" name="button" style="background-color: #007bff; border-color: #007bff;">
                                                         <i class="nav-icon fas fa-table">
                                                             View Profile
@@ -337,16 +335,14 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                                                 </form></i></td>
                                         </tr>
                                     <?php }
-                                }
-
-                                else{
-                                    echo '<tr>
+								} else {
+									echo '<tr>
                                             <td>vuoto</td>
                                             <td>vuoto</td>
                                             <td>vuoto</td>
                                         </tr>';
-                                }
-                                ?>
+								}
+								?>
                                 </tbody>
                             </table>
                         </div>
@@ -376,11 +372,9 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                                     </tr>
                                     </thead>
 
-                                    <?php  if($compitiPaz !=NULL){
-                                        for($i=0;$i<count($compitiPaz);$i++){
-
-
-                                            ?>
+                                    <?php  if ($compitiPaz !=null) {
+									for ($i=0; $i<count($compitiPaz); $i++) {
+										?>
 
                                                 <tbody>
                                                 <tr>
@@ -392,22 +386,19 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                                                     </td>
                                                     <td>
                                                         <?php $eff = $compitiPaz[$i]->getEffettuato();
-                                                              if ($eff == 1){
-                                                                echo "compito svolto";
-                                                              }
-                                                              else if($eff == 0){
-                                                                  echo "compito non svolto";
-                                                              }
-                                                        ?>
+										if ($eff == 1) {
+											echo 'compito svolto';
+										} elseif ($eff == 0) {
+											echo 'compito non svolto';
+										} ?>
                                                     </td>
                                                 </tr>
                                                 </tbody>
 
                                             <?php
-                                        }
-                                    }
-                                    else{
-                                        echo "<tbody>
+									}
+								} else {
+										echo '<tbody>
                   <tr>
                     <td >
                         vuota
@@ -418,8 +409,8 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
                     <td></td>
                   </tr>
 
-                  </tbody>";
-                                    } ?>
+                  </tbody>';
+									} ?>
                                 </table>
                             </div>
                         </div>

@@ -1,14 +1,14 @@
 <?php
-  session_start();
-include "../../plugins/libArray/FunArray.php";
-include "../../storage/DatabaseInterface.php";
-include "../../storage/Professionista.php";
-include "../../applicationLogic/AreaInformativaControl.php";
-  $tipoUtente = $_SESSION["tipo"];
-  if($tipoUtente != "professionista" || $tipoUtente == null){
-    header("Location: ../Utente/login.php");
+session_start();
+include '../../plugins/libArray/FunArray.php';
+include '../../storage/DatabaseInterface.php';
+include '../../storage/Professionista.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+  $tipoUtente = $_SESSION['tipo'];
+  if ($tipoUtente != 'professionista' || $tipoUtente == null) {
+  	header('Location: ../Utente/login.php');
   }
-$cf=$_SESSION["codiceFiscale"];
+$cf=$_SESSION['codiceFiscale'];
 $professionista = AreaInformativaControl::getProf($cf);
 $img=base64_encode($professionista->getImmagineProfessionista());
 ?>
@@ -62,17 +62,16 @@ $img=base64_encode($professionista->getImmagineProfessionista());
               <!-- Sidebar user panel (optional) -->
               <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                   <div class="image">
-                      <?php if ($img != NULL) {
-                          echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                      }
-                      else {
-                          echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                      }
+                      <?php if ($img != null) {
+	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+} else {
+	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+}
 
-                      ?>
+					  ?>
                   </div>
                   <div class="info">
-                      <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                      <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                   </div>
               </div>
               <!-- Sidebar Menu -->
@@ -134,7 +133,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?></li>
+                                <li class="breadcrumb-item active"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?></li>
                                 <li class="breadcrumb-item active">Calendario</li>
                             </ol>
                         </div>
@@ -144,7 +143,9 @@ $img=base64_encode($professionista->getImmagineProfessionista());
 
             <!-- Main content (calendario)-->
             <section class="content">
-                <span style="color:red;"><?php if(isset($_SESSION['erroreApp'])){ echo $_SESSION['erroreApp'];} ?></span>
+                <span style="color:red;"><?php if (isset($_SESSION['erroreApp'])) {
+					  	echo $_SESSION['erroreApp'];
+					  } ?></span>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-3">

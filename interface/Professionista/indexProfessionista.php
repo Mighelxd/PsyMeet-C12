@@ -1,38 +1,39 @@
 <?php
-    include "../../storage/DatabaseInterface.php";
-    include "../../storage/Professionista.php";
-    include "../../storage/Terapia.php";
-    include  "../../storage/Paziente.php";
-    include "../../plugins/libArray/FunArray.php";
-    include "../../applicationLogic/PazienteControl.php";
-    include "../../storage/Pacchetto.php";
-    include "../../storage/scelta.php";
-    include "../../applicationLogic/PacchettoControl.php";
-    include "../../applicationLogic/AreaInformativaControl.php";
-    include "../../storage/Fattura.php";
-    session_start();
-    if(!isset($_SESSION["codiceFiscale"]) || $_SESSION["tipo"]!="professionista") {
-        header("Location: ../Utente/login.php");
-        exit();
-    }
-    $cf=$_SESSION["codiceFiscale"];
-    /*$result=DatabaseInterface::selectQueryById(array("cf_prof"=>$cf), Professionista::$tableName);
-    if(!isset($result)||$result==false || $result->num_rows!=1){
-        header("Location: ../Utente/login.php");
-        exit();
-    }
-    $result=$result->fetch_array();
-    $professionista = new Professionista($cf, $result["nome"],$result["cognome"],$result["data_nascita"],$result["email"],$result["telefono"],$result["cellulare"],$result["passwor"],$result["indirizzo_studio"],$result["esperienze"],$result["pubblicazioni"],$result["titolo_studio"],$result["n_iscrizione_albo"],$result["partita_iva"],$result["pec"],$result["specializzazione"],$result["polizza_RC"],$result["foto_profilo_professionista"]);
-    */
 
-$_SESSION["professionista"]=null;
-$_SESSION["paziente"]=null;
+include '../../storage/DatabaseInterface.php';
+	include '../../storage/Professionista.php';
+	include '../../storage/Terapia.php';
+	include '../../storage/Paziente.php';
+	include '../../plugins/libArray/FunArray.php';
+	include '../../applicationLogic/PazienteControl.php';
+	include '../../storage/Pacchetto.php';
+	include '../../storage/scelta.php';
+	include '../../applicationLogic/PacchettoControl.php';
+	include '../../applicationLogic/AreaInformativaControl.php';
+	include '../../storage/Fattura.php';
+	session_start();
+	if (!isset($_SESSION['codiceFiscale']) || $_SESSION['tipo']!='professionista') {
+		header('Location: ../Utente/login.php');
+		exit();
+	}
+	$cf=$_SESSION['codiceFiscale'];
+	/*$result=DatabaseInterface::selectQueryById(array("cf_prof"=>$cf), Professionista::$tableName);
+	if(!isset($result)||$result==false || $result->num_rows!=1){
+		header("Location: ../Utente/login.php");
+		exit();
+	}
+	$result=$result->fetch_array();
+	$professionista = new Professionista($cf, $result["nome"],$result["cognome"],$result["data_nascita"],$result["email"],$result["telefono"],$result["cellulare"],$result["passwor"],$result["indirizzo_studio"],$result["esperienze"],$result["pubblicazioni"],$result["titolo_studio"],$result["n_iscrizione_albo"],$result["partita_iva"],$result["pec"],$result["specializzazione"],$result["polizza_RC"],$result["foto_profilo_professionista"]);
+	*/
+
+$_SESSION['professionista']=null;
+$_SESSION['paziente']=null;
 $professionista = AreaInformativaControl::getProf($cf);
-    $pazienti=PazienteControl::getPazientiByProf($cf);
+	$pazienti=PazienteControl::getPazientiByProf($cf);
 
-    $pacchettoByProf= PacchettoControl::selectAllPacchettoProf($cf);
+	$pacchettoByProf= PacchettoControl::selectAllPacchettoProf($cf);
 
-    $img=base64_encode($professionista->getImmagineProfessionista());
+	$img=base64_encode($professionista->getImmagineProfessionista());
 ?>
 <!DOCTYPE html>
 <html>
@@ -128,17 +129,16 @@ $professionista = AreaInformativaControl::getProf($cf);
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php if ($img != NULL) {
-                        echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                    }
-                    else {
-                        echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                    }
+                    <?php if ($img != null) {
+	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+} else {
+	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+}
 
-                    ?>
+					?>
                 </div>
                 <div class="info">
-                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
             <!-- Sidebar Menu -->
@@ -202,7 +202,7 @@ $professionista = AreaInformativaControl::getProf($cf);
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active"><?php echo $professionista->getNome() . " " . $professionista->getCognome() ?></li>
+                            <li class="breadcrumb-item active"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome() ?></li>
                             <li class="breadcrumb-item active">Area Professionista</li>
                         </ol>
                     </div><!-- /.col -->
@@ -219,23 +219,24 @@ $professionista = AreaInformativaControl::getProf($cf);
                 <div class="row">
                     <!-- Left col -->
                     <section class="col-lg-7 connectedSortable">
-                        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
+                        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
+						echo $_SESSION['eccareaprof'];
+					} ?></span>
                         <!-- Custom tabs (Charts with tabs)-->
                         <div class="card card-widget widget-user">
                             <!-- Add the bg color to the header using any of the bg-* classes -->
                             <div class="widget-user-header bg-info">
-                                <h3 class="widget-user-username"><?php echo $professionista->getNome()." ".$professionista->getCognome() ?></h3>
+                                <h3 class="widget-user-username"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome() ?></h3>
                                 <h5 class="widget-user-desc"><?php echo $professionista->getSpecializzazione() ?></h5>
                             </div>
                             <div class="widget-user-image">
-                                <?php if ($img != NULL) {
-                                    echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                                }
-                                else {
-                                    echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                                }
+                                <?php if ($img != null) {
+						echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+					} else {
+						echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+					}
 
-                                ?>
+								?>
                             </div>
                             <div class="card-footer">
                                 <div class="row">
@@ -287,12 +288,9 @@ $professionista = AreaInformativaControl::getProf($cf);
                                     </tr>
                                     </thead>
 
-                                    <?php  if($pacchettoByProf !=NULL){
-                                        for($i=0;$i<count($pacchettoByProf);$i++){
-
-
-                                            $p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto());
-                                            ?>
+                                    <?php  if ($pacchettoByProf !=null) {
+									for ($i=0; $i<count($pacchettoByProf); $i++) {
+										$p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto()); ?>
                                             <form method="post" action="../../applicationLogic/PacchettoControlForm.php">
                                                 <input type="text" name="action" value="delPacchetto" hidden="true">
                                                 <input type="text" name="idPacchetto" value= <?php echo $p->getIdPacchetto(); ?> hidden="true">
@@ -313,10 +311,9 @@ $professionista = AreaInformativaControl::getProf($cf);
                                                 </tbody>
                                             </form>
                                             <?php
-                                        }
-                                    }
-                                    else{
-                                        echo "<tbody>
+									}
+								} else {
+									echo '<tbody>
                   <tr>
                     <td >
                         vuota
@@ -327,8 +324,8 @@ $professionista = AreaInformativaControl::getProf($cf);
                     <td></td>
                   </tr>
 
-                  </tbody>";
-                                    } ?>
+                  </tbody>';
+								} ?>
                                 </table>
                             </div>
                         </div>
@@ -363,26 +360,29 @@ $professionista = AreaInformativaControl::getProf($cf);
                                     </thead>
                                     <tbody>
                                     <?php
-                                     if($pazienti != NULL){
-
-                                        foreach($pazienti as $pazienteAtt){
-                                            $fatturaAtt=PacchettoControl::getFatturaByPazProf($pazienteAtt->getCf(),$_SESSION["codiceFiscale"])?>
+									 if ($pazienti != null) {
+									 	foreach ($pazienti as $pazienteAtt) {
+									 		$fatturaAtt=PacchettoControl::getFatturaByPazProf($pazienteAtt->getCf(), $_SESSION['codiceFiscale'])?>
                                         <tr>
                                             <td><?php echo $pazienteAtt->getNome(); ?></td>
                                             <td><?php echo $pazienteAtt->getCognome(); ?></td>
-                                            <td><button type="button" id="call" class="btn btn-block btn-danger btn-sm" onclick="buttonCall('<?php echo $pazienteAtt->getCf(); ?>')" <?php if($pazienteAtt->getVideo() || !isset($fatturaAtt)) echo "disabled" ?>><i class="fas fa-phone"></i></button></td>
+                                            <td><button type="button" id="call" class="btn btn-block btn-danger btn-sm" onclick="buttonCall('<?php echo $pazienteAtt->getCf(); ?>')" <?php if (
+	$pazienteAtt->getVideo()
+	|| !isset($fatturaAtt)
+) {
+									 			echo 'disabled';
+									 		} ?>><i class="fas fa-phone"></i></button></td>
                                         </tr>
-                                    <?php }
-                                     }
-
-                                    else{
-                                        echo '<tr>
+                                    <?php
+									 	}
+									 } else {
+									 	echo '<tr>
                                             <td>vuoto</td>
                                             <td>vuoto</td>
                                             <td>vuoto</td>
                                         </tr>';
-                                    }
-                                    ?>
+									 }
+									?>
                                     </tbody>
                                 </table>
                             </div>

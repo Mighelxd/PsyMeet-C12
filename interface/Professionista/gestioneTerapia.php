@@ -1,43 +1,42 @@
 <?php
 /*
-    * gestioneTerapia.php
-    * Pagina per la gestione della terapia
-    * Autore: Martino D'Auria
-    * Versione: 0.1
-    * 2020 Copyright by PsyMeet - University of Salerno
+	* gestioneTerapia.php
+	* Pagina per la gestione della terapia
+	* Autore: Martino D'Auria
+	* Versione: 0.1
+	* 2020 Copyright by PsyMeet - University of Salerno
 */
-include ("../../plugins/libArray/FunArray.php");
-include "../../storage/DatabaseInterface.php";
-include "../../storage/Terapia.php";
-include "../../storage/SchedaPrimoColloquio.php";
-include "../../storage/SchedaModelloEziologico.php";
-include "../../storage/SchedaFollowUp.php";
-include "../../storage/SchedaAssessmentGeneralizzato.php";
-include "../../storage/SchedaAssessmentFocalizzato.php";
-include "../../applicationLogic/terapiaControl.php";
-include "../../applicationLogic/PazienteControl.php";
-include "../../applicationLogic/AreaInformativaControl.php";
-include "../../storage/Paziente.php";
-include "../../storage/Professionista.php";
+include '../../plugins/libArray/FunArray.php';
+include '../../storage/DatabaseInterface.php';
+include '../../storage/Terapia.php';
+include '../../storage/SchedaPrimoColloquio.php';
+include '../../storage/SchedaModelloEziologico.php';
+include '../../storage/SchedaFollowUp.php';
+include '../../storage/SchedaAssessmentGeneralizzato.php';
+include '../../storage/SchedaAssessmentFocalizzato.php';
+include '../../applicationLogic/terapiaControl.php';
+include '../../applicationLogic/PazienteControl.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+include '../../storage/Paziente.php';
+include '../../storage/Professionista.php';
 
 session_start();
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "professionista"){
-  header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'professionista') {
+	header('Location: ../Utente/login.php');
 }
 
 
-$cfProfessionista = $_SESSION["codiceFiscale"];
+$cfProfessionista = $_SESSION['codiceFiscale'];
 
-if(isset($_POST["codFiscalePaz"])){
-    $cfPazienteTer=$_POST['codFiscalePaz'];
-    $_SESSION["cfPazTer"] = $cfPazienteTer;
-    $pazienteTer = PazienteControl::getPaz($cfPazienteTer);
-}
-else if(isset($_SESSION["datiPaziente"])){
-    $pazienteTer = $_SESSION['datiPaziente'];
-    $_SESSION["cfPazTer"] = $pazienteTer->getCf();
-    $cfPazienteTer = $pazienteTer->getCf();
+if (isset($_POST['codFiscalePaz'])) {
+	$cfPazienteTer=$_POST['codFiscalePaz'];
+	$_SESSION['cfPazTer'] = $cfPazienteTer;
+	$pazienteTer = PazienteControl::getPaz($cfPazienteTer);
+} elseif (isset($_SESSION['datiPaziente'])) {
+	$pazienteTer = $_SESSION['datiPaziente'];
+	$_SESSION['cfPazTer'] = $pazienteTer->getCf();
+	$cfPazienteTer = $pazienteTer->getCf();
 }
 
 $professionista = AreaInformativaControl::getProf($cfProfessionista);
@@ -47,8 +46,8 @@ $terapia = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
 
 /*if(count($listTerapie) > 0 ){
   for($i=0;$i<count($listTerapie);$i++){
-    $terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
-    $_SESSION['totSchede'] = $terapie;
+	$terapie = terapiaControl::recuperaSchede($listTerapie[0]->getIdTerapia());
+	$_SESSION['totSchede'] = $terapie;
   }
 }
 else
@@ -102,17 +101,16 @@ else
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <?php if ($img != NULL) {
-            echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-          }
-          else {
-              echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-          }
+          <?php if ($img != null) {
+	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+} else {
+	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+}
 
-          ?>
+		  ?>
         </div>
         <div class="info">
-          <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+          <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
         </div>
       </div>
 
@@ -140,21 +138,23 @@ else
               <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link">
                   <i class="fas fa-user nav-icon"></i>
-                  <p><?php echo $pazienteTer->getNome() ." ". $pazienteTer->getCognome(); ?>
+                  <p><?php echo $pazienteTer->getNome() . ' ' . $pazienteTer->getCognome(); ?>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <?php
-                if(count($terapia)>0){
-                    $terapie = terapiaControl::recuperaSchede($terapia[0]->getIdTerapia());//$terapie sono tutte le schede della terapia
-                    $_SESSION['idTerCorr'] = $terapia[0]->getIdTerapia();
-                }
-                ?>
+				if (count($terapia)>0) {
+					$terapie = terapiaControl::recuperaSchede($terapia[0]->getIdTerapia()); //$terapie sono tutte le schede della terapia
+					$_SESSION['idTerCorr'] = $terapia[0]->getIdTerapia();
+				}
+				?>
                 <ul class="nav nav-treeview" style="padding-left: 2%;"><!--inizio blocco terapie-->
                   <li class="nav-item has-treeview">
                     <a href="#" class="nav-link active">
                       <i class="fas fa-clipboard nav-icon"></i>
-                      <p>Terapia <?php if(count($terapia)>0){ echo $terapia[0]->getIdTerapia();} ?>
+                      <p>Terapia <?php if (count($terapia)>0) {
+					echo $terapia[0]->getIdTerapia();
+				} ?>
                       </p>
                     </a>
                   </li>
@@ -275,13 +275,17 @@ else
 
     <!-- Main content -->
     <section class="content">
-        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
-        <span style="color:red"><?php if (isset($_SESSION['eccTer'])){echo $_SESSION['eccTer'];} ?></span>
-      <?php if(count($terapia)>0){ ?>
+        <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
+					echo $_SESSION['eccareaprof'];
+				} ?></span>
+        <span style="color:red"><?php if (isset($_SESSION['eccTer'])) {
+					echo $_SESSION['eccTer'];
+				} ?></span>
+      <?php if (count($terapia)>0) { ?>
       <!-- Default box -->
       <div class="card">
         <div class="card-header" style="background-color : #007bff;">
-          <h3 class="card-title" style="color : #ffffff;">Terapia <?php echo $terapia[0]->getDescrizione(); ?> | Data inizio: <?php $d=$terapia[0]->getData(); echo substr($d,8)."/".substr($d,5,2)."/".substr($d,0,4) ?></h3>
+          <h3 class="card-title" style="color : #ffffff;">Terapia <?php echo $terapia[0]->getDescrizione(); ?> | Data inizio: <?php $d=$terapia[0]->getData(); echo substr($d, 8) . '/' . substr($d, 5, 2) . '/' . substr($d, 0, 4) ?></h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -306,35 +310,32 @@ else
               </thead>
               <tbody>
                 <?php
-                  for($i=0;$i<count($terapie);$i++) {
-                ?>
+				  for ($i=0; $i<count($terapie); $i++) {
+				  	?>
                   <tr> <!--INIZIO -->
                       <td>
                           <?php
-                            echo $terapie[$i]->getIdScheda();
-                          ?>
+							echo $terapie[$i]->getIdScheda(); ?>
                       </td>
                       <td>
                           <a>
                           <?php
-                            echo $terapie[$i]->getTipo();
-                          ?>
+							echo $terapie[$i]->getTipo(); ?>
                           </a>
                           <br/>
 
                       </td>
                       <td>
                           <?php
-                            echo $terapie[$i]->getData();
-                          ?>
+							echo $terapie[$i]->getData(); ?>
                       </td>
                       <td class="project-actions text-right">
                           <?php
-                            $tipo = str_replace(' ','',$terapie[$i]->getTipo());
-                            $tipo = $tipo.".php";
-                           // echo($tipo);
-                          ?>
-                          <a class="btn btn-primary btn-sm" href='<?php echo($tipo) ?>'>
+							$tipo = str_replace(' ', '', $terapie[$i]->getTipo());
+				  	$tipo .='.php';
+				  	// echo($tipo);
+						  ?>
+                          <a class="btn btn-primary btn-sm" href='<?php echo $tipo ?>'>
                               <i class="fas fa-folder">
                               </i>
                               View
@@ -342,8 +343,8 @@ else
                       </td>
                   </tr>
                   <?php
-                    }
-                  ?>
+				  }
+				  ?>
 
               </tbody>
           </table>
@@ -354,12 +355,12 @@ else
       <button type="button" id="modTer1" class="btn btn-primary float-right" onclick="modTer()">Modifica Terapia</button>
       <form method="POST" action="../../applicationLogic/terapiaControlForm.php"><button type="submit" id="btnDelTer" name="action" value="delTer" class="btn btn-danger">Elimina Terapia</button></form>
     <?php } ?>
-    <?php if(count($terapia)==0){
-      echo("<button type='button' id='newTer' class='btn btn-primary' onclick=\"newTer()\">Nuova Terapia</button>");
-    } ?>
+    <?php if (count($terapia)==0) {
+				  	echo "<button type='button' id='newTer' class='btn btn-primary' onclick=\"newTer()\">Nuova Terapia</button>";
+				  } ?>
       <div id="formNewTer" style="width:50%;">
         <form method="POST" action="../../applicationLogic/terapiaControlForm.php">
-          <?php $dataCorr = date("d/m/Y"); ?>
+          <?php $dataCorr = date('d/m/Y'); ?>
           <label for="dataTer">Data</label>
           <div class="input-group date" id="reservationdate">
             <input type="text" name="dataTer" value="<?php echo $dataCorr; ?>" class="form-control" data-target="#reservationdate" readonly>

@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html>
 <?php
-    include "../../storage/DatabaseInterface.php";
-    include  "../../storage/Paziente.php";
-    include "../../plugins/libArray/FunArray.php";
-    include "../../applicationLogic/PazienteControl.php";session_start();
-    if(!isset($_SESSION["codiceFiscale"]) && !isset($_SESSION["tipo"])){
-        header("Location: ../utente/login.php");
-        exit();
-    }
-    elseif($_SESSION["tipo"]!="paziente"){
-        header("Location: ../utente/login.php");
-        exit();
-    }
-    $paziente=PazienteControl::getPaz($_SESSION["codiceFiscale"]);
-    if(!$paziente->getVideo()){
-        header("Location: indexPaziente.php");
-        exit();
-    }
-    $img=$paziente->getFotoProfiloPaz();
-        ?>
+	include '../../storage/DatabaseInterface.php';
+	include '../../storage/Paziente.php';
+	include '../../plugins/libArray/FunArray.php';
+	include '../../applicationLogic/PazienteControl.php'; session_start();
+	if (!isset($_SESSION['codiceFiscale']) && !isset($_SESSION['tipo'])) {
+		header('Location: ../utente/login.php');
+		exit();
+	} elseif ($_SESSION['tipo']!='paziente') {
+		header('Location: ../utente/login.php');
+		exit();
+	}
+	$paziente=PazienteControl::getPaz($_SESSION['codiceFiscale']);
+	if (!$paziente->getVideo()) {
+		header('Location: indexPaziente.php');
+		exit();
+	}
+	$img=$paziente->getFotoProfiloPaz();
+		?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -75,11 +74,11 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paziente->getNome() ." ". $paziente->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paziente->getNome() . ' ' . $paziente->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -163,7 +162,9 @@
 
         <!-- Main content -->
         <section class="content">
-            <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+            <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
+			echo $_SESSION['eccezione'];
+		} ?></span>
             <div class="col-lg-12">
             <!-- Default box -->
             <div class="card card-primary">
@@ -199,7 +200,7 @@
 </div>
 <!-- ./wrapper -->
 <script>
-        iniziaChiamata("<?php echo md5($paziente->getCognome().$paziente->getNome()); ?>");
+        iniziaChiamata("<?php echo md5($paziente->getCognome() . $paziente->getNome()); ?>");
 
 </script>
 </body>

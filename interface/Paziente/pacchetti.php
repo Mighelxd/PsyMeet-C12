@@ -1,22 +1,22 @@
 <?php
 
-include ("../../plugins/libArray/FunArray.php");
-include "../../storage/Paziente.php";
-include ("../../storage/DatabaseInterface.php");
-include "../../applicationLogic/PazienteControl.php";
-include "../../applicationLogic/PacchettoControl.php";
-include "../../applicationLogic/AreaInformativaControl.php";
-include "../../storage/scelta.php";
-include "../../storage/Pacchetto.php";
-include "../../storage/Professionista.php";
+include '../../plugins/libArray/FunArray.php';
+include '../../storage/Paziente.php';
+include '../../storage/DatabaseInterface.php';
+include '../../applicationLogic/PazienteControl.php';
+include '../../applicationLogic/PacchettoControl.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+include '../../storage/scelta.php';
+include '../../storage/Pacchetto.php';
+include '../../storage/Professionista.php';
 
 
 session_start();
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "paziente"){
-    header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'paziente') {
+	header('Location: ../Utente/login.php');
 }
-$cfPaziente = $_SESSION["codiceFiscale"];
+$cfPaziente = $_SESSION['codiceFiscale'];
 
 
 
@@ -28,13 +28,13 @@ $paz = PazienteControl::getPaz($cfPaziente);
 
 $img=base64_encode($paz->getFotoProfiloPaz());
 
-if(isset($_POST["cfProfessionista"])){
-    $cfProf = $_POST["cfProfessionista"];
-    $_SESSION["cfProf"] = $cfProf;
+if (isset($_POST['cfProfessionista'])) {
+	$cfProf = $_POST['cfProfessionista'];
+	$_SESSION['cfProf'] = $cfProf;
 }
 
-if(isset($cfProf) == NULL){
-    $cfProf = $_SESSION["cfProf"];
+if (isset($cfProf) == null) {
+	$cfProf = $_SESSION['cfProf'];
 }
 
 
@@ -102,11 +102,11 @@ to get the desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -209,7 +209,9 @@ to get the desired effect
                                     <button type="button" class="btn btn-primary" name="button">Aggiungi</button>
                                   </div> -->
                             </div>
-                            <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+                            <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
+	echo $_SESSION['eccezione'];
+} ?></span>
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
@@ -221,19 +223,15 @@ to get the desired effect
                                     </tr>
                                     </thead>
 
-                                    <?php  if($pacchettoByProf !=NULL){
-                                        for($i=0;$i<count($pacchettoByProf);$i++){
-
-
-                                            $p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto());
-
-                                            ?>
+                                    <?php  if ($pacchettoByProf !=null) {
+	for ($i=0; $i<count($pacchettoByProf); $i++) {
+		$p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto()); ?>
                                             <form method="post" action="../../applicationLogic/PacchettoControlForm.php">
                                                 <input type="text" name="action" value="compraPacchetto" hidden="true">
                                                 <!--<input type="text" name="idPacchetto" value= <?php echo $p->getIdPacchetto(); ?> hidden="true"> -->
-                                                <input type="text" name="cfProf" value= <?php echo $cfProf;?> hidden>
-                                                <input type="text" name="cfPaz" value= <?php echo $cfPaziente;?> hidden>
-                                                <input type="text" name="idScelta" value= <?php echo $pacchettoByProf[$i]->getIdScelta();?> hidden>
+                                                <input type="text" name="cfProf" value= <?php echo $cfProf; ?> hidden>
+                                                <input type="text" name="cfPaz" value= <?php echo $cfPaziente; ?> hidden>
+                                                <input type="text" name="idScelta" value= <?php echo $pacchettoByProf[$i]->getIdScelta(); ?> hidden>
                                                 <tbody>
                                                 <tr>
                                                     <td >
@@ -242,7 +240,7 @@ to get the desired effect
                                                     <td >
                                                         <?php echo $p->getPrezzo(); ?>
                                                     </td>
-                                                    <td><?php echo $professionista->getNome() ." " . $professionista->getCognome();?></td>
+                                                    <td><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?></td>
                                                     <td>
                                                         <button type"submit"  class="btn btn-danger">compra Pacchetto</button>
                                                     </td>
@@ -250,10 +248,9 @@ to get the desired effect
                                                 </tbody>
                                             </form>
                                             <?php
-                                        }
-                                    }
-                                    else{
-                                        echo "<tbody>
+	}
+} else {
+										echo '<tbody>
                   <tr>
                     <td >
                         vuota
@@ -264,8 +261,8 @@ to get the desired effect
                     <td></td>
                   </tr>
 
-                  </tbody>";
-                                    } ?>
+                  </tbody>';
+									} ?>
                                 </table>
                             </div>
                         </div>

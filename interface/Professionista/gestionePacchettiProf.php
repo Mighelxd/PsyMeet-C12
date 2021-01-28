@@ -1,17 +1,17 @@
 <?php
 session_start();
- include ('../../storage/Pacchetto.php');
- include ('../../storage/scelta.php');
+ include '../../storage/Pacchetto.php';
+ include '../../storage/scelta.php';
  include '../../plugins/libArray/FunArray.php';
- include ('../../storage/DatabaseInterface.php');
-include "../../storage/Professionista.php";
-include "../../applicationLogic/AreaInformativaControl.php";
+ include '../../storage/DatabaseInterface.php';
+include '../../storage/Professionista.php';
+include '../../applicationLogic/AreaInformativaControl.php';
  include '../../applicationLogic/PacchettoControl.php';
 
- $tipoUtente= $_SESSION["tipo"];
- $cf=$_SESSION["codiceFiscale"];
- if($tipoUtente !="professionista"){
-   header("Location:../Utente/login.php");
+ $tipoUtente= $_SESSION['tipo'];
+ $cf=$_SESSION['codiceFiscale'];
+ if ($tipoUtente !='professionista') {
+ 	header('Location:../Utente/login.php');
  }
 $professionista = AreaInformativaControl::getProf($cf);
 $img=base64_encode($professionista->getImmagineProfessionista());
@@ -72,17 +72,16 @@ to get the desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php if ($img != NULL) {
-                        echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ;
-                    }
-                    else {
-                        echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
-                    }
+                    <?php if ($img != null) {
+	echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>';
+} else {
+	echo '<img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">';
+}
 
-                    ?>
+					?>
                 </div>
                 <div class="info">
-                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonaleProfessionista.php" class="d-block"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
             <!-- Sidebar Menu -->
@@ -144,7 +143,7 @@ to get the desired effect
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active"><?php echo $professionista->getNome() ." ". $professionista->getCognome(); ?></li>
+              <li class="breadcrumb-item active"><?php echo $professionista->getNome() . ' ' . $professionista->getCognome(); ?></li>
               <li class="breadcrumb-item active">Pacchetti</li>
             </ol>
           </div><!-- /.col -->
@@ -178,12 +177,9 @@ to get the desired effect
                   </tr>
                   </thead>
 
-                  <?php  if($pacchettoByProf !=NULL){
-                      for($i=0;$i<count($pacchettoByProf);$i++){
-
-                  
-                    $p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto());
-                    ?>
+                  <?php  if ($pacchettoByProf !=null) {
+						for ($i=0; $i<count($pacchettoByProf); $i++) {
+							$p=PacchettoControl::recuperaPacchetto($pacchettoByProf[$i]->getIdPacchetto()); ?>
                     <form method="post" action="../../applicationLogic/PacchettoControlForm.php">
                         <input type="text" name="action" value="delPacchetto" hidden="true">
                         <input type="text" name="idPacchetto" value= <?php echo $p->getIdPacchetto(); ?> hidden="true">
@@ -202,10 +198,9 @@ to get the desired effect
                   </tbody>
                    </form>
             <?php
-                 }
-               }
-                 else{
-                echo "<tbody>
+						}
+					} else {
+						echo '<tbody>
                   <tr>
                     <td >
                         vuota
@@ -216,8 +211,8 @@ to get the desired effect
                     <td></td>
                   </tr>
 
-                  </tbody>";
-              } ?>
+                  </tbody>';
+					} ?>
                 </table>
               </div>
             </div>
@@ -248,16 +243,16 @@ to get the desired effect
 
                       <select class="form-control" name="pac">
                       <?php
-                      if($pacchetto!=null){
-                      for($i=0;$i<count($pacchetto);$i++){ ?>
+					  if ($pacchetto!=null) {
+					  	for ($i=0; $i<count($pacchetto); $i++) { ?>
 
-                        <option><?php echo $pacchetto[$i]->getTipologia();?></option>
+                        <option><?php echo $pacchetto[$i]->getTipologia(); ?></option>
                 <?php }
-                      } ?>
+					  } ?>
                       </select>
-                      <span style="color:red;"><?php if(isset($_SESSION['Errore'])) {
-                           echo $_SESSION['Errore'];
-                      }           ?></span>
+                      <span style="color:red;"><?php if (isset($_SESSION['Errore'])) {
+					  	echo $_SESSION['Errore'];
+					  }           ?></span>
                     </div>
 
 
@@ -267,8 +262,12 @@ to get the desired effect
                     <button name='action' type="submit" value="addPacchetto" class="btn btn-primary" style="float: right">Aggiungi</button>
                   </div>
                 </form>
-                  <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])){echo $_SESSION['eccareaprof'];} ?></span>
-                  <span style="color:red"><?php if (isset($_SESSION['eccpac'])){echo $_SESSION['eccpac'];} ?></span>
+                  <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
+					  	echo $_SESSION['eccareaprof'];
+					  } ?></span>
+                  <span style="color:red"><?php if (isset($_SESSION['eccpac'])) {
+					  	echo $_SESSION['eccpac'];
+					  } ?></span>
               </div>
 
             </div>
