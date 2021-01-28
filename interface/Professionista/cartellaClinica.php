@@ -308,7 +308,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                       </div>
                       <div class="form-group">
                           <label for="umore">Qualità dell'umore</label>
-  	    				<input type="text" id="umore" pattern="[1-5]{1}" title="Il campo qualità dell'umore non rispetta il formato" name="umo" value="<?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaUmore() ?>" <?php if(!isset($cartellaClinica)){ ?>placeholder="scrivi...." <?php } ?> required>
+  	    				<input type="text" id="umore" name="umo" value="<?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaUmore() ?>" <?php if(!isset($cartellaClinica)){ ?>placeholder="scrivi...." <?php } ?> required>
                       </div>
                       <div class="form-group">
                           <label for="patologia">Patologie pregresse psichiche/fisiche</label>
@@ -316,7 +316,7 @@ $img=base64_encode($professionista->getImmagineProfessionista());
                       </div>
                       <div class="form-group">
                           <label for="relazioni">Qualità relazioni affettive</label>
-  	    				<input type="text" id="relazioni" name="relaz" value="<?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaRealazioni() ?>" placeholder="Un numero da 0 a 5" pattern="[0-5]{1}" title="Un numero da 0 a 5"required>
+  	    				<input type="text" id="relazioni" name="relaz" value="<?php if(isset($cartellaClinica)) echo $cartellaClinica->getQualitaRealazioni() ?>" placeholder="Un numero da 0 a 5" required>
                     </div>
                     </div>
                   </div>
