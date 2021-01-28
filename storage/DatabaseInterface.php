@@ -51,10 +51,10 @@ declare(strict_types=1);
 				echo $e->getMessage();
 			}
 			$update = "UPDATE $tablename SET ";
-			if (gettype($obj[FunArray::array_key_first($obj)] == 'string')) {
-				$where = 'WHERE ' . FunArray::array_key_first($obj) . ' = ' . "'" . $obj[FunArray::array_key_first($obj)] . "'";
+			if (gettype($obj[FunArray::arrayKeyFirst($obj)] == 'string')) {
+				$where = 'WHERE ' . FunArray::arrayKeyFirst($obj) . ' = ' . "'" . $obj[FunArray::arrayKeyFirst($obj)] . "'";
 			} else {
-				$where = 'WHERE ' . FunArray::array_key_first($obj) . ' = ' . $obj[FunArray::array_key_first($obj)];
+				$where = 'WHERE ' . FunArray::arrayKeyFirst($obj) . ' = ' . $obj[FunArray::arrayKeyFirst($obj)];
 			}
 			foreach ($obj as $key => $value) {
 				if (gettype($value) == 'string') {
@@ -80,10 +80,10 @@ declare(strict_types=1);
 				echo $e->getMessage();
 			}
 			$select = "SELECT * FROM $tablename ";
-			if (gettype($array[FunArray::array_key_first($array)]) == 'string') {
-				$where = 'WHERE ' . FunArray::array_key_first($array) . ' = ' . '"' . $array[FunArray::array_key_first($array)] . '"';
+			if (gettype($array[FunArray::arrayKeyFirst($array)]) == 'string') {
+				$where = 'WHERE ' . FunArray::arrayKeyFirst($array) . ' = ' . '"' . $array[FunArray::arrayKeyFirst($array)] . '"';
 			} else {
-				$where = 'WHERE ' . FunArray::array_key_first($array) . ' = ' . $array[FunArray::array_key_first($array)];
+				$where = 'WHERE ' . FunArray::arrayKeyFirst($array) . ' = ' . $array[FunArray::arrayKeyFirst($array)];
 			}
 			$result = $connection->query($select . $where);
 			DatabaseConnector::close($connection);
@@ -102,10 +102,10 @@ declare(strict_types=1);
 			$select = "SELECT * FROM $tablename ";
 			$where = 'WHERE ';
 			if (count($array) == 1) {
-				if (gettype($array[FunArray::array_key_first($array)] == 'string')) {
-					$where .= FunArray::array_key_first($array) . ' = ' . '"' . $array[FunArray::array_key_first($array)] . '"';
+				if (gettype($array[FunArray::arrayKeyFirst($array)] == 'string')) {
+					$where .= FunArray::arrayKeyFirst($array) . ' = ' . '"' . $array[FunArray::arrayKeyFirst($array)] . '"';
 				} else {
-					$where .= FunArray::array_key_first($array) . ' = ' . $array[FunArray::array_key_first($array)];
+					$where .= FunArray::arrayKeyFirst($array) . ' = ' . $array[FunArray::arrayKeyFirst($array)];
 				}
 			} else {
 				foreach ($array as $att_name => $att) {
