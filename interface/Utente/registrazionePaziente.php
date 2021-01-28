@@ -155,7 +155,9 @@
           </div>
         </div>
       </form>
-        <?php if(isset($_SESSION['eccregpaz'])){echo $_SESSION['eccregpaz'];} ?>
+        <?php if (isset($_SESSION['eccregpaz'])) {
+	echo $_SESSION['eccregpaz'];
+} ?>
 
       <a href="login.php" class="text-center">Sei già registrato? Effettua il Login</a>
     </div>
