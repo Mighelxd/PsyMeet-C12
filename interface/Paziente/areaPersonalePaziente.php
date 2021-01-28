@@ -6,19 +6,19 @@
 * Versione: 0.2
 * 2020 Copyright by PsyMeet - University of Salerno
 */
-include "../../storage/Paziente.php";
-include ("../../storage/DatabaseInterface.php");
-include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/PazienteControl.php";
+include '../../storage/Paziente.php';
+include '../../storage/DatabaseInterface.php';
+include '../../plugins/libArray/FunArray.php';
+include '../../applicationLogic/PazienteControl.php';
 
 
 
 session_start();
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "paziente"){
-  header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'paziente') {
+	header('Location: ../Utente/login.php');
 }
-$cfPaziente = $_SESSION["codiceFiscale"];
+$cfPaziente = $_SESSION['codiceFiscale'];
 
 $paz = PazienteControl::getPaz($cfPaziente);
 
@@ -78,11 +78,11 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
        <!-- Sidebar user panel (optional) -->
        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
          <div class="image">
-           <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+           <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
          </div>
          <div class="info">
-           <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+           <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
          </div>
        </div>
 
@@ -183,11 +183,11 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
                  <div class="text-center">
 
 
-                        <?php echo '<img class="profile-user-img img-fluid img-circle" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                        <?php echo '<img class="profile-user-img img-fluid img-circle" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                  </div>
 
-                 <h3 class="profile-username text-center"><?php echo $paz->getNome() ." " .$paz->getCognome(); ?></h3>
+                 <h3 class="profile-username text-center"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?></h3>
 
                  <p class="text-muted text-center">Data di nascita: <?php echo $paz->getDataNascita(); ?></p>
 
@@ -305,7 +305,9 @@ $paz = new Paziente($arr[0], $arr[1], $arr[2], $arr[3], $arr[4], $arr[5], $arr[6
                  </div>
                    </form>
 
-                    <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+                    <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
+ 	echo $_SESSION['eccezione'];
+ } ?></span>
                    </div>
                    <!-- /.tab-pane -->
 

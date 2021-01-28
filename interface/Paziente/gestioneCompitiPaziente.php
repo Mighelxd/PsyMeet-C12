@@ -2,22 +2,22 @@
 
 
 
-include ('../../storage/Compito.php');
-include ('../../storage/DatabaseInterface.php');
+include '../../storage/Compito.php';
+include '../../storage/DatabaseInterface.php';
 include '../../plugins/libArray/FunArray.php';
 include '../../applicationLogic/CompitoControl.php';
-include "../../storage/Paziente.php";
-include "../../applicationLogic/PazienteControl.php";
+include '../../storage/Paziente.php';
+include '../../applicationLogic/PazienteControl.php';
 
 
 session_start();
-$tipoUtente = $_SESSION["tipo"];
-if($tipoUtente != "paziente"){
-  header("Location: ../Utente/login.php");
+$tipoUtente = $_SESSION['tipo'];
+if ($tipoUtente != 'paziente') {
+	header('Location: ../Utente/login.php');
 }
 
 
-$cfPaziente = $_SESSION["codiceFiscale"];
+$cfPaziente = $_SESSION['codiceFiscale'];
 $paz = PazienteControl::getPaz($cfPaziente);
 $img=base64_encode($paz->getFotoProfiloPaz());
 
@@ -101,11 +101,11 @@ $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -200,9 +200,9 @@ $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
 
 
       <?php
-      if($compito != null){
-       for($i=0; $i<count($compito); $i++) {
-        ?>
+	  if ($compito != null) {
+	  	for ($i=0; $i<count($compito); $i++) {
+	  		?>
 
       <form  name="formSvolg" method="post" enctype="application/x-www-form-urlencoded" action="../../applicationLogic/CorrCompControl.php">
           <input type="text" name="action" value="doComp" hidden="true">
@@ -240,9 +240,9 @@ $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
                 </div>
 
                 <?php
-                $effett=$compito[$i]->getEffettuato();
-                if($effett=="1"){
-                  ?>
+				$effett=$compito[$i]->getEffettuato();
+	  		if ($effett=='1') {
+	  			?>
 
                 <div class="form-group">
                   <label for="effettuato">Effettuato</label>
@@ -250,15 +250,16 @@ $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
                 </div>
 
               <?php
-            } else {
-             ?>
+			} else {
+				?>
 
                   <div class="form-group">
                     <label for="effettuato">Effettuato</label>
                     <input type="checkbox" name="effettuato" class="form-control" rows="1" disabled>
                   </div>
 
-            <?php }  ?>
+            <?php
+			} ?>
 
 
                   <input type="submit" value="Svolgi Compito" class="btn btn-success float-right" >
@@ -273,9 +274,12 @@ $compito = CompitoControl::selectAllCompitiPaz($cfPaziente);
           </div>
 
             </form>
-  <?php  }
-      } ?>
-        <span style="color:red"><?php if(isset($_SESSION['eccComp'])){echo $_SESSION['eccComp'];} ?></span>
+  <?php
+	  	}
+	  } ?>
+        <span style="color:red"><?php if (isset($_SESSION['eccComp'])) {
+	  	echo $_SESSION['eccComp'];
+	  } ?></span>
   </div>
     </section>
 

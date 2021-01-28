@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 include '../../storage/professionista.php';
 include '../../storage/DatabaseInterface.php';

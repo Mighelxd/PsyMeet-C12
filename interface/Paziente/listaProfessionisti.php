@@ -1,13 +1,13 @@
 <?php
 session_start();
-include "../../storage/professionista.php";
-include ("../../storage/DatabaseInterface.php");
-include ("../../plugins/libArray/FunArray.php");
-include "../../applicationLogic/AreaInformativaControl.php";
-include "../../storage/Paziente.php";
-include "../../applicationLogic/PazienteControl.php";
+include '../../storage/professionista.php';
+include '../../storage/DatabaseInterface.php';
+include '../../plugins/libArray/FunArray.php';
+include '../../applicationLogic/AreaInformativaControl.php';
+include '../../storage/Paziente.php';
+include '../../applicationLogic/PazienteControl.php';
 
-$cfPaziente = $_SESSION["codiceFiscale"];
+$cfPaziente = $_SESSION['codiceFiscale'];
 $listProf = AreaInformativaControl::recuperaProfessionisti();
 $paz = PazienteControl::getPaz($cfPaziente);
 $img=base64_encode($paz->getFotoProfiloPaz());
@@ -59,11 +59,11 @@ $img=base64_encode($paz->getFotoProfiloPaz());
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -160,12 +160,13 @@ $img=base64_encode($paz->getFotoProfiloPaz());
       <div class="card card-solid">
         <div class="card-body pb-0">
           <div class="row d-flex align-items-stretch">
-              <?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?>
+              <?php if (isset($_SESSION['eccezione'])) {
+ 	echo $_SESSION['eccezione'];
+ } ?>
             <?php
-            if($listProf != null){
-            for ($i=0; $i < count($listProf); $i++) {
-              $img=base64_encode($listProf[$i]->getImmagineProfessionista());
-            ?>
+			if ($listProf != null) {
+				for ($i=0; $i < count($listProf); $i++) {
+					$img=base64_encode($listProf[$i]->getImmagineProfessionista()); ?>
 
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
               <div class="card bg-light">
@@ -175,7 +176,7 @@ $img=base64_encode($paz->getFotoProfiloPaz());
                 <div class="card-body pt-0">
                   <div class="row">
                     <div class="col-7">
-                      <h2 class="lead"><b><?php echo $listProf[$i]->getNome() ." ". $listProf[$i]->getCognome(); ?></b></h2>
+                      <h2 class="lead"><b><?php echo $listProf[$i]->getNome() . ' ' . $listProf[$i]->getCognome(); ?></b></h2>
                       <p class="text-muted text-sm"><b>About: </b> <?php echo $listProf[$i]->getEsperienze(); ?></p>
                       <ul class="ml-4 mb-0 fa-ul text-muted">
                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: <?php echo $listProf[$i]->getIndirizzoStudio(); ?></li>
@@ -184,13 +185,11 @@ $img=base64_encode($paz->getFotoProfiloPaz());
                     </div>
                     <div class="col-5 text-center">
                       <?php
-                      if($img != NULL){
-                      echo '<img class="img-circle img-fluid" src="data:image/jpeg;base64,'.$img.'"/>';
-                      }
-                      else {
-                        echo '<img src="../../dist/img/user1-128x128.jpg" alt="" class="img-circle img-fluid">';
-                      }
-                    ?>
+					  if ($img != null) {
+					  	echo '<img class="img-circle img-fluid" src="data:image/jpeg;base64,' . $img . '"/>';
+					  } else {
+					  	echo '<img src="../../dist/img/user1-128x128.jpg" alt="" class="img-circle img-fluid">';
+					  } ?>
                       <!--<img src="../../dist/img/user1-128x128.jpg" alt="" class="img-circle img-fluid">-->
                     </div>
                   </div>
@@ -204,7 +203,7 @@ $img=base64_encode($paz->getFotoProfiloPaz());
 
 
                     <form class="" action="schedaProfessionista.php" method="post">
-                      <input type="text" name="codFiscaleProf" value="<?php echo $listProf[$i]->getCfProf();  ?>" hidden ="true">
+                      <input type="text" name="codFiscaleProf" value="<?php echo $listProf[$i]->getCfProf(); ?>" hidden ="true">
                         <button type="submit" class="btn btn-primary float-right" name="button" style="background-color: #007bff; border-color: #007bff;">
                             <i class="nav-icon fas fa-table">
                               View Profile
@@ -216,8 +215,9 @@ $img=base64_encode($paz->getFotoProfiloPaz());
                 </div>
               </div>
             </div>
-          <?php }
-            } ?>
+          <?php
+				}
+			} ?>
 
           </div>
         </div>

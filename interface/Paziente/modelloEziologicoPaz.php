@@ -5,21 +5,21 @@ include '../../storage/DatabaseInterface.php';
 include '../../storage/SchedaAssessmentFocalizzato.php';
 include '../../storage/Episodio.php';
 include '../../applicationLogic/SeduteControl.php';
-include "../../storage/SchedaPrimoColloquio.php";
-include "../../storage/SchedaModelloEziologico.php";
-include "../../storage/SchedaFollowUp.php";
-include "../../storage/SchedaAssessmentGeneralizzato.php";
-include "../../applicationLogic/terapiaControl.php";
-include "../../storage/Paziente.php";
-include "../../applicationLogic/PazienteControl.php";
+include '../../storage/SchedaPrimoColloquio.php';
+include '../../storage/SchedaModelloEziologico.php';
+include '../../storage/SchedaFollowUp.php';
+include '../../storage/SchedaAssessmentGeneralizzato.php';
+include '../../applicationLogic/terapiaControl.php';
+include '../../storage/Paziente.php';
+include '../../applicationLogic/PazienteControl.php';
 
 
 $tipoUtente = $_SESSION['tipo'];
 
 if ($tipoUtente != 'paziente') {
-    header('Location: ../Utente/login.php');
+	header('Location: ../Utente/login.php');
 }
-$cfPaziente = $_SESSION["codiceFiscale"];
+$cfPaziente = $_SESSION['codiceFiscale'];
 
 $paz = PazienteControl::getPaz($cfPaziente);
 
@@ -75,11 +75,11 @@ $img=base64_encode($paz->getFotoProfiloPaz());
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,'.$img.'"/>' ?>
+                    <?php echo '<img class="img-circle elevation-2" src="data:image/jpeg;base64,' . $img . '"/>' ?>
 
                 </div>
                 <div class="info">
-                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() ." ". $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
+                    <a href="areaPersonalePaziente.php" class="d-block"><?php echo $paz->getNome() . ' ' . $paz->getCognome(); ?> <i class="nav-icon fas fa-book-open" style="padding-left: 2%;" ></i></a>
                 </div>
             </div>
 
@@ -178,19 +178,27 @@ $img=base64_encode($paz->getFotoProfiloPaz());
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputDescription">Fattori Causativi</label>
-                                    <textarea id="inputDescription" class="form-control" rows="4" readonly> <?php if(isset($_SESSION['fc'])){echo $_SESSION['fc'];} ?> </textarea>
+                                    <textarea id="inputDescription" class="form-control" rows="4" readonly> <?php if (isset($_SESSION['fc'])) {
+	echo $_SESSION['fc'];
+} ?> </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputDescription">Fattori Precipitanti</label>
-                                    <textarea id="inputDescription" class="form-control" rows="4" readonly><?php if(isset($_SESSION['fp'])){echo $_SESSION['fp'];} ?></textarea>
+                                    <textarea id="inputDescription" class="form-control" rows="4" readonly><?php if (isset($_SESSION['fp'])) {
+	echo $_SESSION['fp'];
+} ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputDescription">Fattori Mantenimento</label>
-                                    <textarea id="inputDescription" class="form-control" rows="4" readonly><?php if(isset($_SESSION['fm'])){echo $_SESSION['fm'];} ?></textarea>
+                                    <textarea id="inputDescription" class="form-control" rows="4" readonly><?php if (isset($_SESSION['fm'])) {
+	echo $_SESSION['fm'];
+} ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputDescription">Relazione Finale</label>
-                                    <textarea id="inputDescription" class="form-control" rows="4" readonly><?php if(isset($_SESSION['rf'])){echo $_SESSION['rf'];} ?></textarea>
+                                    <textarea id="inputDescription" class="form-control" rows="4" readonly><?php if (isset($_SESSION['rf'])) {
+	echo $_SESSION['rf'];
+} ?></textarea>
                                 </div>
 
                             </div>
@@ -202,7 +210,9 @@ $img=base64_encode($paz->getFotoProfiloPaz());
                 </div>
 
             </div>
-            <span style="color:red"><?php if(isset($_SESSION['eccezione'])){echo $_SESSION['eccezione'];} ?></span>
+            <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
+	echo $_SESSION['eccezione'];
+} ?></span>
         </section>
         <!-- /.content -->
     </div>

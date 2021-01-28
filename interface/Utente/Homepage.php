@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 include '../../storage/DatabaseInterface.php';
 include '../../storage/Professionista.php';
 include '../../applicationLogic/AreaInformativaControl.php';
