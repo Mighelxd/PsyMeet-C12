@@ -31,7 +31,7 @@ class TerapiaTest extends TestCase
     public function testSetCf_Prof()
     {
         $ter = new Terapia(1,"2021-01-21","desc","RSSSDR80A01F839S","BNCSDR80A01F839S");
-        $ter ->setCf_Prof("RSSSDR80A01F839B");
+        $ter ->setCfProf("RSSSDR80A01F839B");
         self::assertEquals("RSSSDR80A01F839B",$ter ->getCfProf());
     }
 
