@@ -21,10 +21,10 @@ if ($_POST['action'] == 'ModificaPaziente') {
 		$result = PazienteControl::updateSchedaPaziente($cfPaziente, $telefonoPaz, $indirizzoPaz, $emailPaz, $passwordPaz, $istruzionePaz);
 
 
-		if ($result) {
+		if (gettype($result)=='boolean') {
 			header('Location: ../interface/Paziente/areaPersonalePaziente.php');
 		} else {
-			throw new Exception('Errore: Modifiche non effettuate!');
+			throw new Exception($result);
 		}
 	} catch (Exception $e) {
 		$_SESSION['eccezione']=$e->getMessage();
@@ -41,10 +41,10 @@ if ($_POST['action'] == 'ModificaPaziente') {
 		$res = PazienteControl::updateFotoProfilo($cfPaziente, $immagine);
 
 
-		if ($res) {
+		if (gettype($res)=='boolean') {
 			header('Location: ../interface/Paziente/areaPersonalePaziente.php');
 		} else {
-			throw new Exception('Errore: Modifica foto non effettuate!');
+			throw new Exception($res);
 		}
 
 	} catch (Exception $e) {

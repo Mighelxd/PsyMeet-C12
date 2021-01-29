@@ -23,8 +23,7 @@ class pazienteControl
 
 			return $paz;
 		} catch (Exception $e) {
-			$_SESSION['eccezione']=$e->getMessage();
-			return null;
+            return $e->getMessage();
 		}
 	}
 
@@ -41,8 +40,7 @@ class pazienteControl
 			}
 			return $arrayPazienti;
 		} catch (Exception $e) {
-			$_SESSION['eccezione']=$e->getMessage();
-			return null;
+            return $e->getMessage();
 		}
 	}
 
@@ -63,8 +61,7 @@ class pazienteControl
 			}
 			return $arrayPazienti;
 		} catch (Exception $e) {
-			$_SESSION['eccezione']=$e->getMessage();
-			return null;
+            return $e->getMessage();
 		}
 	}
 
@@ -106,8 +103,7 @@ class pazienteControl
 			return true;
 
 		} catch (Exception $e) {
-			$_SESSION['eccezione']=$e->getMessage();
-			return $e->getMessage();
+            return $e->getMessage();
 		}
 	}
 
