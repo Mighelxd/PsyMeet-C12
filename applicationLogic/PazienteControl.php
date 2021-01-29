@@ -23,7 +23,8 @@ class pazienteControl
 
 			return $paz;
 		} catch (Exception $e) {
-            return $e->getMessage();
+            $_SESSION['eccezione']= $e->getMessage();
+            return null;
 		}
 	}
 
