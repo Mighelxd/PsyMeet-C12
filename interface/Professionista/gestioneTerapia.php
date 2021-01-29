@@ -42,7 +42,11 @@ if (isset($_POST['codFiscalePaz'])) {
 $professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($professionista->getImmagineProfessionista());
 
-$terapia = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
+if (isset($cfPazienteTer)) {
+    $terapia = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
+} else {
+    header('Location: Pazienti.php');
+}
 
 /*if(count($listTerapie) > 0 ){
   for($i=0;$i<count($listTerapie);$i++){

@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /*
 * Pazienti
 * Questa View fornisce tutti gli elementi grafici della home page relativa alla lista di pazienti

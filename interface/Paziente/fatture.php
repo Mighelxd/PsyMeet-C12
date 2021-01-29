@@ -241,8 +241,8 @@ $pacchetti = PacchettoControl::selectAllPacchettoPaz($cf);
         <?php
 	}
 } ?>
-        <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
-	echo $_SESSION['eccezione'];
+        <span style="color:red"><?php if (isset($_SESSION['eccezioneFatture'])) {
+	echo $_SESSION['eccezioneFatture'];
 } ?></span>
     </section>
 

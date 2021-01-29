@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 /*
 	* DatabaseInterface
 	* Questa classe fornisce tutti i metodi per effettuare query sul DB

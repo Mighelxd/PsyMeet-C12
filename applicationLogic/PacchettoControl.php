@@ -101,8 +101,8 @@ class PacchettoControl
 			}
 			return $fatture;
 		} catch (Exception $e) {
-			echo 'sono in eccezione ' . $e->getMessage();
-			$_SESSION['eccezione']=$e->getMessage();
+			//echo 'sono in eccezione ' . $e->getMessage();
+			$_SESSION['eccezioneFatture']=$e->getMessage();
 			return null;
 		}
 	}
@@ -111,7 +111,7 @@ class PacchettoControl
 	public static function getFatturaByPazProf($cfPaz, $cfProf)
 	{
 		$fattAtt=null;
-		$fatts = null;
+		//$fatts = null;
 		$fatts=self::getFatture($cfPaz);
 		$scelte=self::selectAllPacchettoProf($cfProf);
 		if ($fatts!= null) {

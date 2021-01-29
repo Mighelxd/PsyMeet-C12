@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /*
  * Gestione pacchetto
  * Questa classe contiene le informazioni relative all'oggetto fattura

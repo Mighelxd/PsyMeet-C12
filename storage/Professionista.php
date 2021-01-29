@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 class Professionista
 {
 	public static $tableName='professionista';
@@ -43,11 +43,11 @@ class Professionista
 		$polRc,
 		$img
 	) {
-		if ($cf == null || $n == null || $c == null || $date == null || $e == null || $tel == null
+		/*if ($cf == null || $n == null || $c == null || $date == null || $e == null || $tel == null
 			|| $cell == null || $pass == null || $indiSt == null || $esp == null || $pub == null || $titSt == null
 			|| $nIsc == null || $pIva == null || $p == null || $polRc == null) {
 			throw new Exception('Alcuni valori non definiti!');
-		} elseif (strlen($n)<2 || strlen($n)>50) {
+		} else*/if (strlen($n)<2 || strlen($n)>50) {
 			throw new Exception('Il campo Nome non rispetta la lunghezza');
 		} elseif (!preg_match('/^[A-Z a-z]+$/', $n)) {
 			throw new Exception('Nome non rispetta il formato previsto');
@@ -75,7 +75,7 @@ class Professionista
 			throw new Exception('Partita Iva non rispetta la lunghezza prevista!');
 		} elseif (!preg_match('/^[A-Za-z0-9]{11}+$/', $pIva)) {
 			throw new Exception('Partita iva non rispetta il formatoprevisto');
-		} elseif (!preg_match('/^[A-Z a-z 0-9 \\s , àòèéùì]+$/', $indiSt)) {
+		} elseif (!preg_match('/^[A-Za-z0-9\s,.àòèéùì]+$/', $indiSt)) {
 			throw new Exception('Il campo indirizzo studio non rispetta il formato');
 		} elseif (strlen($e)<3 || strlen($e)>50) {
 			throw new Exception('Email non rispetta la lunghezza prevista');
@@ -101,11 +101,11 @@ class Professionista
 			throw new Exception('Numero iscrizione albo non rispetta la lunghezza prevista');
 		} elseif (strlen($spec)<2 || strlen($spec)>500) {
 			throw new Exception('Il campo Specializzazione non rispetta la lunghezza');
-		} elseif (!preg_match('`^[A-Za-z0-9/]+$`', $nIsc)) {
+		} elseif (!preg_match('`^[A-Za-z0-9\s,.]+$`', $nIsc)) {
 			throw new Exception('Il campo Numero Iscrizione Albo non rispetta il formato');
-		} elseif (!preg_match('/^[A-Za-z0-9\\s]+$/', $polRc)) {
+		} elseif (!preg_match('/^[A-Za-z0-9\s]+$/', $polRc)) {
 			throw new Exception('Polizza RC non rispetta il formato previsto');
-		} elseif (!preg_match('/^[A-Z a-z , .]+$/', $esp)) {
+		} elseif (!preg_match('/^[A-Z a-z\s,.]+$/', $esp)) {
 			throw new Exception('Il campo Esperienze Professionali non rispetta il formato');
 		}
 		$this->cfProf=$cf;

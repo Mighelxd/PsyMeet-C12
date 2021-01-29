@@ -209,9 +209,12 @@ to get the desired effect
                                     <button type="button" class="btn btn-primary" name="button">Aggiungi</button>
                                   </div> -->
                             </div>
-                            <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
-	echo $_SESSION['eccezione'];
+                            <span style="color:red"><?php if (isset($_SESSION['eccpac'])) {
+	echo $_SESSION['eccpac'];
 } ?></span>
+                            <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
+                                    echo $_SESSION['eccareaprof'];
+                                } ?></span>
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
@@ -250,7 +253,7 @@ to get the desired effect
                                             <?php
 	}
 } else {
-										echo '<tbody>
+	echo '<tbody>
                   <tr>
                     <td >
                         vuota
@@ -262,7 +265,7 @@ to get the desired effect
                   </tr>
 
                   </tbody>';
-									} ?>
+} ?>
                                 </table>
                             </div>
                         </div>
