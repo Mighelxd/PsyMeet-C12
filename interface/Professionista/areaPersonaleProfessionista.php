@@ -273,7 +273,7 @@ $img=base64_encode($Professionista->getImmagineProfessionista());
 					      <div class="form-group row">
                         <label for="indirizzoFisico" class="col-sm-2 col-form-label">Indirizzo studio</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="indirizzoFisico" placeholder="Indirizzo fisico" name="IndirizzoStudio" pattern="[A-Z a-z 0-9 ']{2,250}" title="Da 2 a 250 caratteri Alfanumerici(Apostrofi Consentiti)">
+                          <input type="text" class="form-control" id="indirizzoFisico" placeholder="Indirizzo fisico" name="IndirizzoStudio" pattern="[A-Za-z0-9,.']+{2,250}" title="Da 2 a 250 caratteri Alfanumerici(Apostrofi Consentiti)">
                         </div>
                       </div>
                       <div class="form-group row">

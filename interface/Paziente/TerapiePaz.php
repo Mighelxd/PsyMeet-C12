@@ -189,6 +189,7 @@ $terapie = terapiaControl::getTerapiePaz($cf);
                                 <i class="fas fa-minus"></i></button>
                         </div>
                     </div>
+        <?php if ($modEz!=null) { ?>
                     <div class="card-body p-0">
                         <table class="table table-striped projects">
                             <thead>
@@ -246,7 +247,7 @@ $terapie = terapiaControl::getTerapiePaz($cf);
                             </tbody>
                         </table>
                     </div>
-                    <?php
+                    <?php }
 	} ?>
                     <!-- /.card-body -->
                 </div>
