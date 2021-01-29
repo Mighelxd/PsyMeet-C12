@@ -172,8 +172,8 @@ $terapie = terapiaControl::getTerapiePaz($cf);
 
         <!-- Main content -->
         <section class="content">
-            <span style="color:red"><?php if (isset($_SESSION['eccezione'])) {
-	echo $_SESSION['eccezione'];
+            <span style="color:red"><?php if (isset($_SESSION['eccTer'])) {
+	echo $_SESSION['eccTer'];
 } ?></span>
             <?php if (count($terapie)>0) {
 	for ($i=0; $i<count($terapie); $i++) {
