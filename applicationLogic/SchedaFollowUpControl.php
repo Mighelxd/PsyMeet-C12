@@ -4,7 +4,7 @@
 * SchedaFollowUpControl
 * Questa Control fornisce tutti i metodi relativi alla scheda follow up
 * Autore: Francesco Capone
-* Versione: 0.2
+* Versione: 1.0
 * 2020 Copyright by PsyMeet - University of Salerno
 */
 	include '../plugins/libArray/FunArray.php';
