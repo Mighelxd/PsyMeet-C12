@@ -1,12 +1,12 @@
 <?php
 
-/*
- * Gestione compiti
- * Questa classe contiene le informazioni relative all'oggetto compito
- * Autore: Mary Cerullo
- * Versione: 0.1
- * 2020 Copyright by PsyMeet - University of Salerno
-*/
+    /*
+     * Compito
+     * Questa classe contiene le informazioni relative all'oggetto Compito
+     * Autore: Cerullo Mary
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 
 /**
  * Class Compito
