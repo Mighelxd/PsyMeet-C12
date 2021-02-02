@@ -3,7 +3,7 @@
 /*
 * SchedaPrimoColloquioControl
 * Questa Control fornisce tutti i metodi relativi alla terapia
-* Autore: Marco Campione
+* Autore: Martino D'Auria
 * Versione: 1.0
 * 2020 Copyright by PsyMeet - University of Salerno
 */
@@ -18,7 +18,7 @@ class terapiaControl
      * Questo metodo permette di aggiungere una terapia
      * In caso di successo il metodo restituisce true
      * In caso di errore il metodo restituisce l'eccezione
-     * Autore:Marco Campione
+     * Autore:Martino D'Auria
      * Versione: 1.0
      * 2020 Copyright by PsyMeet - University of Salerno
      */
@@ -45,7 +45,7 @@ class terapiaControl
      * Questo metodo permette di modificare una terapia
      * In caso di successo il metodo restituisce true
      * In caso di errore il metodo restituisce l'eccezione
-     * Autore:Marco Campione
+     * Autore:Martino D'Auria
      * Versione: 1.0
      * 2020 Copyright by PsyMeet - University of Salerno
      */
@@ -77,7 +77,7 @@ class terapiaControl
     * Questo metodo permette di recuperare le schede
     * In caso di successo il metodo restituisce tutte le schede
     * In caso di errore il metodo restituisce l'array vuoto delle schede
-    * Autore:Marco Campione
+    * Autore:Martino D'auria
     * Versione: 1.0
     * 2020 Copyright by PsyMeet - University of Salerno
     */
@@ -128,7 +128,7 @@ class terapiaControl
     * Questo metodo permette di recuperare le terapie
     * In caso di successo il metodo restituisce tutte le terapie
     * In caso di errore il metodo restituisce l'array vuoto delle terapie
-    * Autore:Marco Campione
+    * Autore:Martino D'Auria
     * Versione: 1.0
     * 2020 Copyright by PsyMeet - University of Salerno
     */
@@ -157,7 +157,7 @@ class terapiaControl
    * Questo metodo permette di recuperare le terapie relative al paziente
    * In caso di successo il metodo restituisce tutte le terapie relative al paziente
    * In caso di errore il metodo restituisce l'array vuoto delle terapie relative al paziente
-   * Autore:Marco Campione
+   * Autore:Martino D'Auria
    * Versione: 1.0
    * 2020 Copyright by PsyMeet - University of Salerno
    */
@@ -186,7 +186,7 @@ class terapiaControl
   * Questo metodo permette di recuperare la scheda modello eziologico relativa al paziente
   * In caso di successo il metodo restituisce la scheda modello eziologico
   * In caso di errore il metodo restituisce null
-  * Autore:Marco Campione
+  * Autore:Martino D'Auria
   * Versione: 1.0
   * 2020 Copyright by PsyMeet - University of Salerno
   */
