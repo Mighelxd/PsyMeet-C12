@@ -1,35 +1,20 @@
 <?php
-
-
-/**
- * Class Pacchetto
- */
+/*
+    * Pacchetto
+    * Questa classe fornisce tutti i metodi per l'entita Pacchetto
+    * Autore: Giuseppe D'avino
+    * Versione: 0.1
+    * 2020 Copyright by PsyMeet - University of Salerno
+*/
 class Pacchetto
 {
 
-	/** @var string */
 	public static $tableName='pacchetto';
-
-	/** @var */
 	private $id_pacchetto;
-
-	/** @var */
 	private $n_sedute;
-
-	/** @var */
 	private $prezzo;
-
-	/** @var */
 	private $tipologia;
 
-
-	/**
-	 * Pacchetto constructor.
-	 * @param $id_pack
-	 * @param $n_sed
-	 * @param $price
-	 * @param $type
-	 */
 	public function __construct($id_pack, $n_sed, $price, $type)
 	{
 		if ($n_sed == null || $price == null || $type == null) {
@@ -45,53 +30,30 @@ class Pacchetto
 		$this->tipologia = $type;
 	}
 
-
-	/**
-	 * @property-read string $id_pacchetto
-	 * @method string getIdPacchetto()
-	 * @return mixed
-	 */
 	public function getIdPacchetto()
 	{
 		return $this->id_pacchetto;
 	}
 
-
-	/**
-	 * @return mixed
-	 */
 	public function getNSedute()
 	{
 		return $this->n_sedute;
 	}
 
-
-	/**
-	 * @return mixed
-	 */
 	public function getPrezzo()
 	{
 		return $this->prezzo;
 	}
 
-
-	/**
-	 * @return mixed
-	 */
 	public function getTipologia()
 	{
 		return $this->tipologia;
 	}
 
-
-	/**
-	 * @return array
-	 */
 	public function getArray()
 	{
 		return ['id_pacchetto' => $this->id_pacchetto, 'n_sedute' => $this->n_sedute, 'prezzo' => $this->prezzo, 'tipologia' => $this->tipologia];
 	}
-
 
 	public function setNSedute($n_sedute)
 	{
@@ -101,7 +63,6 @@ class Pacchetto
 		$this->n_sedute = $n_sedute;
 	}
 
-
 	public function setPrezzo($price)
 	{
 		if ($price==null || ($price != 50 && $price != 60 && $price!= 320 && $price!=500 && $price!=800)) {
@@ -109,7 +70,6 @@ class Pacchetto
 		}
 		$this->prezzo = $price;
 	}
-
 
 	public function setTipologia($tipologia)
 	{
