@@ -1,9 +1,9 @@
 <?php
 /*
     * Appuntamento 
-    * Questa classe fornisce tutti i metodi per l'entit� Appuntamento
+    * Questa classe fornisce tutti i metodi per Appuntamento
     * Autore: Marco Campione
-    * Versione: 0.1
+    * Versione: 1.0
     * 2020 Copyright by PsyMeet - University of Salerno 
 */
 class Appuntamento{
