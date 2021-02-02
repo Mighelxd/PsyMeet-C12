@@ -217,8 +217,8 @@ $img=base64_encode($paz->getFotoProfiloPaz());
            <!-- /.card-body -->
 
 
-           <?php if (isset($_SESSION['eccezione'])) {
- 	echo $_SESSION['eccezione'];
+           <?php if (isset($_SESSION['eccareaprof'])) {
+ 	echo $_SESSION['eccareaprof'];
  } ?>
        </div>
 

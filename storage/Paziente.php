@@ -4,7 +4,7 @@
  * Gestione Paziente
  * Questa classe contiene le informazioni relative all'oggetto Paziente
  * Autore: Giuseppe Ferrante
- * Versione: 0.2
+ * Versione: 1.0
  * 2020 Copyright by PsyMeet - University of Salerno
 */
 

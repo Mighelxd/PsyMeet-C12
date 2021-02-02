@@ -4,7 +4,7 @@
  * Gestione Terapia
  * Questa classe contiene le informazioni relative all'oggetto terapia
  * Autore: Martino D'Auria
- * Versione: 0.1
+ * Versione: 1.0
  * 2020 Copyright by PsyMeet - University of Salerno
  */
 class Terapia

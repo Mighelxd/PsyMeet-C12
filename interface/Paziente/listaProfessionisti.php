@@ -160,9 +160,9 @@ $img=base64_encode($paz->getFotoProfiloPaz());
       <div class="card card-solid">
         <div class="card-body pb-0">
           <div class="row d-flex align-items-stretch">
-              <?php if (isset($_SESSION['eccezione'])) {
- 	echo $_SESSION['eccezione'];
- } ?>
+              <?php if (isset($_SESSION['eccareaprof'])) {
+                  echo $_SESSION['eccareaprof'];
+              } ?>
             <?php
 			if ($listProf != null) {
 				for ($i=0; $i < count($listProf); $i++) {
