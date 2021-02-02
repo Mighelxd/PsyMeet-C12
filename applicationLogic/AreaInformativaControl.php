@@ -127,7 +127,7 @@ class AreaInformativaControl
      * Parametri: cfProf
      * Questo metodo serve a recuperare un professionista dal Database tramite il suo codice fiscale
      * ValoreDiRitorno: In caso di successo ritorna il professionista altrimenti ritorna null
-     * Autore: D'Avino Michele
+     * Autore: Giuseppe Ferrante
      * Versione: 1.0
      * 2020 Copyright by PsyMeet - University of Salerno
      */
@@ -150,7 +150,7 @@ class AreaInformativaControl
     * Parametri: cfPaziente
     * Questo metodo serve a recuperare un professionista dal Database tramite il codice fiscale di un suo paziente
     * ValoreDiRitorno: In caso di successo ritorna il professionista altrimenti ritorna null
-    * Autore: D'Avino Michele
+    * Autore: Giuseppe Ferrante
     * Versione: 1.0
     * 2020 Copyright by PsyMeet - University of Salerno
     */

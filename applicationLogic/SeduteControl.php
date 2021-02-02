@@ -1,13 +1,14 @@
 <?php
-
-
-//include '../../storage/Terapia.php';
-//session_start();
+/*
+    * SeduteControl
+    * Questa classe fornisce tutti i metodi per tutte le schede delle sedute e la videoconferenza
+    * Autore: Marco Campione
+    * Versione: 1.0
+    * 2020 Copyright by PsyMeet - University of Salerno
+*/
 
 class SeduteControl
 {
-	////////////////*scheda ass foc / episodi
-
 	public static function addSchedaFoc($data, $idTerapia)
 	{
         /*
