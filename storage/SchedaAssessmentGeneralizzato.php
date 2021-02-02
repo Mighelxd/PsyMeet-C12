@@ -4,7 +4,7 @@
  * Gestione Sedute
  * Questa classe contiene le informazioni relative all'oggetto scheda assessment generalizzato
  * Autore: Simone D'Ambrosio
- * Versione: 0.1
+ * Versione: 1.0
  * 2020 Copyright by PsyMeet - University of Salerno
  */
 class SchedaAssessmentGeneralizzato
