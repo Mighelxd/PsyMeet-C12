@@ -1,7 +1,24 @@
 <?php
 
+/*
+     * AreaInformativaControl
+     * Questa classe contiene le informazioni relative all'oggetto Professionista
+     * Autore: D'Avino Michele
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
+
 class AreaInformativaControl
 {
+    /*
+     * saveProf
+     * Parametri: codice_fiscale, nome, cognome, data_nascita, email, telefono, cellulare, password, indirizzo_studio, esperienze, pubblicazioni, titolo_studio, n_iscrizione_albo, p_iva, pec, specializzazione, polizza_rc, immagine
+     * Questo metodo serve a salvare un professionista nel Database
+     * ValoreDiRitorno: In caso di successo ritorna true altrimenti ritorna il messaggio di errore
+     * Autore: D'Avino Michele
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 	public static function saveProf(
 		$codice_fiscale,
 		$nome,
@@ -39,7 +56,15 @@ class AreaInformativaControl
 		}
 	}
 
-
+    /*
+     * savePaz
+     * Parametri: codiceFiscale, nome, cognome, dataNascita, email, telefono, password, indirizzo, istruzione, lavoro, diffCura, immagine
+     * Questo metodo serve a salvare un paziente nel Database
+     * ValoreDiRitorno: In caso di successo ritorna true altrimenti ritorna il messaggio di errore
+     * Autore: D'Avino Michele
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 	public static function savePaz(
 		$codiceFiscale,
 		$nome,
@@ -71,7 +96,15 @@ class AreaInformativaControl
 		return $result;
 	}
 
-
+    /*
+     * recuperaProfessionisti
+     * Parametri: //
+     * Questo metodo serve a recuperare tutti i professionisti dal Database
+     * ValoreDiRitorno: In caso di successo ritorna un array di professionisti altrimenti ritorna null
+     * Autore: D'Avino Michele
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 	public static function recuperaProfessionisti()
 	{
 		try {
@@ -89,7 +122,15 @@ class AreaInformativaControl
 		}
 	}
 
-
+    /*
+     * getProf
+     * Parametri: cfProf
+     * Questo metodo serve a recuperare un professionista dal Database tramite il suo codice fiscale
+     * ValoreDiRitorno: In caso di successo ritorna il professionista altrimenti ritorna null
+     * Autore: D'Avino Michele
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 	public static function getProf($cfProf)
 	{
 		try {
@@ -105,7 +146,15 @@ class AreaInformativaControl
 		}
 	}
 
-
+    /*
+    * getProfessionistByPaz
+    * Parametri: cfPaziente
+    * Questo metodo serve a recuperare un professionista dal Database tramite il codice fiscale di un suo paziente
+    * ValoreDiRitorno: In caso di successo ritorna il professionista altrimenti ritorna null
+    * Autore: D'Avino Michele
+    * Versione: 1.0
+    * 2020 Copyright by PsyMeet - University of Salerno
+    */
 	public static function getProfessionistByPaz($cfPaziente)
 	{
 		try {
@@ -127,7 +176,15 @@ class AreaInformativaControl
 		}
 	}
 
-
+    /*
+    * updateSchedaProfessionista
+    * Parametri: cf,telefono,cellulare,email,pass,titoloDiStudio,pubblicazioni,esperienze,indirizzoStudio
+    * Questo metodo serve ad aggiornare le informazioni del professionista nel Database
+    * ValoreDiRitorno: In caso di successo ritorna true altrimenti ritorna il messaggio di errore.
+    * Autore: D'Avino Michele
+    * Versione: 1.0
+    * 2020 Copyright by PsyMeet - University of Salerno
+    */
 	public static function updateSchedaProfessionista(
 		$cf,
 		$telefono,
@@ -185,7 +242,15 @@ class AreaInformativaControl
 		}
 	}
 
-
+    /*
+    * updateFotoProfessionista
+    * Parametri: cf,img
+    * Questo metodo serve ad aggiornare l'immagine del professionista nel Database
+    * ValoreDiRitorno: In caso di successo ritorna true altrimenti ritorna il messaggio di errore.
+    * Autore: D'Avino Michele
+    * Versione: 1.0
+    * 2020 Copyright by PsyMeet - University of Salerno
+    */
 	public static function updateFotoProfessionista($cf, $img)
 	{
 		try {
