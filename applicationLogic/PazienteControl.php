@@ -3,7 +3,7 @@
 * PazienteControl
 * Questa Control fornisce tutti i metodi relativi al paziente
 * Autore: Giuseppe Ferrante
-* Versione: 0.2
+* Versione: 1.0
 * 2020 Copyright by PsyMeet - University of Salerno
 */
 //include "../storage/Paziente.php";
@@ -13,6 +13,15 @@
 
 class pazienteControl
 {
+    /*
+     * getPaz
+     * codice fiscale del paziente da recuperare
+     * il metodo permette di recuperare il paziente con quel dato codice fiscale
+     * Restisce l'oggetto paziente in caso di successo e l'eccezione in caso di fallimento
+     * Autore: Giuseppe Ferrante
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 	public static function getPaz($cfPaziente)
 	{
 		try {
@@ -28,7 +37,15 @@ class pazienteControl
 		}
 	}
 
-
+    /*
+     * getListPaz
+     * nessun valore in input
+     * il metodo permette di recuperare la lista completa dei pazienti
+     * Restisce la lista di tutti i pazienti in caso di successo e l'eccezione in caso di fallimento
+     * Autore: Giuseppe Ferrante
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+      */
 	public static function getListPaz()
 	{
 		try {
@@ -44,8 +61,15 @@ class pazienteControl
             return $e->getMessage();
 		}
 	}
-
-
+    /*
+     * getPazientiByProf
+     * codice fiscale del professionista
+     * il metodo permette di recuperare tutti i pazienti assistiti da un dato professionista
+     * Restisce la lista dei pazienti assisti dal dato professionista in caso di successo e l'eccezione in caso di fallimento
+     * Autore: Giuseppe Ferrante
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 	public static function getPazientiByProf($cfProf)
 	{
 		try {
@@ -66,7 +90,15 @@ class pazienteControl
 		}
 	}
 
-
+    /*
+     * updateSchedaPaziente
+     * codice fiscale, telefono, indirizzo, email, password, istruzione del paziente
+     * il metodo permetti di modificare alcuni dati relativi al paziente
+     * Restisce true in caso di successo e l'eccezione in caso di fallimento
+     * Autore: Giuseppe Ferrante
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 	public static function updateSchedaPaziente($cf, $tell, $indirizzo, $email, $password, $istruzione)
 	{
 		try {
@@ -108,7 +140,15 @@ class pazienteControl
 		}
 	}
 
-
+    /*
+     * updateFotoProfilo
+     * codice fiscale del paziente e l'immagine da inserire
+     * il metodo permette di effettuare l'update della foto profilo del paziente
+     * Restisce true in caso di successo e l'eccezione in caso di fallimento
+     * Autore: Giuseppe Ferrante
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 	public static function updateFotoProfilo($cf, $img)
 	{
 		try {
