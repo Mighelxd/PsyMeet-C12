@@ -1,10 +1,10 @@
 <?php
 
 /*
- * Gestione Sedute
+ * Sedute
  * Questa classe contiene le informazioni relative all'oggetto scheda modello eziologico
- * Autore: Francesco Capone
- * Versione: 0.1
+ * Autore: Capone Francesco
+ * Versione: 1.0
  * 2020 Copyright by PsyMeet - University of Salerno
  */
 class SchedaModelloEziologico
