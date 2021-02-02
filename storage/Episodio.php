@@ -1,5 +1,11 @@
 <?php
-
+/*
+    * Episodio
+    * Questa classe fornisce tutti i metodi per episodio
+    * Autore: Marco Campione
+    * Versione: 1.0
+    * 2020 Copyright by PsyMeet - University of Salerno
+*/
 class Episodio
 {
 	public static $tableName='episodio';

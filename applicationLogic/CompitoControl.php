@@ -1,17 +1,13 @@
 <?php
 
 
-/*
-	* CompitoControl
-	* Questo control fornisce tutte le operazioni che si possono fare per il compito'
-	* Autore: Mary Cerullo
-	* Versione: 0.1
-	* 2020 Copyright by PsyMeet - University of Salerno
-*/
-
-
-
-//define('TABLE_NAME', 'compito');
+    /*
+     * Compito
+     * Questa classe contiene le operazioni relative all'oggetto Compito
+     * Autore: Cerullo Mary
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 
 
 /**
@@ -25,6 +21,17 @@ class CompitoControl
 	 * @param $cfProf
 	 * @return array
 	 */
+
+    /*
+     * NomeMetodo selectAllCompitiProf
+     * Parametri $cfProf
+     * Desc metodo che consente di recuperare tutti i compiti di un professionista
+     * ValoreDiRitorno in caso di successo ritorna l'arrey contenente la lista dei compiti, in caso di insuccesso ritorna il messaggio di errore
+     * Autore: Cerullo Mary
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
+
 	public static function selectAllCompitiProf($cfProf)
 	{
 		try {
@@ -45,8 +52,17 @@ class CompitoControl
 	}
 
 
-	// metodo aggiunto per selezionare tutti i compiti relativi al paziente
 
+
+    /*
+     * NomeMetodo selectAllCompitiPaz
+     * Parametri $cfPaz
+     * Desc metodo che consente di recuperare tutti i compiti di un paziente
+     * ValoreDiRitorno in caso di successo ritorna l'arrey contenente la lista dei compiti, in caso di insuccesso ritorna il messaggio di errore
+     * Autore: Cerullo Mary
+     * Versione: 1.0
+     * 2020 Copyright by PsyMeet - University of Salerno
+     */
 
 	/**
 	 * @param $cfPaz
@@ -72,6 +88,17 @@ class CompitoControl
 	}
 
 
+
+    /*
+    * NomeMetodo addComp
+    * Parametri: $data, $titolo, $descrizione, $svolgimento, $correzione, $cfProf, $cfPaz
+    * Metodo che consente al professionista di aggiungere un nuovo compito per un dato paziente
+    * ValoreDiRitorno: in caso di successo ritorna true, in caso di insuccesso ritorna il messaggio di errore
+    * Autore: Cerullo Mary
+    * Versione: 1.0
+    * 2020 Copyright by PsyMeet - University of Salerno
+    */
+
 	public static function addComp($data, $titolo, $descrizione, $svolgimento, $correzione, $cfProf, $cfPaz)
 	{
 		try {
@@ -94,6 +121,15 @@ class CompitoControl
 		}
 	}
 
+    /*
+    * NomeMetodo doComp
+    * Parametri: $idCp, $svolg
+    * Metodo che consente al paziente di svolgere un compito assegnatogli da un dato professionista
+    * ValoreDiRitorno: in caso di successo ritorna true, in caso di insuccesso ritorna il messaggio di errore
+    * Autore: Cerullo Mary
+    * Versione: 1.0
+    * 2020 Copyright by PsyMeet - University of Salerno
+    */
 
 	public static function doComp($idCp, $svolg)
 	{
@@ -117,6 +153,15 @@ class CompitoControl
 		}
 	}
 
+    /*
+    * NomeMetodo corrComp
+    * Parametri: $id, $effettuatoNew, $correzioneNew
+    * Metodo che consente al professionista di correggere un compito precedentemente svolto da un dato paziente
+    * ValoreDiRitorno: in caso di successo ritorna true, in caso di insuccesso ritorna il messaggio di errore
+    * Autore: Cerullo Mary
+    * Versione: 1.0
+    * 2020 Copyright by PsyMeet - University of Salerno
+    */
 
 	public static function corrComp($id, $effettuatoNew, $correzioneNew)
 	{

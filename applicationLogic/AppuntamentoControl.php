@@ -1,12 +1,4 @@
 <?php
-
-/*
-	* AppuntamentoControl
-	* Questo control fornisce tutte le operazioni che si possono fare per Appuntamento'
-	* Autore: Marco Campione
-	* Versione: 0.1
-	* 2020 Copyright by PsyMeet - University of Salerno
-*/
 session_start();
 include '../plugins/libArray/FunArray.php';
 include '../storage/DatabaseInterface.php';
