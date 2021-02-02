@@ -15,7 +15,7 @@ class pazienteControl
 {
     /*
      * getPaz
-     * codice fiscale del paziente da recuperare
+     * Parametri: codice fiscale del paziente da recuperare
      * il metodo permette di recuperare il paziente con quel dato codice fiscale
      * Restisce l'oggetto paziente in caso di successo e l'eccezione in caso di fallimento
      * Autore: Giuseppe Ferrante
@@ -39,7 +39,7 @@ class pazienteControl
 
     /*
      * getListPaz
-     * nessun valore in input
+     * Parametri: nessun valore in input
      * il metodo permette di recuperare la lista completa dei pazienti
      * Restisce la lista di tutti i pazienti in caso di successo e l'eccezione in caso di fallimento
      * Autore: Giuseppe Ferrante
@@ -63,7 +63,7 @@ class pazienteControl
 	}
     /*
      * getPazientiByProf
-     * codice fiscale del professionista
+     * Parametri: codice fiscale del professionista
      * il metodo permette di recuperare tutti i pazienti assistiti da un dato professionista
      * Restisce la lista dei pazienti assisti dal dato professionista in caso di successo e l'eccezione in caso di fallimento
      * Autore: Giuseppe Ferrante
@@ -92,7 +92,7 @@ class pazienteControl
 
     /*
      * updateSchedaPaziente
-     * codice fiscale, telefono, indirizzo, email, password, istruzione del paziente
+     * Parametri: codice fiscale, telefono, indirizzo, email, password, istruzione del paziente
      * il metodo permetti di modificare alcuni dati relativi al paziente
      * Restisce true in caso di successo e l'eccezione in caso di fallimento
      * Autore: Giuseppe Ferrante
@@ -142,7 +142,7 @@ class pazienteControl
 
     /*
      * updateFotoProfilo
-     * codice fiscale del paziente e l'immagine da inserire
+     * Parametri: codice fiscale del paziente e l'immagine da inserire
      * il metodo permette di effettuare l'update della foto profilo del paziente
      * Restisce true in caso di successo e l'eccezione in caso di fallimento
      * Autore: Giuseppe Ferrante
@@ -172,18 +172,3 @@ class pazienteControl
 }
 
 
-/*
-  if($action == "" && $action )
-  {
-	echo "cose a caso";
-  }
-  else if($action == "ModificaPaziente")
-  {
-	$telefonoControl = $indirizzoControl = $emailControl = $passwordControl = $titoloStdioControl = "";
-	echo ($telefonoControl = $_POST["telefono"]) ."<br>";
-	echo ($indirizzoControl = $_POST["indirizzo"])."<br>";
-	echo ($emailControl = $_POST["email"])."<br>";
-	echo ($passwordControl = $_POST["password"])."<br>";
-	echo ($titoloStdioControl = $_POST["titoloStudio"])."<br>";
-  }
-*/
