@@ -1,12 +1,12 @@
 <?php
 
 /*
-     * AreaInformativaControl
-     * Questa classe contiene le informazioni relative all'oggetto Professionista
-     * Autore: D'Avino Michele
-     * Versione: 1.0
-     * 2020 Copyright by PsyMeet - University of Salerno
-     */
+	* AreaInformativaControl
+	* Questa classe Control fornisce tutte le funzioni che si possono fare per l'area informativa
+	* Autore: D'Avino Michele
+	* Versione: 1.0
+	* 2020 Copyright by PsyMeet - University of Salerno
+*/
 
 class AreaInformativaControl
 {
