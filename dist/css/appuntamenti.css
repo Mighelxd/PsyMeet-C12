@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.columnApp {
+    float: left;
+    width: 244px;
+    height: 320px;
+    margin-right: 2%;
+    /*padding: 0 10px;
+    background-color: cadetblue;*/
+}
+
+/* Remove extra left and right margins, due to padding */
+#appuntamenti {
+    margin: 2px 10px;
+    width:73%;
+}
+
+/* Clear floats after the columns */
+#appuntamenti:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.descApp{
+    font-size: 23px;
+    color:black;
+}
+
+.pazApp{
+  color:white;
+}
+
+.dataApp{
+  color:white;
+}
+
+.oraApp{
+  color:white;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+    .columnApp {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+/* Style the counter cards */
+.cardApp {
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+    padding: 14px;
+    text-align: center;
+    background-image: url("../../dist/img/psicologia.jpeg");
+    width: 103%;
+    height: 243px;
+}
+
+/*Stile bottoni form*/
+#btnFormAdd {
+    background-color: #009400;
+    border-color: #009400;
+}
+
+#btnFormDelete {
+    background-color: #ff6347;
+    border-color: #ff6347;
+}
+
+#btnFormModify {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.bottoneMod{
+  width:103%;
+  float:left;
+  border:none;
+  background-color: yellow;
+  text-align: center;
+  margin-bottom: unset;
+}
+.bottoneDel{
+  width:103%;
+  border:none;
+  background-color: red;
+  text-align: center;
+  float: left;
+}
+
+.bottoneMod:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor:pointer;
+}
+.bottoneDel:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor:pointer;
+}
+/*fissa il menù a SINISTRA*/
+#menuSx{
+  position:fixed;
+}

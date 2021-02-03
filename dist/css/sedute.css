@@ -1,0 +1,15 @@
+.textABC{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+.textABC:focus{
+  border:none;
+}
+
+.nEp{
+  width:40px;
+  text-align:center;
+  border:none;
+}
