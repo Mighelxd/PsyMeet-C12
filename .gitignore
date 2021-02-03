@@ -1,0 +1,8 @@
+/code-checker
+/nette-coding-standard
+composer.json
+composer.lock
+/vendor
+.phpunit.result.cache
+/.idea
+phpunit.xml
