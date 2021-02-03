@@ -1,5 +1,6 @@
 <?php
 
+
 session_start();
 
 include '../plugins/libArray/FunArray.php';

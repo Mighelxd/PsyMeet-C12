@@ -190,11 +190,11 @@ $compitiPaz = CompitoControl::selectAllCompitiPaz($cfPaziente);
 	echo $_SESSION['eccezioneFatture'];
 } ?></span>
                     <span style="color:red"><?php if (isset($_SESSION['eccareaprof'])) {
-                            echo $_SESSION['eccareaprof'];
-                        } ?></span>
+	echo $_SESSION['eccareaprof'];
+} ?></span>
                     <span style="color:red"><?php if (isset($_SESSION['eccComp'])) {
-                            echo $_SESSION['eccComp'];
-                        } ?></span>
+	echo $_SESSION['eccComp'];
+} ?></span>
                     <div class="col-md-6">
                     <div class="card card-widget widget-user">
                         <!-- Add the bg color to the header using any of the bg-* classes -->

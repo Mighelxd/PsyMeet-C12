@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 	 * DatabaseConnector
 	 * Questa classe contiene i metodi per la connessione al Database MySQL

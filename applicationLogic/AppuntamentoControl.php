@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include '../plugins/libArray/FunArray.php';
 include '../storage/DatabaseInterface.php';

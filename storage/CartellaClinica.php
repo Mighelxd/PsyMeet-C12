@@ -1,5 +1,7 @@
 <?php
 
+
+
    /*
 	 * CartellaClinica
 	 * Questa classe contiene le informazioni relative all'oggetto cartella clinica

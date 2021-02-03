@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 	* registrazioneProfessionistaControl.php
 	* Questo file fornisce le funzioni di control per la registrazione del professionista.

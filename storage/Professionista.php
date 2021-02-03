@@ -1,12 +1,14 @@
 <?php
 
+
+
 /*
-     * Professionista
-     * Questa classe contiene le informazioni relative all'oggetto Professionista
-     * Autore: D'Avino Michele
-     * Versione: 1.0
-     * 2020 Copyright by PsyMeet - University of Salerno
-     */
+	 * Professionista
+	 * Questa classe contiene le informazioni relative all'oggetto Professionista
+	 * Autore: D'Avino Michele
+	 * Versione: 1.0
+	 * 2020 Copyright by PsyMeet - University of Salerno
+	 */
 class Professionista
 {
 	public static $tableName='professionista';

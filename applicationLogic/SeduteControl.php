@@ -1,26 +1,27 @@
 <?php
+
 /*
-    * SeduteControl
-    * Questa classe fornisce tutti i metodi per tutte le schede delle sedute e la videoconferenza
-    * Autore: Marco Campione
-    * Versione: 1.0
-    * 2020 Copyright by PsyMeet - University of Salerno
+	* SeduteControl
+	* Questa classe fornisce tutti i metodi per tutte le schede delle sedute e la videoconferenza
+	* Autore: Marco Campione
+	* Versione: 1.0
+	* 2020 Copyright by PsyMeet - University of Salerno
 */
 
 class SeduteControl
 {
 	public static function addSchedaFoc($data, $idTerapia)
 	{
-        /*
-        * addSchedaFoc
-        * data, idTerapia
-        * Questo metodo permette di aggiungere una Scheda Assessment Focalizzato
-        * In caso di successo il metodo restituisce true
-        * In caso di errore il metodo restituisce l'eccezione
-        * Autore:Simone D'Ambrosio
-        * Versione: 1.0
-        * 2020 Copyright by PsyMeet - University of Salerno
-        */
+		/*
+		* addSchedaFoc
+		* data, idTerapia
+		* Questo metodo permette di aggiungere una Scheda Assessment Focalizzato
+		* In caso di successo il metodo restituisce true
+		* In caso di errore il metodo restituisce l'eccezione
+		* Autore:Simone D'Ambrosio
+		* Versione: 1.0
+		* 2020 Copyright by PsyMeet - University of Salerno
+		*/
 		try {
 			$numEp = '0';
 			$data = str_replace('/', '-', $data);
@@ -52,16 +53,16 @@ class SeduteControl
 
 	public static function addEpisodio($numEp, $analisi, $mA, $mB, $mC, $appunti, $idScheda)
 	{
-        /*
-        * addEpisodio
-        * numEp, analisi, mA, mB, mC, appunti, idScheda
-        * Questo metodo permette di aggiungere un Episodio
-        * In caso di successo il metodo restituisce true
-        * In caso di errore il metodo restituisce l'eccezione
-        * Autore:Marco Campione
-        * Versione: 1.0
-        * 2020 Copyright by PsyMeet - University of Salerno
-        */
+		/*
+		* addEpisodio
+		* numEp, analisi, mA, mB, mC, appunti, idScheda
+		* Questo metodo permette di aggiungere un Episodio
+		* In caso di successo il metodo restituisce true
+		* In caso di errore il metodo restituisce l'eccezione
+		* Autore:Marco Campione
+		* Versione: 1.0
+		* 2020 Copyright by PsyMeet - University of Salerno
+		*/
 		try {
 			$attEp = new Episodio(null, $numEp, $analisi, $mA, $mB, $mC, $appunti, $idScheda);
 			$insOk = DatabaseInterface::insertQuery($attEp->getArray(), 'episodio');
@@ -94,16 +95,16 @@ class SeduteControl
 
 	public static function modEpisodio($numEp, $analisi, $mA, $mB, $mC, $appunti, $idSchedaCorr)
 	{
-        /*
-        * modEpisodio
-        * numEp, analisi, mA, mB, mC, appunti, idSchedaCorr
-        * Questo metodo permette di modificare un Episodio
-        * In caso di successo il metodo restituisce true
-        * In caso di errore il metodo restituisce l'eccezione
-        * Autore:Marco Campione
-        * Versione: 1.0
-        * 2020 Copyright by PsyMeet - University of Salerno
-        */
+		/*
+		* modEpisodio
+		* numEp, analisi, mA, mB, mC, appunti, idSchedaCorr
+		* Questo metodo permette di modificare un Episodio
+		* In caso di successo il metodo restituisce true
+		* In caso di errore il metodo restituisce l'eccezione
+		* Autore:Marco Campione
+		* Versione: 1.0
+		* 2020 Copyright by PsyMeet - University of Salerno
+		*/
 		try {
 			$attRec=['numero'=>$numEp, 'id_scheda'=>$idSchedaCorr];
 			$recEp=DatabaseInterface::selectQueryByAtt($attRec, 'episodio');
@@ -133,16 +134,16 @@ class SeduteControl
 
 	public static function recuperaEpisodi($allSchede)
 	{
-	    /*
-        * recuperaEpisodi
-        * allSchede
-        * Questo metodo permette di recuperare gli Episodi
-        * In caso di successo il metodo restituisce la Scheda con Episodi
-        * In caso di errore il metodo restituisce l'eccezione
-        * Autore:Marco Campione
-        * Versione: 1.0
-        * 2020 Copyright by PsyMeet - University of Salerno
-        */
+		/*
+		* recuperaEpisodi
+		* allSchede
+		* Questo metodo permette di recuperare gli Episodi
+		* In caso di successo il metodo restituisce la Scheda con Episodi
+		* In caso di errore il metodo restituisce l'eccezione
+		* Autore:Marco Campione
+		* Versione: 1.0
+		* 2020 Copyright by PsyMeet - University of Salerno
+		*/
 		try {
 			$schedaConEpisodi = [];
 
@@ -182,16 +183,16 @@ class SeduteControl
 		$idTerCorr,
 		$tipo
 	) {
-	    /*
-        * addSchGen
-        * dataCorr, aspPosAut, aspNegAut, aspPosCog, aspNegCog, aspPosSM, aspNegSM, aspPosSo, aspNegSo, idTerCorr, tipo
-        * Questo metodo permette di aggiungere una Scheda Assessment Generalizzato
-        * In caso di successo il metodo restituisce true
-        * In caso di errore il metodo restituisce l'eccezione
-        * Autore:Simone D'Ambrosio
-        * Versione: 1.0
-        * 2020 Copyright by PsyMeet - University of Salerno
-        */
+		/*
+		* addSchGen
+		* dataCorr, aspPosAut, aspNegAut, aspPosCog, aspNegCog, aspPosSM, aspNegSM, aspPosSo, aspNegSo, idTerCorr, tipo
+		* Questo metodo permette di aggiungere una Scheda Assessment Generalizzato
+		* In caso di successo il metodo restituisce true
+		* In caso di errore il metodo restituisce l'eccezione
+		* Autore:Simone D'Ambrosio
+		* Versione: 1.0
+		* 2020 Copyright by PsyMeet - University of Salerno
+		*/
 		try {
 			$att = new SchedaAssessmentGeneralizzato(null, $dataCorr, $aspPosAut, $aspNegAut, $aspPosCog, $aspNegCog, $aspPosSM, $aspNegSM, $aspPosSo, $aspNegSo, $idTerCorr, $tipo);
 			$ok = DatabaseInterface::insertQuery($att->getArray(), SchedaAssessmentGeneralizzato::$tableName);
@@ -217,16 +218,16 @@ class SeduteControl
 		$aspNegSo,
 		$idTerCorr
 	) {
-	    /*
-        * modSchGen
-        * aspPosAut, aspNegAut, aspPosCog, aspNegCog, aspPosSM, aspNegSM, aspPosSo, aspNegSo, idTerCorr
-        * Questo metodo permette di modificare una Scheda Assessment Generalizzato
-        * In caso di successo il metodo restituisce true
-        * In caso di errore il metodo restituisce l'eccezione
-        * Autore:Simone D'Ambrosio
-        * Versione: 1.0
-        * 2020 Copyright by PsyMeet - University of Salerno
-        */
+		/*
+		* modSchGen
+		* aspPosAut, aspNegAut, aspPosCog, aspNegCog, aspPosSM, aspNegSM, aspPosSo, aspNegSo, idTerCorr
+		* Questo metodo permette di modificare una Scheda Assessment Generalizzato
+		* In caso di successo il metodo restituisce true
+		* In caso di errore il metodo restituisce l'eccezione
+		* Autore:Simone D'Ambrosio
+		* Versione: 1.0
+		* 2020 Copyright by PsyMeet - University of Salerno
+		*/
 		try {
 			$key = ['id_terapia'=>$idTerCorr];
 

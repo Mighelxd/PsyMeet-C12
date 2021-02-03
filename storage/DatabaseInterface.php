@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 	* DatabaseInterface
 	* Questa classe fornisce tutti i metodi per effettuare query sul DB

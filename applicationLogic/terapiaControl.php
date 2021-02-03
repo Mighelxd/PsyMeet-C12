@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 * SchedaPrimoColloquioControl
 * Questa Control fornisce tutti i metodi relativi alla terapia
@@ -9,19 +10,18 @@
 */
 class terapiaControl
 {
-
 	public static function addTer($data, $desc, $cfProf, $cfPaz)
 	{
-        /*
-     * addTer
-     * data, descrizione, cfProfessionista, cfPaziente
-     * Questo metodo permette di aggiungere una terapia
-     * In caso di successo il metodo restituisce true
-     * In caso di errore il metodo restituisce l'eccezione
-     * Autore:Martino D'Auria
-     * Versione: 1.0
-     * 2020 Copyright by PsyMeet - University of Salerno
-     */
+		/*
+	 * addTer
+	 * data, descrizione, cfProfessionista, cfPaziente
+	 * Questo metodo permette di aggiungere una terapia
+	 * In caso di successo il metodo restituisce true
+	 * In caso di errore il metodo restituisce l'eccezione
+	 * Autore:Martino D'Auria
+	 * Versione: 1.0
+	 * 2020 Copyright by PsyMeet - University of Salerno
+	 */
 		try {
 			$att = new Terapia(null, $data, $desc, $cfProf, $cfPaz);
 			$ok = DatabaseInterface::insertQuery($att->getArray(), Terapia::$tableName);
@@ -39,16 +39,16 @@ class terapiaControl
 
 	public static function modTerr($idTer, $desc)
 	{
-        /*
-     * modTerr
-     * id terapia, descrizione
-     * Questo metodo permette di modificare una terapia
-     * In caso di successo il metodo restituisce true
-     * In caso di errore il metodo restituisce l'eccezione
-     * Autore:Martino D'Auria
-     * Versione: 1.0
-     * 2020 Copyright by PsyMeet - University of Salerno
-     */
+		/*
+	 * modTerr
+	 * id terapia, descrizione
+	 * Questo metodo permette di modificare una terapia
+	 * In caso di successo il metodo restituisce true
+	 * In caso di errore il metodo restituisce l'eccezione
+	 * Autore:Martino D'Auria
+	 * Versione: 1.0
+	 * 2020 Copyright by PsyMeet - University of Salerno
+	 */
 		try {
 			$key = ['id_terapia'=>$idTer];
 			$recTer = DatabaseInterface::selectQueryById($key, Terapia::$tableName);
@@ -71,16 +71,16 @@ class terapiaControl
 	//@codeCoverageIgnoreStart
 	public static function recuperaSchede($idTerapia)
 	{
-        /*
-    * recuperaSchede
-    * id terapia
-    * Questo metodo permette di recuperare le schede
-    * In caso di successo il metodo restituisce tutte le schede
-    * In caso di errore il metodo restituisce l'array vuoto delle schede
-    * Autore:Martino D'auria
-    * Versione: 1.0
-    * 2020 Copyright by PsyMeet - University of Salerno
-    */
+		/*
+	* recuperaSchede
+	* id terapia
+	* Questo metodo permette di recuperare le schede
+	* In caso di successo il metodo restituisce tutte le schede
+	* In caso di errore il metodo restituisce l'array vuoto delle schede
+	* Autore:Martino D'auria
+	* Versione: 1.0
+	* 2020 Copyright by PsyMeet - University of Salerno
+	*/
 		try {
 			$att = ['id_terapia'=>$idTerapia];
 			$col = ['*'];
@@ -122,16 +122,16 @@ class terapiaControl
 
 	public static function getTerapie($cfPaz, $cfProf)
 	{
-        /*
-    * getTerapie
-    * cfPaziente, cfProfessionista
-    * Questo metodo permette di recuperare le terapie
-    * In caso di successo il metodo restituisce tutte le terapie
-    * In caso di errore il metodo restituisce l'array vuoto delle terapie
-    * Autore:Martino D'Auria
-    * Versione: 1.0
-    * 2020 Copyright by PsyMeet - University of Salerno
-    */
+		/*
+	* getTerapie
+	* cfPaziente, cfProfessionista
+	* Questo metodo permette di recuperare le terapie
+	* In caso di successo il metodo restituisce tutte le terapie
+	* In caso di errore il metodo restituisce l'array vuoto delle terapie
+	* Autore:Martino D'Auria
+	* Versione: 1.0
+	* 2020 Copyright by PsyMeet - University of Salerno
+	*/
 		try {
 			$arrKey= ['cf' => $cfPaz, 'cf_prof' => $cfProf];
 			$arrayTerapie = [];
@@ -151,7 +151,7 @@ class terapiaControl
 
 	public static function getTerapiePaz($cf)
 	{
-        /*
+		/*
    * getTerapiePaz
    * cfPaziente
    * Questo metodo permette di recuperare le terapie relative al paziente
@@ -180,7 +180,7 @@ class terapiaControl
 
 	public static function getEziologicoForPaz($idT)
 	{
-        /*
+		/*
   * getEziologicoForPaz
   * id Terapie
   * Questo metodo permette di recuperare la scheda modello eziologico relativa al paziente

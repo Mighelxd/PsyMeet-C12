@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
  * Gestione Sedute
  * Questa classe contiene le informazioni relative all'oggetto scheda assessment generalizzato

@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 	* registrazionepazienteControl.php
 	* Questo file fornisce le funzioni di control per la registrazione del paziente.

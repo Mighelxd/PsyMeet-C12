@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
  * Sedute
  * Questa classe contiene le informazioni relative all'oggetto scheda modello eziologico

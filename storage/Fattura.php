@@ -1,4 +1,6 @@
 <?php
+
+
 /*
  * Gestione pacchetto
  * Questa classe contiene le informazioni relative all'oggetto fattura

@@ -1,12 +1,14 @@
 <?php
 
-    /*
-     * Compito
-     * Questa classe contiene le informazioni relative all'oggetto Compito
-     * Autore: Cerullo Mary
-     * Versione: 1.0
-     * 2020 Copyright by PsyMeet - University of Salerno
-     */
+
+
+	/*
+	 * Compito
+	 * Questa classe contiene le informazioni relative all'oggetto Compito
+	 * Autore: Cerullo Mary
+	 * Versione: 1.0
+	 * 2020 Copyright by PsyMeet - University of Salerno
+	 */
 
 /**
  * Class Compito

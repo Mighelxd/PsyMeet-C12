@@ -43,9 +43,9 @@ $professionista = AreaInformativaControl::getProf($cfProfessionista);
 $img=base64_encode($professionista->getImmagineProfessionista());
 
 if (isset($cfPazienteTer)) {
-    $terapia = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
+	$terapia = terapiaControl::getTerapie($cfPazienteTer, $cfProfessionista);
 } else {
-    header('Location: Pazienti.php');
+	header('Location: Pazienti.php');
 }
 
 /*if(count($listTerapie) > 0 ){

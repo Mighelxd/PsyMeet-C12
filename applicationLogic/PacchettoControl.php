@@ -1,25 +1,26 @@
 <?php
+
 /*
-    * PacchettoControl
-    * Questa classe fornisce tutti i metodi per la classe PacchettoControl
-    * Autore: Giuseppe D'avino
-    * Versione: 1.0
-    * 2020 Copyright by PsyMeet - University of Salerno
+	* PacchettoControl
+	* Questa classe fornisce tutti i metodi per la classe PacchettoControl
+	* Autore: Giuseppe D'avino
+	* Versione: 1.0
+	* 2020 Copyright by PsyMeet - University of Salerno
 */
 define('TABLE_NAME', 'pacchetto');
 
 class PacchettoControl
 {
-    /*
-     * NomeMetodo:selectAllPacchetto
-     * Parametri:
-     * Desc: Questa funzione recupera tutti i pacchetti che vi sono nel DB
-     * ValoreDiRitorno: in caso di successo vieni restituito l'array con tutti i pacchetti nel DB
-     *                  in caso di insuccesso viene restituito l'eccezione
-     * Autore: Giuseppe D'avino
-     * Versione: 1.0
-     * 2020 Copyright by PsyMeet - University of Salerno
-     */
+	/*
+	 * NomeMetodo:selectAllPacchetto
+	 * Parametri:
+	 * Desc: Questa funzione recupera tutti i pacchetti che vi sono nel DB
+	 * ValoreDiRitorno: in caso di successo vieni restituito l'array con tutti i pacchetti nel DB
+	 *                  in caso di insuccesso viene restituito l'eccezione
+	 * Autore: Giuseppe D'avino
+	 * Versione: 1.0
+	 * 2020 Copyright by PsyMeet - University of Salerno
+	 */
 	public static function selectAllPacchetto()
 	{
 		//Questa action cerca di recuperare tutti i pacchetti che vi sono nel DB
@@ -36,16 +37,18 @@ class PacchettoControl
 			return null;
 		}
 	}
+
+
 	/*
-     * NomeMetodo:selectAllPacchettoProf
-     * Parametri:cfProfessionista
-     * Desc:metodo che recupera tutti i pacchetti per un dato Professionista
-     * ValoreDiRitorno: in caso di successo viene restituito l'array con tutti i pacchetti per il dato professionista
-     *                  in caso di insuccesso viene restituita l'eccezione
-     * Autore: Giuseppe D'avino
-     * Versione: 1.0
-     * 2020 Copyright by PsyMeet - University of Salerno
-     */
+	 * NomeMetodo:selectAllPacchettoProf
+	 * Parametri:cfProfessionista
+	 * Desc:metodo che recupera tutti i pacchetti per un dato Professionista
+	 * ValoreDiRitorno: in caso di successo viene restituito l'array con tutti i pacchetti per il dato professionista
+	 *                  in caso di insuccesso viene restituita l'eccezione
+	 * Autore: Giuseppe D'avino
+	 * Versione: 1.0
+	 * 2020 Copyright by PsyMeet - University of Salerno
+	 */
 	public static function selectAllPacchettoProf($cfProfessionista)
 	{
 		try {
@@ -64,16 +67,17 @@ class PacchettoControl
 		}
 	}
 
-    /*
-       * NomeMetodo:recuperaPacchetto
-       * Parametri:id
-       * Desc:metodo che recupera tutti i pacchetti per un dato id
-       * ValoreDiRitorno: in caso di successo viene restituito l'array con tutti i pacchetti per il dato id
-       *                  in caso di insuccesso viene restituita l'eccezione
-       * Autore: Giuseppe D'avino
-       * Versione: 1.0
-       * 2020 Copyright by PsyMeet - University of Salerno
-       */
+
+	/*
+	   * NomeMetodo:recuperaPacchetto
+	   * Parametri:id
+	   * Desc:metodo che recupera tutti i pacchetti per un dato id
+	   * ValoreDiRitorno: in caso di successo viene restituito l'array con tutti i pacchetti per il dato id
+	   *                  in caso di insuccesso viene restituita l'eccezione
+	   * Autore: Giuseppe D'avino
+	   * Versione: 1.0
+	   * 2020 Copyright by PsyMeet - University of Salerno
+	   */
 	public static function recuperaPacchetto($id)
 	{
 		try {
@@ -91,16 +95,17 @@ class PacchettoControl
 		}
 	}
 
-    /*
-       * NomeMetodo:selectAllPacchettoPaz
-       * Parametri:cfPaziente
-       * Desc: metodo che recupera tutti i pacchetti per un dato Paziente
-       * ValoreDiRitorno: in caso di successo viene restituito l'array con tutti i pacchetti per il dato Paziente
-       *                  in caso di insuccesso viene restituita l'eccezione
-       * Autore: Giuseppe D'avino
-       * Versione: 1.0
-       * 2020 Copyright by PsyMeet - University of Salerno
-       */
+
+	/*
+	   * NomeMetodo:selectAllPacchettoPaz
+	   * Parametri:cfPaziente
+	   * Desc: metodo che recupera tutti i pacchetti per un dato Paziente
+	   * ValoreDiRitorno: in caso di successo viene restituito l'array con tutti i pacchetti per il dato Paziente
+	   *                  in caso di insuccesso viene restituita l'eccezione
+	   * Autore: Giuseppe D'avino
+	   * Versione: 1.0
+	   * 2020 Copyright by PsyMeet - University of Salerno
+	   */
 	public static function selectAllPacchettoPaz($cfPaziente)
 	{
 		try {
@@ -128,16 +133,17 @@ class PacchettoControl
 		}
 	}
 
-    /*
-     * NomeMetodo: getFatture
-     * Parametri:cfPaziente
-     * Desc: metodo che recupera tutte le fatture per un dato Paziente
-     * ValoreDiRitorno: in caso di successo viene restituito l'array con tutte le fatture per il dato Paziente
-     *                  in caso di insuccesso viene restituita l'eccezione
-     * Autore: Giuseppe D'avino
-     * Versione: 1.0
-     * 2020 Copyright by PsyMeet - University of Salerno
-     */
+
+	/*
+	 * NomeMetodo: getFatture
+	 * Parametri:cfPaziente
+	 * Desc: metodo che recupera tutte le fatture per un dato Paziente
+	 * ValoreDiRitorno: in caso di successo viene restituito l'array con tutte le fatture per il dato Paziente
+	 *                  in caso di insuccesso viene restituita l'eccezione
+	 * Autore: Giuseppe D'avino
+	 * Versione: 1.0
+	 * 2020 Copyright by PsyMeet - University of Salerno
+	 */
 	public static function getFatture($cfPaziente)
 	{
 		try {
@@ -155,15 +161,16 @@ class PacchettoControl
 		}
 	}
 
-    /*
-       * NomeMetodo: getFatturaByPazProf
-       * Parametri:cfPaz ,cfProf
-       * Desc: metodo che recupera tutte le fatture per un dato Paziente in relazione con un Professionista
-       * ValoreDiRitorno: in caso di successo viene restituito l'array con tutte le fatture per il dato Paziente in base al professionista
-       * Autore: Giuseppe D'avino
-       * Versione: 1.0
-       * 2020 Copyright by PsyMeet - University of Salerno
-       */
+
+	/*
+	   * NomeMetodo: getFatturaByPazProf
+	   * Parametri:cfPaz ,cfProf
+	   * Desc: metodo che recupera tutte le fatture per un dato Paziente in relazione con un Professionista
+	   * ValoreDiRitorno: in caso di successo viene restituito l'array con tutte le fatture per il dato Paziente in base al professionista
+	   * Autore: Giuseppe D'avino
+	   * Versione: 1.0
+	   * 2020 Copyright by PsyMeet - University of Salerno
+	   */
 	public static function getFatturaByPazProf($cfPaz, $cfProf)
 	{
 		$fattAtt=null;
@@ -181,15 +188,17 @@ class PacchettoControl
 		}
 		return $fattAtt;
 	}
-    /*
-        * NomeMetodo: getSceltaById
-        * Parametri:idScelta
-        * Desc: metodo che si occupa di recuerare le scelte per un dato id della scelta
-        * ValoreDiRitorno: in caso di successo viene restituito l'array con tutte informazioni riguardo la scelta
-        * Autore: Giuseppe D'avino
-        * Versione: 1.0
-        * 2020 Copyright by PsyMeet - University of Salerno
-        */
+
+
+	/*
+		* NomeMetodo: getSceltaById
+		* Parametri:idScelta
+		* Desc: metodo che si occupa di recuerare le scelte per un dato id della scelta
+		* ValoreDiRitorno: in caso di successo viene restituito l'array con tutte informazioni riguardo la scelta
+		* Autore: Giuseppe D'avino
+		* Versione: 1.0
+		* 2020 Copyright by PsyMeet - University of Salerno
+		*/
 
 	public static function getSceltaById($idScelta)
 	{
@@ -200,15 +209,17 @@ class PacchettoControl
 		$scheda = new Scelta($row[0], $row[1], $row[2]);
 		return $scheda;
 	}
-    /*
-           * NomeMetodo: addPacchetto
-           * Parametri:pacchetto
-           * Desc: metodo che si occupa di inserire i nuovi pacchetti nel DB
-           * ValoreDiRitorno: in caso di successo viene inserito un nuovo pacchetto nel DB
-           * Autore: Giuseppe D'avino
-           * Versione: 1.0
-           * 2020 Copyright by PsyMeet - University of Salerno
-           */
+
+
+	/*
+		   * NomeMetodo: addPacchetto
+		   * Parametri:pacchetto
+		   * Desc: metodo che si occupa di inserire i nuovi pacchetti nel DB
+		   * ValoreDiRitorno: in caso di successo viene inserito un nuovo pacchetto nel DB
+		   * Autore: Giuseppe D'avino
+		   * Versione: 1.0
+		   * 2020 Copyright by PsyMeet - University of Salerno
+		   */
 	public static function addPacchetto($pacchetto)
 	{
 		try {
@@ -238,16 +249,17 @@ class PacchettoControl
 		}
 	}
 
-    /*
-            * NomeMetodo: delPacchetto
-            * Parametri:pacchetto , idprof
-            * Desc: metodo che si occupa di eliminare i pacchetti nel DB
-            * ValoreDiRitorno: in caso di successo viene eliminato un pacchetto nel DB
-     *                         in caso di insuccesso viene lanciata l'eccezione
-            * Autore: Giuseppe D'avino
-            * Versione: 1.0
-            * 2020 Copyright by PsyMeet - University of Salerno
-            */
+
+	/*
+			* NomeMetodo: delPacchetto
+			* Parametri:pacchetto , idprof
+			* Desc: metodo che si occupa di eliminare i pacchetti nel DB
+			* ValoreDiRitorno: in caso di successo viene eliminato un pacchetto nel DB
+	 *                         in caso di insuccesso viene lanciata l'eccezione
+			* Autore: Giuseppe D'avino
+			* Versione: 1.0
+			* 2020 Copyright by PsyMeet - University of Salerno
+			*/
 	public static function delPacchetto($idProf, $pacchetto)
 	{
 		try {
@@ -266,16 +278,17 @@ class PacchettoControl
 		}
 	}
 
-    /*
-               * NomeMetodo: delPacchetto
-               * Parametri:pacchetto , idprof
-               * Desc: metodo che si occupa di 'compare' i pacchetti
-               * ValoreDiRitorno: in caso di successo viene restituito true 
-               *                  in caso di insuccesso viene lanciata l'eccezione
-               * Autore: Giuseppe D'avino
-               * Versione: 1.0
-               * 2020 Copyright by PsyMeet - University of Salerno
-               */
+
+	/*
+			   * NomeMetodo: delPacchetto
+			   * Parametri:pacchetto , idprof
+			   * Desc: metodo che si occupa di 'compare' i pacchetti
+			   * ValoreDiRitorno: in caso di successo viene restituito true
+			   *                  in caso di insuccesso viene lanciata l'eccezione
+			   * Autore: Giuseppe D'avino
+			   * Versione: 1.0
+			   * 2020 Copyright by PsyMeet - University of Salerno
+			   */
 	public static function buyPacchetto($data, $cfPaz, $idScelta)
 	{
 		try {

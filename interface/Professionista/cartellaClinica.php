@@ -13,8 +13,9 @@ include '../../plugins/libArray/FunArray.php';
 	if (!isset($_SESSION['datiPaziente'])) {
 		header('Location: pazienti.php');
 	}
-	if(!isset($_POST))
-	    header('Location: pazienti.php');
+	if (!isset($_POST)) {
+		header('Location: pazienti.php');
+	}
 	$paziente=$_SESSION['datiPaziente'];
 	if (isset($_SESSION['cartellaClinica'])) {
 		$cartellaClinica=$_SESSION['cartellaClinica'];

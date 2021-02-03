@@ -1,4 +1,5 @@
 <?php
+
 /*
 	* CartellaClinicaControl
 	* Questa classe Control fornisce tutte le funzioni che si possono fare per la cartella clinica
@@ -8,15 +9,15 @@
 */
 class CartellaClinicaControl
 {
-    /*
-        * getCartellaClinica
-        * Parametri: cfPaz,cfProf
-        * Questo metodo serve a recuperare la cartella clinica di un paziente
-        * ValoreDiRitorno: In caso di successo ritorna la cartella clinica altrimenti ritorna il messaggio d'errore
-        * Autore: D'Avino Michele
-        * Versione: 1.0
-        * 2020 Copyright by PsyMeet - University of Salerno
-        */
+	/*
+		* getCartellaClinica
+		* Parametri: cfPaz,cfProf
+		* Questo metodo serve a recuperare la cartella clinica di un paziente
+		* ValoreDiRitorno: In caso di successo ritorna la cartella clinica altrimenti ritorna il messaggio d'errore
+		* Autore: D'Avino Michele
+		* Versione: 1.0
+		* 2020 Copyright by PsyMeet - University of Salerno
+		*/
 	public static function getCartellaClinica($cfPaz, $cfProf)
 	{
 		try {
@@ -33,15 +34,16 @@ class CartellaClinicaControl
 		}
 	}
 
-    /*
-        * updateCartellaClinica
-        * Parametri: id, date, umo, relaz, patol, farma, cfprof, cfpaz
-        * Questo metodo serve ad aggiornare la cartella clinica di un paziente nel Database
-        * ValoreDiRitorno: In caso di successo ritorna true altrimenti ritorna il messaggio d'errore
-        * Autore: D'Avino Michele
-        * Versione: 1.0
-        * 2020 Copyright by PsyMeet - University of Salerno
-        */
+
+	/*
+		* updateCartellaClinica
+		* Parametri: id, date, umo, relaz, patol, farma, cfprof, cfpaz
+		* Questo metodo serve ad aggiornare la cartella clinica di un paziente nel Database
+		* ValoreDiRitorno: In caso di successo ritorna true altrimenti ritorna il messaggio d'errore
+		* Autore: D'Avino Michele
+		* Versione: 1.0
+		* 2020 Copyright by PsyMeet - University of Salerno
+		*/
 	public static function updateCartellaClinica($id, $date, $umo, $relaz, $patol, $farma, $cfProf, $cfPaz)
 	{
 		try {
@@ -56,15 +58,16 @@ class CartellaClinicaControl
 		}
 	}
 
-    /*
-        * saveCartellaClinica
-        * Parametri: id, date, umo, relaz, patol, farma, cfprof, cfpaz
-        * Questo metodo serve a salvare la cartella clinica di un paziente nel Database
-        * ValoreDiRitorno: In caso di successo ritorna true altrimenti ritorna il messaggio d'errore
-        * Autore: D'Avino Michele
-        * Versione: 1.0
-        * 2020 Copyright by PsyMeet - University of Salerno
-        */
+
+	/*
+		* saveCartellaClinica
+		* Parametri: id, date, umo, relaz, patol, farma, cfprof, cfpaz
+		* Questo metodo serve a salvare la cartella clinica di un paziente nel Database
+		* ValoreDiRitorno: In caso di successo ritorna true altrimenti ritorna il messaggio d'errore
+		* Autore: D'Avino Michele
+		* Versione: 1.0
+		* 2020 Copyright by PsyMeet - University of Salerno
+		*/
 	public static function saveCartellaClinica($id, $date, $umo, $relaz, $patol, $farma, $cfProf, $cfPaz)
 	{
 		try {

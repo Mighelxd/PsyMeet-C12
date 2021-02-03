@@ -1,4 +1,5 @@
 <?php
+
 /*
 	* modificaProfessionistacontrol.php
 	* Control che permette le modifiche relative al professionista
