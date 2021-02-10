@@ -110,7 +110,7 @@ class Professionista
 			throw new Exception('Numero iscrizione albo non rispetta la lunghezza prevista');
 		} elseif (strlen($spec)<2 || strlen($spec)>500) {
 			throw new Exception('Il campo Specializzazione non rispetta la lunghezza');
-		} elseif (!preg_match('`^[A-Za-z0-9\s,.]+$`', $nIsc)) {
+		} elseif (!preg_match('`^[A-Za-z0-9\s/,.]+$`', $nIsc)) {
 			throw new Exception('Il campo Numero Iscrizione Albo non rispetta il formato');
 		} elseif (!preg_match('/^[A-Za-z0-9\s]+$/', $polRc)) {
 			throw new Exception('Polizza RC non rispetta il formato previsto');
@@ -271,7 +271,7 @@ class Professionista
 	public function setNIscrizioneAlbo($nIsc)
 	{
 		if ($nIsc == null) {
-			throw new Exception('Nuovo campo numero iscrizione album non valido!');
+			throw new Exception('Nuovo campo numero iscrizione albo non valido!');
 		}
 		$this->nIscrizioneAlbo=$nIsc;
 	}
